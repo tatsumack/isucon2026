@@ -93,7 +93,8 @@
 ### 5. asia1 の「その他」の枠の待ち
 - 根拠: asia1 の `GET /api/images/:id` 1.562s、`POST /api/friend-requests` 1.649s、`GET /api/me/export` 2.126s (いずれも #26719 より長い)。`POST /api/posts` は 0.152s で変わらない。asia1 の idle 5% 未満は 7秒
 - 原因箇所: `go/priority.go` (asia1 の優先制御。投稿の経路 / 重い API / その他の枠)
-- 対策案: 枠の割り当ての見直しは、別の施策として扱う。画像の署名 (`computeImageSignature`、pprof の 10.8%) を asia1 から外す案 (メンバーが実装中) が入れば、CPU に余裕ができる
+- 画像の署名は、すでに main に入っている PR #49 (期限を時間単位に切り捨てて署名を使い回す) と PR #50 (署名の計算を europe1 / america1 へ移す) で、asia1 の CPU の 65% (#13634) → **10.8%** (`computeImageSignature` 5.06s / 47.01s) まで減っている。残りは、投稿の応答の画像署名 (`signedImageURL` 9.8%) で、PR #64 (`perf/post-signature-remote`、OPEN) が対象
+- 対策案: 枠の割り当ての見直しは、別の施策として扱う。PR #64 は、取り込めば asia1 の CPU が最大 約10%減る見込み (推測)
 - 期待効果: 中
 
 ## 確認したこと / していないこと
