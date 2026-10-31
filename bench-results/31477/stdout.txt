@@ -1,0 +1,60 @@
+jobid:31477
+time=2026-10-31T07:59:21.433Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T07:59:24.426Z level=INFO msg="europe 1 日目: 7 人"
+time=2026-10-31T07:59:27.424Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T07:59:30.425Z level=INFO msg="asia 2 日目: 50 人"
+time=2026-10-31T07:59:33.440Z level=INFO msg="europe 2 日目: 16 人"
+time=2026-10-31T07:59:36.426Z level=INFO msg="america 2 日目: 16 人"
+time=2026-10-31T07:59:39.422Z level=INFO msg="asia 3 日目: 146 人"
+time=2026-10-31T07:59:40.902Z level=INFO msg="user moved" user=saivyni-5582 from=asia to=europe
+time=2026-10-31T07:59:41.985Z level=INFO msg="user moved" user=saivyni-5582 from=europe to=asia
+time=2026-10-31T07:59:42.435Z level=INFO msg="europe 3 日目: 43 人"
+time=2026-10-31T07:59:42.766Z level=INFO msg="user moved" user=kimaxyo_6028 from=asia to=america
+time=2026-10-31T07:59:44.119Z level=INFO msg="user moved" user=kimaxyo_6028 from=america to=asia
+time=2026-10-31T07:59:45.459Z level=INFO msg="america 3 日目: 45 人"
+time=2026-10-31T07:59:48.428Z level=INFO msg="asia 4 日目: 428 人"
+time=2026-10-31T07:59:50.772Z level=INFO msg="user moved" user=setaben_6989 from=asia to=america
+time=2026-10-31T07:59:51.096Z level=INFO msg="user moved" user=saivyni-5582 from=asia to=europe
+time=2026-10-31T07:59:51.454Z level=INFO msg="europe 4 日目: 116 人"
+time=2026-10-31T07:59:51.485Z level=INFO msg="user moved" user=kimaxyo_6028 from=asia to=america
+time=2026-10-31T07:59:52.005Z level=INFO msg="user moved" user=setaben_6989 from=america to=europe
+time=2026-10-31T07:59:52.501Z level=INFO msg="user moved" user=kano.6453 from=america to=europe
+time=2026-10-31T07:59:54.442Z level=INFO msg="america 4 日目: 120 人"
+time=2026-10-31T07:59:56.705Z level=INFO msg="user moved" user=misuto6811 from=asia to=europe
+time=2026-10-31T07:59:57.244Z level=INFO msg="user moved" user=anfuho_8948 from=europe to=america
+time=2026-10-31T07:59:57.571Z level=INFO msg="asia 5 日目: 1114 人"
+time=2026-10-31T07:59:57.613Z level=INFO msg="user moved" user=kano.6453 from=europe to=america
+time=2026-10-31T07:59:59.203Z level=INFO msg="user moved" user=niwasa9085 from=america to=asia
+time=2026-10-31T08:00:00.586Z level=INFO msg="europe 5 日目: 294 人"
+time=2026-10-31T08:00:02.046Z level=INFO msg="user moved" user=issoni.9002 from=america to=asia
+time=2026-10-31T08:00:03.471Z level=INFO msg="america 5 日目: 299 人"
+time=2026-10-31T08:00:12.474Z level=INFO msg="europe 最終日（グランプリ）: 293 人"
+time=2026-10-31T08:00:12.499Z level=INFO msg="asia 最終日（グランプリ）: 1116 人"
+time=2026-10-31T08:00:12.596Z level=INFO msg="america 最終日（グランプリ）: 298 人"
+time=2026-10-31T08:00:21.576Z level=INFO msg="グランプリ: アジア 417 人, ヨーロッパ 292 人, アメリカ 297 人"
+{
+  "pass": true,
+  "score": 140479,
+  "messages": [
+    "na_li_935: 履歴を読めません: GET /api/memories/2026-05-01: 応答がタイムアウトしました",
+    "solyasa.5318: Memories を取得できません: GET /api/memories?month=2026-11: 応答がタイムアウトしました",
+    "miamia.5237: Memories を取得できません: GET /api/memories?month=2026-11: 応答がタイムアウトしました",
+    "ttukbaegi_jeongeori_4593: 履歴を読めません: GET /api/memories?month=2026-06: 応答がタイムアウトしました",
+    "elvin.7306: Memories を取得できません: GET /api/memories?month=2026-11: 応答がタイムアウトしました",
+    "hina_nakamura_843: 履歴を読めません: GET /api/memories?month=2025-10: 応答がタイムアウトしました",
+    "min_zhang_116: 履歴を読めません: GET /api/memories?month=2026-06: 応答がタイムアウトしました",
+    "hajun_jeong_2615: 履歴を読めません: GET /api/memories?month=2026-03: 応答がタイムアウトしました",
+    "wei_wang_398: 履歴を読めません: GET /api/memories?month=2026-05: 応答がタイムアウトしました",
+    "fuan.12905: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "teleoel-14388: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "dante14457: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "romax_14492: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "morato-8182: Memories を取得できません: GET /api/memories?month=2026-11: 応答がタイムアウトしました",
+    "torma14473: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "rasa-14518: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "noleono_14507: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "danmaxra_14502: プロフィール画像を変えられません: PUT /api/me/profile-image: 応答がタイムアウトしました",
+    "miaozhen_gongfang_3759: 履歴を読めません: GET /api/memories/2026-04-08: 応答がタイムアウトしました",
+    "sanchong_yanjiu_1193: 履歴を読めません: GET /api/memories?month=2025-10: 応答がタイムアウトしました"
+  ]
+}
