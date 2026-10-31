@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 89d0a0d5e10ed21dc9257e7e4ebc752a06ae0df9
+Type: cpu
+Time: 2026-10-31 03:26:16 UTC
+Duration: 150s, Total samples = 67.76s (45.17%)
+Showing nodes accounting for 47.69s, 70.38% of 67.76s total
+Dropped 1064 nodes (cum <= 0.34s)
+Showing top 40 nodes out of 252
+      flat  flat%   sum%        cum   cum%
+     0.02s  0.03%  0.03%     62.99s 92.96%  net/http.(*conn).serve
+         0     0%  0.03%     61.09s 90.16%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.03s 0.044% 0.074%     61.09s 90.16%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0% 0.074%     61.09s 90.16%  net/http.serverHandler.ServeHTTP
+         0     0% 0.074%     61.05s 90.10%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.015% 0.089%     60.58s 89.40%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0% 0.089%     60.58s 89.40%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s 0.015%   0.1%     60.51s 89.30%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0%   0.1%     43.13s 63.65%  example.com/isureal-company/isureal.signedImageURL
+     0.39s  0.58%  0.68%     43.06s 63.55%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  0.68%     42.70s 63.02%  example.com/isureal-company/isureal.issueImageSignature
+     1.37s  2.02%  2.70%     39.09s 57.69%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.75s  2.58%  5.28%     37.26s 54.99%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.65s  2.44%  7.72%     36.43s 53.76%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.44s  0.65%  8.37%     33.67s 49.69%  crypto/internal/fips140/sha256.block
+    33.12s 48.88% 57.25%     33.23s 49.04%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 57.25%     31.31s 46.21%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+     0.01s 0.015% 57.26%     31.30s 46.19%  example.com/isureal-company/isureal.listMemories
+         0     0% 57.26%     31.14s 45.96%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 57.26%     31.14s 45.96%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+     0.03s 0.044% 57.31%     22.88s 33.77%  example.com/isureal-company/isureal.newPostResponse
+     0.01s 0.015% 57.32%     20.41s 30.12%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 57.32%     19.83s 29.27%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 57.32%     12.61s 18.61%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0% 57.32%     12.61s 18.61%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+     0.01s 0.015% 57.33%     12.61s 18.61%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+     0.02s  0.03% 57.36%      6.58s  9.71%  database/sql.withLock
+     4.86s  7.17% 64.54%      4.86s  7.17%  internal/runtime/syscall/linux.Syscall6
+         0     0% 64.54%      4.42s  6.52%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 64.54%      4.35s  6.42%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 64.54%      4.35s  6.42%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+     0.01s 0.015% 64.55%      4.29s  6.33%  syscall.RawSyscall6
+         0     0% 64.55%      4.14s  6.11%  syscall.Syscall
+         0     0% 64.55%      4.01s  5.92%  github.com/jmoiron/sqlx.GetContext
+     0.04s 0.059% 64.61%      3.95s  5.83%  database/sql.(*DB).queryDC
+     3.88s  5.73% 70.34%      3.88s  5.73%  runtime.memmove
+         0     0% 70.34%      3.87s  5.71%  database/sql.(*DB).retry
+         0     0% 70.34%      3.87s  5.71%  internal/poll.ignoringEINTRIO (inline)
+     0.01s 0.015% 70.35%      3.66s  5.40%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement
+     0.02s  0.03% 70.38%      3.65s  5.39%  database/sql.(*DB).queryDC.func1

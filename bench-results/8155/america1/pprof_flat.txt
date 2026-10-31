@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 89d0a0d5e10ed21dc9257e7e4ebc752a06ae0df9
+Type: cpu
+Time: 2026-10-31 03:26:16 UTC
+Duration: 150s, Total samples = 3.95s ( 2.63%)
+Showing nodes accounting for 2.72s, 68.86% of 3.95s total
+Dropped 274 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 387
+      flat  flat%   sum%        cum   cum%
+     1.03s 26.08% 26.08%      1.03s 26.08%  internal/runtime/syscall/linux.Syscall6
+     0.40s 10.13% 36.20%      0.40s 10.13%  crypto/internal/fips140/sha256.blockSHANI
+     0.24s  6.08% 42.28%      0.24s  6.08%  runtime.memmove
+     0.12s  3.04% 45.32%      0.12s  3.04%  runtime.memclrNoHeapPointers
+     0.07s  1.77% 47.09%      0.07s  1.77%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.07s  1.77% 48.86%      0.07s  1.77%  runtime.futex
+     0.06s  1.52% 50.38%      0.57s 14.43%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.05s  1.27% 51.65%      0.05s  1.27%  runtime.nextFreeFast (inline)
+     0.04s  1.01% 52.66%      0.65s 16.46%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.03s  0.76% 53.42%      0.19s  4.81%  bytes.(*Buffer).ReadFrom
+     0.03s  0.76% 54.18%      0.53s 13.42%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.03s  0.76% 54.94%      0.03s  0.76%  indexbytebody
+     0.03s  0.76% 55.70%      0.03s  0.76%  runtime.execute
+     0.03s  0.76% 56.46%      0.03s  0.76%  runtime.funcInfo.entry (inline)
+     0.03s  0.76% 57.22%      0.03s  0.76%  time.runtimeNow
+     0.02s  0.51% 57.72%      0.42s 10.63%  crypto/internal/fips140/sha256.block
+     0.02s  0.51% 58.23%      0.33s  8.35%  crypto/tls.(*Conn).readRecordOrCCS
+     0.02s  0.51% 58.73%      0.02s  0.51%  hash/crc32.ieeeCLMUL
+     0.02s  0.51% 59.24%      0.04s  1.01%  image/jpeg.(*decoder).decodeHuffman
+     0.02s  0.51% 59.75%      0.02s  0.51%  image/jpeg.(*decoder).readByteStuffedByte
+     0.02s  0.51% 60.25%      0.02s  0.51%  image/jpeg.(*decoder).receiveExtend
+     0.02s  0.51% 60.76%      0.28s  7.09%  internal/poll.(*FD).Read
+     0.02s  0.51% 61.27%      0.02s  0.51%  internal/runtime/atomic.(*Uint32).Load (inline)
+     0.02s  0.51% 61.77%      0.02s  0.51%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+     0.02s  0.51% 62.28%      0.33s  8.35%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.02s  0.51% 62.78%      0.03s  0.76%  net/textproto.MIMEHeader.Get
+     0.02s  0.51% 63.29%      0.02s  0.51%  net/textproto.validHeaderFieldByte (inline)
+     0.02s  0.51% 63.80%      0.02s  0.51%  runtime.(*itabTableType).find
+     0.02s  0.51% 64.30%      0.34s  8.61%  runtime.findRunnable
+     0.02s  0.51% 64.81%      0.02s  0.51%  runtime.lock2
+     0.02s  0.51% 65.32%      0.06s  1.52%  runtime.makechan
+     0.02s  0.51% 65.82%      0.27s  6.84%  runtime.mallocgc
+     0.02s  0.51% 66.33%      0.03s  0.76%  runtime.mapaccess2
+     0.02s  0.51% 66.84%      0.19s  4.81%  runtime.netpoll
+     0.02s  0.51% 67.34%      0.08s  2.03%  runtime.pcvalue
+     0.02s  0.51% 67.85%      0.02s  0.51%  runtime.step
+     0.01s  0.25% 68.10%      0.02s  0.51%  compress/flate.(*compressor).deflate
+     0.01s  0.25% 68.35%      0.04s  1.01%  crypto/internal/fips140.RecordApproved
+     0.01s  0.25% 68.61%      0.08s  2.03%  crypto/internal/fips140/aes/gcm.open
+     0.01s  0.25% 68.86%      0.03s  0.76%  crypto/internal/fips140/hmac.(*HMAC).Sum

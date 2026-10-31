@@ -1,0 +1,225 @@
+Linux 7.0.0-1014-aws (ip-192-168-1-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+03:26:16      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:26:21     1100     15425    0.00    0.20    0.00    0.00    0.20     1  isureal
+
+03:26:21      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+03:26:26      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+03:26:31      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:26:36     1100     15717    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+03:26:36      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:26:41     1100     15717    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+03:26:41      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+03:26:46      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:26:51        0     15426    0.00    0.20    0.00    0.00    0.20     1  kworker/1:3-events
+
+03:26:51      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+03:26:56      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:01        0      8028    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:1-events_power_efficient
+
+03:27:01      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:06     1100     15717    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+03:27:06      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:11      102       686    0.00    0.20    0.00    0.00    0.20     0  rsyslogd
+03:27:11     1100     15425    0.20    0.00    0.00    0.00    0.20     1  isureal
+03:27:11     1100     15724    0.60    0.00    0.00    0.00    0.60     1  psql
+
+03:27:11      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:16        0       128    0.20    0.20    0.00    0.00    0.40     0  systemd-journal
+03:27:16     1100      1365    0.20    0.00    0.00    0.00    0.20     0  journalctl
+03:27:16        0     15202    0.20    0.00    0.00    0.00    0.20     0  kworker/0:0-events
+03:27:16     1100     15425    0.40    0.20    0.00    0.00    0.60     1  isureal
+03:27:16     1100     15717    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+03:27:16      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:21     1100      1365    0.20    0.00    0.00    0.00    0.20     0  journalctl
+03:27:21     1100     15425   19.40    1.40    0.00    0.00   20.80     1  isureal
+03:27:21       33     15441    0.00    0.20    0.00    0.00    0.20     1  nginx
+
+03:27:21      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:26       33     15442    0.00    0.20    0.00    0.00    0.20     1  nginx
+03:27:26     1100     15717    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+03:27:26      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:31        0       128    1.20    1.00    0.00    2.20    2.20     0  systemd-journal
+03:27:31      102       686    0.60    0.40    0.00    0.00    1.00     0  rsyslogd
+03:27:31     1100      1248    0.80    0.20    0.00    0.00    1.00     0  isureal-guard
+03:27:31     1100      1365    2.20    0.20    0.00    0.80    2.40     0  journalctl
+03:27:31     1100     15425   66.60   11.60    0.00    0.00   78.20     1  isureal
+03:27:31       33     15441    1.80    8.00    0.00    6.20    9.80     0  nginx
+03:27:31       33     15442    0.80    2.40    0.00    4.00    3.20     0  nginx
+
+03:27:31      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:36        0        16    0.00    0.20    0.00    1.60    0.20     0  rcu_sched
+03:27:36        0       128    1.00    0.60    0.00    1.80    1.60     0  systemd-journal
+03:27:36      102       686    0.40    0.40    0.00    0.00    0.80     0  rsyslogd
+03:27:36     1100      1248    0.60    0.20    0.00    0.00    0.80     0  isureal-guard
+03:27:36     1100      1365    2.20    0.20    0.00    0.60    2.40     0  journalctl
+03:27:36     1100     15425   83.20    9.00    0.00    0.00   92.20     0  isureal
+03:27:36       33     15441    1.40    6.80    0.00    7.00    8.20     0  nginx
+03:27:36       33     15442    0.60    2.80    0.00    3.40    3.40     1  nginx
+
+03:27:36      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:41        0        16    0.00    0.20    0.00    2.20    0.20     1  rcu_sched
+03:27:41        0       128    1.60    0.80    0.00    3.40    2.40     1  systemd-journal
+03:27:41      102       686    0.40    0.80    0.00    0.00    1.20     0  rsyslogd
+03:27:41     1100      1248    1.00    0.20    0.00    0.00    1.20     0  isureal-guard
+03:27:41     1100      1365    3.20    0.20    0.00    1.40    3.40     1  journalctl
+03:27:41     1100     15425   84.80   12.60    0.00    0.00   97.40     1  isureal
+03:27:41       33     15441    1.80    8.00    0.00    9.60    9.80     0  nginx
+03:27:41       33     15442    1.00    3.40    0.00    4.60    4.40     0  nginx
+03:27:41     1100     15717    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+03:27:41      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:46        0        16    0.00    0.20    0.00    1.60    0.20     0  rcu_sched
+03:27:46        0       128    1.20    0.80    0.00    2.20    2.00     0  systemd-journal
+03:27:46      102       686    0.60    0.60    0.00    0.00    1.20     0  rsyslogd
+03:27:46     1100      1248    1.00    0.00    0.00    0.00    1.00     0  isureal-guard
+03:27:46     1100      1365    2.20    0.40    0.00    0.80    2.60     0  journalctl
+03:27:46     1100     15425   85.20   11.00    0.00    0.00   96.20     0  isureal
+03:27:46       33     15441    1.40    6.80    0.00    8.80    8.20     0  nginx
+03:27:46       33     15442    1.00    3.40    0.00    4.20    4.40     0  nginx
+03:27:46     1100     15717    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+03:27:46      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:51        0        26    0.00    0.20    0.00    0.00    0.20     1  ksoftirqd/1
+03:27:51        0       128    1.80    1.20    0.00    4.40    3.00     0  systemd-journal
+03:27:51      102       686    0.80    0.60    0.00    0.00    1.40     0  rsyslogd
+03:27:51     1100      1248    1.00    0.20    0.00    0.00    1.20     0  isureal-guard
+03:27:51     1100      1365    4.00    0.20    0.00    1.60    4.20     0  journalctl
+03:27:51        0      8028    0.00    0.20    0.00    0.40    0.20     0  kworker/u8:1-events_power_efficient
+03:27:51        0     12738    0.00    0.20    0.00    0.20    0.20     0  kworker/u8:0-ext4-rsv-conversion
+03:27:51     1100     15425   99.60   13.40    0.00    0.20  113.00     1  isureal
+03:27:51       33     15441    2.40    8.40    0.00   10.00   10.80     0  nginx
+03:27:51       33     15442    1.40    5.60    0.00    7.80    7.00     0  nginx
+
+03:27:51      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:27:56        0        16    0.00    0.20    0.00    1.80    0.20     1  rcu_sched
+03:27:56        0       128    1.20    1.20    0.00    3.60    2.40     1  systemd-journal
+03:27:56      102       686    0.40    0.80    0.00    0.00    1.20     0  rsyslogd
+03:27:56     1100      1248    0.80    0.40    0.00    0.00    1.20     0  isureal-guard
+03:27:56     1100      1365    3.00    0.40    0.00    2.40    3.40     1  journalctl
+03:27:56     1100     15425  113.80   12.20    0.00    0.00  126.00     1  isureal
+03:27:56        0     15426    0.00    0.20    0.00    0.00    0.20     1  kworker/1:3-events
+03:27:56       33     15441    1.40    5.20    0.00    6.60    6.60     0  nginx
+03:27:56       33     15442    1.00    4.80    0.00    7.60    5.80     0  nginx
+
+03:27:56      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:01        0        14    0.00    0.20    0.00    0.00    0.20     0  ksoftirqd/0
+03:28:01        0        16    0.00    0.20    0.00    2.40    0.20     0  rcu_sched
+03:28:01        0       128    2.60    1.60    0.00    9.20    4.20     0  systemd-journal
+03:28:01      102       686    1.00    1.40    0.00    0.00    2.40     0  rsyslogd
+03:28:01     1100      1248    2.00    0.20    0.00    0.00    2.20     0  isureal-guard
+03:28:01     1100      1365    6.40    0.80    0.00    7.20    7.20     0  journalctl
+03:28:01     1100     15425  120.00   19.20    0.00    0.00  139.20     1  isureal
+03:28:01       33     15441    2.60   10.00    0.00   15.20   12.60     0  nginx
+03:28:01       33     15442    2.00    7.80    0.00   12.60    9.80     0  nginx
+03:28:01     1100     15716    0.00    0.20    0.00    0.00    0.20     0  vmstat
+03:28:01     1100     15717    0.00    0.20    0.00    0.20    0.20     1  pidstat
+
+03:28:01      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:06        0       128    2.60    1.40    0.00    6.00    4.00     0  systemd-journal
+03:28:06      102       686    1.00    1.00    0.00    0.00    2.00     0  rsyslogd
+03:28:06     1100      1248    1.60    0.20    0.00    0.00    1.80     0  isureal-guard
+03:28:06     1100      1365    5.40    0.60    0.00    5.00    6.00     1  journalctl
+03:28:06        0     15202    0.00    0.20    0.00    0.20    0.20     0  kworker/0:0-events
+03:28:06     1100     15425  126.00   12.20    0.00    0.00  138.20     1  isureal
+03:28:06       33     15441    0.60    2.00    0.00    4.00    2.60     1  nginx
+03:28:06       33     15442    1.20    3.60    0.00    6.60    4.80     0  nginx
+03:28:06     1100     15717    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+03:28:06      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:11        0        16    0.00    0.20    0.00    2.40    0.20     1  rcu_sched
+03:28:11        0       128    2.40    1.40    0.00    8.20    3.80     0  systemd-journal
+03:28:11        0       188    0.20    0.00    0.00    0.00    0.20     1  multipathd
+03:28:11      102       686    0.80    1.20    0.00    0.00    2.00     0  rsyslogd
+03:28:11     1100      1248    1.60    0.40    0.00    0.00    2.00     0  isureal-guard
+03:28:11     1100      1365    5.80    0.80    0.00    6.60    6.60     1  journalctl
+03:28:11     1100     15425  102.60   23.60    0.00    0.20  126.20     1  isureal
+03:28:11       33     15441    2.80   14.60    0.00   17.80   17.40     0  nginx
+03:28:11       33     15442    1.40    7.60    0.00   11.00    9.00     0  nginx
+03:28:11     1100     15717    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+03:28:11      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:16        0        16    0.00    0.20    0.00    2.00    0.20     0  rcu_sched
+03:28:16        0       128    2.60    2.00    0.00    7.40    4.60     0  systemd-journal
+03:28:16        0       628    0.20    0.00    0.00    0.00    0.20     1  snapd
+03:28:16      102       686    1.00    1.60    0.00    0.00    2.60     0  rsyslogd
+03:28:16     1100      1248    1.80    0.40    0.00    0.00    2.20     0  isureal-guard
+03:28:16     1100      1365    6.00    0.80    0.00    5.20    6.80     0  journalctl
+03:28:16        0      8028    0.00    0.20    0.00    0.40    0.20     1  kworker/u8:1-ext4-rsv-conversion
+03:28:16        0     12738    0.00    0.20    0.00    0.20    0.20     1  kworker/u8:0-events_power_efficient
+03:28:16     1100     15425   88.20   19.60    0.00    0.00  107.80     0  isureal
+03:28:16       33     15441    1.80    8.20    0.00   10.40   10.00     1  nginx
+03:28:16       33     15442    1.80    8.00    0.00   11.00    9.80     0  nginx
+
+03:28:16      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:21        0        16    0.00    0.20    0.00    2.60    0.20     0  rcu_sched
+03:28:21        0       128    2.40    1.60    0.00    6.40    4.00     1  systemd-journal
+03:28:21      102       686    1.00    1.20    0.00    0.00    2.20     0  rsyslogd
+03:28:21     1100      1248    1.80    0.20    0.00    0.00    2.00     0  isureal-guard
+03:28:21     1100      1365    5.80    0.40    0.00    3.20    6.20     1  journalctl
+03:28:21     1100     15425   92.20   15.20    0.00    0.00  107.40     0  isureal
+03:28:21       33     15441    1.40    2.80    0.00    5.00    4.20     1  nginx
+03:28:21       33     15442    0.80    1.60    0.00    3.40    2.40     1  nginx
+
+03:28:21      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:26        0        16    0.00    0.20    0.00    2.40    0.20     1  rcu_sched
+03:28:26        0       128    2.40    1.80    0.00    6.40    4.20     1  systemd-journal
+03:28:26      102       686    0.80    1.40    0.00    0.00    2.20     0  rsyslogd
+03:28:26     1100      1248    1.60    0.40    0.00    0.00    2.00     0  isureal-guard
+03:28:26     1100      1365    5.40    0.40    0.00    3.40    5.80     1  journalctl
+03:28:26        0     12738    0.00    0.20    0.00    0.40    0.20     1  kworker/u8:0-events_power_efficient
+03:28:26     1100     15425   76.60   18.40    0.00    0.00   95.00     0  isureal
+03:28:26       33     15441    2.00   10.60    0.00   11.00   12.60     1  nginx
+03:28:26       33     15442    1.40    4.60    0.00    7.20    6.00     1  nginx
+03:28:26     1100     15717    0.00    0.20    0.00    0.20    0.20     0  pidstat
+
+03:28:26      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:31        0       128    1.20    1.00    0.00    2.60    2.20     0  systemd-journal
+03:28:31      102       686    0.60    0.60    0.00    0.00    1.20     0  rsyslogd
+03:28:31     1100      1248    1.00    0.20    0.00    0.00    1.20     0  isureal-guard
+03:28:31     1100      1365    3.00    0.40    0.00    1.00    3.40     1  journalctl
+03:28:31     1100     15425   35.80    4.60    0.00    0.00   40.40     0  isureal
+03:28:31        0     15426    0.00    0.20    0.00    0.00    0.20     1  kworker/1:3-events
+03:28:31       33     15441    0.40    1.20    0.00    1.60    1.60     1  nginx
+03:28:31       33     15442    0.20    1.00    0.00    1.40    1.20     1  nginx
+
+03:28:31      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:36        0     15202    0.00    0.20    0.00    0.00    0.20     0  kworker/0:0-mm_percpu_wq
+03:28:36     1100     15425    0.20    0.00    0.00    0.00    0.20     0  isureal
+
+03:28:36      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:41     1100     15425    0.20    0.20    0.00    0.00    0.40     0  isureal
+03:28:41     1100     15716    0.20    0.00    0.00    0.00    0.20     1  vmstat
+03:28:41     1100     15717    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+03:28:41      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+03:28:46        0        26    0.00    0.20    0.00    0.00    0.20     1  ksoftirqd/1
+03:28:46     1100     15425    0.40    0.00    0.00    0.00    0.40     0  isureal
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        14    0.00    0.01    0.00    0.01    0.01     -  ksoftirqd/0
+Average:        0        16    0.00    0.06    0.00    0.88    0.06     -  rcu_sched
+Average:        0        26    0.00    0.01    0.00    0.00    0.01     -  ksoftirqd/1
+Average:        0       128    0.81    0.55    0.00    2.13    1.37     -  systemd-journal
+Average:        0       188    0.01    0.00    0.00    0.00    0.01     -  multipathd
+Average:        0       628    0.01    0.00    0.00    0.00    0.01     -  snapd
+Average:      102       686    0.31    0.41    0.00    0.00    0.72     -  rsyslogd
+Average:     1100      1248    0.55    0.11    0.00    0.00    0.66     -  isureal-guard
+Average:     1100      1365    1.83    0.19    0.00    1.31    2.03     -  journalctl
+Average:        0      8028    0.00    0.02    0.00    0.04    0.02     -  kworker/u8:1-events_power_efficient
+Average:        0     12738    0.00    0.02    0.00    0.05    0.02     -  kworker/u8:0-events_power_efficient
+Average:        0     15202    0.01    0.01    0.00    0.07    0.02     -  kworker/0:0-events
+Average:     1100     15425   39.85    6.15    0.00    0.01   46.00     -  isureal
+Average:        0     15426    0.00    0.02    0.00    0.04    0.02     -  kworker/1:3-events
+Average:       33     15441    0.73    3.09    0.00    3.78    3.82     -  nginx
+Average:       33     15442    0.49    1.89    0.00    2.83    2.38     -  nginx
+Average:     1100     15717    0.03    0.05    0.00    0.01    0.09     -  pidstat
