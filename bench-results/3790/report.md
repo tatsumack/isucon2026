@@ -1,9 +1,9 @@
-# Benchmark report: PR #24 deployed
+# Benchmark report: PR #24 deployed (bench #3790)
 
 ## Capture
 
 - Current: `022455` (Europe/America: `022454`)
-- Comparison baseline: PR #20 capture `021710`
+- Comparison baseline: PR #20 capture `021710` (bench #3308)
 - Deployed revision on all four hosts: `f1ee00b` (`codex/integrate-remaining-prs`)
 - Capture duration: 70 seconds
 - Benchmark score / PASS status: not included in the captured host metrics

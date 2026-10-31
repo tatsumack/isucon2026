@@ -1,4 +1,4 @@
-# ベンチ分析 025234 (#31 実行計画11・12 + main)
+# ベンチ分析 #5712 (計測 025234、PR #31 実行計画11・12 + main)
 
 - ブランチ: `codex/integrate-plan-11-12` (`12423b2`)。4台にデプロイ
 - 計測: 11:52:34〜11:53:44 JST の70秒 (asia1 / europe1 / america1)。DB は pg_stat_statements の前後差分 (asia2/slow.txt)

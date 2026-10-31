@@ -1,4 +1,4 @@
-# Benchmark report: PR #20 deployed
+# Benchmark report: PR #20 deployed (bench #3308)
 
 ## Capture
 
