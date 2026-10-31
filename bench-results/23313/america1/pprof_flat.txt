@@ -1,0 +1,49 @@
+File: isureal
+Build ID: b02c236469af92d4d100eb60e7300809f0e0fc2d
+Type: cpu
+Time: 2026-10-31 06:34:46 UTC
+Duration: 150s, Total samples = 8.52s ( 5.68%)
+Showing nodes accounting for 7.14s, 83.80% of 8.52s total
+Dropped 453 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 171
+      flat  flat%   sum%        cum   cum%
+     2.81s 32.98% 32.98%      2.81s 32.98%  crypto/internal/fips140/sha256.blockSHANI
+     0.91s 10.68% 43.66%      4.36s 51.17%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.69s  8.10% 51.76%      0.69s  8.10%  runtime.memmove
+     0.64s  7.51% 59.27%      0.64s  7.51%  internal/runtime/syscall/linux.Syscall6
+     0.51s  5.99% 65.26%      5.13s 60.21%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.40s  4.69% 69.95%      3.65s 42.84%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.22s  2.58% 72.54%      0.22s  2.58%  runtime.memclrNoHeapPointers
+     0.17s  2.00% 74.53%      0.35s  4.11%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.11s  1.29% 75.82%      0.11s  1.29%  runtime.futex
+     0.09s  1.06% 76.88%      5.85s 68.66%  example.com/isureal-company/isureal.computeImageSignature
+     0.08s  0.94% 77.82%      2.89s 33.92%  crypto/internal/fips140/sha256.block
+     0.07s  0.82% 78.64%      0.11s  1.29%  crypto/internal/fips140.RecordApproved
+     0.06s   0.7% 79.34%      0.06s   0.7%  runtime.(*mspan).writeHeapBitsSmall
+     0.05s  0.59% 79.93%      0.06s   0.7%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.59% 80.52%      0.05s  0.59%  internal/byteorder.BEUint32 (inline)
+     0.04s  0.47% 80.99%      0.18s  2.11%  runtime.netpoll
+     0.01s  0.12% 81.10%      0.17s  2.00%  bufio.(*Reader).Read
+     0.01s  0.12% 81.22%      0.21s  2.46%  bufio.(*Writer).Flush
+     0.01s  0.12% 81.34%      0.06s   0.7%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.01s  0.12% 81.46%      7.16s 84.04%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s  0.12% 81.57%      0.26s  3.05%  internal/poll.(*FD).Read
+     0.01s  0.12% 81.69%      0.35s  4.11%  io.ReadAll
+     0.01s  0.12% 81.81%      0.30s  3.52%  net.(*conn).Read
+     0.01s  0.12% 81.92%      0.28s  3.29%  net.(*netFD).Read
+     0.01s  0.12% 82.04%      0.08s  0.94%  net/http.(*chunkWriter).writeHeader
+     0.01s  0.12% 82.16%      0.11s  1.29%  net/http.(*conn).readRequest
+     0.01s  0.12% 82.28%      7.56s 88.73%  net/http.(*conn).serve
+     0.01s  0.12% 82.39%      0.15s  1.76%  net/http.(*persistConn).Read
+     0.01s  0.12% 82.51%      0.07s  0.82%  net/http.(*persistConn).roundTrip
+     0.01s  0.12% 82.63%      0.17s  2.00%  net/http.(*response).finishRequest
+     0.01s  0.12% 82.75%      0.14s  1.64%  net/http/internal.(*chunkedReader).Read
+     0.01s  0.12% 82.86%      0.05s  0.59%  os.statNolog
+     0.01s  0.12% 82.98%      0.32s  3.76%  runtime.findRunnable
+     0.01s  0.12% 83.10%      0.08s  0.94%  runtime.futexwakeup
+     0.01s  0.12% 83.22%      0.34s  3.99%  runtime.mallocgc
+     0.01s  0.12% 83.33%      0.06s   0.7%  runtime.mallocgcSmallNoscan
+     0.01s  0.12% 83.45%      0.18s  2.11%  runtime.mallocgcSmallScanNoHeader
+     0.01s  0.12% 83.57%      0.34s  3.99%  runtime.mcall
+     0.01s  0.12% 83.69%      0.09s  1.06%  runtime.notewakeup
+     0.01s  0.12% 83.80%      0.06s   0.7%  runtime.scanSpan
