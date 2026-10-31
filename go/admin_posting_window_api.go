@@ -44,7 +44,7 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 		defer tx.Rollback()
 		// 登録・リージョン変更・退会と直列化し、通知対象のactiveユーザーを確定する。
-		if err := lockPostingWindowRegions(ctx, tx, region); err != nil {
+		if err := lockPostingWindowRegionExclusive(ctx, tx, region); err != nil {
 			return err
 		}
 		var conflict bool
