@@ -1,0 +1,65 @@
+Linux 7.0.0-1014-aws (ip-192-168-3-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+01:57:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:57:54        0       168    0.00    0.20    0.00    0.00    0.20     1  systemd-journal
+01:57:54     1100      5022    1.80    0.60    0.00    0.00    2.40     1  isureal
+
+01:57:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:57:59     1100      5022    0.40    0.20    0.00    0.00    0.60     1  isureal
+
+01:57:59      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:04     1100      5022    0.40    0.20    0.00    0.00    0.60     1  isureal
+
+01:58:04      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:09        0      1913    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:2-events_power_efficient
+01:58:09     1100      5022    0.60    0.20    0.00    0.00    0.80     1  isureal
+01:58:09     1100      5180    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+01:58:09      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:14        0       227    0.20    0.00    0.00    0.00    0.20     0  multipathd
+01:58:14        0       653    0.00    0.20    0.00    0.00    0.20     0  irqbalance
+01:58:14        0      2019    0.00    0.20    0.00    0.00    0.20     1  kworker/1:1-mm_percpu_wq
+01:58:14     1100      5022    0.40    0.00    0.00    0.00    0.40     1  isureal
+
+01:58:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:19     1100      5022    0.60    0.20    0.00    0.00    0.80     1  isureal
+
+01:58:19      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:24     1100      5022    0.80    0.40    0.00    0.00    1.20     1  isureal
+
+01:58:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:29     1100      5022    0.80    0.20    0.00    0.00    1.00     1  isureal
+01:58:29       33      5036    0.00    0.20    0.00    0.00    0.20     0  nginx
+
+01:58:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:34        0        16    0.20    0.00    0.00    0.00    0.20     1  rcu_sched
+01:58:34     1100      1289    0.20    0.00    0.00    0.00    0.20     0  isureal-guard
+01:58:34     1100      5022    0.80    0.40    0.00    0.00    1.20     1  isureal
+01:58:34     1100      5180    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+01:58:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:39        0        25    0.00    0.20    0.00    0.00    0.20     1  migration/1
+01:58:39     1100      5022    0.80    0.40    0.00    0.00    1.20     1  isureal
+
+01:58:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:44     1100      5022    1.00    0.20    0.00    0.00    1.20     1  isureal
+01:58:44     1100      5180    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+01:58:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+01:58:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+01:58:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        16    0.01    0.00    0.00    0.01    0.01     -  rcu_sched
+Average:        0        25    0.00    0.01    0.00    0.00    0.01     -  migration/1
+Average:        0       168    0.00    0.01    0.00    0.00    0.01     -  systemd-journal
+Average:        0       227    0.01    0.00    0.00    0.00    0.01     -  multipathd
+Average:        0       653    0.00    0.01    0.00    0.00    0.01     -  irqbalance
+Average:     1100      1289    0.01    0.00    0.00    0.00    0.01     -  isureal-guard
+Average:        0      1913    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:2-events_power_efficient
+Average:        0      2019    0.00    0.01    0.00    0.00    0.01     -  kworker/1:1-mm_percpu_wq
+Average:     1100      5022    0.60    0.21    0.00    0.00    0.81     -  isureal
+Average:       33      5036    0.00    0.01    0.00    0.00    0.01     -  nginx
+Average:     1100      5180    0.01    0.03    0.00    0.00    0.04     -  pidstat
