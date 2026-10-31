@@ -82,7 +82,9 @@ func TestImageSignerPrimeIgnoresFailure(t *testing.T) {
 	user := User{ImageKey: make([]byte, 32)}
 	rand.Read(user.ImageKey)
 	batch.add(user, rand.Text())
-	NewImageSigner(&Config{SigningURLs: []string{server.URL}}).Prime(context.Background(), &batch)
+	if err := NewImageSigner(&Config{SigningURLs: []string{server.URL}}).Prime(context.Background(), &batch); err == nil {
+		t.Fatal("Prime returned nil despite the failure")
+	}
 
 	if _, ok := imageSignatureCache.Load(string(user.ImageKey) + ":" + batch.targets[0].ImageID); ok {
 		t.Fatal("cache was filled despite the failure")
@@ -93,14 +95,14 @@ func TestImageSignerPrimeIgnoresFailure(t *testing.T) {
 func TestWaitImageSignature(t *testing.T) {
 	start := time.Now()
 	waitImageSignature(nil)
-	done := make(chan struct{})
-	close(done)
+	done := make(chan error, 1)
+	done <- nil
 	waitImageSignature(done)
 	if elapsed := time.Since(start); elapsed > 10*time.Millisecond {
 		t.Fatalf("waited %v without a pending request", elapsed)
 	}
 	start = time.Now()
-	waitImageSignature(make(chan struct{}))
+	waitImageSignature(make(chan error))
 	if elapsed := time.Since(start); elapsed < postImageSignatureWait || elapsed > postImageSignatureWait+100*time.Millisecond {
 		t.Fatalf("waited %v, want about %v", elapsed, postImageSignatureWait)
 	}

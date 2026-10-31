@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -84,9 +85,9 @@ type imageSignaturesResponse struct {
 
 // Prime は、batch のうちキャッシュにない署名を依頼先に計算させ、キャッシュに入れる。
 // 依頼先が複数あるときは、等分して並行に依頼する。
-func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
+func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) error {
 	if s == nil || len(s.urls) == 0 {
-		return
+		return nil
 	}
 	exp := imageURLExpiration(time.Now())
 	pending := make([]imageSignatureTarget, 0, len(batch.targets))
@@ -96,12 +97,14 @@ func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
 		}
 	}
 	if len(pending) == 0 {
-		return
+		return nil
 	}
 	ctx, cancel := context.WithTimeout(ctx, remoteImageSignatureTimeout)
 	defer cancel()
 	chunkSize := (len(pending) + len(s.urls) - 1) / len(s.urls)
 	var wg sync.WaitGroup
+	var errorMu sync.Mutex
+	var requestErrors []error
 	for i, url := range s.urls {
 		start := i * chunkSize
 		if start >= len(pending) {
@@ -111,10 +114,14 @@ func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
 		wg.Go(func() {
 			if err := s.request(ctx, url, exp, chunk); err != nil {
 				log.Printf("remote image signature failed: %v", err)
+				errorMu.Lock()
+				requestErrors = append(requestErrors, err)
+				errorMu.Unlock()
 			}
 		})
 	}
 	wg.Wait()
+	return errors.Join(requestErrors...)
 }
 
 func (s *ImageSigner) request(ctx context.Context, url string, exp int64, targets []imageSignatureTarget) error {

@@ -2,12 +2,16 @@ package isureal
 
 import (
 	"bytes"
+	"context"
 	"database/sql"
 	"errors"
 	"io"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/google/uuid"
@@ -160,15 +164,23 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 		imageID := uuid.NewString()
 		// 応答の画像URLの署名を europe1 / america1 に依頼し、画像の保存とトランザクションの間に計算させる。
 		// 鍵がまだ手元にない利用者は依頼せず、これまでどおり newPostResponse で計算する。
-		var signed chan struct{}
+		var signed chan error
 		if key, ok := cachedImageKey(userID); ok {
 			var batch imageSignatureBatch
 			batch.addKey(key, imageID)
-			signed = make(chan struct{})
+			signed = make(chan error, 1)
 			go func() {
-				defer close(signed)
-				h.Signer.Prime(ctx, &batch)
+				// 投稿の応答が先に終わっても遠隔HTTPを完走させ、接続を次の依頼で再利用する。
+				// Prime 自身が remoteImageSignatureTimeout の上限を付ける。
+				err := h.Signer.Prime(context.WithoutCancel(ctx), &batch)
+				if err != nil {
+					// 投稿側が先にタイムアウトしても、遠隔HTTPの失敗を集計する。
+					postImageSignatureMetrics.remoteError.Add(1)
+				}
+				signed <- err
 			}()
+		} else {
+			postImageSignatureMetrics.keyMiss.Add(1)
 		}
 		if err := h.Images.Save(imageID, imageData); err != nil {
 			return err
@@ -246,18 +258,61 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 }
 
 // 投稿の応答で、署名の依頼の結果を待つ時間の上限。asia1 から europe1 / america1 への往復は約100ms。
-// 投稿の処理がそれより早く終わったときに、応答を遅らせすぎないよう短くする。間に合わなければ asia1 で計算する。
-const postImageSignatureWait = 50 * time.Millisecond
+// 画像保存とDBトランザクションの間は並行に計算し、コミット後に残った時間だけここで待つ。
+// 間に合わなければ asia1 で計算するが、遠隔HTTPは接続再利用のため完走させる。
+const postImageSignatureWait = 150 * time.Millisecond
 
-func waitImageSignature(signed <-chan struct{}) {
+type postImageSignatureMetricSet struct {
+	keyMiss     atomic.Int64
+	ready       atomic.Int64
+	waitSuccess atomic.Int64
+	timeout     atomic.Int64
+	remoteError atomic.Int64
+}
+
+var postImageSignatureMetrics postImageSignatureMetricSet
+var postImageSignatureMetricsLogger sync.Once
+
+func startPostImageSignatureMetricsLogger() {
+	postImageSignatureMetricsLogger.Do(func() {
+		go func() {
+			ticker := time.NewTicker(10 * time.Second)
+			defer ticker.Stop()
+			for range ticker.C {
+				keyMiss := postImageSignatureMetrics.keyMiss.Swap(0)
+				ready := postImageSignatureMetrics.ready.Swap(0)
+				waitSuccess := postImageSignatureMetrics.waitSuccess.Swap(0)
+				timeout := postImageSignatureMetrics.timeout.Swap(0)
+				remoteError := postImageSignatureMetrics.remoteError.Swap(0)
+				if keyMiss+ready+waitSuccess+timeout+remoteError != 0 {
+					log.Printf("post image signature: key_miss=%d ready=%d wait_success=%d timeout=%d remote_error=%d", keyMiss, ready, waitSuccess, timeout, remoteError)
+				}
+			}
+		}()
+	})
+}
+
+func waitImageSignature(signed <-chan error) {
 	if signed == nil {
 		return
+	}
+	select {
+	case err := <-signed:
+		if err == nil {
+			postImageSignatureMetrics.ready.Add(1)
+		}
+		return
+	default:
 	}
 	timer := time.NewTimer(postImageSignatureWait)
 	defer timer.Stop()
 	select {
-	case <-signed:
+	case err := <-signed:
+		if err == nil {
+			postImageSignatureMetrics.waitSuccess.Add(1)
+		}
 	case <-timer.C:
+		postImageSignatureMetrics.timeout.Add(1)
 	}
 }
 

@@ -68,15 +68,24 @@ func cachedImageKey(userID string) ([]byte, bool) {
 	return key.([]byte), true
 }
 
+// cacheImageKey は署名鍵を計算し、投稿の署名を先行依頼できるよう利用者IDで保持する。
+// secret_key_hash は変更されず、利用者IDも使い回されないため、/initialize まで無効化は不要。
+func cacheImageKey(user *User) error {
+	if err := user.setImageKey(); err != nil {
+		return err
+	}
+	imageKeyCache.Store(user.ID, user.ImageKey)
+	return nil
+}
+
 func getUser(ctx context.Context, db sqlx.QueryerContext, userID string) (User, error) {
 	var user User
 	err := sqlx.GetContext(ctx, db, &user, `SELECT `+strings.Join(userColumns, ", ")+` FROM users WHERE id = $1 AND status = 'active'`, userID)
 	if err != nil {
 		return user, err
 	}
-	if err := user.setImageKey(); err != nil {
+	if err := cacheImageKey(&user); err != nil {
 		return user, err
 	}
-	imageKeyCache.Store(user.ID, user.ImageKey)
 	return user, nil
 }

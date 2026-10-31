@@ -49,6 +49,9 @@ func NewServer(config *Config) *echo.Echo {
 		Images:          NewImageStore(config, db),
 		Signer:          NewImageSigner(config),
 	}
+	if len(config.SigningURLs) != 0 {
+		startPostImageSignatureMetricsLogger()
+	}
 	e.Use(IPBanMiddleware(handlerContext))
 	e.Use(PriorityMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
