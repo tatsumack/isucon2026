@@ -7,3 +7,6 @@
 /python/
 /ruby/
 /rust/
+# ベンチマーカーの行動分析で手元に持ってくる生ログとユーザー別時系列 (docs/benchmarker-analysis.md)
+/bench-results/**/*.log
+/bench-results/**/timeline.tsv
