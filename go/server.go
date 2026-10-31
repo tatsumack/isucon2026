@@ -50,6 +50,7 @@ func NewServer(config *Config) *echo.Echo {
 		Signer:          NewImageSigner(config),
 	}
 	e.Use(IPBanMiddleware(handlerContext))
+	e.Use(PriorityMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
 	// 転送しないもの: 初期化、退会、画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
 	// 登録・ログイン・ログアウト・自分の情報の更新・プロフィール画像も転送する (DB と約5往復するため)。

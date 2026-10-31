@@ -23,4 +23,5 @@ PGPASSWORD="$ISUREAL_DB_PASSWORD" psql \
 	--set=ON_ERROR_STOP=1 \
 	--file=reset.sql \
 	--file=002-performance-indexes.sql \
-	--file=004-user-search.sql
+	--file=004-user-search.sql \
+	--file=005-user-search-trgm.sql
