@@ -18,6 +18,9 @@ import (
 //   - ISUREAL_PRIORITY_MAX_WAIT: 既定 1s。heavy/all は超過後に上限を無視、split は共通追加枠を待つ
 //   - ISUREAL_PRIORITY_SCOPE: heavy (既定) は重い API、all は除外 API 以外、split は投稿経路・重い API・その他に枠を分ける
 
+// adaptiveは全体の上限を維持し、空き枠をグループ間で貸す (priority_adaptive.go)。
+// PriorityMaxWaitはadaptiveでは使わず、キャンセルまで上限内で待つ。
+
 // 「投稿 → 友達フィード」の流れに入らない重い API (#20097 の asia1 の pprof: export 10.8%、プロフィール画像 9.0%、Memories 5.1%)
 var priorityHeavyRoutes = map[string]bool{
 	"GET /api/me/export":        true,
@@ -51,6 +54,9 @@ func PriorityMiddleware(h *HandlerContext) echo.MiddlewareFunc {
 	// 転送を受けるのは asia1 だけ (europe1 / america1 は DelegateURL を持ち、TrustedPeers を持たない)
 	if config.PriorityLimit <= 0 || config.DelegateURL != "" || len(config.TrustedPeers) == 0 {
 		return func(next echo.HandlerFunc) echo.HandlerFunc { return next }
+	}
+	if config.PriorityScope == "adaptive" {
+		return adaptivePriorityMiddleware(config)
 	}
 	if config.PriorityScope == "split" && config.PriorityLimit >= 3 {
 		return splitPriorityMiddleware(config)
