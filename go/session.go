@@ -32,7 +32,7 @@ func GetSession(c *echo.Context) *Session {
 	return sess
 }
 
-func getSessionFromHeader(c *echo.Context, db *sqlx.DB) (*Session, error) {
+func getSessionFromHeader(c *echo.Context, db *sqlx.DB, cache *SessionCache) (*Session, error) {
 	authHeader := c.Request().Header.Get(echo.HeaderAuthorization)
 	if authHeader == "" {
 		return nil, nil
@@ -46,8 +46,14 @@ func getSessionFromHeader(c *echo.Context, db *sqlx.DB) (*Session, error) {
 
 	tokenHashBytes := sha256.Sum256([]byte(token))
 	tokenHash := hex.EncodeToString(tokenHashBytes[:])
+	return cache.lookup(c.Request().Context(), tokenHash, func(ctx context.Context, hash string) (*Session, error) {
+		return loadSession(ctx, db, hash)
+	})
+}
+
+func loadSession(ctx context.Context, db *sqlx.DB, tokenHash string) (*Session, error) {
 	var session Session
-	err := db.GetContext(c.Request().Context(), &session, `
+	err := db.GetContext(ctx, &session, `
 		SELECT s.user_id, s.token_hash, s.created_at, u.region
 		FROM login_sessions s JOIN users u ON u.id = s.user_id
 		WHERE s.token_hash = $1
@@ -65,7 +71,7 @@ func getSessionFromHeader(c *echo.Context, db *sqlx.DB) (*Session, error) {
 func SessionMiddleware(handlerContext *HandlerContext, authRequired bool) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) error {
-			session, err := getSessionFromHeader(c, handlerContext.DB)
+			session, err := getSessionFromHeader(c, handlerContext.DB, handlerContext.Sessions)
 			if err != nil {
 				return err
 			}
