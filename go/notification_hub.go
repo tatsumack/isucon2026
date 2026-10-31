@@ -7,6 +7,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -30,7 +31,6 @@ type notificationPollRow struct {
 	SubscriptionID  int64      `db:"subscription_id"`
 	UserRegion      *string    `db:"user_region"`
 	UserStatus      *string    `db:"user_status"`
-	ID              *string    `db:"id"`
 	PostingWindowID *string    `db:"posting_window_id"`
 	Region          *string    `db:"region"`
 	CreatedAt       *time.Time `db:"created_at"`
@@ -103,11 +103,11 @@ func (h *NotificationHub) poll(ctx context.Context) {
 			h.deliver(subscription, notificationEvent{Disconnect: true})
 			continue
 		}
-		if row.ID == nil {
+		if row.PostingWindowID == nil {
 			continue
 		}
 		h.deliver(subscription, notificationEvent{Notification: &getNotificationsResponse{
-			ID:              *row.ID,
+			ID:              notificationID(*row.PostingWindowID, subscription.userID, *row.CreatedAt),
 			PostingWindowID: *row.PostingWindowID,
 			Region:          *row.Region,
 			CreatedAt:       *row.CreatedAt,
@@ -138,25 +138,15 @@ WITH subscribers(subscription_id, user_id, connected_at) AS (VALUES ` + strings.
 SELECT s.subscription_id,
        u.region AS user_region,
        u.status AS user_status,
-       n.id,
-       n.posting_window_id,
-       n.region,
-       n.created_at
+       w.id AS posting_window_id,
+       w.region,
+       w.starts_at AS created_at
 FROM subscribers s
 LEFT JOIN users u ON u.id = s.user_id
-LEFT JOIN LATERAL (
-  SELECT notifications.id,
-         notifications.posting_window_id,
-         posting_windows.region,
-         notifications.created_at
-  FROM notifications
-  JOIN posting_windows ON posting_windows.id = notifications.posting_window_id
-  WHERE notifications.user_id = s.user_id
-    AND notifications.created_at > s.connected_at
-    AND posting_windows.ended_at IS NULL
-  ORDER BY notifications.created_at, notifications.id
-  LIMIT 1
-) n ON true
+LEFT JOIN posting_windows w
+  ON w.region = u.region
+ AND w.ended_at IS NULL
+ AND w.starts_at > s.connected_at
 `
 	var rows []notificationPollRow
 	if err := h.db.SelectContext(ctx, &rows, query, args...); err != nil {
@@ -170,4 +160,16 @@ func (h *NotificationHub) deliver(subscription *notificationSubscription, event 
 	case subscription.events <- event:
 	default:
 	}
+}
+
+// notificationID は、投稿期間とユーザーから通知IDを決める。通知の行を持たないので、同じ組には毎回同じIDを返す。
+// 先頭は投稿期間の開始時刻を入れたUUID v7の形 (notificationIDPrefix) で、後半は投稿期間IDとユーザーIDのSHA-1から作る。
+func notificationID(postingWindowID, userID string, startsAt time.Time) string {
+	return notificationIDPrefix(startsAt) + uuid.NewSHA1(uuid.Nil, []byte(postingWindowID+":"+userID)).String()[15:]
+}
+
+// notificationIDPrefix は、UUID v7 の先頭15文字 (48ビットのミリ秒時刻とバージョンの7) を返す。
+func notificationIDPrefix(t time.Time) string {
+	ms := uint64(t.UnixMilli())
+	return fmt.Sprintf("%08x-%04x-7", ms>>16, ms&0xffff)
 }
