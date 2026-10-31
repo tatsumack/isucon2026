@@ -1,0 +1,49 @@
+File: isureal
+Build ID: ce30e4ef722a3de34617b17e7b244039f58fa80b
+Type: cpu
+Time: 2026-10-31 07:05:11 UTC
+Duration: 150s, Total samples = 11.18s ( 7.45%)
+Showing nodes accounting for 9.06s, 81.04% of 11.18s total
+Dropped 502 nodes (cum <= 0.06s)
+Showing top 40 nodes out of 212
+      flat  flat%   sum%        cum   cum%
+     3.42s 30.59% 30.59%      3.42s 30.59%  crypto/internal/fips140/sha256.blockSHANI
+     1.17s 10.47% 41.06%      1.17s 10.47%  internal/runtime/syscall/linux.Syscall6
+     1.11s  9.93% 50.98%      5.27s 47.14%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.79s  7.07% 58.05%      0.79s  7.07%  runtime.memmove
+     0.62s  5.55% 63.60%      6.16s 55.10%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.33s  2.95% 66.55%      0.33s  2.95%  runtime.memclrNoHeapPointers
+     0.29s  2.59% 69.14%      4.28s 38.28%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.18s  1.61% 70.75%      0.31s  2.77%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.18s  1.61% 72.36%      0.18s  1.61%  runtime.futex
+     0.11s  0.98% 73.35%      0.11s  0.98%  runtime.nextFreeFast (inline)
+     0.10s  0.89% 74.24%      3.52s 31.48%  crypto/internal/fips140/sha256.block
+     0.08s  0.72% 74.96%      0.13s  1.16%  crypto/internal/fips140.RecordApproved
+     0.06s  0.54% 75.49%      6.71s 60.02%  example.com/isureal-company/isureal.computeImageSignature
+     0.06s  0.54% 76.03%      0.09s  0.81%  runtime.selectgo
+     0.05s  0.45% 76.48%      0.12s  1.07%  runtime.tryDeferToSpanScan
+     0.04s  0.36% 76.83%      0.06s  0.54%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.03s  0.27% 77.10%      0.22s  1.97%  net/http.(*Transport).roundTrip
+     0.03s  0.27% 77.37%      0.07s  0.63%  runtime.(*mcentral).cacheSpan
+     0.03s  0.27% 77.64%      0.36s  3.22%  runtime.findRunnable
+     0.02s  0.18% 77.82%      0.08s  0.72%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.02s  0.18% 78.00%      8.98s 80.32%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.02s  0.18% 78.18%      0.16s  1.43%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.02s  0.18% 78.35%      0.18s  1.61%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.02s  0.18% 78.53%      0.48s  4.29%  internal/poll.(*FD).Read
+     0.02s  0.18% 78.71%      9.57s 85.60%  net/http.(*conn).serve
+     0.02s  0.18% 78.89%      0.32s  2.86%  net/http.(*persistConn).readLoop
+     0.02s  0.18% 79.07%      0.36s  3.22%  net/http.(*persistConn).writeLoop
+     0.02s  0.18% 79.25%      0.23s  2.06%  net/http/internal.(*chunkedReader).Read
+     0.02s  0.18% 79.43%      0.09s  0.81%  runtime.(*mheap).allocSpan
+     0.02s  0.18% 79.61%      0.11s  0.98%  runtime.growslice
+     0.02s  0.18% 79.79%      0.50s  4.47%  runtime.mallocgc
+     0.02s  0.18% 79.96%      0.14s  1.25%  runtime.netpoll
+     0.02s  0.18% 80.14%      0.17s  1.52%  runtime.newobject
+     0.02s  0.18% 80.32%      0.07s  0.63%  runtime.notesleep
+     0.02s  0.18% 80.50%      0.15s  1.34%  runtime.scanSpan
+     0.02s  0.18% 80.68%      0.39s  3.49%  runtime.schedule
+     0.01s 0.089% 80.77%      0.31s  2.77%  bufio.(*Reader).Read
+     0.01s 0.089% 80.86%      0.14s  1.25%  crypto/tls.(*Conn).Read
+     0.01s 0.089% 80.95%      0.09s  0.81%  database/sql.(*Rows).Next
+     0.01s 0.089% 81.04%      0.34s  3.04%  database/sql.ctxDriverQuery
