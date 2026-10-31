@@ -43,7 +43,8 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
-		if _, err := tx.ExecContext(ctx, `LOCK TABLE users IN SHARE ROW EXCLUSIVE MODE`); err != nil {
+		// 登録・リージョン変更・退会と直列化し、通知対象のactiveユーザーを確定する。
+		if err := lockPostingWindowRegions(ctx, tx, region); err != nil {
 			return err
 		}
 		var conflict bool

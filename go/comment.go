@@ -45,29 +45,30 @@ func selectCommentsWithAuthor(ctx context.Context, db sqlx.QueryerContext, condi
 	return comments, nil
 }
 
-func canComment(ctx context.Context, db sqlx.QueryerContext, viewerID, postID string) (bool, error) {
+// コメントできるかを返す。呼び出し元で本人の情報を使えるよう、読み込んだ viewer も返す (許可されないときは使わないこと)。
+func canComment(ctx context.Context, db sqlx.QueryerContext, viewerID, postID string) (bool, viewerContext, error) {
 	post, err := getPostWithAuthor(ctx, db, postID)
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, nil
+		return false, viewerContext{}, nil
 	}
 	if err != nil {
-		return false, err
+		return false, viewerContext{}, err
 	}
 	viewer, err := loadViewerContext(ctx, db, viewerID)
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, nil
+		return false, viewer, nil
 	}
 	if err != nil {
-		return false, err
+		return false, viewer, err
 	}
 	if !viewer.canView(post.Post) || post.WindowEndedAt != nil {
-		return false, nil
+		return false, viewer, nil
 	}
 	if viewer.ID == post.AuthorID {
-		return viewer.HasPostedToday, nil
+		return viewer.HasPostedToday, viewer, nil
 	}
 	if post.Visibility == "public" {
-		return true, nil
+		return true, viewer, nil
 	}
-	return viewer.Friends[post.AuthorID], nil
+	return viewer.Friends[post.AuthorID], viewer, nil
 }

@@ -91,6 +91,11 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
+		// 画像の保存はロックを取る前に済ませ、ロックを持つ時間を短くする。投稿できない場合はロールバックで消える。
+		imageID := uuid.NewString()
+		if _, err := tx.ExecContext(ctx, `INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, $3, 'image/jpeg', $4)`, imageID, userID, imageData, time.Now().UTC()); err != nil {
+			return err
+		}
 		var lockedUserID string
 		if err := tx.GetContext(ctx, &lockedUserID, `SELECT id FROM users WHERE id = $1 FOR NO KEY UPDATE`, userID); err != nil {
 			return err
@@ -104,9 +109,12 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 			LocalDate time.Time `db:"local_date"`
 			StartsAt  time.Time `db:"starts_at"`
 		}
-		err = tx.GetContext(ctx, &window, `SELECT id, local_date, starts_at FROM posting_windows WHERE region = $1 AND ended_at IS NULL FOR UPDATE`, user.Region)
+		// 投稿同士は並行に進め、投稿期間の終了 (UPDATE posting_windows SET ended_at) とだけ排他にする。
+		// FOR KEY SHARE では ended_at の更新を止められないため FOR SHARE を使う。
+		// ロック待ちの間に期間が終了した場合は行が返らないので、新しい期間を取り直す。
+		err = tx.GetContext(ctx, &window, `SELECT id, local_date, starts_at FROM posting_windows WHERE region = $1 AND ended_at IS NULL FOR SHARE`, user.Region)
 		if errors.Is(err, sql.ErrNoRows) {
-			err = tx.GetContext(ctx, &window, `SELECT id, local_date, starts_at FROM posting_windows WHERE region = $1 AND ended_at IS NULL FOR UPDATE`, user.Region)
+			err = tx.GetContext(ctx, &window, `SELECT id, local_date, starts_at FROM posting_windows WHERE region = $1 AND ended_at IS NULL FOR SHARE`, user.Region)
 		}
 		if err != nil {
 			if errors.Is(err, sql.ErrNoRows) {
@@ -129,10 +137,6 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 		postedAt := time.Now().UTC()
 		if counts.Active != 0 || counts.Deleted >= 2 || postedAt.Before(window.StartsAt) {
 			return NewAPIError(http.StatusConflict, "post_slot_unavailable")
-		}
-		imageID := uuid.NewString()
-		if _, err := tx.ExecContext(ctx, `INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, $3, 'image/jpeg', $4)`, imageID, userID, imageData, postedAt); err != nil {
-			return err
 		}
 		postID := uuid.NewString()
 		if _, err := tx.ExecContext(ctx, `

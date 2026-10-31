@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"net/http"
 	"sort"
 	"time"
@@ -55,33 +56,52 @@ func getFeedHandler(h *HandlerContext) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
-		following := map[string]bool{}
-		if input.Feed == "following" {
-			var followeeIDs []string
-			if err := h.DB.SelectContext(ctx, &followeeIDs, `SELECT followee_id FROM follows WHERE follower_id = $1`, viewer.ID); err != nil {
-				return err
-			}
-			for _, id := range followeeIDs {
-				following[id] = true
-			}
+		// Every candidate is someone else's post, and viewer.canView rejects all of them
+		// until the viewer has posted today.
+		if !viewer.HasPostedToday {
+			return c.JSON(http.StatusOK, getFeedResponse{Items: []feedItemResponse{}})
 		}
 		beforePostedAt, beforeID := input.BeforePostedAt, input.BeforeID
 		if ranked {
 			beforePostedAt, beforeID = nil, ""
 		}
-		posts, err := selectPostsWithAuthor(ctx, h.DB, `
+		// The conditions below are viewer.canView and the feed type expressed in SQL.
+		args := []any{viewer.ID, beforePostedAt, beforeID, userIDList(viewer.Blocked)}
+		param := func(value any) string {
+			args = append(args, value)
+			return fmt.Sprintf("$%d", len(args))
+		}
+		var feedConditions string
+		switch input.Feed {
+		case "public":
+			feedConditions = `AND p.visibility = 'public'`
+		case "following":
+			friends, friendsOfFriends := param(userIDList(viewer.Friends)), param(userIDList(viewer.FriendsOfFriends))
+			feedConditions = `AND p.author_id IN (SELECT followee_id FROM follows WHERE follower_id = $1)
+   AND (p.visibility = 'public'
+     OR (p.visibility = 'friends' AND p.author_id = ANY(` + friends + `))
+     OR (p.visibility = 'friends_of_friends' AND (p.author_id = ANY(` + friends + `) OR p.author_id = ANY(` + friendsOfFriends + `))))`
+		case "friends":
+			feedConditions = `AND p.author_id = ANY(` + param(userIDList(viewer.Friends)) + `)
+   AND p.visibility IN ('public', 'friends', 'friends_of_friends')`
+		case "friends-of-friends":
+			feedConditions = `AND p.author_id = ANY(` + param(userIDList(viewer.FriendsOfFriends)) + `)
+   AND NOT p.author_id = ANY(` + param(userIDList(viewer.Friends)) + `)
+   AND p.visibility IN ('public', 'friends_of_friends')`
+		}
+		limit := ""
+		if !ranked {
+			limit = "LIMIT 51"
+		}
+		candidates, err := selectPostsWithAuthor(ctx, h.DB, `
    AND p.author_id <> $1 AND w.ended_at IS NULL
+   AND NOT p.author_id = ANY($4)
+   `+feedConditions+`
    AND ($2::timestamptz IS NULL OR (p.posted_at, p.id) < ($2, $3))
    ORDER BY p.posted_at DESC, p.id DESC
-  `, viewer.ID, beforePostedAt, beforeID)
+   `+limit, args...)
 		if err != nil {
 			return err
-		}
-		candidates := make([]PostWithAuthor, 0)
-		for _, post := range posts {
-			if viewer.canView(post.Post) && matchesFeed(viewer, following, post.Post, input.Feed) {
-				candidates = append(candidates, post)
-			}
 		}
 		var scores map[string]int64
 		if ranked {
@@ -186,17 +206,11 @@ func recommendationScores(ctx context.Context, db sqlx.QueryerContext, viewer vi
 	return scores, nil
 }
 
-func matchesFeed(viewer viewerContext, following map[string]bool, post Post, feed string) bool {
-	switch feed {
-	case "public":
-		return post.Visibility == "public"
-	case "following":
-		return following[post.AuthorID]
-	case "friends":
-		return viewer.Friends[post.AuthorID]
-	case "friends-of-friends":
-		return !viewer.Friends[post.AuthorID] && viewer.FriendsOfFriends[post.AuthorID]
-	default:
-		return false
+// userIDList is never nil: pgx sends a nil slice as NULL, and NOT x = ANY(NULL) would drop every row.
+func userIDList(ids map[string]bool) []string {
+	list := make([]string, 0, len(ids))
+	for id := range ids {
+		list = append(list, id)
 	}
+	return list
 }

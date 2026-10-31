@@ -5,7 +5,7 @@ description: ISUCONでベンチマーク実行中のサーバを計測し、終�
 
 # ベンチマーク計測・分析
 
-引数: 計測秒数 (省略時70秒)。
+引数: 計測秒数 (省略時150秒)。ベンチは開始から終了まで約2分半かかる (#2540 で 148秒)。70秒では負荷走行の後半を取り逃す。
 ベンチはルーター経由で3台のアプリサーバすべてに来るので、全台を同時に計測する。
 
 | ホスト | 役割 | bench-capture.shの第2引数 |
@@ -24,10 +24,10 @@ description: ISUCONでベンチマーク実行中のサーバを計測し、終�
 次の4コマンドをそれぞれ **`run_in_background: true` で** 同時に実行し、すぐにユーザーへ「計測を開始しました。ベンチを開始してください」と伝える。
 
 ```
-ssh asia1 /home/isucon/webapp/bench-capture.sh 70 app
-ssh europe1 /home/isucon/webapp/bench-capture.sh 70 app
-ssh america1 /home/isucon/webapp/bench-capture.sh 70 app
-ssh asia2 /home/isucon/webapp/bench-capture.sh 70 db
+ssh asia1 /home/isucon/webapp/bench-capture.sh 150 app
+ssh europe1 /home/isucon/webapp/bench-capture.sh 150 app
+ssh america1 /home/isucon/webapp/bench-capture.sh 150 app
+ssh asia2 /home/isucon/webapp/bench-capture.sh 150 db
 ```
 
 - ベンチ時間が違う場合はユーザーの指示に合わせる
@@ -40,6 +40,19 @@ mkdir -p bench-results/<ベンチID>
 scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 ```
 
+ベンチマーカーの行動分析 (`docs/benchmarker-analysis.md`) 用に、3台の access.log も取得して集計する。
+access.log は計測が終わった後も書き込まれ続けるので、**ポータルでベンチの終了 (FINISHED) を確認してから** 取得する。
+
+```
+D=bench-results/<ベンチID>/timeline
+mkdir -p $D
+for h in asia1 europe1 america1; do ssh $h sudo cat /var/log/nginx/access.log > $D/$h.log; done
+./bench-timeline.py $D asia=$D/asia1.log europe=$D/europe1.log america=$D/america1.log
+```
+
+- `$D/report.txt` (集計) と `$D/timeline.tsv` (ユーザー別の時系列) ができる。生ログと timeline.tsv は gitignore されている
+- ログに `msec` が無いブランチ (計測用のログ項目を外した後など) では `no rows` で終わる。その場合は行動分析を飛ばし、報告にそう書く
+
 ### 3. 分析する
 次の順で読む。生ログ (access.log) は読まない。
 
@@ -47,11 +60,17 @@ scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 2. 各アプリサーバの `alp.txt` — SUM (合計時間) が大きいエンドポイント上位。COUNTとAVGも見て「遅い」のか「多い」のかを区別する。リージョン間の差も見る
 3. asia2の `slow.txt` — pg_stat_statementsの total_ms 上位のクエリ。rows / calls が大きいもの、mean_msが大きいものはインデックス不足を疑う
 4. `pprof_cum.txt` / `pprof_flat.txt` — アプリ内で時間を使っている関数。`isureal.` で始まるものに注目する
+5. `timeline/report.txt` — ベンチマーカーの行動。生ログの代わりにこれを読む。特に次を見る
+   - 投稿の流れ (通知 → posting-window/current → POST /api/posts → 友達フィード) と、投稿期間の開始間隔 (管理者のリクエスト)
+   - エラーの後の行動: 即リトライされる 4xx (失敗ログイン、不正な署名の画像など) は加点されない。安く返せる候補
+   - 書き込み直後の読み取り: キャッシュを入れる場合に無効化が必要な組み合わせ
+   - 時間帯ごとのアクティブユーザー数: 負荷が増えるタイミング
+   - ベンチの Stdout (ポータル) に出るリージョン・日ごとの人数、グランプリの人数
 
 その後、上位のエンドポイント・クエリ・関数についてアプリのコードを読み、原因箇所を `file:line` で特定する。
 必要なら `ssh <host> "go tool pprof -list 'isureal\.<関数名>' /home/isucon/webapp/go/isureal <結果ディレクトリ>/cpu.pb.gz"` で行単位の内訳を見る (PATHに `/home/isucon/local/go/bin` を足す)。
 
-`bench-results/` に前回の結果がある場合は比較し、改善・悪化したものを示す。
+`bench-results/` に前回の結果がある場合は比較し、改善・悪化したものを示す。`timeline/report.txt` も前回と比べ、ベンチマーカーの行動が変わったか (エラー後のリトライ、離脱するユーザー、グランプリの人数など) を見る。
 
 ### 4. 報告する
 次の形式で `bench-results/<ベンチID>/report.md` に保存し、同じ内容をユーザーに出力する。
@@ -60,6 +79,9 @@ scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 ## 概況
 - ボトルネックの所在: DB / アプリCPU / nginx / 外部待ち など (根拠の数値つき)
 - 前回比: (前回がある場合)
+
+## ベンチマーカーの行動 (timeline/report.txt より)
+- 典型的な流れ、投稿期間の間隔、加点されないリクエスト、前回からの変化を、数値つきで箇条書きにする
 
 ## ボトルネック上位 (最大5件、効果が大きい順)
 ### 1. <短いタイトル>
@@ -79,7 +101,7 @@ scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 4. 返ってきたファイルのリンクをユーザーに伝える
 
 ### 6. 結果をコミットする
-`bench-results/<ベンチID>/` (計測結果と `report.md`) をコミットして main に push する。データのみの変更なのでブランチとPRは作らない。
+`bench-results/<ベンチID>/` (計測結果と `report.md`、`timeline/report.txt`) をコミットして main に push する。データのみの変更なのでブランチとPRは作らない。
 手元の作業ツリーは別の施策のブランチで、未コミットの変更があることが多い。触らないよう、一時的な worktree で行う。
 
 ```
@@ -94,6 +116,7 @@ git worktree remove $W
 ```
 
 - コミット対象は `bench-results/<ベンチID>/` だけにする。他のファイルを含めない
+- 生ログ (`timeline/*.log`) と `timeline/timeline.tsv` はコミットしない (gitignore 済み。`git -C $W status` で入っていないことを確認する)
 - push が拒否されたら (main が先に進んだ場合)、`git -C $W pull --rebase origin main` してから push し直す
 - コミットのハッシュをユーザーに伝える
 
