@@ -1,0 +1,11 @@
+Job #28870 (tatsumack) Started 2026-10-31 16:33:00.829 JST / Finished 16:35:17.301 JST
+Result: Passed  Score: 138429 (base=138429, deduction=0)
+asia 1 日目: 18 人 / europe 1 日目: 7 人 / america 1 日目: 6 人
+asia 2 日目: 50 人 / europe 2 日目: 19 人 / america 2 日目: 16 人
+asia 3 日目: 145 人 / europe 3 日目: 53 人 / america 3 日目: 50 人
+asia 4 日目: 419 人 / europe 4 日目: 142 人 / america 4 日目: 123 人
+asia 5 日目: 982 人 / europe 5 日目: 358 人 / america 5 日目: 285 人
+asia 最終日（グランプリ）: 983 人 / europe: 357 人 / america: 283 人
+グランプリ: アジア 434 人, ヨーロッパ 352 人, アメリカ 281 人
+(user moved のログは省略)
+{"pass": true, "score": 138429, "messages": []}
