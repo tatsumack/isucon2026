@@ -82,7 +82,9 @@ func TestImageSignerPrimeIgnoresFailure(t *testing.T) {
 	user := User{ImageKey: make([]byte, 32)}
 	rand.Read(user.ImageKey)
 	batch.add(user, rand.Text())
-	NewImageSigner(&Config{SigningURLs: []string{server.URL}}).Prime(context.Background(), &batch)
+	if err := NewImageSigner(&Config{SigningURLs: []string{server.URL}}).Prime(context.Background(), &batch); err == nil {
+		t.Fatal("Prime returned nil despite the failure")
+	}
 
 	if _, ok := imageSignatureCache.Load(string(user.ImageKey) + ":" + batch.targets[0].ImageID); ok {
 		t.Fatal("cache was filled despite the failure")
