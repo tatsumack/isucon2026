@@ -1,0 +1,31 @@
+ベンチ #32078 score 151161 (pass: true)
+ブランチ: perf/db-sslmode-disable (b027759)
+
+time=2026-10-31T08:05:21.196Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T08:05:24.186Z level=INFO msg="europe 1 日目: 8 人"
+time=2026-10-31T08:05:27.187Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T08:05:30.179Z level=INFO msg="asia 2 日目: 49 人"
+time=2026-10-31T08:05:33.192Z level=INFO msg="europe 2 日目: 18 人"
+time=2026-10-31T08:05:36.180Z level=INFO msg="america 2 日目: 15 人"
+time=2026-10-31T08:05:39.185Z level=INFO msg="asia 3 日目: 141 人"
+time=2026-10-31T08:05:42.192Z level=INFO msg="europe 3 日目: 50 人"
+time=2026-10-31T08:05:45.190Z level=INFO msg="america 3 日目: 46 人"
+time=2026-10-31T08:05:48.187Z level=INFO msg="asia 4 日目: 410 人"
+time=2026-10-31T08:05:51.229Z level=INFO msg="europe 4 日目: 129 人"
+time=2026-10-31T08:05:54.200Z level=INFO msg="america 4 日目: 117 人"
+time=2026-10-31T08:05:57.236Z level=INFO msg="asia 5 日目: 1158 人"
+time=2026-10-31T08:06:00.227Z level=INFO msg="europe 5 日目: 310 人"
+time=2026-10-31T08:06:03.232Z level=INFO msg="america 5 日目: 282 人"
+time=2026-10-31T08:06:12.237Z level=INFO msg="america 最終日（グランプリ）: 281 人"
+time=2026-10-31T08:06:12.308Z level=INFO msg="europe 最終日（グランプリ）: 310 人"
+time=2026-10-31T08:06:12.318Z level=INFO msg="asia 最終日（グランプリ）: 1161 人"
+time=2026-10-31T08:06:21.328Z level=INFO msg="グランプリ: アジア 564 人, ヨーロッパ 310 人, アメリカ 281 人"
+(user moved の行は省略。計 36 行)
+{
+  "pass": true,
+  "score": 151161,
+  "messages": [
+    "miaruma-11878: 友達申請を送れません: POST /api/friend-requests: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/friend-requests\": EOF",
+    "meulka-12012: プロフィールを変えられません: PATCH /api/me: 通信に失敗しました: Patch \"http://52.198.5.68:8080/api/me\": EOF"
+  ]
+}
