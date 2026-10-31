@@ -1,0 +1,32 @@
+ベンチ #35183 score 157852 (pass: true)
+ブランチ: perf/work-conserving-admission (51acab6)
+
+time=2026-10-31T08:35:06.877Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T08:35:09.875Z level=INFO msg="europe 1 日目: 7 人"
+time=2026-10-31T08:35:12.873Z level=INFO msg="america 1 日目: 7 人"
+time=2026-10-31T08:35:15.867Z level=INFO msg="asia 2 日目: 49 人"
+time=2026-10-31T08:35:18.874Z level=INFO msg="europe 2 日目: 18 人"
+time=2026-10-31T08:35:21.874Z level=INFO msg="america 2 日目: 15 人"
+time=2026-10-31T08:35:24.874Z level=INFO msg="asia 3 日目: 143 人"
+time=2026-10-31T08:35:27.899Z level=INFO msg="europe 3 日目: 50 人"
+time=2026-10-31T08:35:30.877Z level=INFO msg="america 3 日目: 39 人"
+time=2026-10-31T08:35:33.867Z level=INFO msg="asia 4 日目: 417 人"
+time=2026-10-31T08:35:36.897Z level=INFO msg="europe 4 日目: 134 人"
+time=2026-10-31T08:35:39.906Z level=INFO msg="america 4 日目: 107 人"
+time=2026-10-31T08:35:42.912Z level=INFO msg="asia 5 日目: 1224 人"
+time=2026-10-31T08:35:45.934Z level=INFO msg="europe 5 日目: 332 人"
+time=2026-10-31T08:35:48.930Z level=INFO msg="america 5 日目: 263 人"
+time=2026-10-31T08:35:57.954Z level=INFO msg="america 最終日（グランプリ）: 262 人"
+time=2026-10-31T08:35:58.116Z level=INFO msg="europe 最終日（グランプリ）: 330 人"
+time=2026-10-31T08:35:58.139Z level=INFO msg="asia 最終日（グランプリ）: 1225 人"
+time=2026-10-31T08:36:06.968Z level=INFO msg="グランプリ: アジア 595 人, ヨーロッパ 316 人, アメリカ 262 人"
+(user moved の行は省略)
+{
+  "pass": true,
+  "score": 157852,
+  "messages": [
+    "mamoso_11350: 通知を購読できません: GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）",
+    "kumia14877: 通知を購読できません: GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）",
+    "shivinmia14363: 通知を購読できません: GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）"
+  ]
+}
