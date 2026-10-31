@@ -9,11 +9,16 @@ CREATE INDEX IF NOT EXISTS administrator_sessions_active_token_hash
   ON administrator_sessions (token_hash)
   WHERE active = true;
 
--- Usernames are used by registration, login, and user-list pagination.
-CREATE INDEX IF NOT EXISTS users_username
+-- Registration relies on this unique index instead of locking the users table.
+CREATE UNIQUE INDEX IF NOT EXISTS users_username_unique
   ON users (username);
 CREATE INDEX IF NOT EXISTS users_active_username_id
   ON users (username, id)
+  WHERE status = 'active';
+-- Opening a posting window creates one notification for every active user in
+-- the target region.
+CREATE INDEX IF NOT EXISTS users_active_region_id
+  ON users (region, id)
   WHERE status = 'active';
 CREATE INDEX IF NOT EXISTS administrators_username
   ON administrators (username);
