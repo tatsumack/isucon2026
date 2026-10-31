@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6455c50103a79e2c843f888161b1a866be5179a2
+Type: cpu
+Time: 2026-10-31 02:58:41 UTC
+Duration: 150s, Total samples = 3.19s ( 2.13%)
+Showing nodes accounting for 2.23s, 69.91% of 3.19s total
+Dropped 259 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 368
+      flat  flat%   sum%        cum   cum%
+     0.64s 20.06% 20.06%      0.64s 20.06%  internal/runtime/syscall/linux.Syscall6
+     0.28s  8.78% 28.84%      0.28s  8.78%  crypto/internal/fips140/sha256.blockSHANI
+     0.22s  6.90% 35.74%      0.22s  6.90%  runtime.memmove
+     0.20s  6.27% 42.01%      0.20s  6.27%  runtime.futex
+     0.12s  3.76% 45.77%      0.12s  3.76%  runtime.memclrNoHeapPointers
+     0.06s  1.88% 47.65%      0.40s 12.54%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.05s  1.57% 49.22%      0.05s  1.57%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.05s  1.57% 50.78%      0.44s 13.79%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.04s  1.25% 52.04%      0.04s  1.25%  runtime.findfunc
+     0.04s  1.25% 53.29%      0.08s  2.51%  runtime.mallocgcSmallNoscan
+     0.04s  1.25% 54.55%      0.08s  2.51%  runtime.newobject
+     0.03s  0.94% 55.49%      0.59s 18.50%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.03s  0.94% 56.43%      0.55s 17.24%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.03s  0.94% 57.37%      0.31s  9.72%  runtime.mallocgc
+     0.03s  0.94% 58.31%      0.03s  0.94%  runtime.nextFreeFast (inline)
+     0.03s  0.94% 59.25%      0.03s  0.94%  runtime.step
+     0.02s  0.63% 59.87%      0.39s 12.23%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+     0.02s  0.63% 60.50%      0.02s  0.63%  internal/sync.(*Mutex).Unlock
+     0.02s  0.63% 61.13%      0.02s  0.63%  reflect.Value.Field
+     0.02s  0.63% 61.76%      0.06s  1.88%  runtime.(*mcache).refill
+     0.02s  0.63% 62.38%      0.02s  0.63%  runtime.cheaprand
+     0.02s  0.63% 63.01%      0.02s  0.63%  runtime.nanotime
+     0.02s  0.63% 63.64%      0.13s  4.08%  runtime.netpoll
+     0.02s  0.63% 64.26%      0.02s  0.63%  runtime.pidleput
+     0.02s  0.63% 64.89%      0.09s  2.82%  runtime.reentersyscall
+     0.02s  0.63% 65.52%      0.02s  0.63%  runtime.usleep
+     0.01s  0.31% 65.83%      0.03s  0.94%  bufio.(*Reader).Peek
+     0.01s  0.31% 66.14%      0.05s  1.57%  context.(*cancelCtx).Done
+     0.01s  0.31% 66.46%      0.02s  0.63%  context.AfterFunc.func1
+     0.01s  0.31% 66.77%      0.31s  9.72%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.31% 67.08%      0.08s  2.51%  crypto/tls.(*halfConn).decrypt
+     0.01s  0.31% 67.40%      0.02s  0.63%  database/sql.(*DB).putConnDBLocked
+     0.01s  0.31% 67.71%      0.04s  1.25%  encoding/json.(*encodeState).reflectValue
+     0.01s  0.31% 68.03%      0.41s 12.85%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.01s  0.31% 68.34%      0.31s  9.72%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+     0.01s  0.31% 68.65%      0.36s 11.29%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.01s  0.31% 68.97%      0.37s 11.60%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.01s  0.31% 69.28%      0.04s  1.25%  github.com/jackc/pgx/v5/pgtype.scanPlanBinaryBytesToBytes.Scan
+     0.01s  0.31% 69.59%      0.04s  1.25%  github.com/jmoiron/sqlx/reflectx.FieldByIndexes
+     0.01s  0.31% 69.91%      1.93s 60.50%  github.com/labstack/echo/v5.(*Echo).serveHTTP
