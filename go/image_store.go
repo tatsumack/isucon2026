@@ -1,6 +1,7 @@
 package isureal
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
 	"errors"
@@ -28,7 +29,7 @@ import (
 //
 // europe1 / america1 は、手元に無い画像を asia1 の内部 API (/internal/images/:id) から取る。
 // 取ってきた画像のうち、初期データのものだけを自分の initial/ に保存する。初期データの画像は /initialize でも変わらないため、消す必要がない。
-// ベンチ中の画像はメモリのキャッシュ (imageDataCache) にだけ持つ。
+// ベンチ中の画像はメモリのキャッシュ (imageDataCache) にだけ持つ。asia1 では、保存した画像もファイルと合わせてキャッシュに入れる。
 //
 // image_objects の行を消すのはプロフィール画像の変更・削除 (profile_image_api.go) だけなので、ファイルを消す処理は要らない。
 // 行が消えた画像は、DB の確認で 403 になるため配信されない。
@@ -74,11 +75,17 @@ func (s *ImageStore) path(kind, id string) string {
 
 // Save は新しい画像を new/ に書き、fsync してから返す。DB の行は呼び出し側が data を空にして INSERT する。
 // 投稿と RealMoji の作成は asia1 へ転送されるため、asia1 以外で呼ばれることはない。
+// 書いた画像はメモリのキャッシュにも入れる (image_api.go の imageDataCache)。直後の取得でディスクを読まないため
 func (s *ImageStore) Save(id string, data []byte) error {
 	if !s.isOrigin() {
 		return fmt.Errorf("image writes must run on the origin server")
 	}
-	return writeFileAtomic(s.path("new", id), data, true)
+	if err := writeFileAtomic(s.path("new", id), data, true); err != nil {
+		return err
+	}
+	// 呼び出し側の io.ReadAll の余分な容量を持ち続けないよう、大きさぴったりに写す
+	imageDataCache.put(id, cachedImage{data: bytes.Clone(data)})
+	return nil
 }
 
 // Load は画像本体と、初期データの画像かどうかを返す。見つからなければ errImageNotFound を返す。
@@ -92,6 +99,15 @@ func (s *ImageStore) Load(ctx context.Context, id string) ([]byte, bool, error) 
 	}
 	imageDataCache.put(id, cachedImage{data: data, initial: initial})
 	return data, initial, nil
+}
+
+// LoadWithoutCaching はキャッシュにあればそれを返し、無ければ読むがキャッシュには入れない。
+// エクスポートのように過去の画像をまとめて読むときに使い、直後に読まれる新しい画像を追い出さないようにする。
+func (s *ImageStore) LoadWithoutCaching(ctx context.Context, id string) ([]byte, bool, error) {
+	if cached, ok := imageDataCache.get(id); ok {
+		return cached.data, cached.initial, nil
+	}
+	return s.load(ctx, id)
 }
 
 func (s *ImageStore) load(ctx context.Context, id string) ([]byte, bool, error) {

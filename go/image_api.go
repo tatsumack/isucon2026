@@ -101,7 +101,9 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 // 画像本体のバイト列を画像IDごとに保持する (image_store.go の ImageStore.Load から使う)。画像IDはサーバが採番するUUIDで、
 // 同じIDの中身が書き換わることはないため、無効化しない。配信してよいかは毎回DBで確認する。
 // /initialize で消えた画像のエントリが残っても、DBの確認で403になるため配信されない。
-var imageDataCache = &byteCache{entries: map[string]cachedImage{}, limit: 256 << 20}
+// asia1 では保存した画像もここに入れる (ImageStore.Save)。投稿の画像は直後に友達や他リージョンから読まれるが、
+// asia1 はページキャッシュが小さく (約300MB)、ファイルに書いた画像がすぐ追い出されてディスクから読み直していた (#19113)
+var imageDataCache = newByteCache(256 << 20)
 
 type cachedImage struct {
 	data []byte
@@ -112,8 +114,14 @@ type cachedImage struct {
 type byteCache struct {
 	mu      sync.RWMutex
 	entries map[string]cachedImage
-	size    int
-	limit   int
+	// 入れた順のキー。古いものから追い出す
+	order []string
+	size  int
+	limit int
+}
+
+func newByteCache(limit int) *byteCache {
+	return &byteCache{entries: map[string]cachedImage{}, limit: limit}
 }
 
 func (c *byteCache) get(key string) (cachedImage, bool) {
@@ -123,7 +131,8 @@ func (c *byteCache) get(key string) (cachedImage, bool) {
 	return image, ok
 }
 
-// put は上限を超えるとき、任意のエントリを追い出して空きを作る。
+// put は上限を超えるとき、古いエントリから追い出して空きを作る。
+// 投稿の画像は書いた直後ほどよく読まれるため、新しいものを残す。
 func (c *byteCache) put(key string, image cachedImage) {
 	if len(image.data) > c.limit {
 		return
@@ -133,13 +142,13 @@ func (c *byteCache) put(key string, image cachedImage) {
 	if _, ok := c.entries[key]; ok {
 		return
 	}
-	for evictKey, evicted := range c.entries {
-		if c.size+len(image.data) <= c.limit {
-			break
-		}
+	for len(c.order) > 0 && c.size+len(image.data) > c.limit {
+		evictKey := c.order[0]
+		c.order = c.order[1:]
+		c.size -= len(c.entries[evictKey].data)
 		delete(c.entries, evictKey)
-		c.size -= len(evicted.data)
 	}
 	c.entries[key] = image
+	c.order = append(c.order, key)
 	c.size += len(image.data)
 }

@@ -147,3 +147,35 @@ func TestTrustedPeerOnlyRejectsOthers(t *testing.T) {
 		t.Error("no peer is trusted without ISUREAL_TRUSTED_PEERS")
 	}
 }
+
+func TestByteCacheEvictsOldestFirst(t *testing.T) {
+	c := newByteCache(10)
+	c.put("a", cachedImage{data: []byte("aaaa")})
+	c.put("b", cachedImage{data: []byte("bbbb")})
+	c.put("c", cachedImage{data: []byte("cccc")})
+	if _, ok := c.get("a"); ok {
+		t.Fatal("oldest entry must be evicted first")
+	}
+	for _, key := range []string{"b", "c"} {
+		if _, ok := c.get(key); !ok {
+			t.Fatalf("%s must remain", key)
+		}
+	}
+	if c.size != 8 || len(c.order) != 2 {
+		t.Fatalf("size = %d, order = %v", c.size, c.order)
+	}
+}
+
+func TestImageStoreSaveFillsCache(t *testing.T) {
+	origin := &ImageStore{dir: t.TempDir()}
+	id := "89abcdef-cached"
+	data := make([]byte, 5, 64)
+	copy(data, "saved")
+	if err := origin.Save(id, data); err != nil {
+		t.Fatal(err)
+	}
+	cached, ok := imageDataCache.get(id)
+	if !ok || string(cached.data) != "saved" || cached.initial || cap(cached.data) >= cap(data) {
+		t.Fatalf("cache after save = %q (cap %d), %v, %v", cached.data, cap(cached.data), cached.initial, ok)
+	}
+}
