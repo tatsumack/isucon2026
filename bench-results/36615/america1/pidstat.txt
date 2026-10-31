@@ -1,0 +1,189 @@
+Linux 7.0.0-1014-aws (ip-192-168-3-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+08:47:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:00        0     46567    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+08:48:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:05        0     46567    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+08:48:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:10        0     46567    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+08:48:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:15     1100     46563    0.00    0.20    0.00    0.00    0.20     1  pidstat
+08:48:15        0     46567    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+08:48:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:20      110       798    0.00    0.20    0.00    0.00    0.20     1  chronyd
+08:48:20        0     46567    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+08:48:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:25        0     46567    0.20    0.40    0.00    0.00    0.60     0  pidstat
+
+08:48:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:30        0       659    0.20    0.00    0.00    0.00    0.20     0  amazon-ssm-agen
+08:48:30     1100     46253    1.40    0.00    0.00    0.00    1.40     1  isureal
+08:48:30        0     46567    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+08:48:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:35        0     44563    0.00    0.20    0.00    0.00    0.20     1  kworker/1:0-events
+08:48:35        0     46150    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:0-events_power_efficient
+08:48:35     1100     46253    1.60    0.00    0.00    0.00    1.60     1  isureal
+08:48:35        0     46567    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+08:48:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:40     1100     46253    2.40    0.20    0.00    0.00    2.60     1  isureal
+08:48:40     1100     46563    0.00    0.20    0.00    0.00    0.20     1  pidstat
+08:48:40        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:48:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:45        0     42551    0.00    0.20    0.00    0.00    0.20     0  kworker/0:0-events
+08:48:45     1100     46253    6.00    0.20    0.00    0.00    6.20     0  isureal
+08:48:45       33     46267    0.00    0.20    0.00    0.00    0.20     1  nginx
+08:48:45     1100     46563    0.20    0.00    0.00    0.00    0.20     0  pidstat
+08:48:45        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:48:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:50     1100     46253    9.80    0.80    0.00    0.00   10.60     0  isureal
+08:48:50       33     46266    0.00    0.20    0.00    0.00    0.20     1  nginx
+08:48:50       33     46267    0.00    0.20    0.00    0.00    0.20     0  nginx
+08:48:50        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:48:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:48:55     1100     46253   16.00    0.80    0.00    0.00   16.80     1  isureal
+08:48:55       33     46266    0.20    0.20    0.00    0.20    0.40     1  nginx
+08:48:55       33     46267    0.20    0.20    0.00    0.20    0.40     1  nginx
+08:48:55        0     46567    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+08:48:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:00     1100     46253   19.40    1.80    0.00    0.00   21.20     1  isureal
+08:49:00       33     46266    0.20    0.40    0.00    0.20    0.60     1  nginx
+08:49:00       33     46267    0.40    0.40    0.00    0.40    0.80     1  nginx
+08:49:00        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:49:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:05     1100     46253   21.00    2.80    0.00    0.00   23.80     1  isureal
+08:49:05       33     46266    0.40    0.80    0.00    0.60    1.20     0  nginx
+08:49:05       33     46267    0.60    0.60    0.00    0.40    1.20     1  nginx
+08:49:05     1100     46563    0.00    0.20    0.00    0.00    0.20     0  pidstat
+08:49:05        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:49:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:10     1100     46253   19.80    3.20    0.00    0.00   23.00     1  isureal
+08:49:10       33     46266    0.60    0.80    0.00    0.60    1.40     1  nginx
+08:49:10       33     46267    0.40    1.00    0.00    0.60    1.40     1  nginx
+08:49:10        0     46567    0.20    0.40    0.00    0.00    0.60     1  pidstat
+
+08:49:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:15        0        26    0.00    0.20    0.00    0.00    0.20     1  ksoftirqd/1
+08:49:15        0       683    0.20    0.00    0.00    0.00    0.20     1  udisksd
+08:49:15     1100     46253   21.60    4.80    0.00    0.00   26.40     0  isureal
+08:49:15       33     46266    1.00    1.60    0.00    1.20    2.60     0  nginx
+08:49:15       33     46267    0.80    1.40    0.00    1.40    2.20     0  nginx
+08:49:15        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:49:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:20     1100     46253   19.40    5.40    0.00    0.00   24.80     0  isureal
+08:49:20       33     46266    0.80    1.40    0.00    1.40    2.20     0  nginx
+08:49:20       33     46267    1.00    1.60    0.00    1.40    2.60     1  nginx
+08:49:20        0     46567    0.00    0.40    0.00    0.00    0.40     1  pidstat
+
+08:49:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:25        0        16    0.00    0.20    0.00    0.20    0.20     1  rcu_sched
+08:49:25        0       227    0.00    0.20    0.00    0.00    0.20     0  multipathd
+08:49:25     1100     46253   15.60    6.60    0.00    0.00   22.20     0  isureal
+08:49:25       33     46266    1.20    1.80    0.00    1.20    3.00     0  nginx
+08:49:25       33     46267    1.00    2.00    0.00    1.40    3.00     0  nginx
+08:49:25     1100     46563    0.00    0.20    0.00    0.00    0.20     1  pidstat
+08:49:25        0     46567    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+08:49:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:30        0       122    0.00    0.20    0.00    0.00    0.20     1  jbd2/nvme0n1p1-8
+08:49:30     1100     46253   15.80    8.60    0.00    0.00   24.40     0  isureal
+08:49:30       33     46266    1.40    2.40    0.00    2.00    3.80     0  nginx
+08:49:30       33     46267    1.40    2.60    0.00    2.00    4.00     1  nginx
+08:49:30        0     46567    0.00    0.40    0.00    0.00    0.40     1  pidstat
+
+08:49:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:35        0     41995    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:3-events_power_efficient
+08:49:35     1100     46253   13.20    4.40    0.00    0.00   17.60     1  isureal
+08:49:35       33     46266    1.00    2.00    0.00    1.00    3.00     1  nginx
+08:49:35       33     46267    1.00    2.20    0.00    1.00    3.20     1  nginx
+08:49:35        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:49:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:40        0        14    0.00    0.20    0.00    0.00    0.20     0  ksoftirqd/0
+08:49:40     1100     46253   12.60    3.20    0.00    0.00   15.80     0  isureal
+08:49:40       33     46266    0.60    1.20    0.00    0.60    1.80     1  nginx
+08:49:40       33     46267    0.80    1.20    0.00    0.80    2.00     0  nginx
+08:49:40        0     46567    0.00    0.40    0.00    0.00    0.40     1  pidstat
+
+08:49:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:45        0     42551    0.00    0.20    0.00    0.00    0.20     0  kworker/0:0-events
+08:49:45        0     44563    0.00    0.20    0.00    0.00    0.20     1  kworker/1:0-events
+08:49:45     1100     46253    0.20    0.00    0.00    0.00    0.20     0  isureal
+08:49:45     1100     46563    0.20    0.00    0.00    0.00    0.20     1  pidstat
+08:49:45        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:49:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:50     1100     46253    0.20    0.00    0.00    0.00    0.20     0  isureal
+08:49:50     1100     46563    0.00    0.20    0.00    0.00    0.20     1  pidstat
+08:49:50        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:49:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:49:55     1100     46253    0.20    0.20    0.00    0.00    0.40     0  isureal
+08:49:55        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:49:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:00     1100      1289    0.20    0.00    0.00    0.00    0.20     0  isureal-guard
+08:50:00     1100     46253    0.20    0.00    0.00    0.00    0.20     0  isureal
+08:50:00     1100     46562    0.20    0.00    0.00    0.00    0.20     0  vmstat
+08:50:00        0     46567    0.00    0.40    0.00    0.00    0.40     1  pidstat
+
+08:50:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:05     1100     46253    0.20    0.20    0.00    0.00    0.40     0  isureal
+08:50:05        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:50:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:10     1100     46253    0.40    0.20    0.00    0.00    0.60     0  isureal
+08:50:10        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+08:50:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:15        0       653    0.20    0.00    0.00    0.00    0.20     0  irqbalance
+08:50:15        0     43234    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:1-events_power_efficient
+08:50:15     1100     46253    0.20    0.20    0.00    0.00    0.40     0  isureal
+08:50:15     1100     46563    0.00    0.20    0.00    0.00    0.20     1  pidstat
+08:50:15        0     46567    0.00    0.40    0.00    0.00    0.40     1  pidstat
+
+08:50:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:20     1100     46253    0.20    0.00    0.00    0.00    0.20     0  isureal
+08:50:20     1100     46562    0.00    0.20    0.00    0.00    0.20     0  vmstat
+08:50:20        0     46567    0.20    0.20    0.00    0.00    0.40     1  pidstat
+
+08:50:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+08:50:25        0       168    0.20    0.00    0.00    0.00    0.20     1  systemd-journal
+08:50:25     1100     46253    0.20    0.00    0.00    0.00    0.20     0  isureal
+08:50:25        0     46567    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        14    0.00    0.01    0.00    0.00    0.01     -  ksoftirqd/0
+Average:        0        16    0.00    0.01    0.00    0.02    0.01     -  rcu_sched
+Average:        0        26    0.00    0.01    0.00    0.01    0.01     -  ksoftirqd/1
+Average:        0       122    0.00    0.01    0.00    0.01    0.01     -  jbd2/nvme0n1p1-8
+Average:        0       168    0.01    0.00    0.00    0.00    0.01     -  systemd-journal
+Average:        0       227    0.00    0.01    0.00    0.00    0.01     -  multipathd
+Average:        0       653    0.01    0.00    0.00    0.00    0.01     -  irqbalance
+Average:        0       659    0.01    0.00    0.00    0.00    0.01     -  amazon-ssm-agen
+Average:        0       683    0.01    0.00    0.00    0.00    0.01     -  udisksd
+Average:      110       798    0.00    0.01    0.00    0.00    0.01     -  chronyd
+Average:     1100      1289    0.01    0.00    0.00    0.00    0.01     -  isureal-guard
+Average:        0     41995    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:3-events_power_efficient
+Average:        0     42551    0.00    0.01    0.00    0.03    0.01     -  kworker/0:0-events
+Average:        0     43234    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:1-events_power_efficient
+Average:        0     44563    0.00    0.01    0.00    0.02    0.01     -  kworker/1:0-events
+Average:        0     46150    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:0-events_power_efficient
+Average:     1100     46253    6.59    1.45    0.00    0.00    8.04     -  isureal
+Average:       33     46266    0.25    0.43    0.00    0.30    0.67     -  nginx
+Average:       33     46267    0.25    0.45    0.00    0.32    0.71     -  nginx
+Average:     1100     46563    0.01    0.04    0.00    0.00    0.05     -  pidstat
+Average:        0     46567    0.08    0.25    0.00    0.00    0.33     -  pidstat

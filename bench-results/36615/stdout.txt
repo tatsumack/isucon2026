@@ -1,0 +1,13 @@
+ベンチ #36615 score 158417 (pass: true)  ※ポータルの Stdout から "user moved" の行を除いて転記
+asia 1 日目: 18 人 / europe 1 日目: 7 人 / america 1 日目: 6 人
+asia 2 日目: 54 人 / europe 2 日目: 19 人 / america 2 日目: 18 人
+asia 3 日目: 160 人 / europe 3 日目: 54 人 / america 3 日目: 49 人
+asia 4 日目: 478 人 / europe 4 日目: 141 人 / america 4 日目: 127 人
+asia 5 日目: 1218 人 / europe 5 日目: 347 人 / america 5 日目: 312 人
+europe 最終日（グランプリ）: 346 人 / america 最終日（グランプリ）: 311 人 / asia 最終日（グランプリ）: 1219 人
+グランプリ: アジア 588 人, ヨーロッパ 337 人, アメリカ 309 人
+messages:
+  hoben.16948: 通知を購読できません: GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）
+  muko-13889: 通知を購読できません: GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）
+  hoku.18081: 友達申請を送れません: POST /api/friend-requests: 通信に失敗しました: Post "http://52.198.5.68:8080/api/friend-requests": EOF
+  nomar12148: 友達申請を送れません: POST /api/friend-requests: 通信に失敗しました: Post "http://52.198.5.68:8080/api/friend-requests": EOF
