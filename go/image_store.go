@@ -106,12 +106,17 @@ func (s *ImageStore) load(ctx context.Context, id string) ([]byte, bool, error) 
 		// 最初に来たリクエストが切断されても、相乗りしている他のリクエストを失敗させない
 		fetchCtx := context.WithoutCancel(ctx)
 		v, err, _ := s.fetches.Do(id, func() (any, error) {
+			// 直前に終わった取得がディスクに書いていれば、それを使う
+			if data, ok := readImageFile(s.path("initial", id)); ok {
+				return cachedImage{data: data, initial: true}, nil
+			}
 			data, initial, err := s.fetchFromOrigin(fetchCtx, id)
 			if err != nil {
 				return nil, err
 			}
 			if initial {
-				_ = writeFileAtomic(s.path("initial", id), data, false)
+				// 異常停止で中身が途中で切れたファイルを配信しないよう、fsync してから置く
+				_ = writeFileAtomic(s.path("initial", id), data, true)
 			}
 			return cachedImage{data: data, initial: initial}, nil
 		})
@@ -137,7 +142,7 @@ func (s *ImageStore) load(ctx context.Context, id string) ([]byte, bool, error) 
 		return nil, false, err
 	}
 	if row.Initial {
-		_ = writeFileAtomic(s.path("initial", id), row.Data, false)
+		_ = writeFileAtomic(s.path("initial", id), row.Data, true)
 	}
 	return row.Data, row.Initial, nil
 }
