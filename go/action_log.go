@@ -55,6 +55,20 @@ var actionNames = map[string]string{
 
 var logLevelRanks = map[string]int{"debug": 0, "info": 1, "error": 2}
 
+// usedByGuard は、isureal-guard (/opt/isureal-guard/src/guard.go の parseFailure) が失敗として数える行か。
+// guard はこの3種類以外の行を読み飛ばす。
+func usedByGuard(action string, status int, abuse string) bool {
+	switch {
+	case action == "login" && status == http.StatusUnauthorized:
+		return true
+	case action == "put_profile_image" && status == http.StatusBadRequest && abuse == "invalid_image":
+		return true
+	case action == "get_image" && status == http.StatusForbidden && abuse == "invalid_signature":
+		return true
+	}
+	return false
+}
+
 func ActionLogMiddleware(minLevel string, output io.Writer) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) error {
@@ -76,6 +90,14 @@ func ActionLogMiddleware(minLevel string, output io.Writer) echo.MiddlewareFunc 
 			}
 
 			route := c.RouteInfo()
+			action, ok := actionNames[route.Method+" "+route.Path]
+			abuse, _ := c.Get("abuse").(string)
+			// debug 以外では、isureal-guard が BAN の判定に使う行とエラーだけを出す。
+			// ログは journald・isureal-guard・rsyslog が1行ずつ処理するため、使われない行を出すと asia1 の CPU を使う (#18039)。
+			if minLevel != "debug" && level != "error" && !usedByGuard(action, status, abuse) {
+				return nil
+			}
+
 			entry := map[string]any{
 				"level":   level,
 				"action":  nil,
@@ -83,7 +105,6 @@ func ActionLogMiddleware(minLevel string, output io.Writer) echo.MiddlewareFunc 
 				"ip":      c.RealIP(),
 				"user_id": nil,
 			}
-			action, ok := actionNames[route.Method+" "+route.Path]
 			if ok {
 				entry["action"] = action
 			}
@@ -96,7 +117,6 @@ func ActionLogMiddleware(minLevel string, output io.Writer) echo.MiddlewareFunc 
 					entry["username"] = username
 				}
 			}
-			abuse, _ := c.Get("abuse").(string)
 			if abuse != "" {
 				entry["abuse"] = abuse
 			}
