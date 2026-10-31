@@ -1,0 +1,12 @@
+ベンチ #34626 score 141148 (pass: true, messages: [])
+ブランチ: perf/priority-class-limits (c778d1e)
+
+asia 1 日目: 18 人 / europe 1 日目: 7 人 / america 1 日目: 6 人
+asia 2 日目: 48 人 / europe 2 日目: 17 人 / america 2 日目: 13 人
+asia 3 日目: 138 人 / europe 3 日目: 46 人 / america 3 日目: 33 人
+asia 4 日目: 406 人 / europe 4 日目: 128 人 / america 4 日目: 92 人
+asia 5 日目: 1112 人 / europe 5 日目: 321 人 / america 5 日目: 220 人
+europe 最終日（グランプリ）: 321 人 / asia 最終日（グランプリ）: 1112 人 / america 最終日（グランプリ）: 219 人
+グランプリ: アジア 413 人, ヨーロッパ 321 人, アメリカ 219 人
+(user moved のログは省略)
+{"pass": true, "score": 141148, "messages": []}
