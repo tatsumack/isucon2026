@@ -33,6 +33,8 @@ type Config struct {
 	PriorityCriticalLimit int
 	PriorityHeavyLimit    int
 	PriorityOtherLimit    int
+	// split で PUT /api/me/profile-image を入れる枠: heavy (既定) / critical / other / exempt (枠に並ばない)
+	PriorityProfileImageGroup string
 }
 
 func ConfigFromEnv() *Config {
@@ -57,6 +59,8 @@ func ConfigFromEnv() *Config {
 		PriorityCriticalLimit: envIntOrDefault("ISUREAL_PRIORITY_CRITICAL", 0),
 		PriorityHeavyLimit:    envIntOrDefault("ISUREAL_PRIORITY_HEAVY", 0),
 		PriorityOtherLimit:    envIntOrDefault("ISUREAL_PRIORITY_OTHER", 0),
+
+		PriorityProfileImageGroup: envOrDefault("ISUREAL_PRIORITY_PROFILE_IMAGE", "heavy"),
 	}
 }
 

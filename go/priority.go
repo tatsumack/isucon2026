@@ -133,13 +133,28 @@ func splitPriorityLimits(config *Config) []int {
 	return []int{critical, heavy, other}
 }
 
+// profileImagePriorityGroup は、split で PUT /api/me/profile-image を入れる枠 (0 投稿の経路 / 1 heavy / 2 その他) を返す。
+// exempt なら枠に並ばない。未知の値は heavy (従来どおり)。新規ユーザーの入口にあり、処理は軽い (CPU 約3.6ms) ため、
+// heavy の Memories や export の待ちに巻き込まれないよう、別の枠に出せるようにする。
+func profileImagePriorityGroup(name string) (group int, exempt bool) {
+	switch name {
+	case "critical":
+		return 0, false
+	case "other":
+		return 2, false
+	case "exempt":
+		return 0, true
+	}
+	return 1, false
+}
+
 // split は遅い画像転送や export が投稿経路の枠を埋めないようにする。
 // 32枠なら投稿16 / heavy4 / その他12。海外からの委譲と管理者/SSEは従来どおり対象外。
 // MaxWait 後も無制限には実行せず、全グループ共通の追加枠 (32枠なら4) に入れる。
 // 追加枠も満杯なら通常枠か追加枠が空くまで待つ。切断された待機リクエストは実行しない。
 func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
 	limits := splitPriorityLimits(config)
-	log.Printf("priority: split limits critical=%d heavy=%d other=%d overflow=%d", limits[0], limits[1], limits[2], max(1, config.PriorityLimit/8))
+	log.Printf("priority: split limits critical=%d heavy=%d other=%d overflow=%d profile_image=%s", limits[0], limits[1], limits[2], max(1, config.PriorityLimit/8), config.PriorityProfileImageGroup)
 	slots := make([]chan struct{}, len(limits))
 	stats := make([]*priorityStats, len(limits))
 	for i, limit := range limits {
@@ -156,16 +171,24 @@ func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
 				return next(c)
 			}
 			group := 2
-			switch key {
-			case "GET /api/posting-window/current", "GET /api/posts/me/current", "POST /api/posts":
-				group = 0
-			case "GET /api/feeds/:feed":
-				if c.Param("feed") == "friends" {
-					group = 0
+			if key == "PUT /api/me/profile-image" {
+				g, exempt := profileImagePriorityGroup(config.PriorityProfileImageGroup)
+				if exempt {
+					return next(c)
 				}
-			default:
-				if priorityHeavyRoutes[key] {
-					group = 1
+				group = g
+			} else {
+				switch key {
+				case "GET /api/posting-window/current", "GET /api/posts/me/current", "POST /api/posts":
+					group = 0
+				case "GET /api/feeds/:feed":
+					if c.Param("feed") == "friends" {
+						group = 0
+					}
+				default:
+					if priorityHeavyRoutes[key] {
+						group = 1
+					}
 				}
 			}
 			stat := stats[group]

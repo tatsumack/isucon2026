@@ -120,3 +120,18 @@ func TestSplitPriorityLimits(t *testing.T) {
 		}
 	}
 }
+
+func TestProfileImagePriorityGroup(t *testing.T) {
+	for name, want := range map[string]struct {
+		group  int
+		exempt bool
+	}{
+		"heavy": {1, false}, "": {1, false}, "unknown": {1, false},
+		"critical": {0, false}, "other": {2, false}, "exempt": {0, true},
+	} {
+		group, exempt := profileImagePriorityGroup(name)
+		if group != want.group || exempt != want.exempt {
+			t.Errorf("%q: got (%d, %v), want (%d, %v)", name, group, exempt, want.group, want.exempt)
+		}
+	}
+}
