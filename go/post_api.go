@@ -158,6 +158,18 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 		// 画像本体はファイルに置き、行の data は空にする (image_store.go)。投稿できない場合は行がロールバックで消え、
 		// 行が無いファイルは配信されない。ファイルの fsync を待つ間に DB の接続を持たないよう、トランザクションの前に書く。
 		imageID := uuid.NewString()
+		// 応答の画像URLの署名を europe1 / america1 に依頼し、画像の保存とトランザクションの間に計算させる。
+		// 鍵がまだ手元にない利用者は依頼せず、これまでどおり newPostResponse で計算する。
+		var signed chan struct{}
+		if key, ok := cachedImageKey(userID); ok {
+			var batch imageSignatureBatch
+			batch.addKey(key, imageID)
+			signed = make(chan struct{})
+			go func() {
+				defer close(signed)
+				h.Signer.Prime(ctx, &batch)
+			}()
+		}
 		if err := h.Images.Save(imageID, imageData); err != nil {
 			return err
 		}
@@ -228,7 +240,24 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := tx.Commit(); err != nil {
 			return err
 		}
+		waitImageSignature(signed)
 		return c.JSON(http.StatusCreated, newPostResponse(post, user))
+	}
+}
+
+// 投稿の応答で、署名の依頼の結果を待つ時間の上限。asia1 から europe1 / america1 への往復は約100ms。
+// 投稿の処理がそれより早く終わったときに、応答を遅らせすぎないよう短くする。間に合わなければ asia1 で計算する。
+const postImageSignatureWait = 50 * time.Millisecond
+
+func waitImageSignature(signed <-chan struct{}) {
+	if signed == nil {
+		return
+	}
+	timer := time.NewTimer(postImageSignatureWait)
+	defer timer.Stop()
+	select {
+	case <-signed:
+	case <-timer.C:
 	}
 }
 

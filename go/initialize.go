@@ -26,6 +26,7 @@ func initializeHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := refreshUserSearchColumns(c.Request().Context(), h.DB); err != nil {
 			return err
 		}
+		imageKeyCache.Clear()
 		// ベンチ中に書かれた画像のファイルを消す。初期データの画像のファイルは残す (image_store.go)
 		if err := h.Images.Reset(c.Request().Context()); err != nil {
 			return err

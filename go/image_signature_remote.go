@@ -14,7 +14,7 @@ import (
 )
 
 // asia1 の CPU には SHA-NI がなく、署名の計算が europe1 / america1 の約3.3倍かかる (bench-results/7477)。
-// asia1 では、Memories とエクスポートで返す署名を ISUREAL_SIGNING_URLS のサーバにまとめて計算させ、
+// asia1 では、Memories・エクスポート・投稿の応答で返す署名を ISUREAL_SIGNING_URLS のサーバにまとめて計算させ、
 // 結果を imageSignatureCache に入れる。signedImageURL はそのキャッシュを使うので、応答を組み立てる処理は変えない。
 // 依頼に失敗したときは何もしない (signedImageURL がこれまでどおり asia1 で計算する)。
 type ImageSigner struct {
@@ -51,15 +51,19 @@ type imageSignatureBatch struct {
 }
 
 func (b *imageSignatureBatch) add(user User, imageID string) {
+	b.addKey(user.ImageKey, imageID)
+}
+
+func (b *imageSignatureBatch) addKey(key []byte, imageID string) {
 	if b.seen == nil {
 		b.seen = make(map[string]struct{})
 	}
-	cacheKey := string(user.ImageKey) + ":" + imageID
+	cacheKey := string(key) + ":" + imageID
 	if _, ok := b.seen[cacheKey]; ok {
 		return
 	}
 	b.seen[cacheKey] = struct{}{}
-	b.targets = append(b.targets, imageSignatureTarget{Key: user.ImageKey, ImageID: imageID})
+	b.targets = append(b.targets, imageSignatureTarget{Key: key, ImageID: imageID})
 }
 
 // addProfileImage は、newGetMeResponse と同じ条件でプロフィール画像の署名を加える。
