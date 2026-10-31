@@ -17,6 +17,7 @@ import (
 //   - ISUREAL_PRIORITY_LIMIT: 同時に処理する数の上限。0 (既定) なら何もしない
 //   - ISUREAL_PRIORITY_MAX_WAIT: 既定 1s。heavy/all は超過後に上限を無視、split は共通追加枠を待つ
 //   - ISUREAL_PRIORITY_SCOPE: heavy (既定) は重い API、all は除外 API 以外、split は投稿経路・重い API・その他に枠を分ける
+//   - ISUREAL_PRIORITY_IMAGE_LIMIT: split で画像の取得に使う枠の数。0 (既定) なら画像は「その他」の枠に入る
 
 // 「投稿 → 友達フィード」の流れに入らない重い API (#20097 の asia1 の pprof: export 10.8%、プロフィール画像 9.0%、Memories 5.1%)
 var priorityHeavyRoutes = map[string]bool{
@@ -122,12 +123,22 @@ func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
 	critical := max(1, config.PriorityLimit/2)
 	heavy := max(1, config.PriorityLimit/8)
 	limits := []int{critical, heavy, config.PriorityLimit - critical - heavy}
+	names := []string{"critical", "heavy", "other"}
+	// 画像の取得はディスクの読み込みで止まり、CPU が空いていても枠を握り続ける。
+	// 「その他」の枠に入れると、最後の期間に投稿の前の操作 (友達申請、ログイン、検索) が画像の後ろで待つ (#26719 で「その他」の待ち時間の約30%が画像)。
+	// ISUREAL_PRIORITY_IMAGE_LIMIT を設定したら、画像だけ別の枠にする。この枠は PriorityLimit の外に足す
+	imageGroup := -1
+	if config.PriorityImageLimit > 0 {
+		imageGroup = len(limits)
+		limits = append(limits, config.PriorityImageLimit)
+		names = append(names, "image")
+	}
 	slots := make([]chan struct{}, len(limits))
 	stats := make([]*priorityStats, len(limits))
 	for i, limit := range limits {
 		slots[i] = make(chan struct{}, limit)
 		stats[i] = &priorityStats{}
-		go stats[i].reportGroup([]string{"critical", "heavy", "other"}[i])
+		go stats[i].reportGroup(names[i])
 	}
 	overflow := make(chan struct{}, max(1, config.PriorityLimit/8))
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
@@ -144,6 +155,10 @@ func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
 			case "GET /api/feeds/:feed":
 				if c.Param("feed") == "friends" {
 					group = 0
+				}
+			case "GET /api/images/:imageId":
+				if imageGroup >= 0 {
+					group = imageGroup
 				}
 			default:
 				if priorityHeavyRoutes[key] {

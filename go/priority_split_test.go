@@ -100,3 +100,41 @@ func TestSplitPriorityReleasesSlotAfterHandler(t *testing.T) {
 		}
 	}
 }
+
+func TestSplitPriorityImageGroup(t *testing.T) {
+	e := echo.New()
+	e.Use(PriorityMiddleware(&HandlerContext{Config: &Config{
+		TrustedPeers: []string{testPeer}, PriorityScope: "split",
+		PriorityLimit: 3, PriorityMaxWait: time.Hour, PriorityImageLimit: 1,
+	}}))
+	entered := make(chan string, 20)
+	release := make(chan struct{})
+	defer close(release)
+	handler := func(c *echo.Context) error {
+		entered <- c.Request().URL.Path
+		<-release
+		return c.NoContent(http.StatusNoContent)
+	}
+	e.GET("/api/images/:imageId", handler)
+	e.GET("/api/users", handler)
+	start := func(target string) bool {
+		go servePriority(e, http.MethodGet, target, "203.0.113.1")
+		select {
+		case <-entered:
+			return true
+		case <-time.After(100 * time.Millisecond):
+			return false
+		}
+	}
+	// 画像が自分の枠を埋めても、「その他」(1枠) は空いている
+	if !start("/api/images/a") {
+		t.Fatal("image did not enter its own slot")
+	}
+	if !start("/api/users") {
+		t.Fatal("other was blocked by an image")
+	}
+	// どちらの枠も埋まったので、次の画像は待つ
+	if start("/api/images/b") {
+		t.Fatal("image group exceeded its limit")
+	}
+}

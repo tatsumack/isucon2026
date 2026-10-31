@@ -29,6 +29,8 @@ type Config struct {
 	PriorityLimit   int
 	PriorityMaxWait time.Duration
 	PriorityScope   string
+	// split で画像の取得に使う枠の数 (priority.go)
+	PriorityImageLimit int
 }
 
 func ConfigFromEnv() *Config {
@@ -49,6 +51,8 @@ func ConfigFromEnv() *Config {
 		PriorityLimit:   envIntOrDefault("ISUREAL_PRIORITY_LIMIT", 0),
 		PriorityMaxWait: envDurationOrDefault("ISUREAL_PRIORITY_MAX_WAIT", time.Second),
 		PriorityScope:   envOrDefault("ISUREAL_PRIORITY_SCOPE", "heavy"),
+
+		PriorityImageLimit: envIntOrDefault("ISUREAL_PRIORITY_IMAGE_LIMIT", 0),
 	}
 }
 
