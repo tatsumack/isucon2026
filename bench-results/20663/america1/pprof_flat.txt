@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 1a53b1f861dc7f3311aad6ff09d8f25845cc740e
+Type: cpu
+Time: 2026-10-31 06:04:18 UTC
+Duration: 150s, Total samples = 8.91s ( 5.94%)
+Showing nodes accounting for 7.75s, 86.98% of 8.91s total
+Dropped 391 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 163
+      flat  flat%   sum%        cum   cum%
+     3.20s 35.91% 35.91%      3.20s 35.91%  crypto/internal/fips140/sha256.blockSHANI
+     1.08s 12.12% 48.04%      5.14s 57.69%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.76s  8.53% 56.57%      0.76s  8.53%  runtime.memmove
+     0.66s  7.41% 63.97%      0.66s  7.41%  internal/runtime/syscall/linux.Syscall6
+     0.55s  6.17% 70.15%      5.89s 66.11%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.44s  4.94% 75.08%      4.25s 47.70%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.17s  1.91% 76.99%      0.40s  4.49%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.10s  1.12% 78.11%      3.30s 37.04%  crypto/internal/fips140/sha256.block
+     0.09s  1.01% 79.12%      6.60s 74.07%  example.com/isureal-company/isureal.computeImageSignature
+     0.08s   0.9% 80.02%      0.08s   0.9%  internal/byteorder.BEUint32 (inline)
+     0.08s   0.9% 80.92%      0.08s   0.9%  runtime.futex
+     0.07s  0.79% 81.71%      0.08s   0.9%  crypto/internal/fips140.RecordApproved
+     0.06s  0.67% 82.38%      0.06s  0.67%  runtime.memclrNoHeapPointers
+     0.06s  0.67% 83.05%      0.06s  0.67%  runtime.tryDeferToSpanScan
+     0.05s  0.56% 83.61%      0.38s  4.26%  runtime.findRunnable
+     0.04s  0.45% 84.06%      0.12s  1.35%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.03s  0.34% 84.40%      0.09s  1.01%  net/http.(*persistConn).readLoop
+     0.03s  0.34% 84.74%      0.23s  2.58%  runtime.mallocgc
+     0.02s  0.22% 84.96%      0.14s  1.57%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.02s  0.22% 85.19%      7.54s 84.62%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.02s  0.22% 85.41%      0.09s  1.01%  runtime.newobject
+     0.01s  0.11% 85.52%      0.05s  0.56%  crypto/tls.(*atLeastReader).Read
+     0.01s  0.11% 85.63%      7.56s 84.85%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s  0.11% 85.75%      0.14s  1.57%  io.copyBuffer
+     0.01s  0.11% 85.86%      0.26s  2.92%  net.(*netFD).Write
+     0.01s  0.11% 85.97%      0.22s  2.47%  net/http.(*body).readLocked
+     0.01s  0.11% 86.08%      0.07s  0.79%  net/http.(*chunkWriter).writeHeader
+     0.01s  0.11% 86.20%      0.13s  1.46%  net/http.(*conn).readRequest
+     0.01s  0.11% 86.31%      7.92s 88.89%  net/http.(*conn).serve
+     0.01s  0.11% 86.42%      0.14s  1.57%  net/http.(*persistConn).Read
+     0.01s  0.11% 86.53%      0.20s  2.24%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.01s  0.11% 86.64%      0.07s  0.79%  runtime.(*mheap).allocSpan
+     0.01s  0.11% 86.76%      0.06s  0.67%  runtime.makeslice
+     0.01s  0.11% 86.87%      0.08s   0.9%  runtime.markroot
+     0.01s  0.11% 86.98%      0.06s  0.67%  runtime.ready
+         0     0% 86.98%      0.20s  2.24%  bufio.(*Reader).Read
+         0     0% 86.98%      0.18s  2.02%  bufio.(*Writer).Flush
+         0     0% 86.98%      0.14s  1.57%  bufio.(*Writer).ReadFrom
+         0     0% 86.98%      0.12s  1.35%  bufio.(*Writer).Write
+         0     0% 86.98%      0.05s  0.56%  bytes.(*Buffer).ReadFrom
