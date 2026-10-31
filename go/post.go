@@ -195,22 +195,23 @@ func (viewer viewerContext) canView(post Post) bool {
 	}
 }
 
-func canViewPost(ctx context.Context, db sqlx.QueryerContext, viewerID, postID string) (bool, error) {
+// 投稿を閲覧できるかを返す。呼び出し元で本人の情報を使えるよう、読み込んだ viewer も返す (許可されないときは使わないこと)。
+func canViewPost(ctx context.Context, db sqlx.QueryerContext, viewerID, postID string) (bool, viewerContext, error) {
 	post, err := getPostWithAuthor(ctx, db, postID)
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, nil
+		return false, viewerContext{}, nil
 	}
 	if err != nil {
-		return false, err
+		return false, viewerContext{}, err
 	}
 	viewer, err := loadViewerContext(ctx, db, viewerID)
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, nil
+		return false, viewer, nil
 	}
 	if err != nil {
-		return false, err
+		return false, viewer, err
 	}
-	return viewer.canView(post.Post), nil
+	return viewer.canView(post.Post), viewer, nil
 }
 
 func getFriendIDs(ctx context.Context, db sqlx.QueryerContext, userID string) ([]string, error) {

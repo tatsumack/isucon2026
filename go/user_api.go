@@ -96,11 +96,12 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 		userID := uuid.NewString()
 		var insertedUserID string
 		err = tx.GetContext(ctx, &insertedUserID, `
-			INSERT INTO users (id, username, secret_key_hash, display_name, region)
-			VALUES ($1, $2, $3, $4, $5)
+			INSERT INTO users (id, username, secret_key_hash, display_name, region, search_username, search_display_name)
+			VALUES ($1, $2, $3, $4, $5, $6, $7)
 			ON CONFLICT (username) DO NOTHING
 			RETURNING id
-		`, userID, input.Username, hex.EncodeToString(hash[:]), input.DisplayName, input.Region)
+		`, userID, input.Username, hex.EncodeToString(hash[:]), input.DisplayName, input.Region,
+			normalizeSearchText(input.Username), normalizeSearchText(input.DisplayName))
 		if errors.Is(err, sql.ErrNoRows) {
 			return NewAPIError(http.StatusConflict, "username_taken")
 		}
@@ -222,7 +223,7 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 			}
 		}
 		if input.DisplayName != nil {
-			if _, err := tx.ExecContext(ctx, `UPDATE users SET display_name = $2, updated_at = clock_timestamp() WHERE id = $1`, session.UserID, *input.DisplayName); err != nil {
+			if _, err := tx.ExecContext(ctx, `UPDATE users SET display_name = $2, search_display_name = $3, updated_at = clock_timestamp() WHERE id = $1`, session.UserID, *input.DisplayName, normalizeSearchText(*input.DisplayName)); err != nil {
 				return err
 			}
 		}
