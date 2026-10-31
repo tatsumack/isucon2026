@@ -16,8 +16,9 @@ import (
 const imageURLLifetime = 24 * time.Hour
 const imageSignatureIterations = 1000
 
-// 同じ期限の署名を使い回せるよう、期限を分単位に切り捨てる。期限は常に発行から23時間59分以上先になる。
-const imageURLExpirationStep = time.Minute
+// 同じ期限の署名を使い回せるよう、期限を時間単位に切り捨てる。期限は常に発行から23時間以上先になる。
+// 署名は1回に約0.4ms (asia1) かかり、期限が1分ごとに変わると、Memories や export で同じ画像の署名を何度も計算していた。
+const imageURLExpirationStep = time.Hour
 
 func imageSigningKey(secretKeyHash string) ([]byte, error) {
 	key, err := hex.DecodeString(secretKeyHash)
