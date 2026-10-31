@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 9ea6757cce7f94dda347e6ad26daea10eb1e7381
+Type: cpu
+Time: 2026-10-31 04:54:44 UTC
+Duration: 150s, Total samples = 2.49s ( 1.66%)
+Showing nodes accounting for 1.79s, 71.89% of 2.49s total
+Dropped 198 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 316
+      flat  flat%   sum%        cum   cum%
+     0.69s 27.71% 27.71%      0.69s 27.71%  internal/runtime/syscall/linux.Syscall6
+     0.16s  6.43% 34.14%      0.16s  6.43%  runtime.memclrNoHeapPointers
+     0.13s  5.22% 39.36%      0.13s  5.22%  crypto/internal/fips140/sha256.blockSHANI
+     0.09s  3.61% 42.97%      0.09s  3.61%  runtime.futex
+     0.07s  2.81% 45.78%      0.07s  2.81%  runtime.memmove
+     0.04s  1.61% 47.39%      0.22s  8.84%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.04s  1.61% 49.00%      0.04s  1.61%  runtime.step
+     0.03s  1.20% 50.20%      0.12s  4.82%  net/textproto.readMIMEHeader
+     0.03s  1.20% 51.41%      0.03s  1.20%  runtime.(*mspan).writeHeapBitsSmall
+     0.03s  1.20% 52.61%      0.04s  1.61%  runtime.mapaccess1_faststr
+     0.03s  1.20% 53.82%      0.03s  1.20%  runtime.nextFreeFast (inline)
+     0.03s  1.20% 55.02%      0.03s  1.20%  runtime.tryDeferToSpanScan
+     0.02s   0.8% 55.82%      0.15s  6.02%  crypto/internal/fips140/sha256.block
+     0.02s   0.8% 56.63%      0.19s  7.63%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.02s   0.8% 57.43%      0.02s   0.8%  indexbytebody
+     0.02s   0.8% 58.23%      0.02s   0.8%  internal/bytealg.CountString
+     0.02s   0.8% 59.04%      0.04s  1.61%  net/textproto.(*Reader).readLineSlice
+     0.02s   0.8% 59.84%      0.02s   0.8%  runtime.(*itabTableType).find
+     0.02s   0.8% 60.64%      0.02s   0.8%  runtime.casgstatus
+     0.02s   0.8% 61.45%      0.31s 12.45%  runtime.findRunnable
+     0.02s   0.8% 62.25%      0.03s  1.20%  runtime.makechan
+     0.02s   0.8% 63.05%      0.02s   0.8%  runtime.mapaccess1
+     0.02s   0.8% 63.86%      0.21s  8.43%  runtime.netpoll
+     0.02s   0.8% 64.66%      0.02s   0.8%  runtime.runqget (inline)
+     0.02s   0.8% 65.46%      0.02s   0.8%  runtime.selectgo
+     0.02s   0.8% 66.27%      0.02s   0.8%  runtime.usleep
+     0.01s   0.4% 66.67%      0.12s  4.82%  bufio.(*Reader).Read
+     0.01s   0.4% 67.07%      0.02s   0.8%  bufio.(*Reader).ReadSlice
+     0.01s   0.4% 67.47%      0.03s  1.20%  bytes.IndexByte (inline)
+     0.01s   0.4% 67.87%      0.23s  9.24%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.01s   0.4% 68.27%      0.17s  6.83%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.01s   0.4% 68.67%      0.02s   0.8%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.01s   0.4% 69.08%      0.06s  2.41%  crypto/tls.(*Conn).writeRecordLocked
+     0.01s   0.4% 69.48%      0.24s  9.64%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s   0.4% 69.88%      0.08s  3.21%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.01s   0.4% 70.28%      1.14s 45.78%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.01s   0.4% 70.68%      0.04s  1.61%  internal/poll.(*fdMutex).rwlock
+     0.01s   0.4% 71.08%      0.04s  1.61%  net/http.(*chunkWriter).writeHeader
+     0.01s   0.4% 71.49%      0.02s   0.8%  net/http.(*conn).setState
+     0.01s   0.4% 71.89%      0.07s  2.81%  net/http.(*persistConn).Read
