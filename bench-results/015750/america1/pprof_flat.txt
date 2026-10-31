@@ -1,0 +1,48 @@
+File: isureal
+Build ID: bdf755152348ee13e33422075f9242aa0cb3abff
+Type: cpu
+Time: 2026-10-31 01:57:49 UTC
+Duration: 70.01s, Total samples = 500ms ( 0.71%)
+Showing nodes accounting for 500ms, 100% of 500ms total
+Showing top 40 nodes out of 286
+      flat  flat%   sum%        cum   cum%
+      90ms 18.00% 18.00%       90ms 18.00%  internal/runtime/syscall/linux.Syscall6
+      60ms 12.00% 30.00%       60ms 12.00%  crypto/internal/fips140/sha256.blockSHANI
+      60ms 12.00% 42.00%       60ms 12.00%  runtime.futex
+      30ms  6.00% 48.00%       80ms 16.00%  crypto/internal/fips140/hmac.New[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+      30ms  6.00% 54.00%       30ms  6.00%  runtime.memmove
+      20ms  4.00% 58.00%       30ms  6.00%  internal/runtime/gc/scan.scanSpanPackedAVX512
+      20ms  4.00% 62.00%       20ms  4.00%  runtime.nextFreeFast (inline)
+      10ms  2.00% 64.00%       20ms  4.00%  crypto/hmac.New.UnwrapNew[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }].func1
+      10ms  2.00% 66.00%       10ms  2.00%  crypto/internal/fips140/bigmod.addMulVVW2048
+      10ms  2.00% 68.00%       60ms 12.00%  crypto/internal/fips140/sha256.(*Digest).checkSum
+      10ms  2.00% 70.00%      130ms 26.00%  database/sql.(*DB).conn
+      10ms  2.00% 72.00%       20ms  4.00%  database/sql.convertAssignRows
+      10ms  2.00% 74.00%       10ms  2.00%  encoding/json.appendString[go.shape.string]
+      10ms  2.00% 76.00%       10ms  2.00%  expandAVX512_52
+      10ms  2.00% 78.00%       10ms  2.00%  gcWriteBarrier
+      10ms  2.00% 80.00%       10ms  2.00%  github.com/jackc/pgx/v5/internal/stmtcache.(*LRUCache).Get
+      10ms  2.00% 82.00%       10ms  2.00%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+      10ms  2.00% 84.00%       10ms  2.00%  p256MulInternal
+      10ms  2.00% 86.00%       10ms  2.00%  runtime.(*gList).push (inline)
+      10ms  2.00% 88.00%       10ms  2.00%  runtime.(*pageBits).popcntRange
+      10ms  2.00% 90.00%       10ms  2.00%  runtime.(*timer).modify
+      10ms  2.00% 92.00%       40ms  8.00%  runtime.netpoll
+      10ms  2.00% 94.00%       10ms  2.00%  runtime.packPallocSum (inline)
+      10ms  2.00% 96.00%       10ms  2.00%  runtime.tryDeferToSpanScan
+      10ms  2.00% 98.00%       10ms  2.00%  runtime.usleep
+      10ms  2.00%   100%       10ms  2.00%  vendor/golang.org/x/crypto/cryptobyte.(*Builder).add (inline)
+         0     0%   100%       50ms 10.00%  bytes.(*Buffer).ReadFrom
+         0     0%   100%       10ms  2.00%  bytes.Clone (inline)
+         0     0%   100%       10ms  2.00%  crypto/ecdh.(*PrivateKey).ECDH
+         0     0%   100%       10ms  2.00%  crypto/ecdh.(*nistCurve).ecdh
+         0     0%   100%       10ms  2.00%  crypto/ecdh.init.func4
+         0     0%   100%       80ms 16.00%  crypto/hmac.New
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/bigmod.(*Nat).ExpShortVarTime
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/bigmod.(*Nat).montgomeryMul
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/ecdh.ECDH[go.shape.*crypto/internal/fips140/nistec.P256Point]
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/ecdh.ecdh[go.shape.*crypto/internal/fips140/nistec.P256Point]
+         0     0%   100%       60ms 12.00%  crypto/internal/fips140/hmac.(*HMAC).Sum
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/mlkem.(*DecapsulationKey768).EncapsulationKey (inline)
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/nistec.(*P256Point).ScalarMult
+         0     0%   100%       10ms  2.00%  crypto/internal/fips140/nistec.(*P256Point).p256ScalarMult

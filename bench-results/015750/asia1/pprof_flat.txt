@@ -1,0 +1,48 @@
+File: isureal
+Build ID: bdf755152348ee13e33422075f9242aa0cb3abff
+Type: cpu
+Time: 2026-10-31 01:57:51 UTC
+Duration: 70.02s, Total samples = 550ms ( 0.79%)
+Showing nodes accounting for 550ms, 100% of 550ms total
+Showing top 40 nodes out of 208
+      flat  flat%   sum%        cum   cum%
+      90ms 16.36% 16.36%       90ms 16.36%  crypto/internal/fips140/sha256.blockAVX2
+      90ms 16.36% 32.73%       90ms 16.36%  internal/runtime/syscall/linux.Syscall6
+      30ms  5.45% 38.18%       30ms  5.45%  runtime.memmove
+      20ms  3.64% 41.82%       20ms  3.64%  internal/sync.(*Mutex).Unlock (inline)
+      20ms  3.64% 45.45%       20ms  3.64%  runtime.(*spanInlineMarkBits).init
+      20ms  3.64% 49.09%       20ms  3.64%  runtime.madvise
+      20ms  3.64% 52.73%       30ms  5.45%  runtime.mallocgcSmallScanNoHeader
+      20ms  3.64% 56.36%       40ms  7.27%  runtime.scanObjectsSmall
+      20ms  3.64% 60.00%       20ms  3.64%  runtime.tryDeferToSpanScan
+      10ms  1.82% 61.82%       30ms  5.45%  crypto/hmac.New.UnwrapNew[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }].func1
+      10ms  1.82% 63.64%       10ms  1.82%  crypto/internal/fips140/aes.encryptBlockAsm
+      10ms  1.82% 65.45%       10ms  1.82%  crypto/internal/fips140/aes/gcm.gcmAesDec
+      10ms  1.82% 67.27%       80ms 14.55%  crypto/internal/fips140/hmac.New[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+      10ms  1.82% 69.09%       70ms 12.73%  crypto/internal/fips140/sha256.(*Digest).checkSum
+      10ms  1.82% 70.91%      190ms 34.55%  example.com/isureal-company/isureal.NewServer.getNotificationsHandler.func75
+      10ms  1.82% 72.73%       50ms  9.09%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).receiveMessage
+      10ms  1.82% 74.55%       10ms  1.82%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+      10ms  1.82% 76.36%       10ms  1.82%  reflect.valueInterface
+      10ms  1.82% 78.18%       10ms  1.82%  runtime.empty
+      10ms  1.82% 80.00%       10ms  1.82%  runtime.exitsyscall
+      10ms  1.82% 81.82%       80ms 14.55%  runtime.findRunnable
+      10ms  1.82% 83.64%       10ms  1.82%  runtime.memclrNoHeapPointers
+      10ms  1.82% 85.45%       10ms  1.82%  runtime.newArenaMayUnlock
+      10ms  1.82% 87.27%       40ms  7.27%  runtime.newobject
+      10ms  1.82% 89.09%       10ms  1.82%  runtime.nextFreeFast (inline)
+      10ms  1.82% 90.91%       10ms  1.82%  runtime.scanObject
+      10ms  1.82% 92.73%       10ms  1.82%  runtime.selectgo
+      10ms  1.82% 94.55%       10ms  1.82%  runtime.spanSetScans
+      10ms  1.82% 96.36%       10ms  1.82%  runtime.usleep
+      10ms  1.82% 98.18%       10ms  1.82%  sync/atomic.(*Bool).Load (inline)
+      10ms  1.82%   100%       10ms  1.82%  time.(*Time).addSec
+         0     0%   100%       10ms  1.82%  bytes.(*Buffer).ReadFrom
+         0     0%   100%       20ms  3.64%  bytes.Clone
+         0     0%   100%       80ms 14.55%  crypto/hmac.New
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes.EncryptBlockInternal (inline)
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes.encryptBlock
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes/gcm.(*GCM).Open
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes/gcm.(*GCM).sealAfterIndicator
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes/gcm.(*GCMWithXORCounterNonce).Open
+         0     0%   100%       10ms  1.82%  crypto/internal/fips140/aes/gcm.(*GCMWithXORCounterNonce).Seal

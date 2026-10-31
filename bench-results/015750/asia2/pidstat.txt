@@ -1,0 +1,105 @@
+Linux 7.0.0-1014-aws (ip-192-168-4-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+01:57:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:57:55      111     13616    0.20    0.20    0.00    0.20    0.40     1  postgres
+01:57:55      111     17412    0.20    0.00    0.00    0.20    0.20     0  postgres
+01:57:55      111     17427    1.59    0.40    0.00    0.60    1.99     0  postgres
+01:57:55      111     17505    1.59    0.20    0.00    0.80    1.79     0  postgres
+
+01:57:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:00        0       660    0.00    0.20    0.00    0.00    0.20     0  udisksd
+01:58:00      111     13616    0.00    0.20    0.00    0.00    0.20     1  postgres
+01:58:00      111     17427    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:00      111     17505    0.60    0.20    0.00    0.00    0.80     0  postgres
+01:58:00      111     17525    0.20    0.00    0.00    0.00    0.20     1  postgres
+01:58:00      111     17535    0.60    0.00    0.00    0.00    0.60     1  postgres
+01:58:00      111     17536    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:05        0       188    0.20    0.00    0.00    0.00    0.20     0  multipathd
+01:58:05      111     13616    0.00    0.20    0.00    0.00    0.20     1  postgres
+01:58:05      111     17427    0.60    0.00    0.00    0.00    0.60     0  postgres
+01:58:05     1100     17502    0.20    0.20    0.00    0.00    0.40     1  pidstat
+01:58:05      111     17505    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:05      111     17536    0.40    0.00    0.00    0.00    0.40     0  postgres
+
+01:58:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:10        0        66    0.00    0.80    0.00    0.20    0.80     0  kworker/u8:3-events_power_efficient
+01:58:10        0     12952    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:4-events_power_efficient
+01:58:10      111     13616    0.00    0.20    0.00    0.00    0.20     0  postgres
+01:58:10      111     17427    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:10      111     17505    0.40    0.20    0.00    0.00    0.60     0  postgres
+01:58:10      111     17561    0.20    0.00    0.00    0.00    0.20     0  postgres
+01:58:10      111     17567    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:15      111     17427    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:15      111     17505    0.60    0.00    0.00    0.00    0.60     0  postgres
+01:58:15      111     17566    0.40    0.00    0.00    0.00    0.40     1  postgres
+01:58:15      111     17573    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:20      111     13616    0.00    0.20    0.00    0.00    0.20     0  postgres
+01:58:20      111     17427    0.60    0.20    0.00    0.00    0.80     0  postgres
+01:58:20      111     17505    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:20      111     17587    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:25      111     13616    0.00    0.20    0.00    0.00    0.20     0  postgres
+01:58:25      111     17427    0.60    0.00    0.00    0.00    0.60     0  postgres
+01:58:25     1100     17502    0.00    0.20    0.00    0.00    0.20     1  pidstat
+01:58:25      111     17505    0.60    0.00    0.00    0.00    0.60     0  postgres
+01:58:25      111     17590    0.20    0.00    0.00    0.00    0.20     1  postgres
+01:58:25      111     17600    0.20    0.00    0.00    0.00    0.20     0  postgres
+01:58:25      111     17606    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:30      111     13616    0.00    0.20    0.00    0.00    0.20     0  postgres
+01:58:30      111     17427    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:30      111     17505    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:30      111     17611    0.20    0.00    0.00    0.00    0.20     0  postgres
+01:58:30      111     17613    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:35        0     12921    0.00    0.20    0.00    0.00    0.20     1  kworker/1:1-events
+01:58:35      111     13616    0.00    0.20    0.00    0.00    0.20     1  postgres
+01:58:35      111     17427    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:35     1100     17502    0.20    0.00    0.00    0.00    0.20     1  pidstat
+01:58:35      111     17505    0.60    0.20    0.00    0.20    0.80     0  postgres
+01:58:35      111     17611    0.20    0.00    0.00    0.00    0.20     1  postgres
+01:58:35      111     17632    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:40      101       606    0.00    0.20    0.00    0.00    0.20     0  dbus-daemon
+01:58:40      111     17427    0.60    0.00    0.00    0.00    0.60     0  postgres
+01:58:40      111     17505    0.40    0.00    0.00    0.00    0.40     0  postgres
+01:58:40      111     17636    0.20    0.00    0.00    0.00    0.20     1  postgres
+
+01:58:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:45        0        16    0.00    0.20    0.00    0.00    0.20     0  rcu_sched
+01:58:45      111     13616    0.00    0.20    0.00    0.20    0.20     0  postgres
+01:58:45      111     17427    0.20    0.20    0.00    0.00    0.40     0  postgres
+01:58:45     1100     17502    0.00    0.20    0.00    0.00    0.20     1  pidstat
+01:58:45      111     17649    0.60    0.20    0.00    0.00    0.80     1  postgres
+
+01:58:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+01:58:50        0        36    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:1-events_power_efficient
+
+01:58:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+01:58:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        16    0.00    0.01    0.00    0.04    0.01     -  rcu_sched
+Average:        0        36    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:1-events_power_efficient
+Average:        0        66    0.00    0.06    0.00    0.01    0.06     -  kworker/u8:3-events_power_efficient
+Average:        0       188    0.01    0.00    0.00    0.00    0.01     -  multipathd
+Average:      101       606    0.00    0.01    0.00    0.00    0.01     -  dbus-daemon
+Average:        0       660    0.00    0.01    0.00    0.00    0.01     -  udisksd
+Average:        0     12921    0.00    0.01    0.00    0.01    0.01     -  kworker/1:1-events
+Average:        0     12952    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:4-flush-259:0
+Average:      111     13616    0.01    0.13    0.00    0.03    0.14     -  postgres
+Average:      111     17427    0.44    0.06    0.00    0.04    0.50     -  postgres
+Average:     1100     17502    0.03    0.04    0.00    0.00    0.07     -  pidstat
+Average:      111     17505    0.43    0.06    0.00    0.07    0.49     -  postgres
+Average:      111     17649    0.04    0.01    0.00    0.00    0.06     -  postgres

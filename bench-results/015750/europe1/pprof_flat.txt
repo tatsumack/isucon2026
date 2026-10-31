@@ -1,0 +1,48 @@
+File: isureal
+Build ID: bdf755152348ee13e33422075f9242aa0cb3abff
+Type: cpu
+Time: 2026-10-31 01:57:50 UTC
+Duration: 70.01s, Total samples = 590ms ( 0.84%)
+Showing nodes accounting for 590ms, 100% of 590ms total
+Showing top 40 nodes out of 267
+      flat  flat%   sum%        cum   cum%
+      90ms 15.25% 15.25%       90ms 15.25%  internal/runtime/syscall/linux.Syscall6
+      70ms 11.86% 27.12%       70ms 11.86%  crypto/internal/fips140/sha256.blockSHANI
+      70ms 11.86% 38.98%       70ms 11.86%  runtime.memmove
+      40ms  6.78% 45.76%       40ms  6.78%  runtime.memclrNoHeapPointers
+      20ms  3.39% 49.15%       20ms  3.39%  runtime.nanotime (inline)
+      20ms  3.39% 52.54%       20ms  3.39%  runtime.nextFreeFast
+      10ms  1.69% 54.24%       20ms  3.39%  crypto/internal/fips140/bigmod.(*Nat).montgomeryMul
+      10ms  1.69% 55.93%       10ms  1.69%  crypto/internal/fips140/bigmod.addMulVVW2048
+      10ms  1.69% 57.63%      100ms 16.95%  crypto/internal/fips140/hmac.(*HMAC).Sum
+      10ms  1.69% 59.32%       20ms  3.39%  crypto/internal/fips140/mlkem.sampleNTT
+      10ms  1.69% 61.02%       80ms 13.56%  crypto/internal/fips140/pbkdf2.Key[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+      10ms  1.69% 62.71%      100ms 16.95%  crypto/internal/fips140/sha256.(*Digest).Write
+      10ms  1.69% 64.41%       10ms  1.69%  crypto/internal/fips140/sha3.keccakF1600
+      10ms  1.69% 66.10%       30ms  5.08%  crypto/tls.(*Conn).Read
+      10ms  1.69% 67.80%       30ms  5.08%  database/sql.convertAssignRows
+      10ms  1.69% 69.49%       10ms  1.69%  github.com/jackc/pgx/v5.(*baseRows).Next
+      10ms  1.69% 71.19%       10ms  1.69%  github.com/jackc/pgx/v5/pgconn.parseURLSettings
+      10ms  1.69% 72.88%       10ms  1.69%  github.com/jackc/pgx/v5/pgtype.(*Map).planEncodeDepth
+      10ms  1.69% 74.58%       10ms  1.69%  internal/poll.setDeadlineImpl
+      10ms  1.69% 76.27%       10ms  1.69%  internal/runtime/atomic.(*Uint64).Add
+      10ms  1.69% 77.97%       10ms  1.69%  internal/runtime/gc/scan.scanSpanPackedAVX512
+      10ms  1.69% 79.66%       10ms  1.69%  net/url.escape
+      10ms  1.69% 81.36%       10ms  1.69%  runtime.(*spanSet).pop
+      10ms  1.69% 83.05%       70ms 11.86%  runtime.findRunnable
+      10ms  1.69% 84.75%       10ms  1.69%  runtime.gcmarknewobject
+      10ms  1.69% 86.44%       10ms  1.69%  runtime.madvise
+      10ms  1.69% 88.14%       10ms  1.69%  runtime.mapaccess2_faststr
+      10ms  1.69% 89.83%       40ms  6.78%  runtime.newobject
+      10ms  1.69% 91.53%       10ms  1.69%  runtime.pidleput
+      10ms  1.69% 93.22%       20ms  3.39%  runtime.scanObject
+      10ms  1.69% 94.92%       10ms  1.69%  runtime.scanObjectsSmall
+      10ms  1.69% 96.61%       10ms  1.69%  runtime.step
+      10ms  1.69% 98.31%       10ms  1.69%  runtime.tryDeferToSpanScan
+      10ms  1.69%   100%       40ms  6.78%  syscall.write
+         0     0%   100%       20ms  3.39%  bufio.(*Writer).Write
+         0     0%   100%       10ms  1.69%  bytes.(*Buffer).ReadFrom
+         0     0%   100%       20ms  3.39%  bytes.Clone (inline)
+         0     0%   100%       10ms  1.69%  context.WithCancel
+         0     0%   100%       10ms  1.69%  context.withCancel (inline)
+         0     0%   100%       10ms  1.69%  crypto.Hash.New
