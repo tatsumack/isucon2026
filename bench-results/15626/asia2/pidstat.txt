@@ -1,0 +1,187 @@
+Linux 7.0.0-1014-aws (ip-192-168-4-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+05:02:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:30        0        16    0.00    0.20    0.00    0.00    0.20     1  rcu_sched
+
+05:02:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:45        0       644    0.20    0.00    0.00    0.00    0.20     0  systemd-logind
+05:02:45     1100     49473    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:02:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:50      111     48732    0.00    0.20    0.00    0.00    0.20     1  postgres
+
+05:02:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:55      989       615    0.20    0.00    0.00    0.00    0.20     1  polkitd
+
+05:02:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:00        0       611    0.00    0.20    0.00    0.00    0.20     1  irqbalance
+05:03:00        0     48023    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:3-events_power_efficient
+
+05:03:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:05        0     46956    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:0-events_power_efficient
+05:03:05     1100     49473    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:03:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:10        0       622    0.20    0.00    0.00    0.00    0.20     1  snapd
+05:03:10     1100     49473    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+05:03:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:35        0         1    0.20    0.00    0.00    0.00    0.20     1  systemd
+05:03:35        0       188    0.20    0.00    0.00    0.00    0.20     0  multipathd
+05:03:35      101       606    0.00    0.20    0.00    0.00    0.20     1  dbus-daemon
+05:03:35     1100     49473    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+05:03:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:40     1100     49473    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+05:03:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:45        0     48578    0.00    0.20    0.00    0.00    0.20     0  kworker/0:2-events
+
+05:03:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:55      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:00      111     48730    0.00    0.20    0.00    0.00    0.20     0  postgres
+
+05:04:00      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:05     1100     49473    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+05:04:05      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:10     1100     49473    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+05:04:10      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:04:15      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:20        0     47434    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:1-events_power_efficient
+
+05:04:20      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:04:25      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:30        0     48507    0.00    0.20    0.00    0.00    0.20     1  kworker/1:2-events
+05:04:30     1100     49473    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+05:04:30      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:35     1100     49472    0.20    0.20    0.00    0.00    0.40     1  vmstat
+
+05:04:35      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:04:40      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:45      111     48730    0.00    0.20    0.00    0.80    0.20     1  postgres
+05:04:45      111     48732    0.00    0.20    0.00    0.00    0.20     0  postgres
+05:04:45      111     48734    0.20    0.00    0.00    0.00    0.20     1  postgres
+05:04:45      111     49388    0.60    0.20    0.00    0.40    0.80     0  postgres
+05:04:45     1100     49473    0.00    0.20    0.00    0.00    0.20     1  pidstat
+05:04:45      111     49600    0.20    0.00    0.00    0.80    0.20     0  postgres
+05:04:45      111     49604    0.20    0.00    0.00    0.80    0.20     0  postgres
+05:04:45      111     49612    0.20    0.00    0.00    0.60    0.20     0  postgres
+
+05:04:45      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:50      111     49390    0.20    0.20    0.00    0.20    0.40     0  postgres
+05:04:50      111     49391    0.20    0.00    0.00    0.20    0.20     1  postgres
+05:04:50      111     49599    0.60    0.00    0.00    0.40    0.60     0  postgres
+05:04:50      111     49600    0.00    0.20    0.00    0.00    0.20     0  postgres
+05:04:50      111     49604    0.80    0.00    0.00    0.60    0.80     0  postgres
+05:04:50      111     49606    0.20    0.00    0.00    0.20    0.20     1  postgres
+05:04:50      111     49609    0.20    0.00    0.00    0.00    0.20     1  postgres
+05:04:50      111     49611    0.60    0.00    0.00    0.40    0.60     1  postgres
+05:04:50      111     49612    0.20    0.00    0.00    0.20    0.20     1  postgres
+05:04:50      111     49613    1.00    0.40    0.00    0.40    1.40     1  postgres
+05:04:50      111     49614    0.80    0.20    0.00    0.60    1.00     0  postgres
+05:04:50      111     49616    0.20    0.00    0.00    0.00    0.20     1  postgres
+05:04:50      111     49617    0.40    0.00    0.00    0.60    0.40     0  postgres
+05:04:50      111     49618    0.40    0.00    0.00    0.40    0.40     1  postgres
+05:04:50      111     49619    0.40    0.00    0.00    0.40    0.40     1  postgres
+05:04:50      111     49620    0.20    0.00    0.00    0.40    0.20     0  postgres
+05:04:50      111     49621    0.40    0.00    0.00    0.20    0.40     0  postgres
+05:04:50      111     49622    0.40    0.00    0.00    0.60    0.40     1  postgres
+05:04:50      111     49623    0.40    0.00    0.00    0.40    0.40     0  postgres
+05:04:50      111     49624    0.20    0.00    0.00    0.00    0.20     1  postgres
+05:04:50      111     49625    0.20    0.00    0.00    0.20    0.20     0  postgres
+05:04:50      111     49626    0.20    0.00    0.00    0.20    0.20     0  postgres
+05:04:50      111     49627    0.20    0.00    0.00    0.20    0.20     0  postgres
+05:04:50      111     49628    0.20    0.00    0.00    0.20    0.20     1  postgres
+
+05:04:50      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:55        0        38    0.00    0.20    0.00    0.00    0.20     1  kcompactd0
+05:04:55        0       619    0.20    0.00    0.00    0.00    0.20     1  amazon-ssm-agen
+05:04:55      111     48734    0.00    0.20    0.00    0.20    0.20     0  postgres
+05:04:55     1100     49473    0.20    0.00    0.00    0.00    0.20     1  pidstat
+05:04:55      111     49600    0.20    0.00    0.00    0.60    0.20     0  postgres
+05:04:55      111     49602    0.40    0.00    0.00    1.00    0.40     0  postgres
+05:04:55      111     49603    0.20    0.20    0.00    0.60    0.40     0  postgres
+05:04:55      111     49605    0.60    0.20    0.00    1.00    0.80     0  postgres
+05:04:55      111     49607    0.20    0.00    0.00    1.00    0.20     0  postgres
+05:04:55      111     49608    3.60    1.20    0.00    0.60    4.80     0  postgres
+05:04:55      111     49614    0.40    0.00    0.00    0.60    0.40     0  postgres
+05:04:55      111     49615    0.60    0.00    0.00    1.20    0.60     0  postgres
+05:04:55      111     49616    0.20    0.00    0.00    0.60    0.20     0  postgres
+05:04:55      111     49617    0.20    0.20    0.00    0.60    0.40     0  postgres
+05:04:55      111     49618    0.20    0.00    0.00    0.40    0.20     1  postgres
+05:04:55      111     49626    0.20    0.00    0.00    0.20    0.20     0  postgres
+05:04:55      111     49629    0.20    0.00    0.00    0.00    0.20     0  postgres
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0         1    0.01    0.00    0.00    0.00    0.01     -  systemd
+Average:        0        16    0.00    0.01    0.00    0.01    0.01     -  rcu_sched
+Average:        0        38    0.00    0.01    0.00    0.00    0.01     -  kcompactd0
+Average:        0       188    0.01    0.00    0.00    0.00    0.01     -  multipathd
+Average:      101       606    0.00    0.01    0.00    0.01    0.01     -  dbus-daemon
+Average:        0       611    0.00    0.01    0.00    0.00    0.01     -  irqbalance
+Average:      989       615    0.01    0.00    0.00    0.00    0.01     -  polkitd
+Average:        0       619    0.01    0.00    0.00    0.00    0.01     -  amazon-ssm-agen
+Average:        0       622    0.01    0.00    0.00    0.00    0.01     -  snapd
+Average:        0       644    0.01    0.00    0.00    0.00    0.01     -  systemd-logind
+Average:        0     46956    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:0-events_unbound
+Average:        0     47434    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:1-events_power_efficient
+Average:        0     48023    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:3-events_power_efficient
+Average:        0     48507    0.00    0.01    0.00    0.01    0.01     -  kworker/1:2-events
+Average:        0     48578    0.00    0.01    0.00    0.01    0.01     -  kworker/0:2-events
+Average:      111     48730    0.00    0.01    0.00    0.03    0.01     -  postgres
+Average:      111     48732    0.00    0.01    0.00    0.00    0.01     -  postgres
+Average:      111     48734    0.01    0.01    0.00    0.01    0.01     -  postgres
+Average:      111     49388    0.02    0.01    0.00    0.01    0.03     -  postgres
+Average:      111     49390    0.01    0.01    0.00    0.01    0.01     -  postgres
+Average:      111     49391    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:     1100     49473    0.03    0.04    0.00    0.00    0.07     -  pidstat
+Average:      111     49599    0.02    0.00    0.00    0.03    0.02     -  postgres
+Average:      111     49600    0.01    0.01    0.00    0.05    0.02     -  postgres
+Average:      111     49602    0.01    0.00    0.00    0.06    0.01     -  postgres
+Average:      111     49603    0.01    0.01    0.00    0.04    0.01     -  postgres
+Average:      111     49604    0.03    0.00    0.00    0.05    0.03     -  postgres
+Average:      111     49605    0.02    0.01    0.00    0.07    0.03     -  postgres
+Average:      111     49606    0.01    0.00    0.00    0.04    0.01     -  postgres
+Average:      111     49607    0.01    0.00    0.00    0.05    0.01     -  postgres
+Average:      111     49608    0.12    0.04    0.00    0.05    0.16     -  postgres
+Average:      111     49609    0.01    0.00    0.00    0.03    0.01     -  postgres
+Average:      111     49611    0.02    0.00    0.00    0.03    0.02     -  postgres
+Average:      111     49612    0.01    0.00    0.00    0.03    0.01     -  postgres
+Average:      111     49613    0.03    0.01    0.00    0.03    0.05     -  postgres
+Average:      111     49614    0.04    0.01    0.00    0.06    0.05     -  postgres
+Average:      111     49615    0.02    0.00    0.00    0.05    0.02     -  postgres
+Average:      111     49616    0.01    0.00    0.00    0.03    0.01     -  postgres
+Average:      111     49617    0.02    0.01    0.00    0.05    0.03     -  postgres
+Average:      111     49618    0.02    0.00    0.00    0.04    0.02     -  postgres
+Average:      111     49619    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49620    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49621    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49622    0.01    0.00    0.00    0.02    0.01     -  postgres
+Average:      111     49623    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49624    0.01    0.00    0.00    0.00    0.01     -  postgres
+Average:      111     49625    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49626    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49627    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49628    0.01    0.00    0.00    0.01    0.01     -  postgres
+Average:      111     49629    0.01    0.00    0.00    0.00    0.01     -  postgres

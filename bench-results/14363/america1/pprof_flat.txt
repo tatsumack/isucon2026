@@ -1,0 +1,48 @@
+File: isureal
+Build ID: f2d8dc3ac4e61f69c0da5a5a33e385ad06c4e215
+Type: cpu
+Time: 2026-10-31 04:48:30 UTC
+Duration: 150s, Total samples = 1.10s ( 0.73%)
+Showing nodes accounting for 0.92s, 83.64% of 1.10s total
+Showing top 40 nodes out of 397
+      flat  flat%   sum%        cum   cum%
+     0.30s 27.27% 27.27%      0.30s 27.27%  internal/runtime/syscall/linux.Syscall6
+     0.13s 11.82% 39.09%      0.13s 11.82%  runtime.futex
+     0.05s  4.55% 43.64%      0.05s  4.55%  crypto/internal/fips140/sha256.blockSHANI
+     0.04s  3.64% 47.27%      0.04s  3.64%  runtime.memmove
+     0.03s  2.73% 50.00%      0.03s  2.73%  runtime.memclrNoHeapPointers
+     0.02s  1.82% 51.82%      0.08s  7.27%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.02s  1.82% 53.64%      0.02s  1.82%  runtime.(*mspan).writeHeapBitsSmall
+     0.01s  0.91% 54.55%      0.01s  0.91%  cmpbody
+     0.01s  0.91% 55.45%      0.01s  0.91%  context.(*cancelCtx).cancel
+     0.01s  0.91% 56.36%      0.01s  0.91%  context.(*valueCtx).Value
+     0.01s  0.91% 57.27%      0.01s  0.91%  context.value
+     0.01s  0.91% 58.18%      0.01s  0.91%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.01s  0.91% 59.09%      0.10s  9.09%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.01s  0.91% 60.00%      0.01s  0.91%  crypto/tls.(*atLeastReader).Read
+     0.01s  0.91% 60.91%      0.07s  6.36%  database/sql.(*DB).queryDC
+     0.01s  0.91% 61.82%      0.01s  0.91%  database/sql.(*Rows).scanLocked
+     0.01s  0.91% 62.73%      0.04s  3.64%  database/sql.(*Tx).ExecContext
+     0.01s  0.91% 63.64%      0.01s  0.91%  encoding/json.stringEncoder
+     0.01s  0.91% 64.55%      0.57s 51.82%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s  0.91% 65.45%      0.01s  0.91%  github.com/jackc/pgx/v5/pgconn.(*PgConn).exitPotentialWriteReadDeadlock
+     0.01s  0.91% 66.36%      0.03s  2.73%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+     0.01s  0.91% 67.27%      0.02s  1.82%  github.com/jackc/pgx/v5/pgtype.(*Map).TypeForOID (inline)
+     0.01s  0.91% 68.18%      0.01s  0.91%  image/jpeg.(*decoder).decodeHuffman
+     0.01s  0.91% 69.09%      0.01s  0.91%  indexbytebody
+     0.01s  0.91% 70.00%      0.01s  0.91%  internal/chacha8rand.block
+     0.01s  0.91% 70.91%      0.01s  0.91%  internal/poll.(*FD).eofError (inline)
+     0.01s  0.91% 71.82%      0.01s  0.91%  internal/poll.runtime_pollReset
+     0.01s  0.91% 72.73%      0.01s  0.91%  internal/runtime/atomic.(*Int64).Load
+     0.01s  0.91% 73.64%      0.01s  0.91%  internal/runtime/atomic.(*Uint32).CompareAndSwap
+     0.01s  0.91% 74.55%      0.01s  0.91%  internal/runtime/maps.(*Map).Used (inline)
+     0.01s  0.91% 75.45%      0.10s  9.09%  net.(*conn).Read
+     0.01s  0.91% 76.36%      0.01s  0.91%  net/http.StatusText
+     0.01s  0.91% 77.27%      0.01s  0.91%  net/textproto.CanonicalMIMEHeaderKey
+     0.01s  0.91% 78.18%      0.01s  0.91%  runtime.(*gcControllerState).releaseNextGCMarkWorker
+     0.01s  0.91% 79.09%      0.01s  0.91%  runtime.(*itabTableType).find
+     0.01s  0.91% 80.00%      0.01s  0.91%  runtime.(*mLockProfile).store (inline)
+     0.01s  0.91% 80.91%      0.01s  0.91%  runtime.(*mheap).allocMSpanLocked
+     0.01s  0.91% 81.82%      0.01s  0.91%  runtime.(*mheap).tryAllocMSpan
+     0.01s  0.91% 82.73%      0.01s  0.91%  runtime.(*mspan).refillAllocCache
+     0.01s  0.91% 83.64%      0.01s  0.91%  runtime.(*stackScanState).findObject

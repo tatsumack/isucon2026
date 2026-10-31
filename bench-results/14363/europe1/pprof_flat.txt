@@ -1,0 +1,49 @@
+File: isureal
+Build ID: f2d8dc3ac4e61f69c0da5a5a33e385ad06c4e215
+Type: cpu
+Time: 2026-10-31 04:48:30 UTC
+Duration: 150s, Total samples = 2.41s ( 1.61%)
+Showing nodes accounting for 1.65s, 68.46% of 2.41s total
+Dropped 260 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 305
+      flat  flat%   sum%        cum   cum%
+     0.76s 31.54% 31.54%      0.76s 31.54%  internal/runtime/syscall/linux.Syscall6
+     0.16s  6.64% 38.17%      0.16s  6.64%  runtime.memclrNoHeapPointers
+     0.09s  3.73% 41.91%      0.09s  3.73%  runtime.futex
+     0.08s  3.32% 45.23%      0.08s  3.32%  crypto/internal/fips140/sha256.blockSHANI
+     0.08s  3.32% 48.55%      0.08s  3.32%  runtime.memmove
+     0.03s  1.24% 49.79%      0.17s  7.05%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.03s  1.24% 51.04%      0.07s  2.90%  runtime.selectgo
+     0.02s  0.83% 51.87%      0.02s  0.83%  aeshashbody
+     0.02s  0.83% 52.70%      0.02s  0.83%  bufio.(*Writer).WriteString
+     0.02s  0.83% 53.53%      0.14s  5.81%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.02s  0.83% 54.36%      0.02s  0.83%  image/jpeg.(*decoder).reconstructBlock
+     0.02s  0.83% 55.19%      1.62s 67.22%  net/http.(*conn).serve
+     0.02s  0.83% 56.02%      0.03s  1.24%  runtime.mapaccess2_faststr
+     0.02s  0.83% 56.85%      0.21s  8.71%  runtime.netpoll
+     0.02s  0.83% 57.68%      0.04s  1.66%  runtime.scanObject
+     0.02s  0.83% 58.51%      0.02s  0.83%  sync.(*Pool).pin
+     0.01s  0.41% 58.92%      0.02s  0.83%  context.WithCancel
+     0.01s  0.41% 59.34%      0.12s  4.98%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.01s  0.41% 59.75%      0.09s  3.73%  crypto/internal/fips140/sha256.block
+     0.01s  0.41% 60.17%      0.07s  2.90%  crypto/tls.(*Conn).writeRecordLocked
+     0.01s  0.41% 60.58%      0.18s  7.47%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s  0.41% 61.00%      0.09s  3.73%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.01s  0.41% 61.41%      0.10s  4.15%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.01s  0.41% 61.83%      1.22s 50.62%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s  0.41% 62.24%      0.02s  0.83%  image/jpeg.(*decoder).decodeHuffman
+     0.01s  0.41% 62.66%      0.05s  2.07%  image/jpeg.(*decoder).processSOS
+     0.01s  0.41% 63.07%      0.28s 11.62%  internal/poll.(*FD).Read
+     0.01s  0.41% 63.49%      0.32s 13.28%  internal/poll.(*FD).Write
+     0.01s  0.41% 63.90%      0.02s  0.83%  internal/poll.(*FD).readLock (inline)
+     0.01s  0.41% 64.32%      0.07s  2.90%  net/http.(*Transport).roundTrip
+     0.01s  0.41% 64.73%      0.22s  9.13%  net/http.(*bodyEOFSignal).Read
+     0.01s  0.41% 65.15%      0.20s  8.30%  net/http.(*persistConn).Read
+     0.01s  0.41% 65.56%      0.11s  4.56%  net/http.(*persistConn).readLoop
+     0.01s  0.41% 65.98%      0.02s  0.83%  net/http.(*persistConn).roundTrip
+     0.01s  0.41% 66.39%      0.14s  5.81%  net/http.(*persistConn).writeLoop
+     0.01s  0.41% 66.80%      0.14s  5.81%  net/http.(*response).finishRequest
+     0.01s  0.41% 67.22%      0.02s  0.83%  net/textproto.readMIMEHeader
+     0.01s  0.41% 67.63%      0.02s  0.83%  regexp.(*Regexp).doOnePass
+     0.01s  0.41% 68.05%      0.02s  0.83%  runtime.(*unwinder).resolveInternal
+     0.01s  0.41% 68.46%      0.06s  2.49%  runtime.makeslice

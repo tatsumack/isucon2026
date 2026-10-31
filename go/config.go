@@ -21,6 +21,8 @@ type Config struct {
 	TrustedPeers []string
 	// 画像を置くディレクトリ (image_store.go)
 	ImageDir string
+	// 画像署名の計算を依頼するサーバの URL。asia1 だけで設定する (image_signature_remote.go)
+	SigningURLs []string
 }
 
 func ConfigFromEnv() *Config {
@@ -36,6 +38,7 @@ func ConfigFromEnv() *Config {
 		DelegateURL:  os.Getenv("ISUREAL_DELEGATE_URL"),
 		TrustedPeers: strings.FieldsFunc(os.Getenv("ISUREAL_TRUSTED_PEERS"), func(r rune) bool { return r == ',' || r == ' ' }),
 		ImageDir:     envOrDefault("ISUREAL_IMAGE_DIR", "/home/isucon/images"),
+		SigningURLs:  strings.FieldsFunc(os.Getenv("ISUREAL_SIGNING_URLS"), func(r rune) bool { return r == ',' || r == ' ' }),
 	}
 }
 

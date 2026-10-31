@@ -58,6 +58,7 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := tx.GetContext(ctx, &startsAt, `SELECT clock_timestamp()`); err != nil {
 			return err
 		}
+		// 通知の行を作らないので、古い期間の行ロックを持つのは、この UPDATE からコミットまでの短い間だけになる。
 		if _, err := tx.ExecContext(ctx, `UPDATE posting_windows SET ended_at = $2 WHERE region = $1 AND ended_at IS NULL`, region, startsAt); err != nil {
 			return err
 		}

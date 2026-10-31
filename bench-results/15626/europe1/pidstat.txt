@@ -1,0 +1,122 @@
+Linux 7.0.0-1014-aws (ip-192-168-2-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+05:02:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:34     1100     21718    0.20    0.20    0.00    0.00    0.40     0  isureal
+
+05:02:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:39     1100     21889    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:02:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:44        0     19049    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:3-events_power_efficient
+
+05:02:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:59      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:04      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:09     1100     21889    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:03:09      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:19        0       652    0.00    0.20    0.00    0.00    0.20     1  irqbalance
+
+05:03:19      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:29     1100     21889    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:03:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:34        0         1    0.20    0.00    0.00    0.00    0.20     0  systemd
+05:03:34        0       167    0.00    0.20    0.00    0.00    0.20     1  systemd-journal
+05:03:34        0      2633    0.00    0.20    0.00    0.20    0.20     1  fwupd
+
+05:03:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:39        0       662    0.20    0.00    0.00    0.00    0.20     1  snapd
+05:03:39        0     21121    0.20    0.00    0.00    0.00    0.20     0  kworker/0:0-events
+
+05:03:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:44     1100     21718    0.20    0.00    0.00    0.00    0.20     0  isureal
+
+05:03:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:49        0     21344    0.20    0.00    0.00    0.00    0.20     1  kworker/1:3-events
+05:03:49     1100     21889    0.20    0.20    0.00    0.00    0.40     0  pidstat
+
+05:03:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:59      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:04:04      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:09     1100     21888    0.00    0.20    0.00    0.00    0.20     1  vmstat
+
+05:04:09      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:14        0       167    0.20    0.00    0.00    0.00    0.20     0  systemd-journal
+05:04:14      101       647    0.20    0.00    0.00    0.00    0.20     0  dbus-daemon
+05:04:14      989       656    0.20    0.00    0.00    0.00    0.20     1  polkitd
+05:04:14        0       681    0.20    0.00    0.00    0.00    0.20     1  udisksd
+
+05:04:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:19        0       227    0.00    0.20    0.00    0.00    0.20     1  multipathd
+05:04:19     1100     21718    0.00    0.20    0.00    0.00    0.20     0  isureal
+05:04:19     1100     21889    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:04:19      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:24     1100     22055    0.00    0.20    0.00    0.00    0.20     1  bash
+
+05:04:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:04:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:34        0     11082    0.00    0.20    0.00    0.00    0.20     0  kworker/u8:0-events_power_efficient
+
+05:04:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:39     1100     21889    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:04:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:44        0     21617    0.20    0.00    0.00    0.00    0.20     0  kworker/u8:1-writeback
+05:04:44     1100     21718    0.20    0.00    0.00    0.00    0.20     0  isureal
+05:04:44     1100     22055    0.00    0.20    0.00    0.00    0.20     1  bash
+
+05:04:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:49        0        26    0.00    0.20    0.00    0.00    0.20     1  ksoftirqd/1
+05:04:49        0       660    0.20    0.00    0.00    0.00    0.20     1  amazon-ssm-agen
+05:04:49     1100      1346    0.20    0.00    0.00    0.00    0.20     0  journalctl
+05:04:49     1100     21718    2.60    0.40    0.00    0.00    3.00     0  isureal
+05:04:49       33     21731    0.20    0.00    0.00    0.00    0.20     0  nginx
+05:04:49     1100     21889    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:04:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:54        0        16    0.00    0.20    0.00    0.00    0.20     0  rcu_sched
+05:04:54        0     21121    0.20    0.00    0.00    0.00    0.20     0  kworker/0:0-events
+05:04:54     1100     21718    0.20    0.20    0.00    0.00    0.40     0  isureal
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0         1    0.01    0.00    0.00    0.01    0.01     -  systemd
+Average:        0        16    0.00    0.01    0.00    0.01    0.01     -  rcu_sched
+Average:        0        26    0.00    0.01    0.00    0.00    0.01     -  ksoftirqd/1
+Average:        0       167    0.01    0.01    0.00    0.01    0.01     -  systemd-journal
+Average:        0       227    0.00    0.01    0.00    0.00    0.01     -  multipathd
+Average:      101       647    0.01    0.00    0.00    0.01    0.01     -  dbus-daemon
+Average:        0       652    0.00    0.01    0.00    0.00    0.01     -  irqbalance
+Average:      989       656    0.01    0.00    0.00    0.00    0.01     -  polkitd
+Average:        0       660    0.01    0.00    0.00    0.00    0.01     -  amazon-ssm-agen
+Average:        0       662    0.01    0.00    0.00    0.00    0.01     -  snapd
+Average:        0       681    0.01    0.00    0.00    0.00    0.01     -  udisksd
+Average:     1100      1346    0.01    0.00    0.00    0.00    0.01     -  journalctl
+Average:        0      2633    0.00    0.01    0.00    0.01    0.01     -  fwupd
+Average:        0     11082    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:0-events_power_efficient
+Average:        0     19049    0.00    0.01    0.00    0.01    0.01     -  kworker/u8:3-flush-259:0
+Average:        0     21121    0.01    0.00    0.00    0.03    0.01     -  kworker/0:0-events
+Average:        0     21344    0.01    0.00    0.00    0.02    0.01     -  kworker/1:3-events
+Average:        0     21617    0.01    0.00    0.00    0.00    0.01     -  kworker/u8:1-events_power_efficient
+Average:     1100     21718    0.11    0.03    0.00    0.00    0.15     -  isureal
+Average:       33     21731    0.01    0.00    0.00    0.00    0.01     -  nginx
+Average:     1100     21889    0.01    0.04    0.00    0.00    0.05     -  pidstat
+Average:     1100     22055    0.00    0.01    0.00    0.00    0.01     -  bash

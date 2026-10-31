@@ -1,0 +1,48 @@
+File: isureal
+Build ID: f2d8dc3ac4e61f69c0da5a5a33e385ad06c4e215
+Type: cpu
+Time: 2026-10-31 04:48:30 UTC
+Duration: 150s, Total samples = 1.10s ( 0.73%)
+Showing nodes accounting for 0.46s, 41.82% of 1.10s total
+Showing top 40 nodes out of 397
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      0.62s 56.36%  net/http.(*conn).serve
+     0.01s  0.91%  0.91%      0.57s 51.82%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0%  0.91%      0.57s 51.82%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0%  0.91%      0.57s 51.82%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0%  0.91%      0.57s 51.82%  net/http.serverHandler.ServeHTTP
+         0     0%  0.91%      0.55s 50.00%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.91%      0.55s 50.00%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0%  0.91%      0.53s 48.18%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.30s 27.27% 28.18%      0.30s 27.27%  internal/runtime/syscall/linux.Syscall6
+         0     0% 28.18%      0.29s 26.36%  example.com/isureal-company/isureal.NewServer.getImageHandler.func78
+         0     0% 28.18%      0.26s 23.64%  runtime.mcall
+     0.01s  0.91% 29.09%      0.25s 22.73%  runtime.schedule
+         0     0% 29.09%      0.22s 20.00%  runtime.findRunnable
+         0     0% 29.09%      0.22s 20.00%  runtime.park_m
+         0     0% 29.09%      0.19s 17.27%  internal/poll.ignoringEINTRIO (inline)
+         0     0% 29.09%      0.19s 17.27%  syscall.Syscall
+         0     0% 29.09%      0.18s 16.36%  syscall.RawSyscall6
+         0     0% 29.09%      0.15s 13.64%  example.com/isureal-company/isureal.(*ImageStore).Load
+         0     0% 29.09%      0.15s 13.64%  example.com/isureal-company/isureal.(*ImageStore).load
+         0     0% 29.09%      0.14s 12.73%  example.com/isureal-company/isureal.(*ImageStore).load.func1
+         0     0% 29.09%      0.14s 12.73%  golang.org/x/sync/singleflight.(*Group).Do
+         0     0% 29.09%      0.14s 12.73%  golang.org/x/sync/singleflight.(*Group).doCall
+         0     0% 29.09%      0.14s 12.73%  golang.org/x/sync/singleflight.(*Group).doCall.func2
+         0     0% 29.09%      0.13s 11.82%  example.com/isureal-company/isureal.(*ImageStore).fetchFromOrigin
+     0.13s 11.82% 40.91%      0.13s 11.82%  runtime.futex
+         0     0% 40.91%      0.13s 11.82%  runtime.systemstack
+         0     0% 40.91%      0.12s 10.91%  database/sql.withLock
+         0     0% 40.91%      0.12s 10.91%  internal/runtime/syscall/linux.EpollWait
+         0     0% 40.91%      0.12s 10.91%  runtime.netpoll
+         0     0% 40.91%      0.11s 10.00%  database/sql.(*DB).retry
+         0     0% 40.91%      0.11s 10.00%  internal/poll.(*FD).Write
+         0     0% 40.91%      0.11s 10.00%  io.ReadAll
+         0     0% 40.91%      0.11s 10.00%  net.(*conn).Write
+         0     0% 40.91%      0.11s 10.00%  net.(*netFD).Write
+         0     0% 40.91%      0.11s 10.00%  net/http.(*bodyEOFSignal).Read
+     0.01s  0.91% 41.82%      0.10s  9.09%  crypto/internal/fips140/sha256.(*Digest).Sum
+         0     0% 41.82%      0.10s  9.09%  database/sql.(*DB).QueryContext
+         0     0% 41.82%      0.10s  9.09%  database/sql.(*DB).QueryContext.func1
+         0     0% 41.82%      0.10s  9.09%  database/sql.(*DB).query
+         0     0% 41.82%      0.10s  9.09%  example.com/isureal-company/isureal.DelegateMiddleware.func4.1

@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 266ad89502d951678cb24e307f066c03bda7d54b
+Type: cpu
+Time: 2026-10-31 04:28:08 UTC
+Duration: 150s, Total samples = 77.69s (51.79%)
+Showing nodes accounting for 56.58s, 72.83% of 77.69s total
+Dropped 1204 nodes (cum <= 0.39s)
+Showing top 40 nodes out of 240
+      flat  flat%   sum%        cum   cum%
+     0.03s 0.039% 0.039%     73.41s 94.49%  net/http.(*conn).serve
+         0     0% 0.039%     71.57s 92.12%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.01s 0.013% 0.051%     71.57s 92.12%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0% 0.051%     71.57s 92.12%  net/http.serverHandler.ServeHTTP
+     0.05s 0.064%  0.12%     71.45s 91.97%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.013%  0.13%     70.77s 91.09%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.13%     70.77s 91.09%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s 0.013%  0.14%     70.70s 91.00%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.48s  0.62%  0.76%     48.88s 62.92%  example.com/isureal-company/isureal.computeImageSignature
+     0.02s 0.026%  0.79%     48.85s 62.88%  example.com/isureal-company/isureal.signedImageURL
+         0     0%  0.79%     48.47s 62.39%  example.com/isureal-company/isureal.issueImageSignature
+     1.46s  1.88%  2.66%     44.57s 57.37%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.96s  2.52%  5.19%     42.25s 54.38%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     2.16s  2.78%  7.97%     41.52s 53.44%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.45s  0.58%  8.55%     38.05s 48.98%  crypto/internal/fips140/sha256.block
+    37.42s 48.17% 56.71%     37.60s 48.40%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 56.71%     32.77s 42.18%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func55.1
+     0.01s 0.013% 56.73%     32.76s 42.17%  example.com/isureal-company/isureal.listMemories
+         0     0% 56.73%     32.61s 41.97%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func56.1
+         0     0% 56.73%     32.60s 41.96%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func54
+     0.02s 0.026% 56.75%     27.53s 35.44%  example.com/isureal-company/isureal.newPostResponse
+         0     0% 56.75%     21.52s 27.70%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 56.75%     20.87s 26.86%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 56.75%     18.14s 23.35%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func19.1
+         0     0% 56.75%     18.12s 23.32%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func20.1
+         0     0% 56.75%     18.12s 23.32%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func18
+     8.34s 10.73% 67.49%      8.34s 10.73%  internal/runtime/syscall/linux.Syscall6
+         0     0% 67.49%      7.88s 10.14%  syscall.RawSyscall6
+     0.02s 0.026% 67.51%      6.68s  8.60%  syscall.Syscall
+         0     0% 67.51%      6.07s  7.81%  internal/poll.ignoringEINTRIO (inline)
+     0.01s 0.013% 67.52%      5.46s  7.03%  database/sql.withLock
+         0     0% 67.52%      4.99s  6.42%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func34.1
+         0     0% 67.52%      4.92s  6.33%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func35.1
+         0     0% 67.52%      4.91s  6.32%  example.com/isureal-company/isureal.NewServer.createPostHandler.func33
+         0     0% 67.52%      4.25s  5.47%  io.ReadAll
+     4.10s  5.28% 72.80%      4.10s  5.28%  runtime.memmove
+     0.01s 0.013% 72.82%      4.03s  5.19%  database/sql.(*DB).queryDC
+     0.01s 0.013% 72.83%      3.97s  5.11%  database/sql.(*DB).retry
+         0     0% 72.83%      3.93s  5.06%  github.com/jmoiron/sqlx.GetContext
+         0     0% 72.83%      3.83s  4.93%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func27.1
