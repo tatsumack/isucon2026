@@ -53,8 +53,8 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 			if err != nil {
 				return err
 			}
-			// エクスポートは過去の画像をまとめて読むため、画像取得用のメモリのキャッシュに入れない
-			data, _, err := h.Images.load(ctx, post.ImageID)
+			// エクスポートは過去の画像をまとめて読むため、画像取得用のメモリのキャッシュに入れない (あれば使う)
+			data, _, err := h.Images.LoadWithoutCaching(ctx, post.ImageID)
 			if err != nil {
 				return err
 			}

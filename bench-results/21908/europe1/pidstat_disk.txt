@@ -1,0 +1,554 @@
+Linux 7.0.0-1014-aws (ip-192-168-2-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+06:18:36      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:18:37        0       167      0.00    276.00      0.00       0  systemd-journal
+
+06:18:37      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:38      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:39      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:40      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:41      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:42      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:43      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:44      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:45      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:46      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:47      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:48      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:49      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:50      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:52      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:53      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:18:54       33     36580      0.00      4.00      0.00       0  nginx
+
+06:18:54      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:18:55       33     36580      0.00      4.00      0.00       0  nginx
+
+06:18:55      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:56      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:18:57       33     36581      0.00      4.00      0.00       0  nginx
+
+06:18:57      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:58      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:18:59      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:19:00      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:19:01      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:19:02      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:03        0       121      0.00    180.00      0.00       0  jbd2/nvme0n1p1-8
+
+06:19:03      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:19:04      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:05       33     36580      0.00      4.00      0.00       0  nginx
+
+06:19:05      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:06       33     36580      0.00      4.00      0.00       0  nginx
+
+06:19:06      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:07        0       121      0.00     84.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:07     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:07       33     36580      0.00      4.00      0.00       0  nginx
+
+06:19:07      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:08        0       121      0.00     12.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:08     1100     36567      0.00      8.00      0.00       0  isureal
+06:19:08       33     36580      0.00      4.00      0.00       0  nginx
+06:19:08     1100     36716      0.00      4.00      0.00       0  vmstat
+
+06:19:08      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:09        0       121      0.00     24.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:09     1100     36567      0.00     12.00      0.00       0  isureal
+06:19:09       33     36580      0.00      4.00      0.00       0  nginx
+06:19:09       33     36581      0.00      4.00      0.00       0  nginx
+06:19:09        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:09      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:10       33     36580      0.00      4.00      0.00       0  nginx
+06:19:10       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:10      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:11        0       121      0.00     24.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:11     1100     36567      0.00     12.00      0.00       0  isureal
+06:19:11       33     36580      0.00     12.00      0.00       0  nginx
+06:19:11     1100     36717      0.00      4.00      0.00       0  pidstat
+06:19:11        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:11      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:12        0       121      0.00     16.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:12     1100     36567      0.00     16.00      0.00       0  isureal
+06:19:12       33     36580      0.00     12.00      0.00       0  nginx
+
+06:19:12      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:13        0       121      0.00     36.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:13     1100     36567      0.00     24.00      0.00       0  isureal
+06:19:13       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:13      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:19:14      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:15        0       121      0.00      8.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:15     1100     36567      0.00     16.00      0.00       0  isureal
+06:19:15       33     36580      0.00      4.00      0.00       0  nginx
+
+06:19:15      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:16        0       121      0.00     24.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:16     1100     36567      0.00     24.00      0.00       0  isureal
+06:19:16       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:16      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:17       33     36580      0.00      8.00      0.00       0  nginx
+
+06:19:17      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:18        0       121      0.00     52.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:18     1100     36567      0.00     44.00      0.00       0  isureal
+06:19:18       33     36580      0.00     20.00      0.00       0  nginx
+06:19:18     1100     36716      0.00      4.00      0.00       0  vmstat
+
+06:19:18      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:19        0       121      0.00     64.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:19     1100     36567      0.00     64.00      0.00       0  isureal
+06:19:19       33     36580      0.00     20.00      0.00       0  nginx
+06:19:19       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:19      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:20        0       121      0.00     40.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:20     1100     36567      0.00     36.00      0.00       0  isureal
+06:19:20       33     36580      0.00     20.00      0.00       0  nginx
+06:19:20       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:20      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:21       33     36580      0.00      8.00      0.00       0  nginx
+06:19:21       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:21      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:22        0       121      0.00     28.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:22     1100     36567      0.00     48.00      0.00       0  isureal
+06:19:22       33     36580      0.00     12.00      0.00       0  nginx
+06:19:22       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:22      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:23       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:23      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:24        0       121      0.00     20.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:24     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:24       33     36580      0.00      4.00      0.00       0  nginx
+06:19:24       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:24      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:25        0       121      0.00     36.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:25     1100     36567      0.00     16.00      0.00       0  isureal
+06:19:25       33     36580      0.00      8.00      0.00       0  nginx
+06:19:25       33     36581      0.00      8.00      0.00       0  nginx
+06:19:25        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:25      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:26     1100     36567      0.00      8.00      0.00       0  isureal
+06:19:26       33     36580      0.00     12.00      0.00       0  nginx
+06:19:26       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:26      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:27        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:27     1100     36567      0.00      4.00      0.00       0  isureal
+06:19:27       33     36580      0.00     20.00      0.00       0  nginx
+06:19:27       33     36581      0.00     16.00      0.00       0  nginx
+
+06:19:27      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:28        0       121      0.00     60.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:28     1100     36567      0.00     68.00      0.00       0  isureal
+06:19:28       33     36580      0.00     28.00      0.00       0  nginx
+06:19:28       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:28      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:29        0       121      0.00     36.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:29     1100     36567      0.00     44.00      0.00       0  isureal
+06:19:29       33     36580      0.00     28.00      0.00       0  nginx
+06:19:29       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:29      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:30        0       121      0.00     44.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:30     1100     36567      0.00     24.00      0.00       0  isureal
+06:19:30       33     36580      0.00     32.00      0.00       0  nginx
+06:19:30       33     36581      0.00     16.00      0.00       0  nginx
+
+06:19:30      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:31       33     36580      0.00     12.00      0.00       0  nginx
+06:19:31       33     36581      0.00     16.00      0.00       0  nginx
+06:19:31     1100     36717      0.00      4.00      0.00       0  pidstat
+
+06:19:31      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:32        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:32     1100     36567      0.00     40.00      0.00       0  isureal
+06:19:32       33     36580      0.00     12.00      0.00       0  nginx
+06:19:32       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:32      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:33        0       121      0.00      4.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:33     1100     36567      0.00     24.00      0.00       0  isureal
+06:19:33       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:33      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:34        0       121      0.00     12.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:34     1100     36567      0.00     12.00      0.00       0  isureal
+06:19:34       33     36580      0.00      4.00      0.00       0  nginx
+06:19:34       33     36581      0.00     16.00      0.00       0  nginx
+
+06:19:34      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:35        0       121      0.00     40.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:35     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:35       33     36580      0.00     20.00      0.00       0  nginx
+06:19:35       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:35      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:36        0       121      0.00     24.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:36     1100     36567      0.00     52.00      0.00       0  isureal
+06:19:36       33     36580      0.00     28.00      0.00       0  nginx
+06:19:36       33     36581      0.00      4.00      0.00       0  nginx
+06:19:36        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:36      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:37        0       121      0.00     84.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:37     1100     36567      0.00     72.00      0.00       0  isureal
+06:19:37       33     36580      0.00     40.00      0.00       0  nginx
+06:19:37       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:37      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:38        0       121      0.00    108.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:38     1100     36567      0.00     52.00      0.00       0  isureal
+06:19:38       33     36580      0.00     32.00      0.00       0  nginx
+06:19:38       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:38      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:39       33     36580      0.00     20.00      0.00       0  nginx
+06:19:39       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:39      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:40        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:40     1100     36567      0.00      4.00      0.00       0  isureal
+06:19:40       33     36580      0.00     28.00      0.00       0  nginx
+06:19:40       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:40      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:41       33     36580      0.00      4.00      0.00       0  nginx
+06:19:41       33     36581      0.00     28.00      0.00       0  nginx
+
+06:19:41      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:42       33     36580      0.00     16.00      0.00       0  nginx
+06:19:42       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:42      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:43        0       121      0.00     44.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:43     1100     36567      0.00     40.00      0.00       0  isureal
+06:19:43       33     36580      0.00     28.00      0.00       0  nginx
+06:19:43       33     36581      0.00     12.00      0.00       0  nginx
+06:19:43     1100     36716      0.00      4.00      0.00       0  vmstat
+
+06:19:43      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:44        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:44     1100     36567      0.00     20.00      0.00       0  isureal
+06:19:44       33     36580      0.00     24.00      0.00       0  nginx
+06:19:44       33     36581      0.00      4.00      0.00       0  nginx
+06:19:44        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:44      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:45        0       121      0.00     16.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:45     1100     36567      0.00     24.00      0.00       0  isureal
+06:19:45       33     36580      0.00     20.00      0.00       0  nginx
+06:19:45       33     36581      0.00      8.00      0.00       0  nginx
+
+06:19:45      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:46        0       121      0.00     47.52      0.00       0  jbd2/nvme0n1p1-8
+06:19:46     1100     36567      0.00     35.64      0.00       0  isureal
+06:19:46       33     36580      0.00     11.88      0.00       0  nginx
+06:19:46       33     36581      0.00     11.88      0.00       0  nginx
+06:19:46     1100     36717      0.00      3.96      0.00       0  pidstat
+
+06:19:46      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:47        0       121      0.00     40.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:47     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:47       33     36580      0.00     12.00      0.00       0  nginx
+06:19:47       33     36581      0.00     20.00      0.00       0  nginx
+06:19:47        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:47      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:48        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:48     1100     36567      0.00     20.00      0.00       0  isureal
+06:19:48       33     36580      0.00     12.00      0.00       0  nginx
+06:19:48       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:48      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:49       33     36580      0.00     16.00      0.00       0  nginx
+06:19:49       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:49      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:50        0       121      0.00     56.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:50     1100     36567      0.00     56.00      0.00       0  isureal
+06:19:50       33     36580      0.00     16.00      0.00       0  nginx
+06:19:50       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:50      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:51        0       121      0.00     56.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:51     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:51       33     36580      0.00     12.00      0.00       0  nginx
+06:19:51       33     36581      0.00     20.00      0.00       0  nginx
+
+06:19:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:52        0       121      0.00     20.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:52     1100     36567      0.00     28.00      0.00       0  isureal
+06:19:52       33     36580      0.00     16.00      0.00       0  nginx
+06:19:52       33     36581      0.00     12.00      0.00       0  nginx
+
+06:19:52      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:53        0       121      0.00     52.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:53     1100     36567      0.00     68.00      0.00       0  isureal
+06:19:53       33     36580      0.00      4.00      0.00       0  nginx
+06:19:53       33     36581      0.00     20.00      0.00       0  nginx
+
+06:19:53      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:54        0       121      0.00     20.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:54     1100     36567      0.00      4.00      0.00       0  isureal
+06:19:54       33     36580      0.00      8.00      0.00       0  nginx
+06:19:54       33     36581      0.00     16.00      0.00       0  nginx
+
+06:19:54      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:55        0       121      0.00      8.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:55     1100     36567      0.00      4.00      0.00       0  isureal
+06:19:55       33     36580      0.00      8.00      0.00       0  nginx
+06:19:55       33     36581      0.00     36.00      0.00       0  nginx
+
+06:19:55      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:56        0       121      0.00     52.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:56     1100     36567      0.00     40.00      0.00       0  isureal
+06:19:56       33     36580      0.00     12.00      0.00       0  nginx
+06:19:56       33     36581      0.00     24.00      0.00       0  nginx
+
+06:19:56      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:57        0       121      0.00     12.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:57     1100     36567      0.00     16.00      0.00       0  isureal
+06:19:57       33     36580      0.00      8.00      0.00       0  nginx
+06:19:57       33     36581      0.00     20.00      0.00       0  nginx
+
+06:19:57      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:58        0       121      0.00     32.00      0.00       0  jbd2/nvme0n1p1-8
+06:19:58     1100     36567      0.00     32.00      0.00       0  isureal
+06:19:58       33     36580      0.00      4.00      0.00       0  nginx
+06:19:58       33     36581      0.00     20.00      0.00       0  nginx
+06:19:58        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:19:58      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:19:59       33     36580      0.00     12.00      0.00       0  nginx
+06:19:59       33     36581      0.00      4.00      0.00       0  nginx
+
+06:19:59      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:00        0       121      0.00     28.00      0.00       0  jbd2/nvme0n1p1-8
+06:20:00     1100     36567      0.00      4.00      0.00       0  isureal
+06:20:00       33     36580      0.00     16.00      0.00       0  nginx
+
+06:20:00      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:01        0       121      0.00     48.00      0.00       0  jbd2/nvme0n1p1-8
+06:20:01        0       167      0.00      8.00      0.00       0  systemd-journal
+06:20:01     1100     36567      0.00     32.00      0.00       0  isureal
+06:20:01       33     36580      0.00      8.00      0.00       0  nginx
+06:20:01       33     36581      0.00     24.00      0.00       0  nginx
+
+06:20:01      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:02        0       121      0.00     12.00      0.00       0  jbd2/nvme0n1p1-8
+06:20:02     1100     36567      0.00      4.00      0.00       0  isureal
+06:20:02       33     36580      0.00     24.00      0.00       0  nginx
+06:20:02       33     36581      0.00      4.00      0.00       0  nginx
+06:20:02     1100     36716      0.00      4.00      0.00       0  vmstat
+
+06:20:02      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:03        0         1      0.00      8.00      0.00       0  systemd
+06:20:03        0       121      0.00     12.00      0.00       0  jbd2/nvme0n1p1-8
+06:20:03        0       167      0.00   2892.00      0.00       0  systemd-journal
+06:20:03      102       740      0.00      4.00      0.00       0  rsyslogd
+06:20:03     1100     36567      0.00     16.00      0.00       0  isureal
+06:20:03       33     36580      0.00      8.00      0.00       0  nginx
+06:20:03       33     36581      0.00     20.00      0.00       0  nginx
+
+06:20:03      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:04        0       121      0.00     20.00      0.00       0  jbd2/nvme0n1p1-8
+06:20:04        0       167      0.00   1108.00      0.00       0  systemd-journal
+06:20:04     1100     36567      0.00     24.00      0.00       0  isureal
+06:20:04       33     36580      0.00     12.00      0.00       0  nginx
+06:20:04       33     36581      0.00     16.00      0.00       0  nginx
+
+06:20:04      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:05       33     36580      0.00      4.00      0.00       0  nginx
+06:20:05       33     36581      0.00      8.00      0.00       0  nginx
+
+06:20:05      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:06      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:07      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:08      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:09       33     36581      0.00      8.00      0.00       0  nginx
+
+06:20:09      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:10      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:11       33     36580      0.00      4.00      0.00       0  nginx
+
+06:20:11      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:12      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:13      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:14       33     36580      0.00      4.00      0.00       0  nginx
+
+06:20:14      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:15     1100     36716      0.00      4.00      0.00       0  vmstat
+06:20:15        0     36721      0.00      8.00      0.00       0  pidstat
+
+06:20:15      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:16      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:17      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:18       33     36580      0.00      4.00      0.00       0  nginx
+
+06:20:18      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:19      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:20      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:21     1100     36717      0.00      8.00      0.00       0  pidstat
+
+06:20:21      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:22       33     36580      0.00      4.00      0.00       0  nginx
+
+06:20:22      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:23      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:24      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:25      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:26       33     36580      0.00      4.00      0.00       0  nginx
+
+06:20:26      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:27      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:28      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:29      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:30      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:31      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:32      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:33      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:34        0       121      0.00     36.00      0.00       0  jbd2/nvme0n1p1-8
+
+06:20:34      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:35      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:36      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:37      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:38      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:39      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:40      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:41      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:42      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:43      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:44      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:45     1100     36716      0.00      4.00      0.00       0  vmstat
+
+06:20:45      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:46     1100     36716      0.00      4.00      0.00       0  vmstat
+06:20:46        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:20:46      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:47      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:48      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:49      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:50      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:52      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:53      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:54      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:55       33     36580      0.00     16.00      0.00       0  nginx
+06:20:55       33     36581      0.00      8.00      0.00       0  nginx
+
+06:20:55      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:20:56     1100     36717      0.00      4.00      0.00       0  pidstat
+06:20:56        0     36721      0.00      4.00      0.00       0  pidstat
+
+06:20:56      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:57      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:58      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:20:59      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:21:00      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:21:01      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:21:02      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:21:03      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+
+06:21:04      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:21:05        0       121      0.00     20.00      0.00       0  jbd2/nvme0n1p1-8
+
+06:21:05      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+06:21:06     1100     36711      0.00     92.00      0.00       0  bench-capture.s
+
+Average:      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command
+Average:        0         1      0.00      0.05      0.00       0  systemd
+Average:        0       121      0.00     12.35      0.00       0  jbd2/nvme0n1p1-8
+Average:        0       167      0.00     28.56      0.00       0  systemd-journal
+Average:      102       740      0.00      0.03      0.00       0  rsyslogd
+Average:     1100     36567      0.00      8.88      0.00       0  isureal
+Average:       33     36580      0.00      5.52      0.00       0  nginx
+Average:       33     36581      0.00      4.64      0.00       0  nginx
+Average:     1100     36711      0.00      0.61      0.00       0  bench-capture.s
+Average:        0     36721      0.00      0.29      0.00       0  pidstat
