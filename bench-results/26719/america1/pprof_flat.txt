@@ -1,0 +1,49 @@
+File: isureal
+Build ID: bdc752c99d3fd129cdf4ec111a7b20149b9b9e18
+Type: cpu
+Time: 2026-10-31 07:10:59 UTC
+Duration: 150s, Total samples = 9.34s ( 6.23%)
+Showing nodes accounting for 7.27s, 77.84% of 9.34s total
+Dropped 470 nodes (cum <= 0.05s)
+Showing top 40 nodes out of 249
+      flat  flat%   sum%        cum   cum%
+     2.52s 26.98% 26.98%      2.52s 26.98%  crypto/internal/fips140/sha256.blockSHANI
+     1.40s 14.99% 41.97%      1.40s 14.99%  internal/runtime/syscall/linux.Syscall6
+     0.72s  7.71% 49.68%      0.72s  7.71%  runtime.memmove
+     0.58s  6.21% 55.89%      3.70s 39.61%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.33s  3.53% 59.42%      4.19s 44.86%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.30s  3.21% 62.63%      0.30s  3.21%  runtime.memclrNoHeapPointers
+     0.24s  2.57% 65.20%      3.27s 35.01%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.16s  1.71% 66.92%      0.16s  1.71%  runtime.futex
+     0.10s  1.07% 67.99%      4.72s 50.54%  example.com/isureal-company/isureal.computeImageSignature
+     0.08s  0.86% 68.84%      0.25s  2.68%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.06s  0.64% 69.49%      0.06s  0.64%  runtime.nextFreeFast (inline)
+     0.06s  0.64% 70.13%      0.07s  0.75%  runtime.step
+     0.06s  0.64% 70.77%      0.11s  1.18%  runtime.tryDeferToSpanScan
+     0.05s  0.54% 71.31%      0.05s  0.54%  aeshashbody
+     0.05s  0.54% 71.84%      2.57s 27.52%  crypto/internal/fips140/sha256.block
+     0.05s  0.54% 72.38%      0.05s  0.54%  internal/sync.(*Mutex).Lock (inline)
+     0.05s  0.54% 72.91%      7.37s 78.91%  net/http.(*conn).serve
+     0.05s  0.54% 73.45%      0.05s  0.54%  runtime.sellock
+     0.04s  0.43% 73.88%      0.07s  0.75%  crypto/internal/fips140.RecordApproved
+     0.03s  0.32% 74.20%      0.07s  0.75%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.03s  0.32% 74.52%      0.05s  0.54%  runtime.(*mspan).writeHeapBitsSmall
+     0.03s  0.32% 74.84%      0.29s  3.10%  runtime.netpoll
+     0.02s  0.21% 75.05%      0.20s  2.14%  bufio.(*Reader).Peek
+     0.02s  0.21% 75.27%      0.28s  3.00%  bufio.(*Reader).Read
+     0.02s  0.21% 75.48%      0.07s  0.75%  fmt.(*pp).doPrintf
+     0.02s  0.21% 75.70%      0.54s  5.78%  internal/poll.(*FD).Read
+     0.02s  0.21% 75.91%      0.08s  0.86%  net/http.Header.writeSubset
+     0.02s  0.21% 76.12%      0.53s  5.67%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.02s  0.21% 76.34%      0.06s  0.64%  runtime.(*stkframe).getStackMap
+     0.02s  0.21% 76.55%      0.07s  0.75%  runtime.(*unwinder).resolveInternal
+     0.02s  0.21% 76.77%      0.53s  5.67%  runtime.mallocgc
+     0.02s  0.21% 76.98%      0.05s  0.54%  runtime.mapaccess1_faststr
+     0.01s  0.11% 77.09%      0.11s  1.18%  bytes.(*Buffer).ReadFrom
+     0.01s  0.11% 77.19%      0.39s  4.18%  database/sql.(*DB).query
+     0.01s  0.11% 77.30%      0.28s  3.00%  database/sql.(*DB).queryDC.func1
+     0.01s  0.11% 77.41%      0.06s  0.64%  encoding/json.(*decodeState).literalStore
+     0.01s  0.11% 77.52%      0.05s  0.54%  fmt.(*pp).printArg
+     0.01s  0.11% 77.62%      0.25s  2.68%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.01s  0.11% 77.73%      0.06s  0.64%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Flush
+     0.01s  0.11% 77.84%      6.80s 72.81%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
