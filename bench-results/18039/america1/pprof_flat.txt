@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 9f97dd6d6662732cf0a466f72380ee294315bb03
+Type: cpu
+Time: 2026-10-31 05:33:35 UTC
+Duration: 150s, Total samples = 8.07s ( 5.38%)
+Showing nodes accounting for 6.95s, 86.12% of 8.07s total
+Dropped 412 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 169
+      flat  flat%   sum%        cum   cum%
+     2.89s 35.81% 35.81%      2.89s 35.81%  crypto/internal/fips140/sha256.blockSHANI
+     0.77s  9.54% 45.35%      4.38s 54.28%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.75s  9.29% 54.65%      0.75s  9.29%  runtime.memmove
+     0.59s  7.31% 61.96%      5.13s 63.57%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.57s  7.06% 69.02%      0.57s  7.06%  internal/runtime/syscall/linux.Syscall6
+     0.33s  4.09% 73.11%      3.80s 47.09%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.16s  1.98% 75.09%      0.16s  1.98%  runtime.memclrNoHeapPointers
+     0.14s  1.73% 76.83%      0.14s  1.73%  runtime.futex
+     0.10s  1.24% 78.07%      5.80s 71.87%  example.com/isureal-company/isureal.computeImageSignature
+     0.08s  0.99% 79.06%      2.97s 36.80%  crypto/internal/fips140/sha256.block
+     0.07s  0.87% 79.93%      0.33s  4.09%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.07s  0.87% 80.79%      0.07s  0.87%  internal/byteorder.BEUint32 (inline)
+     0.06s  0.74% 81.54%      0.06s  0.74%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.62% 82.16%      0.05s  0.62%  crypto/internal/fips140deps/byteorder.BEUint64 (inline)
+     0.04s   0.5% 82.65%      0.07s  0.87%  crypto/internal/fips140.RecordApproved
+     0.03s  0.37% 83.02%      0.12s  1.49%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.02s  0.25% 83.27%      0.09s  1.12%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.02s  0.25% 83.52%      7.10s 87.98%  net/http.(*conn).serve
+     0.01s  0.12% 83.64%      0.05s  0.62%  bufio.(*Reader).fill
+     0.01s  0.12% 83.77%      0.08s  0.99%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.12% 83.89%      0.21s  2.60%  database/sql.(*DB).QueryContext
+     0.01s  0.12% 84.01%      0.56s  6.94%  example.com/isureal-company/isureal.NewServer.getImageHandler.func80
+     0.01s  0.12% 84.14%      0.16s  1.98%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+     0.01s  0.12% 84.26%      0.17s  2.11%  internal/poll.(*FD).Read
+     0.01s  0.12% 84.39%      0.07s  0.87%  io.copyBuffer
+     0.01s  0.12% 84.51%      0.18s  2.23%  net.(*conn).Read
+     0.01s  0.12% 84.63%      0.13s  1.61%  net/http.(*chunkWriter).Write
+     0.01s  0.12% 84.76%      0.11s  1.36%  net/http.(*response).Write
+     0.01s  0.12% 84.88%      0.16s  1.98%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.01s  0.12% 85.01%      0.07s  0.87%  runtime.(*mcache).refill
+     0.01s  0.12% 85.13%      0.06s  0.74%  runtime.(*mcentral).cacheSpan
+     0.01s  0.12% 85.25%      0.07s  0.87%  runtime.futexsleep
+     0.01s  0.12% 85.38%      0.06s  0.74%  runtime.makeslice
+     0.01s  0.12% 85.50%      0.24s  2.97%  runtime.mallocgc
+     0.01s  0.12% 85.63%      0.05s  0.62%  runtime.mallocgcSmallNoscan
+     0.01s  0.12% 85.75%      0.09s  1.12%  runtime.mallocgcSmallScanNoHeader
+     0.01s  0.12% 85.87%      0.06s  0.74%  runtime.markroot
+     0.01s  0.12% 86.00%      0.20s  2.48%  runtime.netpoll
+     0.01s  0.12% 86.12%      0.06s  0.74%  runtime.reentersyscall
+         0     0% 86.12%      0.05s  0.62%  bufio.(*Reader).Peek
