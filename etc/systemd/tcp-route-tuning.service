@@ -1,0 +1,15 @@
+# サーバ間 (192.168.0.0/16、ルーター経由) の経路に initcwnd / initrwnd を設定する
+# MTU 9001 (MSS 約8.9KB) なので 64 で約570KB。投稿の画像 (平均 約420KB) を1往復で送れる
+[Unit]
+Description=Set initcwnd/initrwnd on routes between servers
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c 'set -- $$(ip -4 route show default | head -1); ip route replace 192.168.0.0/16 via $$3 dev $$5 initcwnd 64 initrwnd 64'
+ExecStop=/bin/sh -c 'ip route del 192.168.0.0/16 || true'
+
+[Install]
+WantedBy=multi-user.target

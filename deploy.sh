@@ -61,6 +61,10 @@ sudo cp -r etc/nginx/. /etc/nginx/
 sudo nginx -t
 sudo cp etc/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
+sudo cp etc/sysctl.d/*.conf /etc/sysctl.d/
+sudo sysctl --system > /dev/null
+sudo systemctl enable tcp-route-tuning.service
+sudo systemctl restart tcp-route-tuning.service
 cd $APP_DIR
 PATH=/home/isucon/local/go/bin:/usr/local/go/bin:/home/isucon/go/bin:/usr/bin go build -o $APP_BINARY ./cmd/isureal
 sudo mkdir -p $LOG_BACKUP_DIR
