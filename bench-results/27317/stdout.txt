@@ -1,0 +1,36 @@
+ベンチ #27317 score 127669 (pass: true, messages: [])
+ブランチ: perf/region-upload-image-cache (effdd58)
+
+time=2026-10-31T07:17:19.256Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T07:17:22.252Z level=INFO msg="europe 1 日目: 7 人"
+time=2026-10-31T07:17:25.247Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T07:17:28.248Z level=INFO msg="asia 2 日目: 54 人"
+time=2026-10-31T07:17:31.262Z level=INFO msg="europe 2 日目: 17 人"
+time=2026-10-31T07:17:34.245Z level=INFO msg="america 2 日目: 12 人"
+time=2026-10-31T07:17:37.251Z level=INFO msg="asia 3 日目: 162 人"
+time=2026-10-31T07:17:39.377Z level=INFO msg="user moved" user=miyotor_5624 from=asia to=europe
+time=2026-10-31T07:17:40.266Z level=INFO msg="europe 3 日目: 49 人"
+time=2026-10-31T07:17:40.505Z level=INFO msg="user moved" user=miyotor_5624 from=europe to=asia
+time=2026-10-31T07:17:42.008Z level=INFO msg="user moved" user=namelia.5769 from=asia to=america
+time=2026-10-31T07:17:43.282Z level=INFO msg="america 3 日目: 32 人"
+time=2026-10-31T07:17:44.037Z level=INFO msg="user moved" user=toliaku6170 from=asia to=america
+time=2026-10-31T07:17:44.124Z level=INFO msg="user moved" user=miaismar-6285 from=europe to=america
+time=2026-10-31T07:17:46.254Z level=INFO msg="asia 4 日目: 476 人"
+time=2026-10-31T07:17:49.297Z level=INFO msg="europe 4 日目: 120 人"
+time=2026-10-31T07:17:50.818Z level=INFO msg="user moved" user=miyotor_5624 from=asia to=europe
+time=2026-10-31T07:17:52.292Z level=INFO msg="america 4 日目: 81 人"
+time=2026-10-31T07:17:54.936Z level=INFO msg="user moved" user=kirusa.6984 from=asia to=america
+time=2026-10-31T07:17:55.292Z level=INFO msg="asia 5 日目: 1010 人"
+time=2026-10-31T07:17:55.322Z level=INFO msg="user moved" user=miaismar-6285 from=america to=europe
+time=2026-10-31T07:17:57.193Z level=INFO msg="user moved" user=horoto.8837 from=europe to=america
+time=2026-10-31T07:17:58.317Z level=INFO msg="europe 5 日目: 299 人"
+time=2026-10-31T07:18:01.374Z level=INFO msg="america 5 日目: 203 人"
+time=2026-10-31T07:18:10.342Z level=INFO msg="asia 最終日（グランプリ）: 1010 人"
+time=2026-10-31T07:18:10.436Z level=INFO msg="europe 最終日（グランプリ）: 298 人"
+time=2026-10-31T07:18:10.582Z level=INFO msg="america 最終日（グランプリ）: 203 人"
+time=2026-10-31T07:18:19.358Z level=INFO msg="グランプリ: アジア 372 人, ヨーロッパ 298 人, アメリカ 201 人"
+{
+  "pass": true,
+  "score": 127669,
+  "messages": []
+}
