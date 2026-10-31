@@ -12,6 +12,7 @@
 import re
 import sys
 from collections import Counter, defaultdict
+from itertools import permutations
 
 UUID = re.compile(r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
 DATE = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
@@ -76,6 +77,111 @@ def pct(values, p):
         return 0
     values = sorted(values)
     return values[min(len(values) - 1, int(len(values) * p))]
+
+
+def window_pass_rate(rows, out):
+    """投稿期間ごとの「投稿 → 友達フィード取得」の完了率 (docs/action-plan-makino.md の M2)
+
+    加点条件 (manual.md): 投稿が受理され、その投稿期間が終了する前に友達フィードの検証に成功すること。
+    - 期間: POST /api/admin/posting-window (201) の完了時刻から、同じリージョンの次の期間の開始まで。
+      期間の開始時刻 (startsAt = 前の期間の ended_at) はロック待ちの後にトランザクション内で決まり、
+      #2540 では admin のリクエストが最大3.4秒かかったため、リクエストの開始ではなく完了を境界にする
+      各リージョンの最後の期間は終了時刻がログに無いので別に集計する (最終日で1件20点)
+    - リージョン: 管理者のリクエストはすべて asia1 に来て、region はリクエストの body にしか無い。
+      SSE (GET /api/notifications) は自分のリージョンの通知を1件送ると閉じるので、リージョンを巡回する順番
+      (6通り) のうち、期間開始から3秒以内に閉じた SSE が一番多い順番で割り当てる (推定。同数なら asia → europe → america)。
+      期間は3秒ごとに開くので、通知が3秒以上遅れると次の期間 (別リージョン) に数えられ、1位と2位の差が縮む
+    - 投稿: 期間内に始まった POST /api/posts (201)。host (ユーザー) × 期間ごとに最初の1件
+    - 完了: 同じ host・同じリージョンの GET /api/feeds/friends (200) が投稿の後に始まり、期間の終了前に終わったもの
+    """
+    print("\n## 投稿期間ごとの投稿〜友達フィード完了 (M2)", file=out)
+    admins = sorted((r for r in rows if r["ep"] == "POST /api/admin/posting-window" and r["status"] == "201"),
+                    key=lambda r: r["t"])
+    starts = [r["t"] + r["reqtime"] for r in admins]
+    if not starts:
+        print("POST /api/admin/posting-window (201) が無い", file=out)
+        return
+    regions = [g for g in ("asia", "europe", "america") if any(r["region"] == g for r in rows)]
+    t_last = max(r["t"] + r["reqtime"] for r in rows)
+
+    # SSE が通知を受け取って閉じた時刻。60秒で切れたもの (通知なし) は除く
+    sse = defaultdict(list)
+    for r in rows:
+        if r["ep"] == "GET /api/notifications" and r["status"] == "200" and r["reqtime"] < 59:
+            sse[(r["region"], r["host"])].append(r["t"] + r["reqtime"])
+    sse_by_region = defaultdict(list)
+    for (g, _), ends in sse.items():
+        sse_by_region[g] += ends
+
+    def score(order):
+        return sum(1 for i, t in enumerate(starts) for e in sse_by_region[order[i % len(order)]] if t <= e < t + 3)
+    scores = sorted(((score(o), o) for o in permutations(regions)), key=lambda x: -x[0])
+    order = max(scores, key=lambda x: (x[0], x[1] == tuple(regions)))[1]
+    print("期間の割り当て: 巡回の順番ごとの、期間開始から3秒以内に閉じた SSE の数 (多いものを採用)", file=out)
+    for n, o in scores:
+        print(f"  {n:5d}  {' → '.join(o)}{'  ← 採用' if o == order else ''}", file=out)
+    windows = [{"region": order[i % len(order)], "start": t, "admin": r["reqtime"]}
+               for i, (t, r) in enumerate(zip(starts, admins))]
+    for w in windows:
+        nxt = [v["start"] for v in windows if v["region"] == w["region"] and v["start"] > w["start"]]
+        w["end"] = min(nxt) if nxt else None
+
+    by_host = defaultdict(list)
+    for r in rows:
+        by_host[(r["region"], r["host"])].append(r)
+    posts = []
+    for (g, host), rs in by_host.items():
+        for w in windows:
+            if w["region"] != g:
+                continue
+            end = w["end"] if w["end"] is not None else t_last
+            p = next((r for r in rs if r["ep"] == "POST /api/posts" and r["status"] == "201"
+                      and w["start"] <= r["t"] < end), None)
+            if p is None:
+                continue
+            p_end = p["t"] + p["reqtime"]
+            feed = next((r for r in rs if r["ep"] == "GET /api/feeds/friends" and r["status"] == "200"
+                         and r["t"] >= p_end and r["t"] + r["reqtime"] < end), None)
+            notified = [e for e in sse.get((g, host), []) if w["start"] <= e <= p["t"]]
+            posts.append({
+                "window": w, "post_start": p["t"], "post_end": p_end,
+                "feed_end": feed["t"] + feed["reqtime"] if feed else None,
+                "notified": min(notified) if notified else None,
+            })
+
+    print("admin = POST /api/admin/posting-window の reqtime、lag = 期間開始からそのリージョンで最初に SSE が閉じるまで", file=out)
+    print(f"{'start':>7} {'end':>7}  {'region':<8} {'admin':>5} {'lag':>5}  {'posts':>5} {'done':>5}", file=out)
+    suspicious = 0
+    for w in windows:
+        lag = min((e - w["start"] for e in sse_by_region[w["region"]]
+                   if w["start"] <= e < (w["end"] if w["end"] is not None else t_last)), default=None)
+        if lag is None or lag > 6:
+            suspicious += 1
+        ps = [p for p in posts if p["window"] is w]
+        end = f"{w['end']:7.2f}" if w["end"] is not None else "   last"
+        lag_s = f"{lag:5.2f}" if lag is not None else "    -"
+        print(f"{w['start']:7.2f} {end}  {w['region']:<8} {w['admin']:5.2f} {lag_s}  {len(ps):5d} {sum(1 for p in ps if p['feed_end'] is not None):5d}", file=out)
+    print(f"lag が無い・6秒超の期間 (割り当てが疑わしい): {suspicious} / {len(windows)}", file=out)
+
+    def row(label, ps):
+        done = [p for p in ps if p["feed_end"] is not None]
+        rate = f"{100 * len(done) / len(ps):3.0f}%" if ps else "   -"
+        notify = [p["notified"] - p["window"]["start"] for p in ps if p["notified"] is not None]
+        think = [p["post_start"] - p["notified"] for p in ps if p["notified"] is not None]
+        to_post = [p["post_start"] - p["window"]["start"] for p in ps]
+        to_feed = [p["feed_end"] - p["post_start"] for p in done]
+        q = lambda v: f"{pct(v, .5):5.2f}/{pct(v, .9):5.2f}" if v else "    -/    -"
+        print(f"{label:<14} {len(ps):5d} {len(done):5d} {rate}  {q(notify)}  {q(think)}  {q(to_post)}  {q(to_feed)}", file=out)
+
+    print("\n### リージョン別 (秒は p50/p90。通知 = 期間開始→本人の SSE が閉じる、反応 = SSE→投稿開始、"
+          "開始→投稿 = 期間開始→投稿開始、投稿→フィード = 投稿開始→友達フィード完了)", file=out)
+    print(f"{'region':<14} {'posts':>5} {'done':>5} {'rate':>4}  {'通知':>11}  {'反応':>11}  {'開始→投稿':>11}  {'投稿→フィード':>11}", file=out)
+    for g in regions:
+        row(g, [p for p in posts if p["window"]["region"] == g and p["window"]["end"] is not None])
+    row("(all)", [p for p in posts if p["window"]["end"] is not None])
+    print(f"最後の期間 (終了時刻不明。ログの最後 t={t_last:.2f} までに完了したもの)", file=out)
+    for g in regions:
+        row(f"{g} last", [p for p in posts if p["window"]["region"] == g and p["window"]["end"] is None])
 
 
 def main():
@@ -240,6 +346,8 @@ def main():
     for r in rows:
         if r["uid"].startswith("admin:") or "/api/admin/" in r["uri"]:
             print(f"t={r['t']:8.2f}  {r['region']}  {r['method']} {r['uri']}  {r['status']}", file=out)
+
+    window_pass_rate(rows, out)
 
     out.close()
     print(f"{out_dir}/report.txt\n{out_dir}/timeline.tsv")
