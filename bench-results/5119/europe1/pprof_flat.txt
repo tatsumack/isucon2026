@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6b28ef707f68f5574b6810ab6bae1e6040a2e0c1
+Type: cpu
+Time: 2026-10-31 02:43:37 UTC
+Duration: 150s, Total samples = 2.93s ( 1.95%)
+Showing nodes accounting for 2.50s, 85.32% of 2.93s total
+Dropped 182 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 279
+      flat  flat%   sum%        cum   cum%
+     0.61s 20.82% 20.82%      0.84s 28.67%  image/jpeg.(*decoder).reconstructBlock
+     0.20s  6.83% 27.65%      0.20s  6.83%  internal/runtime/syscall/linux.Syscall6
+     0.17s  5.80% 33.45%      1.44s 49.15%  image/jpeg.(*decoder).processSOS
+     0.16s  5.46% 38.91%      0.26s  8.87%  image/jpeg.(*decoder).decodeHuffman
+     0.15s  5.12% 44.03%      0.15s  5.12%  image/jpeg.(*decoder).receiveExtend
+     0.13s  4.44% 48.46%      0.13s  4.44%  crypto/internal/fips140/sha256.blockSHANI
+     0.12s  4.10% 52.56%      0.12s  4.10%  runtime.memmove
+     0.11s  3.75% 56.31%      0.14s  4.78%  image/jpeg.idctCols
+     0.08s  2.73% 59.04%      0.09s  3.07%  image/jpeg.idctRows
+     0.08s  2.73% 61.77%      0.08s  2.73%  runtime.futex
+     0.06s  2.05% 63.82%      0.37s 12.63%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.06s  2.05% 65.87%      0.10s  3.41%  image/jpeg.(*decoder).ensureNBits
+     0.06s  2.05% 67.92%      0.06s  2.05%  runtime.memclrNoHeapPointers
+     0.05s  1.71% 69.62%      0.25s  8.53%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.04s  1.37% 70.99%      0.41s 13.99%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.04s  1.37% 72.35%      0.04s  1.37%  image/jpeg.dctBox (inline)
+     0.04s  1.37% 73.72%      0.05s  1.71%  runtime.scanObject
+     0.03s  1.02% 74.74%      0.04s  1.37%  image/jpeg.(*decoder).readByteStuffedByte
+     0.02s  0.68% 75.43%      0.02s  0.68%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.02s  0.68% 76.11%      0.21s  7.17%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.02s  0.68% 76.79%      0.15s  5.12%  crypto/internal/fips140/sha256.block
+     0.02s  0.68% 77.47%      0.05s  1.71%  crypto/tls.(*halfConn).encrypt
+     0.02s  0.68% 78.16%      0.02s  0.68%  github.com/jackc/pgx/v5/pgtype.(*Map).planScan
+     0.02s  0.68% 78.84%      0.02s  0.68%  runtime.nextFreeFast (inline)
+     0.02s  0.68% 79.52%      0.04s  1.37%  runtime.stealWork
+     0.02s  0.68% 80.20%      0.02s  0.68%  runtime.usleep
+     0.02s  0.68% 80.89%      0.02s  0.68%  time.runtimeNow
+     0.01s  0.34% 81.23%      0.03s  1.02%  crypto/internal/fips140/aes/gcm.seal
+     0.01s  0.34% 81.57%      0.09s  3.07%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.34% 81.91%      0.03s  1.02%  crypto/tls.(*Conn).write
+     0.01s  0.34% 82.25%      0.02s  0.68%  database/sql.(*Rows).scanLocked
+     0.01s  0.34% 82.59%      0.41s 13.99%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s  0.34% 82.94%      0.13s  4.44%  github.com/jmoiron/sqlx.(*DB).QueryRowxContext
+     0.01s  0.34% 83.28%      0.12s  4.10%  io.ReadAtLeast
+     0.01s  0.34% 83.62%      0.03s  1.02%  net/http.readRequest
+     0.01s  0.34% 83.96%      0.02s  0.68%  runtime.(*spanSet).push
+     0.01s  0.34% 84.30%      0.23s  7.85%  runtime.findRunnable
+     0.01s  0.34% 84.64%      0.05s  1.71%  runtime.growslice
+     0.01s  0.34% 84.98%      0.03s  1.02%  runtime.mallocgcSmallNoscan
+     0.01s  0.34% 85.32%      0.02s  0.68%  runtime.mapIterStart

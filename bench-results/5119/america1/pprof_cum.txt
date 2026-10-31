@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6b28ef707f68f5574b6810ab6bae1e6040a2e0c1
+Type: cpu
+Time: 2026-10-31 02:43:37 UTC
+Duration: 150s, Total samples = 2.37s ( 1.58%)
+Showing nodes accounting for 1.08s, 45.57% of 2.37s total
+Dropped 202 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 217
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      2.09s 88.19%  net/http.(*conn).serve
+         0     0%     0%      2.08s 87.76%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0%     0%      2.08s 87.76%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%     0%      2.08s 87.76%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0%     0%      2.08s 87.76%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0%     0%      2.08s 87.76%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0%     0%      2.08s 87.76%  net/http.serverHandler.ServeHTTP
+         0     0%     0%      2.06s 86.92%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0%     0%      1.32s 55.70%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0%     0%      1.32s 55.70%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0%     0%      1.32s 55.70%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+         0     0%     0%      1.20s 50.63%  image/jpeg.(*decoder).decode
+     0.19s  8.02%  8.02%      1.20s 50.63%  image/jpeg.(*decoder).processSOS
+         0     0%  8.02%      1.20s 50.63%  image/jpeg.Decode
+     0.37s 15.61% 23.63%      0.47s 19.83%  image/jpeg.(*decoder).reconstructBlock
+         0     0% 23.63%      0.41s 17.30%  example.com/isureal-company/isureal.issueImageSignature
+         0     0% 23.63%      0.41s 17.30%  example.com/isureal-company/isureal.signedImageURL
+         0     0% 23.63%      0.40s 16.88%  example.com/isureal-company/isureal.computeImageSignature
+     0.03s  1.27% 24.89%      0.38s 16.03%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.02s  0.84% 25.74%      0.35s 14.77%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.21s  8.86% 34.60%      0.33s 13.92%  image/jpeg.(*decoder).decodeHuffman
+         0     0% 34.60%      0.29s 12.24%  database/sql.withLock
+         0     0% 34.60%      0.29s 12.24%  example.com/isureal-company/isureal.listMemories
+         0     0% 34.60%      0.28s 11.81%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+     0.02s  0.84% 35.44%      0.27s 11.39%  crypto/internal/fips140/sha256.(*Digest).Write
+         0     0% 35.44%      0.27s 11.39%  crypto/internal/fips140/sha256.(*Digest).checkSum
+         0     0% 35.44%      0.27s 11.39%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 35.44%      0.27s 11.39%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+         0     0% 35.44%      0.25s 10.55%  example.com/isureal-company/isureal.newPostResponse
+         0     0% 35.44%      0.24s 10.13%  github.com/jmoiron/sqlx.GetContext
+     0.01s  0.42% 35.86%      0.23s  9.70%  crypto/internal/fips140/sha256.block
+     0.22s  9.28% 45.15%      0.22s  9.28%  crypto/internal/fips140/sha256.blockSHANI
+     0.01s  0.42% 45.57%      0.22s  9.28%  database/sql.(*DB).queryDC
+         0     0% 45.57%      0.22s  9.28%  database/sql.(*DB).retry
+         0     0% 45.57%      0.21s  8.86%  database/sql.(*DB).QueryContext
+         0     0% 45.57%      0.21s  8.86%  database/sql.(*DB).QueryContext.func1
+         0     0% 45.57%      0.21s  8.86%  database/sql.(*DB).query
+         0     0% 45.57%      0.20s  8.44%  database/sql.(*DB).queryDC.func1
+         0     0% 45.57%      0.20s  8.44%  database/sql.ctxDriverQuery
+         0     0% 45.57%      0.20s  8.44%  github.com/jackc/pgx/v5.(*Conn).Query

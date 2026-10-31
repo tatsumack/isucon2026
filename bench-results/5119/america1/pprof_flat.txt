@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6b28ef707f68f5574b6810ab6bae1e6040a2e0c1
+Type: cpu
+Time: 2026-10-31 02:43:37 UTC
+Duration: 150s, Total samples = 2.37s ( 1.58%)
+Showing nodes accounting for 2.02s, 85.23% of 2.37s total
+Dropped 202 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 217
+      flat  flat%   sum%        cum   cum%
+     0.37s 15.61% 15.61%      0.47s 19.83%  image/jpeg.(*decoder).reconstructBlock
+     0.22s  9.28% 24.89%      0.22s  9.28%  crypto/internal/fips140/sha256.blockSHANI
+     0.21s  8.86% 33.76%      0.33s 13.92%  image/jpeg.(*decoder).decodeHuffman
+     0.19s  8.02% 41.77%      1.20s 50.63%  image/jpeg.(*decoder).processSOS
+     0.19s  8.02% 49.79%      0.19s  8.02%  internal/runtime/syscall/linux.Syscall6
+     0.16s  6.75% 56.54%      0.18s  7.59%  image/jpeg.(*decoder).receiveExtend
+     0.09s  3.80% 60.34%      0.14s  5.91%  image/jpeg.(*decoder).ensureNBits
+     0.06s  2.53% 62.87%      0.06s  2.53%  image/jpeg.dctBox (inline)
+     0.06s  2.53% 65.40%      0.06s  2.53%  runtime.memclrNoHeapPointers
+     0.05s  2.11% 67.51%      0.05s  2.11%  runtime.memmove
+     0.04s  1.69% 69.20%      0.05s  2.11%  image/jpeg.(*decoder).readByteStuffedByte
+     0.04s  1.69% 70.89%      0.06s  2.53%  image/jpeg.idctCols
+     0.03s  1.27% 72.15%      0.03s  1.27%  crypto/internal/fips140/hmac.(*HMAC).Reset
+     0.03s  1.27% 73.42%      0.38s 16.03%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.03s  1.27% 74.68%      0.18s  7.59%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.02s  0.84% 75.53%      0.02s  0.84%  aeshashbody
+     0.02s  0.84% 76.37%      0.02s  0.84%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.02s  0.84% 77.22%      0.35s 14.77%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.02s  0.84% 78.06%      0.27s 11.39%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.02s  0.84% 78.90%      0.02s  0.84%  runtime.futex
+     0.02s  0.84% 79.75%      0.02s  0.84%  runtime.pidleput
+     0.01s  0.42% 80.17%      0.02s  0.84%  crypto/internal/fips140/aes/gcm.gcmAesEnc
+     0.01s  0.42% 80.59%      0.23s  9.70%  crypto/internal/fips140/sha256.block
+     0.01s  0.42% 81.01%      0.15s  6.33%  crypto/tls.(*Conn).Read
+     0.01s  0.42% 81.43%      0.08s  3.38%  crypto/tls.(*atLeastReader).Read
+     0.01s  0.42% 81.86%      0.03s  1.27%  crypto/tls.(*xorNonceAEAD).Open
+     0.01s  0.42% 82.28%      0.22s  9.28%  database/sql.(*DB).queryDC
+     0.01s  0.42% 82.70%      0.02s  0.84%  fmt.Sprintf
+     0.01s  0.42% 83.12%      0.16s  6.75%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+     0.01s  0.42% 83.54%      0.02s  0.84%  github.com/jackc/pgx/v5/stdlib.(*Rows).initValueFuncs.func14
+     0.01s  0.42% 83.97%      0.17s  7.17%  runtime.findRunnable
+     0.01s  0.42% 84.39%      0.04s  1.69%  runtime.growslice
+     0.01s  0.42% 84.81%      0.02s  0.84%  runtime.mallocgcSmallNoscan
+     0.01s  0.42% 85.23%      0.06s  2.53%  runtime.systemstack
+         0     0% 85.23%      0.04s  1.69%  bufio.(*Writer).Write
+         0     0% 85.23%      0.09s  3.80%  bytes.(*Buffer).ReadFrom
+         0     0% 85.23%      0.02s  0.84%  crypto/internal/fips140/aes/gcm.(*GCM).Open
+         0     0% 85.23%      0.03s  1.27%  crypto/internal/fips140/aes/gcm.(*GCM).sealAfterIndicator
+         0     0% 85.23%      0.02s  0.84%  crypto/internal/fips140/aes/gcm.(*GCMWithXORCounterNonce).Open
+         0     0% 85.23%      0.03s  1.27%  crypto/internal/fips140/aes/gcm.(*GCMWithXORCounterNonce).Seal
