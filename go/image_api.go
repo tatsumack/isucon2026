@@ -42,7 +42,7 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 
 		// 署名鍵と削除状態を1クエリで取る。削除状態は毎回確認する。即時反映も5秒以内の許容範囲に含まれる。
-		// 画像本体は署名を検証してから取る。
+		// 画像本体は署名を検証してから取る。所有者と種類は、パーティションしていない image_owners から引く (sql/005-image-owners.sql)。
 		ctx := c.Request().Context()
 		var object struct {
 			SecretKeyHash string `db:"secret_key_hash"`
@@ -63,7 +63,7 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
        WHERE r.image_id = i.id AND r.reactor_id = u.id AND r.replaced_at IS NULL AND r.deleted_at IS NULL
      )
    ) IS TRUE AS servable
-   FROM image_objects i JOIN users u ON u.id = i.owner_user_id
+   FROM image_owners i JOIN users u ON u.id = i.owner_user_id
    WHERE i.id = $1 AND u.status = 'active'
   `, input.ImageID)
 		if errors.Is(err, sql.ErrNoRows) {
