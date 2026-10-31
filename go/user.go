@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
-	"sync"
 	"unicode/utf8"
 
 	"github.com/jmoiron/sqlx"
@@ -56,36 +55,11 @@ func (user *User) setImageKey() error {
 	return err
 }
 
-// 利用者ID → 画像の署名鍵。投稿の処理で、DB から利用者を読む前に署名の依頼を出すために使う (post_api.go)。
-// secret_key_hash は変更されず、ID は使い回されないので、値が古くなることはない。getUser で入れ、/initialize で空にする。
-var imageKeyCache sync.Map
-
-func cachedImageKey(userID string) ([]byte, bool) {
-	key, ok := imageKeyCache.Load(userID)
-	if !ok {
-		return nil, false
-	}
-	return key.([]byte), true
-}
-
-// cacheImageKey は署名鍵を計算し、投稿の署名を先行依頼できるよう利用者IDで保持する。
-// secret_key_hash は変更されず、利用者IDも使い回されないため、/initialize まで無効化は不要。
-func cacheImageKey(user *User) error {
-	if err := user.setImageKey(); err != nil {
-		return err
-	}
-	imageKeyCache.Store(user.ID, user.ImageKey)
-	return nil
-}
-
 func getUser(ctx context.Context, db sqlx.QueryerContext, userID string) (User, error) {
 	var user User
 	err := sqlx.GetContext(ctx, db, &user, `SELECT `+strings.Join(userColumns, ", ")+` FROM users WHERE id = $1 AND status = 'active'`, userID)
 	if err != nil {
 		return user, err
 	}
-	if err := cacheImageKey(&user); err != nil {
-		return user, err
-	}
-	return user, nil
+	return user, user.setImageKey()
 }

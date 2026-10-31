@@ -112,9 +112,6 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := tx.Commit(); err != nil {
 			return err
 		}
-		if err := cacheImageKey(&user); err != nil {
-			return err
-		}
 		return c.JSON(http.StatusCreated, registerResponse{SecretKey: secretKey, User: newSessionUserResponse(user)})
 	}
 }
@@ -158,9 +155,6 @@ func loginHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		if err := tx.Commit(); err != nil {
-			return err
-		}
-		if err := cacheImageKey(&user); err != nil {
 			return err
 		}
 		return c.JSON(http.StatusOK, loginResponse{Token: session.Token, User: newSessionUserResponse(user)})

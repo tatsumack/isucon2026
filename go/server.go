@@ -51,9 +51,6 @@ func NewServer(config *Config) *echo.Echo {
 		Signer:          NewImageSigner(config),
 	}
 	go handlerContext.NotificationHub.listen(context.Background(), config.DatabaseDSN())
-	if len(config.SigningURLs) != 0 {
-		startPostImageSignatureMetricsLogger()
-	}
 	e.Use(IPBanMiddleware(handlerContext))
 	e.Use(PriorityMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
