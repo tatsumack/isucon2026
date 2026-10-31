@@ -3,11 +3,13 @@ package isureal
 import (
 	"context"
 	"fmt"
+	"log"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -37,7 +39,8 @@ type notificationPollRow struct {
 }
 
 type NotificationHub struct {
-	db *sqlx.DB
+	db   *sqlx.DB
+	wake chan struct{}
 
 	mu            sync.Mutex
 	nextID        int64
@@ -47,6 +50,7 @@ type NotificationHub struct {
 func NewNotificationHub(db *sqlx.DB) *NotificationHub {
 	hub := &NotificationHub{
 		db:            db,
+		wake:          make(chan struct{}, 1),
 		subscriptions: make(map[int64]*notificationSubscription),
 	}
 	go hub.run()
@@ -76,7 +80,11 @@ func (h *NotificationHub) Subscribe(userID, region string, connectedAt time.Time
 func (h *NotificationHub) run() {
 	ticker := time.NewTicker(notificationPollInterval)
 	defer ticker.Stop()
-	for range ticker.C {
+	for {
+		select {
+		case <-ticker.C:
+		case <-h.wake:
+		}
 		h.poll(context.Background())
 	}
 }
@@ -172,4 +180,54 @@ func notificationID(postingWindowID, userID string, startsAt time.Time) string {
 func notificationIDPrefix(t time.Time) string {
 	ms := uint64(t.UnixMilli())
 	return fmt.Sprintf("%08x-%04x-7", ms>>16, ms&0xffff)
+}
+
+// 通知は起床のヒントだけ。対象者・接続時刻・終了済み期間の判定は必ず既存の SQL で行う。
+// NOTIFY はトランザクションの commit 後に届く。接続断で失っても500msのpollで補う。
+func (h *NotificationHub) wakePoll() {
+	select {
+	case h.wake <- struct{}{}:
+	default:
+	}
+}
+
+func (h *NotificationHub) listen(ctx context.Context, dsn string) {
+	for ctx.Err() == nil {
+		err := h.listenOnce(ctx, dsn)
+		if ctx.Err() != nil {
+			return
+		}
+		log.Printf("notification LISTEN reconnect: %v", err)
+		timer := time.NewTimer(time.Second)
+		select {
+		case <-ctx.Done():
+			timer.Stop()
+			return
+		case <-timer.C:
+		}
+	}
+}
+
+func (h *NotificationHub) listenOnce(ctx context.Context, dsn string) error {
+	connectCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+	conn, err := pgx.Connect(connectCtx, dsn)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		closeCtx, closeCancel := context.WithTimeout(context.Background(), time.Second)
+		defer closeCancel()
+		_ = conn.Close(closeCtx)
+	}()
+	if _, err := conn.Exec(connectCtx, "LISTEN isureal_posting_window"); err != nil {
+		return err
+	}
+	h.wakePoll() // 再接続までに commit された期間も拾う
+	for {
+		if _, err := conn.WaitForNotification(ctx); err != nil {
+			return err
+		}
+		h.wakePoll()
+	}
 }
