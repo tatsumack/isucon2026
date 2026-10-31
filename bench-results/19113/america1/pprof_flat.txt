@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 1976bb3e6334e44182728139e17f841a115f6292
+Type: cpu
+Time: 2026-10-31 05:45:51 UTC
+Duration: 150s, Total samples = 7.44s ( 4.96%)
+Showing nodes accounting for 6.64s, 89.25% of 7.44s total
+Dropped 306 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 161
+      flat  flat%   sum%        cum   cum%
+     3.11s 41.80% 41.80%      3.11s 41.80%  crypto/internal/fips140/sha256.blockSHANI
+     0.81s 10.89% 52.69%      4.67s 62.77%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.74s  9.95% 62.63%      0.74s  9.95%  runtime.memmove
+     0.47s  6.32% 68.95%      5.32s 71.51%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.44s  5.91% 74.87%      0.44s  5.91%  internal/runtime/syscall/linux.Syscall6
+     0.36s  4.84% 79.70%      4.05s 54.44%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.07s  0.94% 80.65%      0.27s  3.63%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.07s  0.94% 81.59%      0.07s  0.94%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.07s  0.94% 82.53%      5.89s 79.17%  example.com/isureal-company/isureal.computeImageSignature
+     0.07s  0.94% 83.47%      0.07s  0.94%  runtime.futex
+     0.07s  0.94% 84.41%      0.07s  0.94%  runtime.memclrNoHeapPointers
+     0.06s  0.81% 85.22%      3.17s 42.61%  crypto/internal/fips140/sha256.block
+     0.05s  0.67% 85.89%      0.05s  0.67%  internal/byteorder.BEUint32 (inline)
+     0.03s   0.4% 86.29%      0.10s  1.34%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.03s   0.4% 86.69%      0.04s  0.54%  crypto/internal/fips140deps/byteorder.BEUint64 (inline)
+     0.02s  0.27% 86.96%      0.07s  0.94%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.02s  0.27% 87.23%      0.16s  2.15%  runtime.findRunnable
+     0.02s  0.27% 87.50%      0.09s  1.21%  runtime.netpoll
+     0.01s  0.13% 87.63%      6.48s 87.10%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+     0.01s  0.13% 87.77%      0.06s  0.81%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.01s  0.13% 87.90%      0.06s  0.81%  github.com/jackc/pgx/v5/pgconn.connectOne
+     0.01s  0.13% 88.04%      0.21s  2.82%  net.(*netFD).Read
+     0.01s  0.13% 88.17%      6.86s 92.20%  net/http.(*conn).serve
+     0.01s  0.13% 88.31%      0.08s  1.08%  net/http.(*connReader).Read
+     0.01s  0.13% 88.44%      0.04s  0.54%  net/http.Header.sortedKeyValues
+     0.01s  0.13% 88.58%      0.06s  0.81%  net/http.Header.writeSubset
+     0.01s  0.13% 88.71%      0.12s  1.61%  runtime.mallocgc
+     0.01s  0.13% 88.84%      0.05s  0.67%  runtime.newobject
+     0.01s  0.13% 88.98%      0.04s  0.54%  runtime.reentersyscall
+     0.01s  0.13% 89.11%      0.18s  2.42%  syscall.Read (inline)
+     0.01s  0.13% 89.25%      0.17s  2.28%  syscall.read
+         0     0% 89.25%      0.07s  0.94%  bufio.(*Reader).Peek
+         0     0% 89.25%      0.10s  1.34%  bufio.(*Reader).Read
+         0     0% 89.25%      0.07s  0.94%  bufio.(*Reader).fill
+         0     0% 89.25%      0.18s  2.42%  bufio.(*Writer).Flush
+         0     0% 89.25%      0.05s  0.67%  bufio.(*Writer).ReadFrom
+         0     0% 89.25%      0.07s  0.94%  bufio.(*Writer).Write
+         0     0% 89.25%      0.04s  0.54%  context.(*cancelCtx).propagateCancel
+         0     0% 89.25%      0.04s  0.54%  context.WithCancel
+         0     0% 89.25%      0.04s  0.54%  context.withCancel (inline)
