@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -14,7 +15,7 @@ import (
 )
 
 // asia1 の CPU には SHA-NI がなく、署名の計算が europe1 / america1 の約3.3倍かかる (bench-results/7477)。
-// asia1 では、Memories とエクスポートで返す署名を ISUREAL_SIGNING_URLS のサーバにまとめて計算させ、
+// asia1 では、Memories・エクスポート・投稿の応答で返す署名を ISUREAL_SIGNING_URLS のサーバにまとめて計算させ、
 // 結果を imageSignatureCache に入れる。signedImageURL はそのキャッシュを使うので、応答を組み立てる処理は変えない。
 // 依頼に失敗したときは何もしない (signedImageURL がこれまでどおり asia1 で計算する)。
 type ImageSigner struct {
@@ -51,15 +52,19 @@ type imageSignatureBatch struct {
 }
 
 func (b *imageSignatureBatch) add(user User, imageID string) {
+	b.addKey(user.ImageKey, imageID)
+}
+
+func (b *imageSignatureBatch) addKey(key []byte, imageID string) {
 	if b.seen == nil {
 		b.seen = make(map[string]struct{})
 	}
-	cacheKey := string(user.ImageKey) + ":" + imageID
+	cacheKey := string(key) + ":" + imageID
 	if _, ok := b.seen[cacheKey]; ok {
 		return
 	}
 	b.seen[cacheKey] = struct{}{}
-	b.targets = append(b.targets, imageSignatureTarget{Key: user.ImageKey, ImageID: imageID})
+	b.targets = append(b.targets, imageSignatureTarget{Key: key, ImageID: imageID})
 }
 
 // addProfileImage は、newGetMeResponse と同じ条件でプロフィール画像の署名を加える。
@@ -80,9 +85,9 @@ type imageSignaturesResponse struct {
 
 // Prime は、batch のうちキャッシュにない署名を依頼先に計算させ、キャッシュに入れる。
 // 依頼先が複数あるときは、等分して並行に依頼する。
-func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
+func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) error {
 	if s == nil || len(s.urls) == 0 {
-		return
+		return nil
 	}
 	exp := imageURLExpiration(time.Now())
 	pending := make([]imageSignatureTarget, 0, len(batch.targets))
@@ -92,12 +97,14 @@ func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
 		}
 	}
 	if len(pending) == 0 {
-		return
+		return nil
 	}
 	ctx, cancel := context.WithTimeout(ctx, remoteImageSignatureTimeout)
 	defer cancel()
 	chunkSize := (len(pending) + len(s.urls) - 1) / len(s.urls)
 	var wg sync.WaitGroup
+	var errorMu sync.Mutex
+	var requestErrors []error
 	for i, url := range s.urls {
 		start := i * chunkSize
 		if start >= len(pending) {
@@ -107,10 +114,14 @@ func (s *ImageSigner) Prime(ctx context.Context, batch *imageSignatureBatch) {
 		wg.Go(func() {
 			if err := s.request(ctx, url, exp, chunk); err != nil {
 				log.Printf("remote image signature failed: %v", err)
+				errorMu.Lock()
+				requestErrors = append(requestErrors, err)
+				errorMu.Unlock()
 			}
 		})
 	}
 	wg.Wait()
+	return errors.Join(requestErrors...)
 }
 
 func (s *ImageSigner) request(ctx context.Context, url string, exp int64, targets []imageSignatureTarget) error {
