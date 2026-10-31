@@ -1,10 +1,13 @@
 package isureal
 
 import (
+	"bytes"
 	"database/sql"
 	"errors"
-	"mime/multipart"
+	"io"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -12,13 +15,90 @@ import (
 )
 
 type createPostRequest struct {
-	Image        *multipart.FileHeader `form:"image"`
-	Caption      string                `form:"caption"`
-	Visibility   string                `form:"visibility"`
-	LocationKind string                `form:"location_kind"`
-	Latitude     *float64              `form:"latitude"`
-	Longitude    *float64              `form:"longitude"`
-	Locality     *string               `form:"locality"`
+	// 最初の image のファイルのパート。無ければ nil。使い終わったら releaseUpload で返す
+	Image        *bytes.Buffer
+	Caption      string
+	Visibility   string
+	LocationKind string
+	Latitude     *float64
+	Longitude    *float64
+	Locality     *string
+}
+
+// bindCreatePostRequest は multipart のパートを順に読み、画像は使い回しのバッファへ1回だけ読む。
+// c.Bind (ParseMultipartForm) は画像をメモリ上のバッファへ読み、さらに Open + io.ReadAll で読み直していた。
+// ステータスは c.Bind と同じにする: 本文が空なら値なし、multipart の形が壊れていれば 400、知らない Content-Type は 415。
+// フィールドの扱いも c.Bind と同じ: 同じ名前は最初の値を使い、空の数値は 0、ファイル名の無い image はファイルとみなさない。
+func bindCreatePostRequest(c *echo.Context, input *createPostRequest) error {
+	req := c.Request()
+	if req.ContentLength == 0 {
+		return nil
+	}
+	base, _, _ := strings.Cut(req.Header.Get(echo.HeaderContentType), ";")
+	switch strings.TrimSpace(base) {
+	case echo.MIMEMultipartForm:
+	case echo.MIMEApplicationJSON, echo.MIMEApplicationXML, echo.MIMETextXML, echo.MIMEApplicationForm:
+		// c.Bind でも image のファイルは入らず、invalid_post になる
+		return nil
+	default:
+		return &echo.HTTPError{Code: http.StatusUnsupportedMediaType}
+	}
+	reader, err := req.MultipartReader()
+	if err != nil {
+		return echo.ErrBadRequest.Wrap(err)
+	}
+	seen := map[string]bool{}
+	for {
+		part, err := reader.NextPart()
+		// ラップされた EOF (境界が1つも無い本文) は壊れた本文として 400 にする (ParseMultipartForm と同じ比べ方)
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			return echo.ErrBadRequest.Wrap(err)
+		}
+		name := part.FormName()
+		if name == "image" && part.FileName() != "" {
+			if input.Image == nil {
+				// 本文のほとんどは画像なので、Content-Length の分を先に確保する
+				if input.Image, err = readUpload(part, req.ContentLength); err != nil {
+					return echo.ErrBadRequest.Wrap(err)
+				}
+			}
+			continue
+		}
+		if part.FileName() != "" || seen[name] {
+			continue
+		}
+		seen[name] = true
+		value, err := io.ReadAll(part)
+		if err != nil {
+			return echo.ErrBadRequest.Wrap(err)
+		}
+		switch name {
+		case "caption":
+			input.Caption = string(value)
+		case "visibility":
+			input.Visibility = string(value)
+		case "location_kind":
+			input.LocationKind = string(value)
+		case "latitude", "longitude":
+			v := 0.0
+			if len(value) != 0 {
+				if v, err = strconv.ParseFloat(string(value), 64); err != nil {
+					return echo.ErrBadRequest.Wrap(err)
+				}
+			}
+			if name == "latitude" {
+				input.Latitude = &v
+			} else {
+				input.Longitude = &v
+			}
+		case "locality":
+			locality := string(value)
+			input.Locality = &locality
+		}
+	}
 }
 
 type postAuthorResponse struct {
@@ -46,7 +126,11 @@ type createPostResponse struct {
 func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		var input createPostRequest
-		if err := c.Bind(&input); err != nil {
+		err := bindCreatePostRequest(c, &input)
+		if input.Image != nil {
+			defer releaseUpload(input.Image)
+		}
+		if err != nil {
 			return err
 		}
 		if input.Image == nil || !validUserText(input.Caption, 0, 1000) {
@@ -64,15 +148,7 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 		if !location.valid() {
 			return NewAPIError(http.StatusBadRequest, "invalid_post")
 		}
-		imageFile, err := input.Image.Open()
-		if err != nil {
-			return err
-		}
-		defer imageFile.Close()
-		imageData, err := readAllSized(imageFile, input.Image.Size)
-		if err != nil {
-			return err
-		}
+		imageData := input.Image.Bytes()
 		if !validJPEG(imageData, 4096) {
 			return NewAPIError(http.StatusBadRequest, "invalid_post")
 		}

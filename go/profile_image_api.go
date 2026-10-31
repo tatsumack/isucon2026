@@ -16,10 +16,13 @@ func putProfileImageHandler(h *HandlerContext) echo.HandlerFunc {
 		if c.Request().Header.Get("Content-Type") != "image/jpeg" {
 			return NewAPIError(http.StatusUnsupportedMediaType, "unsupported_media_type")
 		}
-		data, err := readAllSized(c.Request().Body, c.Request().ContentLength)
+		body, err := readUpload(c.Request().Body, c.Request().ContentLength)
 		if err != nil {
 			return err
 		}
+		// INSERT が data を送り終えるまで返さない
+		defer releaseUpload(body)
+		data := body.Bytes()
 		img, err := jpeg.Decode(bytes.NewReader(data))
 		if err != nil {
 			c.Set("abuse", "invalid_image")
