@@ -7,6 +7,7 @@ ISUCONの競技用リポジトリ。サーバ上の `/home/isucon/webapp` をそ
 - `etc/`: サーバの `/etc` からコピーしたミドルウェアの設定 (nginx, mysql, systemd, env.sh)。deploy.shでサーバに反映される
 - `deploy.sh`: `./deploy.sh <branch> <host>` で指定ホストにデプロイする。ホストは `~/.ssh/config` の `isu1` `isu2` `isu3`
 - `bench-capture.sh`: ベンチ中の計測スクリプト。`/bench-analyze` スキルから使う
+- `docs/manual.md`: 当日マニュアル。`docs/regulation.md`: レギュレーション。当日マニュアルの内容がレギュレーションより優先される
 
 ## 進め方
 - 1施策 = 1ブランチ。mainへは、ベンチが通ってスコアが下がらないことを確認してからマージする
