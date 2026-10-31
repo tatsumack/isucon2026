@@ -31,7 +31,7 @@ func certifyUserHandler(h *HandlerContext) echo.HandlerFunc {
 	}
 }
 
-// 2026-08-26: 認定されたユーザーを戻すことは禁止する
+// 認定の取り消しは受け付けず、常に 409 certification_irreversible を返す (リファレンス実装の挙動)
 func deleteUserCertificationHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		return NewAPIError(http.StatusConflict, "certification_irreversible")

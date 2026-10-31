@@ -109,7 +109,6 @@ func InvalidateLoginSession(db *sqlx.DB, userID string, tokenHash string) error 
 	return nil
 }
 
-// 2026-09-03: リファクタリング後にこの関数の利用がないようです。消すのはいかがでしょうか
 func CreateLoginSession(db *sqlx.DB, userID string) (*Session, error) {
 	ctx := context.Background()
 	tx, err := db.BeginTxx(ctx, nil)
