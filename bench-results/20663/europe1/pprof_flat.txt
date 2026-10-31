@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 1a53b1f861dc7f3311aad6ff09d8f25845cc740e
+Type: cpu
+Time: 2026-10-31 06:04:18 UTC
+Duration: 150s, Total samples = 9.72s ( 6.48%)
+Showing nodes accounting for 8.13s, 83.64% of 9.72s total
+Dropped 429 nodes (cum <= 0.05s)
+Showing top 40 nodes out of 200
+      flat  flat%   sum%        cum   cum%
+     3.56s 36.63% 36.63%      3.56s 36.63%  crypto/internal/fips140/sha256.blockSHANI
+     0.90s  9.26% 45.88%      5.31s 54.63%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.76s  7.82% 53.70%      0.76s  7.82%  runtime.memmove
+     0.65s  6.69% 60.39%      0.65s  6.69%  internal/runtime/syscall/linux.Syscall6
+     0.50s  5.14% 65.53%      6.03s 62.04%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.33s  3.40% 68.93%      4.53s 46.60%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.21s  2.16% 71.09%      0.21s  2.16%  runtime.memclrNoHeapPointers
+     0.20s  2.06% 73.15%      0.45s  4.63%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.14s  1.44% 74.59%      0.14s  1.44%  runtime.futex
+     0.10s  1.03% 75.62%      3.66s 37.65%  crypto/internal/fips140/sha256.block
+     0.08s  0.82% 76.44%      0.08s  0.82%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.07s  0.72% 77.16%      0.11s  1.13%  crypto/internal/fips140.RecordApproved
+     0.07s  0.72% 77.88%      6.74s 69.34%  example.com/isureal-company/isureal.computeImageSignature
+     0.06s  0.62% 78.50%      0.15s  1.54%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.06s  0.62% 79.12%      0.06s  0.62%  internal/byteorder.BEUint32 (inline)
+     0.05s  0.51% 79.63%      0.08s  0.82%  runtime.tryDeferToSpanScan
+     0.05s  0.51% 80.14%      0.05s  0.51%  runtime.usleep
+     0.03s  0.31% 80.45%      0.09s  0.93%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.03s  0.31% 80.76%      0.05s  0.51%  runtime.mapaccess1_faststr
+     0.03s  0.31% 81.07%      0.09s  0.93%  runtime.selectgo
+     0.02s  0.21% 81.28%      8.06s 82.92%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.02s  0.21% 81.48%      0.27s  2.78%  net/http.(*persistConn).readLoop
+     0.02s  0.21% 81.69%      0.14s  1.44%  runtime.netpoll
+     0.02s  0.21% 81.89%      0.06s  0.62%  runtime.notesleep
+     0.02s  0.21% 82.10%      0.08s  0.82%  runtime.stealWork
+     0.01s   0.1% 82.20%      0.16s  1.65%  bufio.(*Reader).fill
+     0.01s   0.1% 82.30%      0.06s  0.62%  github.com/jackc/pgx/v5/pgconn.connectOne
+     0.01s   0.1% 82.41%      8.07s 83.02%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s   0.1% 82.51%      0.37s  3.81%  internal/poll.(*FD).Read
+     0.01s   0.1% 82.61%      0.37s  3.81%  net.(*conn).Read
+     0.01s   0.1% 82.72%      0.14s  1.44%  net/http.(*Request).write
+     0.01s   0.1% 82.82%      0.16s  1.65%  net/http.(*Transport).roundTrip
+     0.01s   0.1% 82.92%      0.16s  1.65%  net/http.(*body).Read
+     0.01s   0.1% 83.02%      0.05s  0.51%  net/http.(*chunkWriter).writeHeader
+     0.01s   0.1% 83.13%      0.14s  1.44%  net/http.(*conn).readRequest
+     0.01s   0.1% 83.23%      8.46s 87.04%  net/http.(*conn).serve
+     0.01s   0.1% 83.33%      0.11s  1.13%  net/http.(*response).finishRequest
+     0.01s   0.1% 83.44%      0.17s  1.75%  net/http.(*response).write
+     0.01s   0.1% 83.54%      0.09s  0.93%  net/http/internal.(*chunkedReader).Read
+     0.01s   0.1% 83.64%      0.07s  0.72%  net/textproto.canonicalMIMEHeaderKey

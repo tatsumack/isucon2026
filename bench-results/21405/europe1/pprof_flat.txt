@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 98f96c1e25079e036b60a0a2ab540ef1f0d4bdfa
+Type: cpu
+Time: 2026-10-31 06:12:51 UTC
+Duration: 150s, Total samples = 8.26s ( 5.51%)
+Showing nodes accounting for 7.19s, 87.05% of 8.26s total
+Dropped 383 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 149
+      flat  flat%   sum%        cum   cum%
+     3.15s 38.14% 38.14%      3.15s 38.14%  crypto/internal/fips140/sha256.blockSHANI
+     0.80s  9.69% 47.82%      0.80s  9.69%  runtime.memmove
+     0.70s  8.47% 56.30%      0.70s  8.47%  internal/runtime/syscall/linux.Syscall6
+     0.68s  8.23% 64.53%      4.52s 54.72%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.59s  7.14% 71.67%      5.28s 63.92%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.30s  3.63% 75.30%      4.05s 49.03%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.16s  1.94% 77.24%      0.37s  4.48%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.15s  1.82% 79.06%      0.15s  1.82%  runtime.memclrNoHeapPointers
+     0.11s  1.33% 80.39%      0.11s  1.33%  runtime.futex
+     0.08s  0.97% 81.36%      6.05s 73.24%  example.com/isureal-company/isureal.computeImageSignature
+     0.07s  0.85% 82.20%      0.08s  0.97%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.61% 82.81%      0.05s  0.61%  internal/byteorder.BEUint32 (inline)
+     0.05s  0.61% 83.41%      0.11s  1.33%  runtime.newobject
+     0.04s  0.48% 83.90%      3.19s 38.62%  crypto/internal/fips140/sha256.block
+     0.03s  0.36% 84.26%      0.05s  0.61%  crypto/internal/fips140.RecordApproved
+     0.03s  0.36% 84.62%      0.18s  2.18%  runtime.netpoll
+     0.02s  0.24% 84.87%      0.08s  0.97%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.01s  0.12% 84.99%      0.06s  0.73%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.01s  0.12% 85.11%      0.10s  1.21%  example.com/isureal-company/isureal.(*NotificationHub).fetch
+     0.01s  0.12% 85.23%      0.05s  0.61%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.01s  0.12% 85.35%      0.07s  0.85%  github.com/jmoiron/sqlx.(*Row).scanAny
+     0.01s  0.12% 85.47%      0.23s  2.78%  internal/poll.(*FD).Read
+     0.01s  0.12% 85.59%      0.22s  2.66%  io.ReadAll
+     0.01s  0.12% 85.71%      0.16s  1.94%  net/http.(*body).readLocked
+     0.01s  0.12% 85.84%      0.07s  0.85%  net/http.(*chunkWriter).writeHeader
+     0.01s  0.12% 85.96%      7.35s 88.98%  net/http.(*conn).serve
+     0.01s  0.12% 86.08%      0.14s  1.69%  net/http.(*persistConn).Read
+     0.01s  0.12% 86.20%      0.11s  1.33%  net/http.(*transferWriter).writeBody
+     0.01s  0.12% 86.32%      0.25s  3.03%  net/http.checkConnErrorWriter.Write
+     0.01s  0.12% 86.44%      0.30s  3.63%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.01s  0.12% 86.56%      0.19s  2.30%  net/http/httputil.(*ReverseProxy).copyResponse
+     0.01s  0.12% 86.68%      0.31s  3.75%  runtime.findRunnable
+     0.01s  0.12% 86.80%      0.05s  0.61%  runtime.pcvalue
+     0.01s  0.12% 86.92%      0.06s  0.73%  runtime.stopm
+     0.01s  0.12% 87.05%      0.35s  4.24%  syscall.write
+         0     0% 87.05%      0.06s  0.73%  bufio.(*Reader).Peek
+         0     0% 87.05%      0.15s  1.82%  bufio.(*Reader).Read
+         0     0% 87.05%      0.06s  0.73%  bufio.(*Reader).fill
+         0     0% 87.05%      0.23s  2.78%  bufio.(*Writer).Flush
+         0     0% 87.05%      0.10s  1.21%  bufio.(*Writer).ReadFrom
