@@ -1,0 +1,49 @@
+File: isureal
+Build ID: d025abf1026672e83effa25d64ba39b382a6a66b
+Type: cpu
+Time: 2026-10-31 04:15:58 UTC
+Duration: 150s, Total samples = 69.97s (46.65%)
+Showing nodes accounting for 51.02s, 72.92% of 69.97s total
+Dropped 1156 nodes (cum <= 0.35s)
+Showing top 40 nodes out of 225
+      flat  flat%   sum%        cum   cum%
+     0.02s 0.029% 0.029%     66.58s 95.16%  net/http.(*conn).serve
+         0     0% 0.029%     65.05s 92.97%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.01s 0.014% 0.043%     65.05s 92.97%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0% 0.043%     65.05s 92.97%  net/http.serverHandler.ServeHTTP
+     0.01s 0.014% 0.057%     65.03s 92.94%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.014% 0.071%     64.48s 92.15%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0% 0.071%     64.47s 92.14%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0% 0.071%     64.42s 92.07%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0% 0.071%     44.08s 63.00%  example.com/isureal-company/isureal.signedImageURL
+     0.38s  0.54%  0.61%     43.94s 62.80%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s 0.014%  0.63%     43.70s 62.46%  example.com/isureal-company/isureal.issueImageSignature
+     1.28s  1.83%  2.46%     40.32s 57.62%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.88s  2.69%  5.15%     38.21s 54.61%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.55s  2.22%  7.36%     37.10s 53.02%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.38s  0.54%  7.90%     34.34s 49.08%  crypto/internal/fips140/sha256.block
+    33.90s 48.45% 56.35%     33.96s 48.54%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 56.35%     29.49s 42.15%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func55.1
+         0     0% 56.35%     29.47s 42.12%  example.com/isureal-company/isureal.listMemories
+         0     0% 56.35%     29.38s 41.99%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func56.1
+     0.01s 0.014% 56.37%     29.37s 41.98%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func54
+     0.01s 0.014% 56.38%     24.73s 35.34%  example.com/isureal-company/isureal.newPostResponse
+     0.02s 0.029% 56.41%     19.30s 27.58%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 56.41%     18.89s 27.00%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 56.41%     17.01s 24.31%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func20.1
+         0     0% 56.41%     17.01s 24.31%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func19.1
+         0     0% 56.41%     17.01s 24.31%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func18
+     7.68s 10.98% 67.39%      7.68s 10.98%  internal/runtime/syscall/linux.Syscall6
+     0.04s 0.057% 67.44%      7.26s 10.38%  syscall.RawSyscall6
+         0     0% 67.44%      6.22s  8.89%  syscall.Syscall
+         0     0% 67.44%      5.82s  8.32%  internal/poll.ignoringEINTRIO (inline)
+     0.01s 0.014% 67.46%      4.93s  7.05%  database/sql.withLock
+         0     0% 67.46%      4.33s  6.19%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func34.1
+         0     0% 67.46%      4.25s  6.07%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func35.1
+     0.01s 0.014% 67.47%      4.25s  6.07%  example.com/isureal-company/isureal.NewServer.createPostHandler.func33
+     3.75s  5.36% 72.83%      3.75s  5.36%  runtime.memmove
+     0.02s 0.029% 72.86%      3.51s  5.02%  internal/poll.(*FD).Read
+     0.02s 0.029% 72.89%      3.49s  4.99%  database/sql.(*DB).queryDC
+         0     0% 72.89%      3.48s  4.97%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func52.1
+     0.01s 0.014% 72.90%      3.46s  4.94%  io.ReadAll
+     0.01s 0.014% 72.92%      3.45s  4.93%  github.com/jmoiron/sqlx.GetContext

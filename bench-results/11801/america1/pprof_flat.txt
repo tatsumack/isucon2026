@@ -1,0 +1,49 @@
+File: isureal
+Build ID: d025abf1026672e83effa25d64ba39b382a6a66b
+Type: cpu
+Time: 2026-10-31 04:15:58 UTC
+Duration: 150s, Total samples = 2.55s ( 1.70%)
+Showing nodes accounting for 1.81s, 70.98% of 2.55s total
+Dropped 247 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 355
+      flat  flat%   sum%        cum   cum%
+     0.88s 34.51% 34.51%      0.88s 34.51%  internal/runtime/syscall/linux.Syscall6
+     0.16s  6.27% 40.78%      0.16s  6.27%  runtime.memclrNoHeapPointers
+     0.08s  3.14% 43.92%      0.08s  3.14%  crypto/internal/fips140/sha256.blockSHANI
+     0.08s  3.14% 47.06%      0.08s  3.14%  runtime.futex
+     0.04s  1.57% 48.63%      0.13s  5.10%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.04s  1.57% 50.20%      0.04s  1.57%  runtime.nextFreeFast (inline)
+     0.03s  1.18% 51.37%      0.18s  7.06%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.03s  1.18% 52.55%      0.03s  1.18%  runtime.findfunc
+     0.03s  1.18% 53.73%      0.03s  1.18%  runtime.memmove
+     0.03s  1.18% 54.90%      0.14s  5.49%  runtime.netpoll
+     0.02s  0.78% 55.69%      0.02s  0.78%  bytes.TrimLeft
+     0.02s  0.78% 56.47%      0.02s  0.78%  image/jpeg.(*decoder).decodeHuffman
+     0.02s  0.78% 57.25%      0.02s  0.78%  internal/runtime/maps.(*Map).getWithoutKeySmallFastStr
+     0.02s  0.78% 58.04%      0.21s  8.24%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.02s  0.78% 58.82%      0.02s  0.78%  runtime.(*mspan).specialFindSplicePoint
+     0.02s  0.78% 59.61%      0.02s  0.78%  runtime.findObject
+     0.02s  0.78% 60.39%      0.27s 10.59%  runtime.findRunnable
+     0.02s  0.78% 61.18%      0.02s  0.78%  runtime.lock2
+     0.02s  0.78% 61.96%      0.05s  1.96%  runtime.pcvalue
+     0.02s  0.78% 62.75%      0.02s  0.78%  runtime.rand
+     0.02s  0.78% 63.53%      0.02s  0.78%  runtime.step
+     0.01s  0.39% 63.92%      0.03s  1.18%  bufio.(*Reader).ReadLine
+     0.01s  0.39% 64.31%      0.09s  3.53%  bufio.(*Writer).Write
+     0.01s  0.39% 64.71%      0.02s  0.78%  crypto/internal/fips140.RecordApproved
+     0.01s  0.39% 65.10%      0.03s  1.18%  crypto/tls.(*halfConn).decrypt
+     0.01s  0.39% 65.49%      0.02s  0.78%  database/sql.(*Rows).close.func1
+     0.01s  0.39% 65.88%      0.02s  0.78%  database/sql.(*Tx).Commit
+     0.01s  0.39% 66.27%      1.31s 51.37%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s  0.39% 66.67%      1.19s 46.67%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+     0.01s  0.39% 67.06%      0.11s  4.31%  github.com/jackc/pgx/v5/pgconn.(*PgConn).receiveMessage
+     0.01s  0.39% 67.45%      0.14s  5.49%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+     0.01s  0.39% 67.84%      0.09s  3.53%  github.com/labstack/echo/v5.(*Response).Write
+     0.01s  0.39% 68.24%      0.36s 14.12%  golang.org/x/sync/singleflight.(*Group).Do
+     0.01s  0.39% 68.63%      0.02s  0.78%  image/jpeg.(*decoder).reconstructBlock
+     0.01s  0.39% 69.02%      0.23s  9.02%  internal/poll.(*FD).Read
+     0.01s  0.39% 69.41%      0.07s  2.75%  io.copyBuffer
+     0.01s  0.39% 69.80%      0.11s  4.31%  net/http.(*Request).write
+     0.01s  0.39% 70.20%      0.02s  0.78%  net/http.(*Transport).tryPutIdleConn
+     0.01s  0.39% 70.59%      0.14s  5.49%  net/http.(*body).readLocked
+     0.01s  0.39% 70.98%      0.07s  2.75%  net/http.(*response).finishRequest
