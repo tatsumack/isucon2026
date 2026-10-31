@@ -10,10 +10,10 @@ ISUREAL_LOG_LEVEL=info
 ISUREAL_PRIORITY_LIMIT=32
 ISUREAL_PRIORITY_MAX_WAIT=1s
 ISUREAL_PRIORITY_SCOPE=split
-# split の枠 (投稿の経路 / heavy / その他)。#32613 (PR #74) と同じ 16 / 8 / 8。個別に指定しないと LIMIT から 16 / 4 / 12 になる
+# split の枠 (投稿の経路 / heavy / その他)。#34626 では 16 / 8 / 8 で、その他が詰まった (ピークの平均待ち 8s)。その他だけ 16 に増やす (#34626 の対策案 1)
 ISUREAL_PRIORITY_CRITICAL=16
 ISUREAL_PRIORITY_HEAVY=8
-ISUREAL_PRIORITY_OTHER=8
+ISUREAL_PRIORITY_OTHER=16
 # PUT /api/me/profile-image を入れる枠 (heavy / critical / other / exempt)。新規ユーザーの入口で軽いので、heavy (Memories・export と同じ枠) から出す
 ISUREAL_PRIORITY_PROFILE_IMAGE=critical
 ISUREAL_SESSION_CACHE=1
