@@ -15,6 +15,7 @@ type HandlerContext struct {
 	Config          *Config
 	IPBans          *IPBanList
 	NotificationHub *NotificationHub
+	Images          *ImageStore
 }
 
 func NewServer(config *Config) *echo.Echo {
@@ -44,12 +45,18 @@ func NewServer(config *Config) *echo.Echo {
 		Config:          config,
 		IPBans:          &IPBanList{},
 		NotificationHub: NewNotificationHub(db),
+		Images:          NewImageStore(config, db),
 	}
 	e.Use(IPBanMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
 	// 転送しないもの: 初期化、登録・ログイン (不正アクセスの記録)、自分の情報の更新 (リージョンの変更)、
-	// プロフィール画像、退会、エクスポート、画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
+	// プロフィール画像、退会、画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
+	// エクスポートは、画像本体が asia1 のディスクにあるため転送する (image_store.go)
 	delegate := DelegateMiddleware(handlerContext)
+
+	// asia1 の画像を europe1 / america1 から読む内部 API (image_store.go)。/api/ の外に置き、nginx からは届かない
+	e.GET("/internal/images/:imageId", getInternalImageHandler(handlerContext), trustedPeerOnly(handlerContext))
+	e.POST("/internal/images/reset", resetInternalImagesHandler(handlerContext), trustedPeerOnly(handlerContext))
 
 	e.POST("/api/initialize", initializeHandler(handlerContext))
 	e.POST("/api/auth/register", registerHandler(handlerContext))
@@ -57,7 +64,7 @@ func NewServer(config *Config) *echo.Echo {
 	e.POST("/api/auth/logout", logoutHandler(handlerContext), SessionMiddleware(handlerContext, true))
 	e.GET("/api/users", searchUsersHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/users/:userId", getUserHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
-	e.GET("/api/me/export", exportPostsHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
+	e.GET("/api/me/export", exportPostsHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/me", getMeHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.PATCH("/api/me", updateMeHandler(handlerContext), SessionMiddleware(handlerContext, true))
 	e.PUT("/api/me/profile-image", putProfileImageHandler(handlerContext), SessionMiddleware(handlerContext, true))

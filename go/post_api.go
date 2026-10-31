@@ -80,14 +80,19 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 
 		ctx := c.Request().Context()
 		userID := GetSession(c).UserID
+		// 画像本体はファイルに置き、行の data は空にする (image_store.go)。投稿できない場合は行がロールバックで消え、
+		// 行が無いファイルは配信されない。ファイルの fsync を待つ間に DB の接続を持たないよう、トランザクションの前に書く。
+		imageID := uuid.NewString()
+		if err := h.Images.Save(imageID, imageData); err != nil {
+			return err
+		}
 		tx, err := h.DB.BeginTxx(ctx, nil)
 		if err != nil {
 			return err
 		}
 		defer tx.Rollback()
-		// 画像の保存はロックを取る前に済ませ、ロックを持つ時間を短くする。投稿できない場合はロールバックで消える。
-		imageID := uuid.NewString()
-		if _, err := tx.ExecContext(ctx, `INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, $3, 'image/jpeg', $4)`, imageID, userID, imageData, time.Now().UTC()); err != nil {
+		// 画像の行の保存はロックを取る前に済ませ、ロックを持つ時間を短くする。
+		if _, err := tx.ExecContext(ctx, `INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, ''::bytea, 'image/jpeg', $3)`, imageID, userID, time.Now().UTC()); err != nil {
 			return err
 		}
 		var lockedUserID string

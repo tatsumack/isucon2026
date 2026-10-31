@@ -1,0 +1,49 @@
+File: isureal
+Build ID: d025abf1026672e83effa25d64ba39b382a6a66b
+Type: cpu
+Time: 2026-10-31 04:15:58 UTC
+Duration: 150s, Total samples = 4.77s ( 3.18%)
+Showing nodes accounting for 2.99s, 62.68% of 4.77s total
+Dropped 390 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 357
+      flat  flat%   sum%        cum   cum%
+     1.20s 25.16% 25.16%      1.20s 25.16%  internal/runtime/syscall/linux.Syscall6
+     0.24s  5.03% 30.19%      0.24s  5.03%  runtime.memclrNoHeapPointers
+     0.18s  3.77% 33.96%      0.18s  3.77%  runtime.futex
+     0.17s  3.56% 37.53%      0.17s  3.56%  crypto/internal/fips140/sha256.blockSHANI
+     0.12s  2.52% 40.04%      0.12s  2.52%  runtime.memmove
+     0.08s  1.68% 41.72%      0.34s  7.13%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.07s  1.47% 43.19%      0.07s  1.47%  runtime.step
+     0.05s  1.05% 44.23%      0.05s  1.05%  internal/runtime/maps.(*Map).getWithoutKeySmallFastStr
+     0.04s  0.84% 45.07%      0.04s  0.84%  bufio.(*Writer).Available
+     0.04s  0.84% 45.91%      0.14s  2.94%  example.com/isureal-company/isureal.(*NotificationHub).fetch
+     0.04s  0.84% 46.75%      0.04s  0.84%  internal/sync.(*Mutex).Lock
+     0.04s  0.84% 47.59%      0.05s  1.05%  runtime.mapaccess2_faststr
+     0.04s  0.84% 48.43%      0.04s  0.84%  runtime.nanotime (inline)
+     0.04s  0.84% 49.27%      0.08s  1.68%  runtime.stealWork
+     0.03s  0.63% 49.90%      0.25s  5.24%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.03s  0.63% 50.52%      0.26s  5.45%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.03s  0.63% 51.15%      0.03s  0.63%  image/jpeg.(*decoder).ensureNBits
+     0.03s  0.63% 51.78%      0.15s  3.14%  image/jpeg.(*decoder).processSOS
+     0.03s  0.63% 52.41%      0.06s  1.26%  image/jpeg.(*decoder).reconstructBlock
+     0.03s  0.63% 53.04%      0.03s  0.63%  image/jpeg.idctRows
+     0.03s  0.63% 53.67%      0.03s  0.63%  internal/sync.(*Mutex).Unlock
+     0.03s  0.63% 54.30%      0.03s  0.63%  runtime.(*mspan).writeHeapBitsSmall
+     0.03s  0.63% 54.93%      0.11s  2.31%  runtime.(*unwinder).resolveInternal
+     0.03s  0.63% 55.56%      0.04s  0.84%  runtime.SetFinalizer
+     0.03s  0.63% 56.18%      0.03s  0.63%  runtime.releasem (inline)
+     0.03s  0.63% 56.81%      0.03s  0.63%  runtime.usleep
+     0.02s  0.42% 57.23%      0.05s  1.05%  example.com/isureal-company/isureal.(*IPBanList).Banned
+     0.02s  0.42% 57.65%      0.35s  7.34%  example.com/isureal-company/isureal.computeImageSignature
+     0.02s  0.42% 58.07%      0.13s  2.73%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).receiveMessage
+     0.02s  0.42% 58.49%      0.05s  1.05%  image/jpeg.(*decoder).decodeHuffman
+     0.02s  0.42% 58.91%      0.03s  0.63%  internal/runtime/maps.(*Iter).Next
+     0.02s  0.42% 59.33%      0.09s  1.89%  net/http.(*Transport).roundTrip
+     0.02s  0.42% 59.75%      0.15s  3.14%  net/http.(*persistConn).Read
+     0.02s  0.42% 60.17%      0.03s  0.63%  net/http/httputil.removeHopByHopHeaders
+     0.02s  0.42% 60.59%      0.08s  1.68%  runtime.adjustframe
+     0.02s  0.42% 61.01%      0.03s  0.63%  runtime.isSystemGoroutine
+     0.02s  0.42% 61.43%      0.20s  4.19%  runtime.netpoll
+     0.02s  0.42% 61.84%      0.11s  2.31%  runtime.pcvalue
+     0.02s  0.42% 62.26%      0.53s 11.11%  runtime.schedule
+     0.02s  0.42% 62.68%      0.09s  1.89%  runtime.selectgo
