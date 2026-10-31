@@ -82,6 +82,16 @@ func TestSplitPriorityIsolationAndBoundedOverflow(t *testing.T) {
 	}
 }
 
+func TestSplitPriorityLimits(t *testing.T) {
+	got := splitPriorityLimits(32)
+	want := []int{16, 8, 8}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("splitPriorityLimits(32) = %v, want %v", got, want)
+		}
+	}
+}
+
 func TestSplitPriorityReleasesSlotAfterHandler(t *testing.T) {
 	e := echo.New()
 	e.Use(PriorityMiddleware(&HandlerContext{Config: &Config{

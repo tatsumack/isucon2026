@@ -115,13 +115,11 @@ func (s *priorityStats) reportGroup(group string) {
 }
 
 // split は遅い画像転送や export が投稿経路の枠を埋めないようにする。
-// 32枠なら投稿16 / heavy4 / その他12。海外からの委譲と管理者/SSEは従来どおり対象外。
+// 32枠なら投稿16 / heavy8 / その他8。海外からの委譲と管理者/SSEは従来どおり対象外。
 // MaxWait 後も無制限には実行せず、全グループ共通の追加枠 (32枠なら4) に入れる。
 // 追加枠も満杯なら通常枠か追加枠が空くまで待つ。切断された待機リクエストは実行しない。
 func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
-	critical := max(1, config.PriorityLimit/2)
-	heavy := max(1, config.PriorityLimit/8)
-	limits := []int{critical, heavy, config.PriorityLimit - critical - heavy}
+	limits := splitPriorityLimits(config.PriorityLimit)
 	slots := make([]chan struct{}, len(limits))
 	stats := make([]*priorityStats, len(limits))
 	for i, limit := range limits {
@@ -187,4 +185,10 @@ func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
 			return next(c)
 		}
 	}
+}
+
+func splitPriorityLimits(limit int) []int {
+	critical := max(1, limit/2)
+	heavy := max(1, limit/4)
+	return []int{critical, heavy, limit - critical - heavy}
 }
