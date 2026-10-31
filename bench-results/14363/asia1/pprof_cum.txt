@@ -1,0 +1,49 @@
+File: isureal
+Build ID: f2d8dc3ac4e61f69c0da5a5a33e385ad06c4e215
+Type: cpu
+Time: 2026-10-31 04:48:29 UTC
+Duration: 150s, Total samples = 79.88s (53.25%)
+Showing nodes accounting for 59.88s, 74.96% of 79.88s total
+Dropped 1171 nodes (cum <= 0.40s)
+Showing top 40 nodes out of 213
+      flat  flat%   sum%        cum   cum%
+     0.01s 0.013% 0.013%     76.40s 95.64%  net/http.(*conn).serve
+     0.01s 0.013% 0.025%     74.89s 93.75%  net/http.serverHandler.ServeHTTP
+     0.01s 0.013% 0.038%     74.88s 93.74%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.038%     74.87s 93.73%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.02s 0.025% 0.063%     74.78s 93.62%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.02s 0.025% 0.088%     74.34s 93.06%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0% 0.088%     74.31s 93.03%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+     0.01s 0.013%   0.1%     74.20s 92.89%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.53s  0.66%  0.76%     52.94s 66.27%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  0.76%     52.81s 66.11%  example.com/isureal-company/isureal.signedImageURL
+     0.01s 0.013%  0.78%     52.41s 65.61%  example.com/isureal-company/isureal.issueImageSignature
+     1.69s  2.12%  2.89%     47.78s 59.81%  crypto/internal/fips140/sha256.(*Digest).Sum
+     2.04s  2.55%  5.45%     45.26s 56.66%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.93s  2.42%  7.86%     44.47s 55.67%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.64s   0.8%  8.66%     40.94s 51.25%  crypto/internal/fips140/sha256.block
+    40.29s 50.44% 59.10%     40.30s 50.45%  crypto/internal/fips140/sha256.blockAVX2
+     0.01s 0.013% 59.11%     34.68s 43.42%  example.com/isureal-company/isureal.listMemories
+         0     0% 59.11%     34.65s 43.38%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func55.1
+         0     0% 59.11%     34.56s 43.26%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func56.1
+         0     0% 59.11%     34.56s 43.26%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func54
+         0     0% 59.11%     30.49s 38.17%  example.com/isureal-company/isureal.newPostResponse
+     0.02s 0.025% 59.14%     22.19s 27.78%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 59.14%     21.86s 27.37%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 59.14%     20.42s 25.56%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func20.1
+         0     0% 59.14%     20.42s 25.56%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func19.1
+     0.01s 0.013% 59.15%     20.42s 25.56%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func18
+     8.07s 10.10% 69.25%      8.07s 10.10%  internal/runtime/syscall/linux.Syscall6
+     0.03s 0.038% 69.29%      7.85s  9.83%  syscall.RawSyscall6
+     0.02s 0.025% 69.32%      6.94s  8.69%  syscall.Syscall
+     0.01s 0.013% 69.33%      6.51s  8.15%  internal/poll.ignoringEINTRIO (inline)
+         0     0% 69.33%      5.76s  7.21%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func34.1
+         0     0% 69.33%      5.69s  7.12%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func35.1
+         0     0% 69.33%      5.69s  7.12%  example.com/isureal-company/isureal.NewServer.createPostHandler.func33
+     0.01s 0.013% 69.34%      4.79s  6.00%  database/sql.withLock
+     4.45s  5.57% 74.91%      4.45s  5.57%  runtime.memmove
+     0.04s  0.05% 74.96%      3.48s  4.36%  internal/poll.(*FD).Read
+         0     0% 74.96%      3.44s  4.31%  io.ReadAll
+         0     0% 74.96%      3.40s  4.26%  example.com/isureal-company/isureal.(*ImageStore).load
+         0     0% 74.96%      3.34s  4.18%  example.com/isureal-company/isureal.readImageFile
+         0     0% 74.96%      3.34s  4.18%  os.ReadFile
