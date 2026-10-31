@@ -13,7 +13,7 @@ ALP_MATCHING_GROUPS='^/api/users/[^/]+$,^/api/posts/[^/]+$,^/api/posts/[^/]+/com
 export PATH=/home/isucon/local/go/bin:/usr/local/go/bin:/home/isucon/go/bin:${PATH}
 PSQL="sudo -u postgres psql -d isureal -X -q"
 
-DURATION=${1:-70}
+DURATION=${1:-150}
 ROLE=${2:-app}
 OUT=/home/isucon/bench/$(date "+%H%M%S")
 mkdir -p ${OUT}
