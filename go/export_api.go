@@ -29,9 +29,14 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 		//   - 投稿の作成 (post_api.go) は、同じトランザクションで image_objects に行を入れる
 		//   - image_objects の行を消すのはプロフィール画像の変更・削除だけで、投稿の画像とは id が別 (初期データで重なりは0件)
 		//   - 初期データで、画像の行が無い投稿は0件 (2026-10-31 に asia2 で確認)
-		var posts []Post
+		// 初期データの画像かどうかは、画像の行の代わりに投稿の created_at で決める。投稿と画像の行は同じときに作られる。
+		// 外れても writeExportImage が両方のディレクトリを探し直すので、結果は変わらない (遅くなるだけ)
+		var posts []struct {
+			Post
+			InitialImage bool `db:"initial_image"`
+		}
 		if err := h.DB.SelectContext(ctx, &posts, `
-   SELECT `+postColumns+`
+   SELECT `+postColumns+`, p.created_at <= (SELECT created_at FROM initial_data_boundary) AS initial_image
    FROM posts p
    JOIN posting_windows w ON w.id = p.posting_window_id
    WHERE p.author_id = $1 AND p.deleted_at IS NULL
@@ -58,14 +63,10 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 				return err
 			}
 			// エクスポートは過去の画像をまとめて読むため、画像取得用のメモリのキャッシュに入れない (あれば使う)
-			data, _, err := h.Images.LoadWithoutCaching(ctx, post.ImageID)
-			if err != nil {
+			if err := h.Images.writeExportImage(ctx, image, post.ImageID, post.InitialImage); err != nil {
 				return err
 			}
-			if _, err := image.Write(data); err != nil {
-				return err
-			}
-			items = append(items, exportPostResponse{createPostResponse: newPostResponse(post, author), ImagePath: imagePath})
+			items = append(items, exportPostResponse{createPostResponse: newPostResponse(post.Post, author), ImagePath: imagePath})
 		}
 		manifest, err := writer.Create("posts.json")
 		if err != nil {

@@ -40,6 +40,8 @@ func DelegateMiddleware(h *HandlerContext) echo.MiddlewareFunc {
 			MaxIdleConnsPerHost: 1024,
 			IdleConnTimeout:     90 * time.Second,
 		},
+		// 投稿と RealMoji は、画像を手元のキャッシュにも入れる (delegate_upload.go)
+		ModifyResponse: cacheUploadedImage,
 		// 投稿やコメントが二重に登録されないよう、失敗しても再送しない。
 		ErrorHandler: func(w http.ResponseWriter, r *http.Request, err error) {
 			w.WriteHeader(http.StatusBadGateway)
@@ -47,7 +49,11 @@ func DelegateMiddleware(h *HandlerContext) echo.MiddlewareFunc {
 	}
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c *echo.Context) error {
-			proxy.ServeHTTP(c.Response(), c.Request())
+			req := c.Request()
+			if route := c.RouteInfo(); uploadRoutes[route.Method+" "+route.Path] {
+				req = withCapturedUpload(req)
+			}
+			proxy.ServeHTTP(c.Response(), req)
 			return nil
 		}
 	}

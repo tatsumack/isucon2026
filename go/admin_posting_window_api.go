@@ -73,6 +73,10 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
+		// PostgreSQL は commit が成功してから各リージョンの LISTEN 接続を起こす。
+		if _, err := tx.ExecContext(ctx, `SELECT pg_notify('isureal_posting_window', '')`); err != nil {
+			return err
+		}
 		if err := tx.Commit(); err != nil {
 			return err
 		}
