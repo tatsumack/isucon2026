@@ -1,0 +1,24 @@
+ calls | total_ms | mean_ms |  rows  | pct  |                                                                                                                                                    query                                                                                                                                                     
+-------+----------+---------+--------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   835 |   363784 |  435.67 |    830 | 36.6 | SELECT i.data, i.media_type FROM image_objects i JOIN users u ON u.id = i.owner_user_id AND u.status = 'active' WHERE i.id = $1 AND ( u.profile_image_id = i.id OR EXISTS ( SELECT 1 FROM posts p WHERE p.image_id = i.id AND p.author_id = u.id AND p.deleted_at IS NULL ) OR EXISTS ( SELECT 1 FROM realmo
+   821 |   166836 |  203.21 |    821 | 16.8 | SELECT id FROM users WHERE id = $1 AND status = 'active' FOR NO KEY UPDATE
+   150 |   135328 |  902.18 |    136 | 13.6 | SELECT id, local_date, starts_at FROM posting_windows WHERE region = $1 AND ended_at IS NULL FOR UPDATE
+    44 |    95005 | 2159.21 |      0 |  9.6 | LOCK TABLE users IN SHARE ROW EXCLUSIVE MODE
+   949 |    38963 |   41.06 |  13041 |  3.9 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id = $1 OR user_high_id = $1
+    18 |    26747 | 1485.94 |  29504 |  2.7 | INSERT INTO notifications (id, user_id, posting_window_id, created_at) SELECT gen_random_uuid()::text, id, $2, $3 FROM users WHERE region = $1 AND status = $4
+    13 |    14671 | 1128.52 |   1680 |  1.5 | SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at, i.data AS image_data FROM posts p JOIN posting_windows w ON w.id = p.posting_window_id JOIN image_
+   136 |    14653 |  107.74 |    136 |  1.5 | INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, $3, $5, $4)
+    76 |    13965 |  183.75 | 373772 |  1.4 | SELECT id, username, secret_key_hash, display_name, bio, profile_image_id, region, account_type, status FROM users WHERE status=$4 AND id<>$1 AND ($2=$5 OR (username,id)>($2,$3)) ORDER BY username, id
+   226 |    11333 |   50.14 |    226 |  1.1 | SELECT id FROM users WHERE id = $1 FOR NO KEY UPDATE
+    18 |     9550 |  530.57 |     15 |  1.0 | UPDATE posting_windows SET ended_at = $2 WHERE region = $1 AND ended_at IS NULL
+  1037 |     8197 |    7.90 |   1037 |  0.8 | SELECT u.secret_key_hash FROM image_objects i JOIN users u ON u.id = i.owner_user_id WHERE i.id = $1 AND u.status = 'active'
+    66 |     7553 |  114.44 |   5991 |  0.8 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4, $5) OR user_high_id IN ($6, $7, $8, $9, $10)
+    51 |     6933 |  135.93 |   6120 |  0.7 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4, $5, $6, $7) OR user_high_id IN ($8, $9, $10, $11, $12, $13, $14)
+   167 |     6679 |   40.00 |     19 |  0.7 | SELECT id FROM friend_requests WHERE status=$3 AND ((requester_id=$1 AND recipient_id=$2) OR (requester_id=$2 AND recipient_id=$1))
+    72 |     6593 |   91.57 |   2260 |  0.7 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3) OR user_high_id IN ($4, $5, $6)
+    43 |     6025 |  140.11 |   5352 |  0.6 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4, $5, $6, $7, $8) OR user_high_id IN ($9, $10, $11, $12, $13, $14, $15, $16)
+    94 |     5632 |   59.91 |  18388 |  0.6 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) OR user_high_id IN ($11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+    53 |     5629 |  106.20 |   1327 |  0.6 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4) OR user_high_id IN ($5, $6, $7, $8)
+    41 |     4787 |  116.77 |   1924 |  0.5 | SELECT user_low_id, user_high_id FROM friendships WHERE user_low_id IN ($1, $2, $3, $4, $5, $6) OR user_high_id IN ($7, $8, $9, $10, $11, $12)
+(20 rows)
+

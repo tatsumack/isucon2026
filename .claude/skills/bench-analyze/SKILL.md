@@ -78,6 +78,25 @@ scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 3. `slack_complete_file_upload` で `#isucon2026` に共有する (title: `ベンチ #<ベンチID> 分析 (score <スコア>)`、initial_comment: `ベンチ #<ベンチID> の分析結果 (mdファイル)`)
 4. 返ってきたファイルのリンクをユーザーに伝える
 
+### 6. 結果をコミットする
+`bench-results/<ベンチID>/` (計測結果と `report.md`) をコミットして main に push する。データのみの変更なのでブランチとPRは作らない。
+手元の作業ツリーは別の施策のブランチで、未コミットの変更があることが多い。触らないよう、一時的な worktree で行う。
+
+```
+W=<スクラッチパッド>/wt-bench-<ベンチID>
+git fetch -q origin
+git worktree add -q --detach $W origin/main
+cp -R bench-results/<ベンチID> $W/bench-results/
+git -C $W add bench-results/<ベンチID>
+git -C $W commit -m "ベンチ #<ベンチID> の計測結果と分析を追加 (score <スコア>)"
+git -C $W push origin HEAD:main
+git worktree remove $W
+```
+
+- コミット対象は `bench-results/<ベンチID>/` だけにする。他のファイルを含めない
+- push が拒否されたら (main が先に進んだ場合)、`git -C $W pull --rebase origin main` してから push し直す
+- コミットのハッシュをユーザーに伝える
+
 ## 守ること
 - **分析だけ行い、コードの変更・デプロイはしない。** 対策をどれから入れるかは人間が決める
 - サーバ上でサービスの再起動、設定変更、`/initialize` の実行をしない
