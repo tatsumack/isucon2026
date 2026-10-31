@@ -1,0 +1,61 @@
+Linux 7.0.0-1014-aws (ip-192-168-3-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+02:03:56      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+02:04:01      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+02:04:06      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:11        0       227    0.00    0.20    0.00    0.00    0.20     0  multipathd
+
+02:04:11      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:16     1100      5962    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+02:04:16      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:21        0       168    0.00    0.20    0.00    0.00    0.20     1  systemd-journal
+
+02:04:21      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:26     1100      5823    3.80    0.20    0.00    0.00    4.00     0  isureal
+
+02:04:26      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:31        0      1651    0.00    0.20    0.00    0.00    0.20     0  kworker/0:3-events
+02:04:31     1100      5823    7.80    0.60    0.00    0.00    8.40     0  isureal
+
+02:04:31      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:36     1100      5823    0.20    0.00    0.00    0.00    0.20     0  isureal
+
+02:04:36      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:41     1100      5962    0.00    0.20    0.00    0.00    0.20     1  pidstat
+
+02:04:41      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:46     1100      1407    0.20    0.00    0.00    0.00    0.20     1  journalctl
+02:04:46     1100      5823    0.60    0.20    0.00    0.00    0.80     0  isureal
+
+02:04:46      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:51     1100      5823    0.40    0.40    0.00    0.00    0.80     0  isureal
+
+02:04:51      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:04:56        0       168    0.20    0.00    0.00    0.00    0.20     0  systemd-journal
+02:04:56     1100      1289    0.20    0.00    0.00    0.00    0.20     0  isureal-guard
+02:04:56     1100      5823    2.20    0.40    0.00    0.00    2.60     1  isureal
+02:04:56     1100      5962    0.20    0.00    0.00    0.00    0.20     1  pidstat
+
+02:04:56      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:05:01     1100      5823    5.60    0.60    0.00    0.00    6.20     0  isureal
+02:05:01       33      5837    0.00    0.20    0.00    0.00    0.20     0  nginx
+
+02:05:01      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+02:05:06        0        16    0.20    0.00    0.00    0.00    0.20     0  rcu_sched
+02:05:06        0      5576    0.20    0.00    0.00    0.00    0.20     1  kworker/1:3-events
+02:05:06     1100      5823    3.40    1.00    0.00    0.00    4.40     0  isureal
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0        16    0.01    0.00    0.00    0.00    0.01     -  rcu_sched
+Average:        0       168    0.01    0.01    0.00    0.01    0.03     -  systemd-journal
+Average:        0       227    0.00    0.01    0.00    0.00    0.01     -  multipathd
+Average:     1100      1289    0.01    0.00    0.00    0.00    0.01     -  isureal-guard
+Average:     1100      1407    0.01    0.00    0.00    0.01    0.01     -  journalctl
+Average:        0      1651    0.00    0.01    0.00    0.00    0.01     -  kworker/0:3-events
+Average:        0      5576    0.01    0.00    0.00    0.00    0.01     -  kworker/1:3-events
+Average:     1100      5823    1.71    0.24    0.00    0.00    1.96     -  isureal
+Average:       33      5837    0.00    0.01    0.00    0.00    0.01     -  nginx
+Average:     1100      5962    0.01    0.03    0.00    0.00    0.04     -  pidstat

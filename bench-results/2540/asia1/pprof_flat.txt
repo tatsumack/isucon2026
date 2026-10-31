@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 338b45697b40ca96b2895111d589ed605392e889
+Type: cpu
+Time: 2026-10-31 02:03:56 UTC
+Duration: 70.02s, Total samples = 28.40s (40.56%)
+Showing nodes accounting for 23.39s, 82.36% of 28.40s total
+Dropped 772 nodes (cum <= 0.14s)
+Showing top 40 nodes out of 219
+      flat  flat%   sum%        cum   cum%
+    11.35s 39.96% 39.96%     11.35s 39.96%  crypto/internal/fips140/sha256.blockAVX2
+     1.53s  5.39% 45.35%      7.56s 26.62%  crypto/internal/fips140/hmac.New[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+     1.06s  3.73% 49.08%      1.06s  3.73%  runtime.memclrNoHeapPointers
+     0.91s  3.20% 52.29%      0.91s  3.20%  runtime.memmove
+     0.74s  2.61% 54.89%      1.19s  4.19%  image/jpeg.(*decoder).reconstructBlock
+     0.67s  2.36% 57.25%      0.67s  2.36%  internal/runtime/syscall/linux.Syscall6
+     0.55s  1.94% 59.19%     12.45s 43.84%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.40s  1.41% 60.60%      0.67s  2.36%  runtime.scanObject
+     0.38s  1.34% 61.94%      1.77s  6.23%  runtime.mallocgcSmallNoscan
+     0.38s  1.34% 63.27%      0.38s  1.34%  runtime.nextFreeFast (inline)
+     0.33s  1.16% 64.44%      7.87s 27.71%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.32s  1.13% 65.56%      8.84s 31.13%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.31s  1.09% 66.65%      2.12s  7.46%  image/jpeg.(*decoder).processSOS
+     0.29s  1.02% 67.68%      0.51s  1.80%  runtime.tryDeferToSpanScan
+     0.28s  0.99% 68.66%      3.77s 13.27%  runtime.mallocgc
+     0.27s  0.95% 69.61%     11.78s 41.48%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.26s  0.92% 70.53%      0.26s  0.92%  runtime.procyieldAsm
+     0.25s  0.88% 71.41%      0.26s  0.92%  crypto/internal/fips140/sha256.(*Digest).Reset
+     0.25s  0.88% 72.29%      0.40s  1.41%  image/jpeg.(*decoder).decodeHuffman
+     0.20s   0.7% 72.99%     11.55s 40.67%  crypto/internal/fips140/sha256.block
+     0.19s  0.67% 73.66%      4.06s 14.30%  crypto/internal/fips140/pbkdf2.Key[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+     0.19s  0.67% 74.33%      0.21s  0.74%  image/jpeg.(*decoder).receiveExtend
+     0.19s  0.67% 75.00%      0.19s  0.67%  runtime.madvise
+     0.19s  0.67% 75.67%      0.49s  1.73%  runtime.scanObjectsSmall
+     0.17s   0.6% 76.27%      0.25s  0.88%  image/jpeg.idctRows
+     0.17s   0.6% 76.87%      0.20s   0.7%  runtime.step
+     0.15s  0.53% 77.39%      0.19s  0.67%  image/jpeg.idctCols
+     0.15s  0.53% 77.92%      0.15s  0.53%  runtime.(*spanInlineMarkBits).init
+     0.13s  0.46% 78.38%      1.83s  6.44%  crypto/hmac.New.UnwrapNew[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }].func1
+     0.13s  0.46% 78.84%      0.33s  1.16%  runtime.(*unwinder).resolveInternal
+     0.13s  0.46% 79.30%      0.24s  0.85%  runtime.gcmarknewobject
+     0.13s  0.46% 79.75%      0.60s  2.11%  runtime.mallocgcSmallScanNoHeader
+     0.13s  0.46% 80.21%      0.39s  1.37%  runtime.pcvalue
+     0.11s  0.39% 80.60%      0.17s   0.6%  image/jpeg.(*decoder).ensureNBits
+     0.10s  0.35% 80.95%      0.64s  2.25%  runtime.growslice
+     0.10s  0.35% 81.30%      0.20s   0.7%  runtime.scanblock
+     0.09s  0.32% 81.62%      2.17s  7.64%  runtime.newobject
+     0.08s  0.28% 81.90%      1.04s  3.66%  runtime.makeslice
+     0.07s  0.25% 82.15%      0.23s  0.81%  crypto/internal/fips140/hmac.(*HMAC).Write (inline)
+     0.06s  0.21% 82.36%      0.25s  0.88%  runtime.(*stkframe).getStackMap

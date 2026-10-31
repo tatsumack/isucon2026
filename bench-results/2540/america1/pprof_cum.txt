@@ -1,0 +1,48 @@
+File: isureal
+Build ID: 338b45697b40ca96b2895111d589ed605392e889
+Type: cpu
+Time: 2026-10-31 02:03:56 UTC
+Duration: 70s, Total samples = 1.28s ( 1.83%)
+Showing nodes accounting for 0.41s, 32.03% of 1.28s total
+Showing top 40 nodes out of 351
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      0.98s 76.56%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0%     0%      0.98s 76.56%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0%     0%      0.98s 76.56%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0%     0%      0.98s 76.56%  net/http.(*conn).serve
+         0     0%     0%      0.98s 76.56%  net/http.serverHandler.ServeHTTP
+         0     0%     0%      0.97s 75.78%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%     0%      0.97s 75.78%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0%     0%      0.97s 75.78%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s  0.78%  0.78%      0.55s 42.97%  example.com/isureal-company/isureal.imageSignature
+         0     0%  0.78%      0.53s 41.41%  example.com/isureal-company/isureal.signedImageURL
+         0     0%  0.78%      0.39s 30.47%  example.com/isureal-company/isureal.newPostResponse
+         0     0%  0.78%      0.32s 25.00%  crypto/internal/fips140/hmac.(*HMAC).Sum
+         0     0%  0.78%      0.31s 24.22%  crypto/hmac.New
+     0.06s  4.69%  5.47%      0.31s 24.22%  crypto/internal/fips140/hmac.New[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+         0     0%  5.47%      0.31s 24.22%  example.com/isureal-company/isureal.newGetMeResponse
+     0.01s  0.78%  6.25%      0.29s 22.66%  crypto/internal/fips140/sha256.(*Digest).Write
+         0     0%  6.25%      0.28s 21.88%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0%  6.25%      0.28s 21.88%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0%  6.25%      0.28s 21.88%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+         0     0%  6.25%      0.27s 21.09%  crypto/internal/fips140/sha256.block
+     0.27s 21.09% 27.34%      0.27s 21.09%  crypto/internal/fips140/sha256.blockSHANI
+         0     0% 27.34%      0.26s 20.31%  example.com/isureal-company/isureal.listMemories
+     0.03s  2.34% 29.69%      0.25s 19.53%  crypto/internal/fips140/sha256.(*Digest).Sum
+         0     0% 29.69%      0.25s 19.53%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 29.69%      0.25s 19.53%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 29.69%      0.25s 19.53%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+         0     0% 29.69%      0.23s 17.97%  runtime.systemstack
+         0     0% 29.69%      0.20s 15.62%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 29.69%      0.20s 15.62%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 29.69%      0.20s 15.62%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+     0.01s  0.78% 30.47%      0.19s 14.84%  crypto/internal/fips140/sha256.(*Digest).checkSum
+         0     0% 30.47%      0.18s 14.06%  runtime.mallocgc
+         0     0% 30.47%      0.16s 12.50%  image/jpeg.(*decoder).decode
+     0.02s  1.56% 32.03%      0.16s 12.50%  image/jpeg.(*decoder).processSOS
+         0     0% 32.03%      0.16s 12.50%  image/jpeg.Decode
+         0     0% 32.03%      0.15s 11.72%  database/sql.(*DB).retry
+         0     0% 32.03%      0.14s 10.94%  database/sql.(*DB).QueryContext
+         0     0% 32.03%      0.14s 10.94%  database/sql.(*DB).QueryContext.func1
+         0     0% 32.03%      0.14s 10.94%  database/sql.(*DB).query
+         0     0% 32.03%      0.14s 10.94%  example.com/isureal-company/isureal.loadMemoryInteractions

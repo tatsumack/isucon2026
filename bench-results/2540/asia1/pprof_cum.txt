@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 338b45697b40ca96b2895111d589ed605392e889
+Type: cpu
+Time: 2026-10-31 02:03:56 UTC
+Duration: 70.02s, Total samples = 28.40s (40.56%)
+Showing nodes accounting for 14.62s, 51.48% of 28.40s total
+Dropped 772 nodes (cum <= 0.14s)
+Showing top 40 nodes out of 219
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     26.02s 91.62%  net/http.(*conn).serve
+     0.01s 0.035% 0.035%     25.86s 91.06%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.035%     25.86s 91.06%  net/http.serverHandler.ServeHTTP
+         0     0% 0.035%     25.85s 91.02%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0% 0.035%     25.85s 91.02%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s 0.035%  0.07%     25.82s 90.92%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s 0.035%  0.11%     25.81s 90.88%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.11%     25.77s 90.74%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.02s  0.07%  0.18%     15.77s 55.53%  example.com/isureal-company/isureal.imageSignature
+         0     0%  0.18%     14.37s 50.60%  example.com/isureal-company/isureal.signedImageURL
+     0.55s  1.94%  2.11%     12.45s 43.84%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.27s  0.95%  3.06%     11.78s 41.48%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.20s   0.7%  3.77%     11.55s 40.67%  crypto/internal/fips140/sha256.block
+    11.35s 39.96% 43.73%     11.35s 39.96%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 43.73%     10.33s 36.37%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 43.73%     10.32s 36.34%  example.com/isureal-company/isureal.listMemories
+         0     0% 43.73%     10.24s 36.06%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 43.73%     10.24s 36.06%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+     0.32s  1.13% 44.86%      8.84s 31.13%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.33s  1.16% 46.02%      7.87s 27.71%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.01s 0.035% 46.06%      7.56s 26.62%  crypto/hmac.New
+     1.53s  5.39% 51.44%      7.56s 26.62%  crypto/internal/fips140/hmac.New[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+         0     0% 51.44%      7.27s 25.60%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 51.44%      7.10s 25.00%  example.com/isureal-company/isureal.newPostResponse
+         0     0% 51.44%      5.96s 20.99%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 51.44%      5.45s 19.19%  database/sql.(*DB).retry
+         0     0% 51.44%      5.11s 17.99%  database/sql.(*DB).conn
+         0     0% 51.44%      5.09s 17.92%  example.com/isureal-company/isureal.newGetMeResponse
+         0     0% 51.44%      5.08s 17.89%  github.com/jackc/pgx/v5/stdlib.(*driverConnector).Connect
+         0     0% 51.44%      5.05s 17.78%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0% 51.44%      5.05s 17.78%  github.com/jackc/pgx/v5.connect
+         0     0% 51.44%      5.04s 17.75%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0% 51.44%      5.04s 17.75%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0% 51.44%      5.04s 17.75%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+     0.01s 0.035% 51.48%      4.92s 17.32%  database/sql.(*DB).QueryContext
+         0     0% 51.48%      4.91s 17.29%  database/sql.(*DB).QueryContext.func1
+         0     0% 51.48%      4.91s 17.29%  database/sql.(*DB).query
+         0     0% 51.48%      4.67s 16.44%  github.com/jmoiron/sqlx.GetContext
+         0     0% 51.48%      4.47s 15.74%  github.com/jmoiron/sqlx.(*DB).QueryRowxContext
+         0     0% 51.48%      4.14s 14.58%  github.com/jackc/pgx/v5/pgconn.(*PgConn).scramAuth
