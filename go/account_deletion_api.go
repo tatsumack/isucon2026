@@ -12,7 +12,7 @@ func deleteAccountHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		ctx := c.Request().Context()
 		userID := GetSession(c).UserID
-		tx, err := h.DB.BeginTxx(ctx, nil)
+		tx, err := h.DB.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelReadCommitted})
 		if err != nil {
 			return err
 		}
@@ -33,6 +33,9 @@ func deleteAccountHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		if _, err := tx.ExecContext(ctx, `UPDATE users SET status='deleted', deleted_at=clock_timestamp(), updated_at=clock_timestamp() WHERE id=$1`, userID); err != nil {
+			return err
+		}
+		if err := recordMembershipState(ctx, tx, userID, lockedUser.Region, false); err != nil {
 			return err
 		}
 		if _, err := tx.ExecContext(ctx, `UPDATE login_sessions SET active=false, invalidated_at=clock_timestamp(), reason='account_deletion' WHERE user_id=$1 AND active=true`, userID); err != nil {

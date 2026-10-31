@@ -2,6 +2,10 @@ SET session_replication_role = replica;
 
 BEGIN;
 
+-- initialize は通常リクエストを停止した状態で実行する。既存transactionは完了を待つ。
+-- user -> region -> window の通常更新と同時実行してresetを運用しない。
+LOCK TABLE users, posting_windows, membership, region_state, notification_history_state IN ACCESS EXCLUSIVE MODE;
+
 TRUNCATE ip_bans, login_sessions, administrator_sessions, friendships, friend_requests, follows, block_relations;
 
 DELETE FROM notifications WHERE created_at > (SELECT created_at FROM initial_data_boundary);
@@ -39,5 +43,13 @@ INSERT INTO follows (id, follower_id, followee_id, created_at, updated_at)
 SELECT id, follower_id, followee_id, created_at, updated_at FROM initial_follows;
 INSERT INTO block_relations (id, blocker_id, blocked_id, created_at)
 SELECT id, blocker_id, blocked_id, created_at FROM initial_block_relations;
+
+-- 初期windowはlegacy通知だけを使う。現在所属から過去通知を再生成しない。
+UPDATE posting_windows SET cut_epoch = NULL;
+TRUNCATE membership;
+UPDATE region_state SET current_epoch = 0;
+INSERT INTO membership(user_id, region, epoch, present)
+SELECT id, region, 0, true FROM users WHERE status = 'active';
+UPDATE notification_history_state SET ready = true, generation = generation + 1 WHERE id = true;
 
 COMMIT;

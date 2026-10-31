@@ -1,6 +1,7 @@
 package isureal
 
 import (
+	"context"
 	"os"
 
 	"github.com/jmoiron/sqlx"
@@ -38,6 +39,10 @@ func NewServer(config *Config) *echo.Echo {
 	err = db.Ping()
 	if err != nil {
 		panic("failed to ping database: " + err.Error())
+	}
+
+	if err := migrateNotificationHistory(context.Background(), db); err != nil {
+		panic("failed to migrate notification history: " + err.Error())
 	}
 
 	handlerContext := &HandlerContext{

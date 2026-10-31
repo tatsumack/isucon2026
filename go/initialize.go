@@ -17,6 +17,11 @@ type initializeResponse struct {
 
 func initializeHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
+		// 古いSSEを初期化の前後で切断する。他ノードはDBのgeneration更新で無効化する。
+		if h.NotificationHub != nil {
+			h.NotificationHub.Reset()
+			defer h.NotificationHub.Reset()
+		}
 		cmd := exec.Command("../sql/init.sh")
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr

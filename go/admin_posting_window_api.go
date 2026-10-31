@@ -1,6 +1,7 @@
 package isureal
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"time"
@@ -39,7 +40,7 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			seconds = *input.OnTimeSeconds
 		}
 		ctx := c.Request().Context()
-		tx, err := h.DB.BeginTxx(ctx, nil)
+		tx, err := h.DB.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelReadCommitted})
 		if err != nil {
 			return err
 		}
@@ -62,21 +63,41 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 		if _, err := tx.ExecContext(ctx, `UPDATE posting_windows SET ended_at = $2 WHERE region = $1 AND ended_at IS NULL`, region, startsAt); err != nil {
 			return err
 		}
-		windowID := uuid.NewString()
-		if _, err := tx.ExecContext(ctx, `
-   INSERT INTO posting_windows (id, region, local_date, starts_at, on_time_deadline)
-   VALUES ($1, $2, $3, $4, $5)
-  `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second)); err != nil {
+		// 排他lock取得後の別statementで世代を読む。legacyへ切戻しても世代を進める。
+		var epoch int64
+		if err := tx.GetContext(ctx, &epoch, `SELECT current_epoch FROM region_state WHERE region = $1`, region); err != nil {
 			return err
 		}
-		// 通知IDはUUID v7の形にする。ランダムなUUIDだと1行ごとに主キーの別のページへ書き込み、
-		// asiaの約4,900行でディスクの読み込みが多発するため、先頭を時刻にして書き込み先を寄せる。
-		// 後半はgen_random_uuid()の16文字目以降 (ランダムな部分とvariant) をそのまま使う。
+		var cutEpoch *int64
+		if h.Config.EventOnlyNotifications {
+			var ready bool
+			if err := tx.GetContext(ctx, &ready, `SELECT ready FROM notification_history_state WHERE id = true`); err != nil {
+				return err
+			}
+			if !ready {
+				return NewAPIError(http.StatusServiceUnavailable, "notification_history_not_initialized")
+			}
+			cutEpoch = &epoch
+		}
+		windowID := uuid.NewString()
 		if _, err := tx.ExecContext(ctx, `
+   INSERT INTO posting_windows (id, region, local_date, starts_at, on_time_deadline, cut_epoch)
+   VALUES ($1, $2, $3, $4, $5, $6)
+  `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second), cutEpoch); err != nil {
+			return err
+		}
+		if _, err := tx.ExecContext(ctx, `UPDATE region_state SET current_epoch = current_epoch + 1 WHERE region = $1`, region); err != nil {
+			return err
+		}
+		// flagは新windowの書込方式だけを選ぶ。reader/history追跡は常に両方式に対応。
+		// event方式ではrecipientの走査も通知の人数分INSERTも実行しない。
+		if !h.Config.EventOnlyNotifications {
+			if _, err := tx.ExecContext(ctx, `
    INSERT INTO notifications (id, user_id, posting_window_id, created_at)
    SELECT $4 || substr(gen_random_uuid()::text, 16), id, $2, $3 FROM users WHERE region = $1 AND status = 'active'
   `, region, windowID, startsAt, notificationIDPrefix(startsAt)); err != nil {
-			return err
+				return err
+			}
 		}
 		window, err := getPostingWindow(ctx, tx, windowID)
 		if err != nil {

@@ -85,7 +85,7 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 		secretKey := uuid.NewString()
 		hash := sha256.Sum256([]byte(secretKey))
 		ctx := c.Request().Context()
-		tx, err := h.DB.BeginTxx(ctx, nil)
+		tx, err := h.DB.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelReadCommitted})
 		if err != nil {
 			return err
 		}
@@ -107,6 +107,10 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusConflict, "username_taken")
 		}
 		if err != nil {
+			return err
+		}
+		// 通知方式を旧方式へ戻しても、将来の cut に必要な履歴の追跡は止めない。
+		if err := recordMembershipState(ctx, tx, user.ID, user.Region, true); err != nil {
 			return err
 		}
 		if err := tx.Commit(); err != nil {
@@ -208,7 +212,7 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusBadRequest, "invalid_profile")
 		}
 		ctx := c.Request().Context()
-		tx, err := h.DB.BeginTxx(ctx, nil)
+		tx, err := h.DB.BeginTxx(ctx, &sql.TxOptions{Isolation: sql.LevelReadCommitted})
 		if err != nil {
 			return err
 		}
@@ -246,6 +250,14 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 		if err != nil {
 			return err
+		}
+		if input.Region != nil && *input.Region != currentRegion {
+			if err := recordMembershipState(ctx, tx, user.ID, currentRegion, false); err != nil {
+				return err
+			}
+			if err := recordMembershipState(ctx, tx, user.ID, user.Region, true); err != nil {
+				return err
+			}
 		}
 		if err := user.setImageKey(); err != nil {
 			return err

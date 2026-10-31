@@ -21,8 +21,11 @@ func getNotificationsHandler(h *HandlerContext) echo.HandlerFunc {
 		ctx := c.Request().Context()
 		session := GetSession(c)
 		userID := session.UserID
-		var connectedAt time.Time
-		if err := h.DB.GetContext(ctx, &connectedAt, `SELECT clock_timestamp()`); err != nil {
+		var connection struct {
+			ConnectedAt time.Time `db:"connected_at"`
+			Generation  int64     `db:"generation"`
+		}
+		if err := h.DB.GetContext(ctx, &connection, `SELECT clock_timestamp() AS connected_at, generation FROM notification_history_state WHERE id = true`); err != nil {
 			return err
 		}
 		response := c.Response()
@@ -32,7 +35,7 @@ func getNotificationsHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := controller.Flush(); err != nil {
 			return nil
 		}
-		events, unsubscribe := h.NotificationHub.Subscribe(userID, session.Region, connectedAt)
+		events, unsubscribe := h.NotificationHub.Subscribe(userID, session.Region, connection.ConnectedAt, connection.Generation)
 		defer unsubscribe()
 		for {
 			select {
