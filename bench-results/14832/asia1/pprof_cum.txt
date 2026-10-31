@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 9ea6757cce7f94dda347e6ad26daea10eb1e7381
+Type: cpu
+Time: 2026-10-31 04:54:44 UTC
+Duration: 150s, Total samples = 80.48s (53.65%)
+Showing nodes accounting for 58.33s, 72.48% of 80.48s total
+Dropped 1205 nodes (cum <= 0.40s)
+Showing top 40 nodes out of 246
+      flat  flat%   sum%        cum   cum%
+     0.01s 0.012% 0.012%     76.17s 94.64%  net/http.(*conn).serve
+     0.01s 0.012% 0.025%     74.04s 92.00%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.025%     74.04s 92.00%  net/http.serverHandler.ServeHTTP
+     0.01s 0.012% 0.037%     74.03s 91.99%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.04s  0.05% 0.087%     73.92s 91.85%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.012% 0.099%     73.25s 91.02%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.04s  0.05%  0.15%     73.24s 91.00%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.15%     73.12s 90.85%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0%  0.15%     50.55s 62.81%  example.com/isureal-company/isureal.signedImageURL
+     0.40s   0.5%  0.65%     50.26s 62.45%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s 0.012%  0.66%     50.11s 62.26%  example.com/isureal-company/isureal.issueImageSignature
+     1.44s  1.79%  2.45%     46.11s 57.29%  crypto/internal/fips140/sha256.(*Digest).Sum
+     2.20s  2.73%  5.18%     43.88s 54.52%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.93s  2.40%  7.58%     42.89s 53.29%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.62s  0.77%  8.35%     39.66s 49.28%  crypto/internal/fips140/sha256.block
+    38.74s 48.14% 56.49%     39.03s 48.50%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 56.49%     33.79s 41.99%  example.com/isureal-company/isureal.listMemories
+         0     0% 56.49%     33.78s 41.97%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func55.1
+     0.01s 0.012% 56.50%     33.60s 41.75%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func56.1
+         0     0% 56.50%     33.59s 41.74%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func54
+         0     0% 56.50%     28.60s 35.54%  example.com/isureal-company/isureal.newPostResponse
+     0.01s 0.012% 56.51%     22.01s 27.35%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 56.51%     21.39s 26.58%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 56.51%     18.44s 22.91%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func20.1
+         0     0% 56.51%     18.44s 22.91%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func19.1
+     0.02s 0.025% 56.54%     18.44s 22.91%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func18
+     8.51s 10.57% 67.11%      8.51s 10.57%  internal/runtime/syscall/linux.Syscall6
+     0.03s 0.037% 67.15%      8.15s 10.13%  syscall.RawSyscall6
+     0.02s 0.025% 67.17%      6.95s  8.64%  syscall.Syscall
+         0     0% 67.17%      6.20s  7.70%  internal/poll.ignoringEINTRIO (inline)
+     0.01s 0.012% 67.18%      5.99s  7.44%  database/sql.withLock
+         0     0% 67.18%      5.46s  6.78%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func34.1
+         0     0% 67.18%      5.40s  6.71%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func35.1
+     0.01s 0.012% 67.20%      5.40s  6.71%  example.com/isureal-company/isureal.NewServer.createPostHandler.func33
+     0.02s 0.025% 67.22%      4.52s  5.62%  database/sql.(*DB).queryDC
+         0     0% 67.22%      4.43s  5.50%  database/sql.(*DB).retry
+     0.01s 0.012% 67.23%      4.33s  5.38%  github.com/jmoiron/sqlx.GetContext
+     0.02s 0.025% 67.26%      4.19s  5.21%  database/sql.(*DB).queryDC.func1
+     4.17s  5.18% 72.44%      4.17s  5.18%  runtime.memmove
+     0.03s 0.037% 72.48%      4.13s  5.13%  database/sql.ctxDriverQuery
