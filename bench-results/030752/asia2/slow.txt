@@ -1,0 +1,22 @@
+# pg_stat_statements の差分 (計測の前後)。total 747.7s。total_ms 降順 上位20
+calls	total_ms	mean_ms	rows	pct	query
+288	355776	1235.33	288	47.6	SELECT pg_advisory_xact_lock(hashtext($2 || $1::text))
+1198	82826	69.14	22482	11.1	SELECT id, data FROM image_objects WHERE id = ANY($1)
+743	72408	97.45	743	9.7	INSERT INTO image_objects (id, owner_user_id, data, media_type, created_at) VALUES ($1, $2, $3, $5, $4)
+6346	35929	5.66	6346	4.8	SELECT data FROM image_objects WHERE id = $1
+1993	31494	15.80	22804	4.2	SELECT r.id, r.post_id, r.reactor_id, r.image_id, r.reaction_type, r.created_at, r.replaced_at, r.deleted_at, u.id AS "reactor.id", u.username AS "reactor.username", u.secret_key_hash AS "reactor.secret_key_hash", u.display_name AS "reactor.display_name", u.bio AS "reactor.bio", u.profile_image_id A
+7383	23143	3.13	7383	3.1	SELECT u.secret_key_hash, i.media_type, ( u.profile_image_id = i.id OR EXISTS ( SELECT $2 FROM posts p WHERE p.image_id = i.id AND p.author_id = u.id AND p.deleted_at IS NULL ) OR EXISTS ( SELECT $3 FROM realmojis r JOIN posts p ON p.id = r.post_id AND p.deleted_at IS NULL JOIN users author ON autho
+1993	18511	9.29	11525	2.5	SELECT c.id, c.post_id, c.author_id, c.body, c.created_at, c.deleted_at, u.id AS "author.id", u.username AS "author.username", u.secret_key_hash AS "author.secret_key_hash", u.display_name AS "author.display_name", u.bio AS "author.bio", u.profile_image_id AS "author.profile_image_id", u.region AS "
+15	14974	998.28	29753	2.0	INSERT INTO notifications (id, user_id, posting_window_id, created_at) SELECT gen_random_uuid()::text, id, $2, $3 FROM users WHERE region = $1 AND status = $4
+6705	13509	2.01	6705	1.8	WITH me AS ( SELECT id, username, secret_key_hash, display_name, bio, profile_image_id, region, account_type, status FROM users WHERE id = $1 AND status = $2 ), friends AS ( SELECT CASE WHEN user_low_id = $1 THEN user_high_id ELSE user_low_id END AS id FROM friendships WHERE user_low_id = $1 OR user
+991	12384	12.50	19123	1.7	SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at, u.id AS "author.id", u.username AS "author.username", u.secret_key_hash AS "author.secret_key_hash
+753	12143	16.13	800	1.6	SELECT id, username, secret_key_hash, display_name, bio, profile_image_id, region, account_type, status FROM users WHERE status=$5 AND id<>$1 AND ($2=$6 OR (username,id)>($2,$3)) AND (search_username LIKE $4 OR search_display_name LIKE $4) AND NOT EXISTS ( SELECT $7 FROM block_relations b WHERE (b.b
+157	11463	73.01	22482	1.5	SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at FROM posts p JOIN posting_windows w ON w.id = p.posting_window_id JOIN image_objects i ON i.id = p.
+3008	8803	2.93	6008	1.2	SELECT id FROM users WHERE id IN ($1, $2) AND status=$3 ORDER BY id FOR NO KEY UPDATE
+1	6287	6286.57	1	0.8	SELECT (SELECT count(*) FROM users) users, (SELECT count(*) FROM posts) posts, (SELECT count(*) FROM realmojis) realmojis, (SELECT count(*) FROM image_objects) images, (SELECT count(*) FROM comments) comments
+2500	4361	1.74	14356	0.6	SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at, u.id AS "author.id", u.username AS "author.username", u.secret_key_hash AS "author.secret_key_hash
+741	2007	2.71	741	0.3	INSERT INTO posts (id, author_id, posting_window_id, image_id, caption, visibility, location_kind, latitude, longitude, locality, posted_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+1	1708	1707.68	187	0.2	DELETE FROM realmojis WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+284	1567	5.52	568	0.2	SELECT id FROM users WHERE id IN ($1, $2) ORDER BY id FOR NO KEY UPDATE
+2007	1518	0.76	7909	0.2	SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at, u.id AS "author.id", u.username AS "author.username", u.secret_key_hash AS "author.secret_key_hash
+1	1382	1381.83	30030	0.2	DELETE FROM notifications WHERE created_at > (SELECT created_at FROM initial_data_boundary)

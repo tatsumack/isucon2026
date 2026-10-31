@@ -1,0 +1,49 @@
+File: isureal
+Build ID: ef7c17585ac0a32dfe3df4d397a9319d642409da
+Type: cpu
+Time: 2026-10-31 03:17:47 UTC
+Duration: 150s, Total samples = 2.81s ( 1.87%)
+Showing nodes accounting for 2.04s, 72.60% of 2.81s total
+Dropped 287 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 338
+      flat  flat%   sum%        cum   cum%
+     0.72s 25.62% 25.62%      0.72s 25.62%  internal/runtime/syscall/linux.Syscall6
+     0.20s  7.12% 32.74%      0.20s  7.12%  crypto/internal/fips140/sha256.blockSHANI
+     0.18s  6.41% 39.15%      0.18s  6.41%  runtime.memmove
+     0.10s  3.56% 42.70%      0.37s 13.17%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.09s  3.20% 45.91%      0.09s  3.20%  runtime.memclrNoHeapPointers
+     0.07s  2.49% 48.40%      0.07s  2.49%  runtime.futex
+     0.06s  2.14% 50.53%      0.45s 16.01%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.05s  1.78% 52.31%      0.32s 11.39%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.04s  1.42% 53.74%      0.04s  1.42%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.04s  1.42% 55.16%      0.05s  1.78%  runtime.(*unwinder).resolveInternal
+     0.03s  1.07% 56.23%      0.03s  1.07%  runtime.findfunc
+     0.03s  1.07% 57.30%      0.03s  1.07%  runtime.gopark
+     0.03s  1.07% 58.36%      0.03s  1.07%  runtime.pcvalue
+     0.02s  0.71% 59.07%      0.03s  1.07%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.02s  0.71% 59.79%      0.02s  0.71%  indexbytebody
+     0.02s  0.71% 60.50%      0.06s  2.14%  net/http.(*Transport).roundTrip
+     0.02s  0.71% 61.21%      0.15s  5.34%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.02s  0.71% 61.92%      0.02s  0.71%  runtime.(*gcBitsArena).tryAlloc
+     0.02s  0.71% 62.63%      0.02s  0.71%  runtime.(*mspan).writeHeapBitsSmall
+     0.02s  0.71% 63.35%      0.05s  1.78%  runtime.(*stkframe).getStackMap
+     0.02s  0.71% 64.06%      0.04s  1.42%  runtime.mallocgcSmallNoscan
+     0.02s  0.71% 64.77%      0.02s  0.71%  runtime.nanotime
+     0.02s  0.71% 65.48%      0.03s  1.07%  runtime.newproc1
+     0.02s  0.71% 66.19%      0.02s  0.71%  runtime.nextFreeFast
+     0.02s  0.71% 66.90%      0.02s  0.71%  runtime.typePointers.next
+     0.02s  0.71% 67.62%      0.02s  0.71%  runtime.usleep
+     0.01s  0.36% 67.97%      0.02s  0.71%  bytes.Cut
+     0.01s  0.36% 68.33%      0.02s  0.71%  compress/flate.(*huffmanBitWriter).indexTokens
+     0.01s  0.36% 68.68%      0.05s  1.78%  context.(*cancelCtx).Done
+     0.01s  0.36% 69.04%      0.05s  1.78%  context.(*cancelCtx).propagateCancel
+     0.01s  0.36% 69.40%      0.27s  9.61%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.36% 69.75%      0.05s  1.78%  database/sql.convertAssignRows
+     0.01s  0.36% 70.11%      0.04s  1.42%  encoding/json.(*encodeState).reflectValue
+     0.01s  0.36% 70.46%      0.02s  0.71%  encoding/json.mapEncoder.encode
+     0.01s  0.36% 70.82%      0.52s 18.51%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s  0.36% 71.17%      0.29s 10.32%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.01s  0.36% 71.53%      0.02s  0.71%  github.com/labstack/echo/v5.(*Response).WriteHeader
+     0.01s  0.36% 71.89%      0.12s  4.27%  internal/poll.(*FD).Accept
+     0.01s  0.36% 72.24%      0.29s 10.32%  io.ReadAtLeast
+     0.01s  0.36% 72.60%      0.02s  0.71%  net.(*TCPConn).SetKeepAliveConfig

@@ -1,0 +1,551 @@
+# ベンチマーカー行動分析
+requests=30938 users(host)=310 t=0 は最後の POST /api/initialize (見つかった数: 1)
+
+## リージョン別リクエスト数 / 国コード / UA
+[('asia', 19691), ('europe', 6587), ('america', 4660)]
+[('JP', 9386), ('KR', 5606), ('CN', 3720), ('GB', 2832), ('DE', 1968), ('US', 1814), ('FR', 1787), ('CA', 1470), ('MX', 1376), ('AU', 979)]
+   30938  Go-http-client/1.1
+
+## host と user_id の対応
+user_idが付かないhost: 23
+複数user_idを持つhost: 32
+複数hostから来るuser_id: 262
+複数リージョンにアクセスするhost: 6
+
+## フェーズ別のエンドポイント (初期化前 / 初期化後10秒 / 負荷走行)
+### before_init: 0 req
+### init+10s: 205 req
+      58  GET /api/images/:id?exp&sig
+      39  POST /api/auth/login
+      22  POST /api/auth/register
+      16  PUT /api/follows/:id
+      13  POST /api/friend-requests
+      12  POST /api/friend-requests/:id/accept
+      10  GET /api/memories?month
+       5  GET /api/me
+       5  GET /api/relationships/friends
+       5  GET /api/relationships/friends?beforeId&beforeUpdatedAt
+       5  GET /api/me/export
+       4  PUT /api/admin/users/:id/certification
+       3  PUT /api/me/profile-image
+       2  PUT /api/blocks/:id
+       1  POST /api/initialize
+### load: 30733 req
+    8308  GET /api/images/:id?exp&sig
+    2874  POST /api/auth/login
+    2347  GET /api/memories?month
+    2206  GET /api/feeds/friends
+    1430  POST /api/friend-requests
+    1161  GET /api/feeds/friends-of-friends
+    1127  GET /api/feeds/public
+     980  GET /api/posting-window/current
+     949  POST /api/friend-requests/:id/accept
+     897  GET /api/posts/:id
+     815  GET /api/notifications
+     757  GET /api/feeds/following
+     749  POST /api/posts
+     749  GET /api/posts/me/current
+     651  GET /api/users?q
+
+## エンドポイント別 件数・ステータス・reqtime
+   count  users     p50     p99  statuses  endpoint
+    8366    275   0.050   0.742  200:8135,403:231  GET /api/images/:id?exp&sig
+    2913    298   0.041   1.111  200:2385,401:510,403:18  POST /api/auth/login
+    2357    263   0.111   0.780  200:2357  GET /api/memories?month
+    2206    231   0.151   0.630  200:2206  GET /api/feeds/friends
+    1443    222   0.134   0.558  201:1389,409:47,404:7  POST /api/friend-requests
+    1161    143   0.180   0.936  200:1161  GET /api/feeds/friends-of-friends
+    1128    146   0.130   0.649  200:1128  GET /api/feeds/public
+     980    231   0.134   0.495  200:980  GET /api/posting-window/current
+     961    120   0.168   0.686  200:959,403:1,404:1  POST /api/friend-requests/:id/accept
+     897    141   0.135   0.635  200:868,404:29  GET /api/posts/:id
+     815    231  10.549  60.002  200:599,499:216  GET /api/notifications
+     757    139   0.141   0.608  200:757  GET /api/feeds/following
+     750    232   0.251   0.755  200:745,404:5  GET /api/posts/me/current
+     749    231   0.462   1.322  201:749  POST /api/posts
+     651    199   0.129   0.545  200:651  GET /api/users?q
+     515    120   0.162   0.735  200:514,404:1  GET /api/users/:id
+     498    190   0.111   0.607  200:498  GET /api/relationships/incoming-requests
+     444     46   0.038   0.938  204:444  POST /api/auth/logout
+     413     31   0.026   0.548  200:413  GET /api/memories/:date
+     342     91   0.130   0.783  200:342  GET /api/posts/:id/realmojis
+     303     37   0.237   0.636  201:300,403:3  POST /api/posts/:id/realmojis
+     284     87   0.145   0.707  200:283,403:1  GET /api/posts/:id/comments
+     273     34   0.228   0.959  201:271,403:2  POST /api/posts/:id/comments
+     261    230   0.103   0.206  200:261  GET /api/relationships/friends
+     244    243   0.653   9.660  201:243,409:1  POST /api/auth/register
+     222    139   0.639   1.741  204:119,400:75,403:23,502:5  PUT /api/me/profile-image
+     182     30   0.661   2.741  200:182  GET /api/me/export
+     160     95   0.141   0.505  204:160  PUT /api/follows/:id
+     137    129   0.107   0.391  200:131,401:5,403:1  GET /api/me
+     103     91   0.613   4.616  200:103  PATCH /api/me
+      82     70   0.194   0.969  200:81,403:1  PATCH /api/posts/:id
+      54     22   0.141   0.583  204:54  DELETE /api/comments/:id
+      48     23   0.138   0.928  204:48  DELETE /api/realmojis/:id
+      42     36   0.544   0.950  200:42  GET /api/feeds/friends-of-friends?beforeId&beforePostedAt&beforeScore
+      40     38   0.175   0.471  204:40  DELETE /api/posts/:id
+      22     21   0.142   0.343  200:22  GET /api/relationships/outgoing-requests
+      18      1   1.101   4.759  201:18  POST /api/admin/posting-window
+      18     18   0.176   0.509  200:18  POST /api/friend-requests/:id/cancel
+      16      1   0.011   0.399  204:16  PUT /api/admin/users/:id/certification
+      15     14   0.137   0.475  204:15  PUT /api/blocks/:id
+      15     13   0.149   0.233  200:15  GET /api/relationships/following
+      13      5   0.006   0.035  200:13  GET /api/relationships/friends?beforeId&beforeUpdatedAt
+      10     10   0.159   0.356  200:10  GET /api/relationships/followers
+       8      8   0.200   0.460  200:8  POST /api/friend-requests/:id/reject
+       5      4   0.114   0.309  204:5  DELETE /api/follows/:id
+       5      4   0.143   0.761  204:5  DELETE /api/friendships/:id
+       3      3   1.090   1.183  204:3  POST /api/me/account-deletion
+       3      2   0.508   0.540  200:3  GET /api/feeds/friends?beforeId&beforePostedAt
+       2      2   0.277   0.277  204:2  DELETE /api/me/profile-image
+       1      1   4.814   4.814  200:1  POST /api/initialize
+       1      1   0.016   0.016  200:1  POST /api/admin/auth/login
+       1      1   0.002   0.002  409:1  DELETE /api/admin/users/:id/certification
+       1      1   0.067   0.067  204:1  POST /api/admin/auth/logout
+
+## 最初の5リクエスト (ユーザーの入口)
+   112  POST /api/auth/register > POST /api/auth/login > PUT /api/me/profile-image > GET /api/me > GET /api/images/:id?exp&sig
+    23  POST /api/auth/login > GET /api/memories?month > GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig
+    22  POST /api/auth/register > POST /api/auth/login > PUT /api/me/profile-image > PUT /api/me/profile-image > PUT /api/me/profile-image
+    15  POST /api/auth/register > POST /api/auth/login > POST /api/friend-requests > GET /api/users?q > POST /api/friend-requests
+    14  POST /api/auth/register > POST /api/auth/login > PATCH /api/me > GET /api/users?q > POST /api/friend-requests
+    13  POST /api/auth/login > POST /api/auth/login > POST /api/auth/login > POST /api/auth/login > POST /api/auth/login
+    11  GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig > GET /api/images/:id?exp&sig
+    10  POST /api/auth/login > GET /api/notifications > GET /api/notifications > GET /api/posting-window/current > POST /api/posts
+    10  POST /api/auth/register > POST /api/auth/login > GET /api/users?q > POST /api/friend-requests > GET /api/users?q
+     8  POST /api/auth/register > POST /api/auth/login > PATCH /api/me > PUT /api/follows/:id > PUT /api/follows/:id
+     7  POST /api/auth/register > POST /api/auth/login > PATCH /api/me > POST /api/friend-requests > POST /api/friend-requests
+     6  POST /api/auth/register > POST /api/auth/login > PUT /api/follows/:id > GET /api/posting-window/current > GET /api/notifications
+     5  POST /api/auth/register > POST /api/auth/login > POST /api/friend-requests > PUT /api/follows/:id > POST /api/friend-requests/:id/accept
+     5  POST /api/auth/register > POST /api/auth/login > GET /api/users?q > POST /api/friend-requests > POST /api/friend-requests
+     5  POST /api/auth/register > POST /api/auth/login > PATCH /api/me > PUT /api/follows/:id > GET /api/posting-window/current
+
+## 遷移 (同一ユーザーで A の次に B) 上位40
+    4867  GET /api/images/:id?exp&sig  ->  GET /api/images/:id?exp&sig
+    1360  POST /api/auth/login  ->  GET /api/memories?month
+    1294  GET /api/memories?month  ->  GET /api/images/:id?exp&sig
+    1245  GET /api/images/:id?exp&sig  ->  POST /api/auth/login
+     749  GET /api/posting-window/current  ->  POST /api/posts
+     728  POST /api/friend-requests/:id/accept  ->  POST /api/friend-requests/:id/accept
+     727  GET /api/posts/me/current  ->  GET /api/images/:id?exp&sig
+     723  POST /api/posts  ->  GET /api/feeds/friends
+     683  GET /api/notifications  ->  GET /api/posting-window/current
+     647  GET /api/users?q  ->  POST /api/friend-requests
+     519  POST /api/auth/login  ->  POST /api/auth/login
+     503  GET /api/feeds/friends  ->  GET /api/memories?month
+     489  GET /api/memories?month  ->  GET /api/posts/me/current
+     442  POST /api/auth/logout  ->  POST /api/auth/login
+     429  POST /api/friend-requests  ->  POST /api/friend-requests
+     415  POST /api/friend-requests  ->  GET /api/users?q
+     413  POST /api/auth/login  ->  GET /api/memories/:date
+     326  GET /api/images/:id?exp&sig  ->  POST /api/auth/logout
+     297  GET /api/posts/:id  ->  GET /api/images/:id?exp&sig
+     292  GET /api/feeds/public  ->  GET /api/posts/:id
+     258  GET /api/feeds/friends  ->  GET /api/posts/:id
+     254  GET /api/memories?month  ->  GET /api/memories?month
+     248  GET /api/memories?month  ->  GET /api/relationships/friends
+     244  POST /api/auth/register  ->  POST /api/auth/login
+     243  GET /api/images/:id?exp&sig  ->  GET /api/feeds/friends
+     240  GET /api/feeds/friends  ->  GET /api/posts/me/current
+     234  GET /api/feeds/public  ->  GET /api/images/:id?exp&sig
+     228  GET /api/posting-window/current  ->  GET /api/notifications
+     218  GET /api/feeds/friends  ->  GET /api/images/:id?exp&sig
+     212  GET /api/relationships/incoming-requests  ->  POST /api/friend-requests/:id/accept
+     209  GET /api/memories/:date  ->  POST /api/auth/login
+     205  GET /api/feeds/friends  ->  GET /api/feeds/friends
+     199  GET /api/feeds/friends-of-friends  ->  GET /api/posts/:id
+     177  POST /api/auth/login  ->  GET /api/me/export
+     170  GET /api/images/:id?exp&sig  ->  GET /api/feeds/friends-of-friends
+     168  GET /api/images/:id?exp&sig  ->  GET /api/users/:id
+     161  GET /api/images/:id?exp&sig  ->  GET /api/relationships/incoming-requests
+     155  GET /api/images/:id?exp&sig  ->  GET /api/feeds/public
+     149  POST /api/auth/login  ->  GET /api/images/:id?exp&sig
+     148  GET /api/me/export  ->  POST /api/auth/login
+
+## A の次に来るもの (件数の多いエンドポイント上位15について、後続の上位5)
+### GET /api/images/:id?exp&sig
+   58.4%  GET /api/images/:id?exp&sig
+   14.9%  POST /api/auth/login
+    3.9%  POST /api/auth/logout
+    2.9%  GET /api/feeds/friends
+    2.0%  GET /api/feeds/friends-of-friends
+### POST /api/auth/login
+   47.0%  GET /api/memories?month
+   17.9%  POST /api/auth/login
+   14.3%  GET /api/memories/:date
+    6.1%  GET /api/me/export
+    5.1%  GET /api/images/:id?exp&sig
+### GET /api/memories?month
+   55.2%  GET /api/images/:id?exp&sig
+   20.8%  GET /api/posts/me/current
+   10.8%  GET /api/memories?month
+   10.6%  GET /api/relationships/friends
+    2.2%  POST /api/auth/login
+### GET /api/feeds/friends
+   22.8%  GET /api/memories?month
+   11.7%  GET /api/posts/:id
+   10.9%  GET /api/posts/me/current
+    9.9%  GET /api/images/:id?exp&sig
+    9.3%  GET /api/feeds/friends
+### POST /api/friend-requests
+   29.7%  POST /api/friend-requests
+   28.8%  GET /api/users?q
+    9.9%  GET /api/posting-window/current
+    5.3%  GET /api/notifications
+    4.6%  GET /api/feeds/friends
+### GET /api/feeds/friends-of-friends
+   17.1%  GET /api/posts/:id
+   12.7%  GET /api/images/:id?exp&sig
+   11.4%  GET /api/feeds/friends
+   11.1%  GET /api/feeds/friends-of-friends
+    8.8%  POST /api/friend-requests
+### GET /api/feeds/public
+   25.9%  GET /api/posts/:id
+   20.7%  GET /api/images/:id?exp&sig
+    6.8%  GET /api/feeds/friends-of-friends
+    6.5%  GET /api/feeds/public
+    6.4%  GET /api/users/:id
+### GET /api/posting-window/current
+   76.4%  POST /api/posts
+   23.3%  GET /api/notifications
+    0.3%  GET /api/posting-window/current
+### POST /api/friend-requests/:id/accept
+   75.8%  POST /api/friend-requests/:id/accept
+    4.6%  GET /api/feeds/friends
+    4.3%  GET /api/feeds/friends-of-friends
+    4.3%  GET /api/feeds/public
+    3.7%  GET /api/notifications
+### GET /api/posts/:id
+   33.1%  GET /api/images/:id?exp&sig
+   10.5%  GET /api/users/:id
+    9.5%  GET /api/feeds/friends
+    6.8%  GET /api/feeds/friends-of-friends
+    6.8%  GET /api/feeds/public
+### GET /api/notifications
+   83.8%  GET /api/posting-window/current
+    7.9%  GET /api/notifications
+    3.1%  GET /api/feeds/friends
+    1.1%  GET /api/images/:id?exp&sig
+    1.1%  GET /api/memories?month
+### GET /api/feeds/following
+   18.1%  GET /api/feeds/friends
+   13.3%  GET /api/feeds/public
+   12.8%  GET /api/feeds/friends-of-friends
+   12.7%  GET /api/posts/:id
+   11.1%  GET /api/feeds/following
+### GET /api/posts/me/current
+   96.9%  GET /api/images/:id?exp&sig
+    0.7%  GET /api/feeds/public
+    0.4%  GET /api/feeds/following
+    0.4%  GET /api/memories?month
+    0.4%  GET /api/feeds/friends
+### POST /api/posts
+   96.5%  GET /api/feeds/friends
+    2.5%  GET /api/posts/me/current
+    0.7%  GET /api/images/:id?exp&sig
+    0.3%  GET /api/notifications
+### GET /api/users?q
+   99.4%  POST /api/friend-requests
+    0.6%  GET /api/notifications
+
+## 同一ユーザー・同一エンドポイントのアクセス間隔 (秒) → ポーリング周期
+       n     p10     p50     p90  endpoint
+    8091    0.00    0.01    2.36  GET /api/images/:id?exp&sig
+    2615    0.01    0.12    1.32  POST /api/auth/login
+    2094    0.06    0.52    8.13  GET /api/memories?month
+    1975    0.12    1.33    8.17  GET /api/feeds/friends
+    1221    0.08    0.29    8.15  POST /api/friend-requests
+    1018    0.10    0.90    8.18  GET /api/feeds/friends-of-friends
+     982    0.11    0.88    8.37  GET /api/feeds/public
+     841    0.05    0.20    6.97  POST /api/friend-requests/:id/accept
+     756    0.19    1.31    9.17  GET /api/posts/:id
+     749    0.11    7.52   14.91  GET /api/posting-window/current
+     618    0.12    1.28   10.24  GET /api/feeds/following
+     584    5.17    8.50   15.54  GET /api/notifications
+     518    5.01    8.99   15.61  POST /api/posts
+     518    5.18    9.18   15.96  GET /api/posts/me/current
+     452    0.20    0.49    8.91  GET /api/users?q
+     398    0.13    1.01    5.95  POST /api/auth/logout
+     395    0.17    1.65   11.33  GET /api/users/:id
+     382    0.08    0.83    5.51  GET /api/memories/:date
+     308    0.57    6.69   19.71  GET /api/relationships/incoming-requests
+     266    0.30    0.98    8.73  POST /api/posts/:id/realmojis
+     251    0.20    1.74   11.61  GET /api/posts/:id/realmojis
+     239    0.19    1.08    9.06  POST /api/posts/:id/comments
+     197    0.15    2.02   12.93  GET /api/posts/:id/comments
+     152    0.35    2.02   12.84  GET /api/me/export
+      83    0.50    0.50    0.50  PUT /api/me/profile-image
+      65    0.03    0.17   13.60  PUT /api/follows/:id
+      32    0.38    3.30   12.75  DELETE /api/comments/:id
+      31    0.03    1.27   25.50  GET /api/relationships/friends
+      25    0.45    4.06   11.86  DELETE /api/realmojis/:id
+      17    0.00    3.00    3.01  POST /api/admin/posting-window
+      15    0.01    3.06    8.36  PUT /api/admin/users/:id/certification
+      12    0.46    2.65   10.14  PATCH /api/me
+      12    5.91    8.88   14.77  PATCH /api/posts/:id
+       8    0.02    3.96   25.41  GET /api/me
+       8    0.03    0.04    1.92  GET /api/relationships/friends?beforeId&beforeUpdatedAt
+       6    0.87    7.38    8.61  GET /api/feeds/friends-of-friends?beforeId&beforePostedAt&beforeScore
+       2    6.64    6.68    6.68  DELETE /api/posts/:id
+       2    0.13   14.69   14.69  GET /api/relationships/following
+       1    0.03    0.03    0.03  POST /api/auth/register
+       1    7.34    7.34    7.34  GET /api/feeds/friends?beforeId&beforePostedAt
+
+## 書き込み直後の読み取り (POST/PUT/PATCH/DELETE の次の GET と間隔)
+### POST /api/auth/login
+    1360  <1s   GET /api/memories?month
+     413  <1s   GET /api/memories/:date
+     177  <1s   GET /api/me/export
+     149  <1s   GET /api/images/:id?exp&sig
+### POST /api/friend-requests
+     415  <1s   GET /api/users?q
+     142  <1s   GET /api/posting-window/current
+      64  <1s   GET /api/feeds/friends
+      64  <1s   GET /api/feeds/public
+### POST /api/posts
+     723  <1s   GET /api/feeds/friends
+      19  <1s   GET /api/posts/me/current
+       5  <1s   GET /api/images/:id?exp&sig
+       2  <1s   GET /api/notifications
+### POST /api/posts/:id/realmojis
+      75  <1s   GET /api/posts/:id/realmojis
+      52  <1s   GET /api/feeds/friends-of-friends
+      47  <1s   GET /api/feeds/friends
+      43  <1s   GET /api/feeds/public
+### POST /api/posts/:id/comments
+      76  <1s   GET /api/posts/:id/comments
+      52  <1s   GET /api/feeds/friends
+      34  <1s   GET /api/feeds/public
+      33  <1s   GET /api/feeds/friends-of-friends
+### POST /api/friend-requests/:id/accept
+      41  <1s   GET /api/feeds/friends
+      41  <1s   GET /api/feeds/friends-of-friends
+      41  <1s   GET /api/feeds/public
+      26  >=1s  GET /api/notifications
+### PUT /api/me/profile-image
+     119  <1s   GET /api/me
+### PUT /api/follows/:id
+      60  <1s   GET /api/posting-window/current
+       8  <1s   GET /api/feeds/friends-of-friends
+       7  <1s   GET /api/feeds/public
+       6  <1s   GET /api/feeds/following
+### PATCH /api/posts/:id
+      15  <1s   GET /api/relationships/incoming-requests
+      10  <1s   GET /api/users?q
+       9  <1s   GET /api/feeds/friends
+       8  <1s   GET /api/feeds/following
+### DELETE /api/comments/:id
+      23  <1s   GET /api/feeds/friends
+       8  <1s   GET /api/feeds/friends-of-friends
+       8  <1s   GET /api/feeds/following
+       5  <1s   GET /api/feeds/public
+### PATCH /api/me
+      28  <1s   GET /api/users?q
+       7  <1s   GET /api/posting-window/current
+       4  <1s   GET /api/feeds/following
+       4  <1s   GET /api/feeds/friends
+### DELETE /api/realmojis/:id
+      14  <1s   GET /api/feeds/friends-of-friends
+      13  <1s   GET /api/feeds/friends
+      11  <1s   GET /api/feeds/public
+       6  <1s   GET /api/feeds/following
+### DELETE /api/posts/:id
+      20  <1s   GET /api/posting-window/current
+       8  >=1s  GET /api/images/:id?exp&sig
+       6  >=1s  GET /api/notifications
+       6  >=1s  GET /api/memories?month
+### POST /api/friend-requests/:id/cancel
+       6  <1s   GET /api/feeds/friends
+       6  <1s   GET /api/feeds/public
+       5  <1s   GET /api/feeds/friends-of-friends
+       1  <1s   GET /api/feeds/following
+### PUT /api/blocks/:id
+       4  <1s   GET /api/feeds/friends
+       3  <1s   GET /api/feeds/friends-of-friends
+       3  <1s   GET /api/feeds/public
+       2  <1s   GET /api/notifications
+
+## エラー (4xx/5xx/499) の後の行動
+### 510  401 POST /api/auth/login
+     509  same(retry)
+       1  GET /api/me
+### 231  403 GET /api/images/:id?exp&sig
+     189  same(retry)
+      14  GET /api/notifications
+      11  (end)
+       7  GET /api/feeds/friends
+### 216  499 GET /api/notifications
+     191  GET /api/posting-window/current
+      10  GET /api/feeds/friends
+       6  GET /api/memories?month
+       4  POST /api/friend-requests/:id/accept
+### 75  400 PUT /api/me/profile-image
+      53  same(retry)
+      22  (end)
+### 47  409 POST /api/friend-requests
+      11  GET /api/users?q
+       6  GET /api/feeds/public
+       5  GET /api/notifications
+       4  GET /api/relationships/incoming-requests
+### 29  404 GET /api/posts/:id
+      10  GET /api/images/:id?exp&sig
+       5  GET /api/feeds/friends
+       4  GET /api/feeds/public
+       3  GET /api/feeds/friends-of-friends
+### 23  403 PUT /api/me/profile-image
+      23  same(retry)
+### 18  403 POST /api/auth/login
+      12  (end)
+       6  same(retry)
+### 7  404 POST /api/friend-requests
+       4  GET /api/users?q
+       2  GET /api/posting-window/current
+       1  same(retry)
+### 5  404 GET /api/posts/me/current
+       3  GET /api/notifications
+       1  GET /api/me
+       1  GET /api/images/:id?exp&sig
+### 5  401 GET /api/me
+       4  (end)
+       1  POST /api/auth/logout
+### 5  502 PUT /api/me/profile-image
+       5  same(retry)
+### 3  403 POST /api/posts/:id/realmojis
+       1  GET /api/feeds/friends
+       1  GET /api/feeds/friends-of-friends
+       1  GET /api/feeds/following
+### 2  403 POST /api/posts/:id/comments
+       2  GET /api/feeds/public
+### 1  409 DELETE /api/admin/users/:id/certification
+       1  PUT /api/admin/users/:id/certification
+### 1  409 POST /api/auth/register
+       1  POST /api/auth/login
+### 1  403 GET /api/me
+       1  PUT /api/me/profile-image
+### 1  403 POST /api/friend-requests/:id/accept
+       1  same(retry)
+### 1  404 POST /api/friend-requests/:id/accept
+       1  GET /api/notifications
+### 1  404 GET /api/users/:id
+       1  DELETE /api/realmojis/:id
+
+## ユーザーごとのリクエスト数・セッション長 (秒)・最後のリクエスト
+requests/user p10=20 p50=64 p90=176 max=1858
+span(s)       p10=1.7 p50=29.0 p90=60.2
+終了10秒以上前に止まったユーザー: 308 / 310
+   217  200 GET /api/relationships/friends
+    22  400 PUT /api/me/profile-image
+    18  200 GET /api/images/:id?exp&sig
+    12  403 POST /api/auth/login
+    11  200 GET /api/memories?month
+    11  403 GET /api/images/:id?exp&sig
+     6  200 POST /api/auth/login
+     4  401 GET /api/me
+     3  200 GET /api/memories/:date
+     2  200 GET /api/relationships/friends?beforeId&beforeUpdatedAt
+     1  204 POST /api/admin/auth/logout
+     1  204 POST /api/auth/logout
+
+## 時間帯ごとのアクティブユーザー数・リクエスト数 (5秒ごと、t=初期化からの秒)
+t=    0  users=    2  req=    10  writes: /api/auth/register:2, /api/auth/login:2, /api/initialize:1
+t=    5  users=   34  req=   195  writes: /api/auth/login:37, /api/auth/register:20, /api/follows/:id:16
+t=   10  users=   32  req=    54  writes: /api/blocks/:id:2, /api/friend-requests/:id/accept:1
+t=   15  users=   35  req=   897  writes: /api/auth/login:158, /api/friend-requests:26, /api/auth/logout:24
+t=   20  users=   29  req=  1054  writes: /api/auth/login:172, /api/auth/logout:37, /api/friend-requests:22
+t=   25  users=   45  req=  1674  writes: /api/auth/login:206, /api/friend-requests:52, /api/friend-requests/:id/accept:41
+t=   30  users=   56  req=  1338  writes: /api/auth/login:201, /api/friend-requests:66, /api/auth/logout:33
+t=   35  users=   95  req=  2553  writes: /api/auth/login:267, /api/friend-requests:132, /api/friend-requests/:id/accept:61
+t=   40  users=   83  req=  2053  writes: /api/auth/login:262, /api/friend-requests:101, /api/auth/logout:40
+t=   45  users=  184  req=  3484  writes: /api/auth/login:300, /api/friend-requests:275, /api/friend-requests/:id/accept:128
+t=   50  users=  200  req=  2814  writes: /api/auth/login:308, /api/friend-requests:138, /api/friend-requests/:id/accept:89
+t=   55  users=  260  req=  3774  writes: /api/friend-requests:347, /api/auth/login:260, /api/posts:165
+t=   60  users=  226  req=  3420  writes: /api/friend-requests/:id/accept:213, /api/auth/login:210, /api/friend-requests:139
+t=   65  users=  204  req=  3070  writes: /api/auth/login:280, /api/friend-requests/:id/accept:116, /api/posts:116
+t=   70  users=  250  req=  3128  writes: /api/auth/login:233, /api/friend-requests/:id/accept:118, /api/posts:112
+t=   75  users=  258  req=  1281  writes: /api/friend-requests/:id/accept:28, /api/auth/login:17, /api/posts/:id/realmojis:16
+t=   80  users=    1  req=    23  writes: 
+t=   85  users=    2  req=    25  writes: 
+t=   90  users=    1  req=    22  writes: 
+t=   95  users=    2  req=    24  writes: 
+t=  100  users=    2  req=    22  writes: 
+t=  105  users=    1  req=    23  writes: 
+
+## 管理者のリクエスト (投稿期間の開始タイミング)
+t=    4.82  asia  POST /api/admin/auth/login  200
+t=    5.32  asia  DELETE /api/admin/users/947bff71-0221-4ed8-893a-b4a89eb94f63/certification  409
+t=    9.54  asia  PUT /api/admin/users/d5466789-94c2-4144-954b-c5a51e48caac/certification  204
+t=    9.55  asia  PUT /api/admin/users/b4393b43-b330-4105-a103-358b2552f154/certification  204
+t=    9.56  asia  PUT /api/admin/users/94426918-4b3c-481f-8332-b1a8a3610a75/certification  204
+t=    9.57  asia  PUT /api/admin/users/c4e3b885-7e50-4457-ad62-e14b39a47218/certification  204
+t=   15.67  asia  POST /api/admin/posting-window  201
+t=   18.67  asia  POST /api/admin/posting-window  201
+t=   21.67  asia  POST /api/admin/posting-window  201
+t=   24.67  asia  POST /api/admin/posting-window  201
+t=   25.80  asia  PUT /api/admin/users/904b1e7a-acb1-4f51-b080-db05476d28e7/certification  204
+t=   27.67  asia  POST /api/admin/posting-window  201
+t=   30.67  asia  POST /api/admin/posting-window  201
+t=   30.71  asia  PUT /api/admin/users/16b1ec15-43c8-490a-a8f9-9b91b954b242/certification  204
+t=   33.67  asia  POST /api/admin/posting-window  201
+t=   34.77  asia  PUT /api/admin/users/8109225c-0c37-42f3-9e84-34162db5e275/certification  204
+t=   36.67  asia  POST /api/admin/posting-window  201
+t=   36.72  asia  PUT /api/admin/users/61f2e6cd-0daa-417e-9221-f2b6f7c5c8a1/certification  204
+t=   39.67  asia  POST /api/admin/posting-window  201
+t=   39.74  asia  PUT /api/admin/users/3ef3efab-5424-4716-9c05-97c537c5f0c5/certification  204
+t=   42.67  asia  POST /api/admin/posting-window  201
+t=   45.13  asia  PUT /api/admin/users/76a19850-e713-4866-9deb-0787409aa57f/certification  204
+t=   45.67  asia  POST /api/admin/posting-window  201
+t=   46.17  asia  PUT /api/admin/users/ac1721c7-3449-4aa9-a3cc-ad754893bf1d/certification  204
+t=   48.67  asia  POST /api/admin/posting-window  201
+t=   51.67  asia  POST /api/admin/posting-window  201
+t=   54.31  asia  PUT /api/admin/users/1fb0169c-3a68-4fb2-8ad1-d11284120665/certification  204
+t=   54.67  asia  POST /api/admin/posting-window  201
+t=   57.67  asia  POST /api/admin/posting-window  201
+t=   58.48  asia  PUT /api/admin/users/1f647ad1-bf20-402f-baac-19663de4a195/certification  204
+t=   66.67  asia  POST /api/admin/posting-window  201
+t=   66.67  asia  POST /api/admin/posting-window  201
+t=   66.67  asia  POST /api/admin/posting-window  201
+t=   66.84  asia  PUT /api/admin/users/5c223e76-c1c1-4334-b4e7-03cba48d13de/certification  204
+t=   67.02  asia  PUT /api/admin/users/45529624-5c90-457f-b633-437e73167bf2/certification  204
+t=   70.07  asia  PUT /api/admin/users/e8a824d8-53be-4b8d-a2ce-a7d1951dc698/certification  204
+t=   75.67  asia  POST /api/admin/auth/logout  204
+
+## 投稿期間ごとの投稿〜友達フィード完了 (M2)
+期間の割り当て: 巡回の順番ごとの、期間開始から3秒以内に閉じた SSE の数 (多いものを採用)
+    419  asia → europe → america  ← 採用
+    402  america → europe → asia
+    389  europe → america → asia
+    233  asia → america → europe
+    224  europe → asia → america
+     51  america → asia → europe
+admin = POST /api/admin/posting-window の reqtime、lag = 期間開始からそのリージョンで最初に SSE が閉じるまで
+  start     end  region   admin   lag  posts  done
+  17.52   25.80  asia      1.85  0.26     18    18
+  18.74   27.74  europe    0.07  0.32      6     6
+  21.69   30.70  america   0.02  0.43      6     6
+  25.80   34.77  asia      1.13  0.48     17    17
+  27.74   36.72  europe    0.07  0.32     13    13
+  30.70   39.73  america   0.04  0.12     12    12
+  34.77   45.13  asia      1.10  0.00     27    27
+  36.72   46.17  europe    0.05  0.35     27    26
+  39.73   53.43  america   0.07  0.59     29    29
+  45.13   54.30  asia      2.46  0.20     64    56
+  46.17   58.48  europe    0.50  0.60     49    45
+  53.43   61.18  america   4.76  0.31     37    36
+  54.30   66.84  asia      2.64  0.50    103   103
+  58.48   67.01  europe    3.81  0.21     60    60
+  61.18   70.07  america   3.51  0.06     49    48
+  66.84    last  asia      0.17  3.53    104   104
+  67.01    last  europe    0.35  0.17     67    67
+  70.07    last  america   3.40     -      5     4
+lag が無い・6秒超の期間 (割り当てが疑わしい): 1 / 18
+
+### リージョン別 (秒は p50/p90。通知 = 期間開始→本人の SSE が閉じる、反応 = SSE→投稿開始、開始→投稿 = 期間開始→投稿開始、投稿→フィード = 投稿開始→友達フィード完了)
+region         posts  done rate           通知           反応        開始→投稿      投稿→フィード
+asia             229   221  97%   0.48/ 0.53   1.30/ 2.65   2.02/ 4.87   0.34/ 0.69
+europe           155   150  97%   0.21/ 0.60   1.24/ 1.85   1.86/ 8.20   0.82/ 1.30
+america          133   131  98%   0.12/ 0.60   1.45/ 3.26   2.10/ 7.13   0.82/ 1.29
+(all)            517   502  97%   0.31/ 0.54   1.28/ 2.46   2.02/ 6.63   0.60/ 1.16
+最後の期間 (終了時刻不明。ログの最後 t=131.39 までに完了したもの)
+asia last        104   104 100%   3.55/ 3.55   1.18/ 2.52   4.73/ 6.07   0.67/ 0.95
+europe last       67    67 100%   0.17/ 0.17   1.21/ 1.99   1.38/ 2.15   1.05/ 1.30
+america last       5     4  80%      -/    -      -/    -   0.19/ 1.66   1.15/ 1.31
