@@ -105,6 +105,12 @@ type viewerContext struct {
 // 本人・当日投稿済みか・ブロック・友達・友達の友達を1回のクエリで取得する。
 // europe / america からは DB への往復1回ごとに約100ms かかるため、以前の5往復を1往復にまとめている。
 func loadViewerContext(ctx context.Context, db sqlx.QueryerContext, viewerID string) (viewerContext, error) {
+	return loadViewerContextWithRelations(ctx, db, viewerID, true, true)
+}
+
+// friends/public feeds do not need a two-hop graph. Other callers retain the
+// complete context for visibility checks and recommendation scoring.
+func loadViewerContextWithRelations(ctx context.Context, db sqlx.QueryerContext, viewerID string, needFriends, needFriendsOfFriends bool) (viewerContext, error) {
 	viewer := viewerContext{Friends: map[string]bool{}, FriendsOfFriends: map[string]bool{}, MutualFriends: map[string]int{}}
 	var row struct {
 		User
@@ -133,16 +139,16 @@ func loadViewerContext(ctx context.Context, db sqlx.QueryerContext, viewerID str
       SELECT json_agg(CASE WHEN blocker_id = $1 THEN blocked_id ELSE blocker_id END)
       FROM block_relations WHERE blocker_id = $1 OR blocked_id = $1
     ), '[]') AS blocked_ids,
-    COALESCE((SELECT json_agg(id) FROM friends), '[]') AS friend_ids,
-    COALESCE((
+    CASE WHEN $2 THEN COALESCE((SELECT json_agg(id) FROM friends), '[]') ELSE '[]'::json END AS friend_ids,
+    CASE WHEN $3 THEN COALESCE((
       SELECT json_agg(other_id) FROM (
         SELECT fr.user_high_id AS other_id FROM friendships fr WHERE fr.user_low_id IN (SELECT id FROM friends)
         UNION ALL
         SELECT fr.user_low_id FROM friendships fr WHERE fr.user_high_id IN (SELECT id FROM friends)
       ) others
-    ), '[]') AS friend_of_friend_ids
+    ), '[]') ELSE '[]'::json END AS friend_of_friend_ids
   FROM me
- `, viewerID)
+ `, viewerID, needFriends, needFriendsOfFriends)
 	if err != nil {
 		return viewer, err
 	}
