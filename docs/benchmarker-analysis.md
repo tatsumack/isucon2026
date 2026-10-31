@@ -88,4 +88,4 @@ for h in asia1 europe1 america1; do ssh $h sudo cat /var/log/nginx/access.log > 
 ./bench-timeline.py $D asia=$D/asia1.log europe=$D/europe1.log america=$D/america1.log
 ```
 
-`bench-results/` は gitignore されている。最終ベンチの前に、`X-User-Id` の付与と追加したログのフィールドを外す。
+生ログ (`*.log`) と `timeline.tsv` は gitignore している。`report.txt` はコミットしてよい。最終ベンチの前に、`X-User-Id` の付与と追加したログのフィールドを外す。
