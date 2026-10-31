@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"crypto/rand"
+	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -34,12 +36,16 @@ func TestImageSignerPrimeMatchesLocal(t *testing.T) {
 	}
 
 	// 同じプロセスの中では、依頼先の処理も同じキャッシュに書き込む。依頼元が受け取った結果を入れたことを確かめるため、
-	// 依頼先は応答を返す前に、自分が書き込んだキャッシュを消す。
+	// 依頼先は応答を返す前に、その依頼で書き込んだキャッシュを消す。
 	newServer := func() *httptest.Server {
 		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			body, _ := io.ReadAll(r.Body)
+			var input imageSignaturesRequest
+			json.Unmarshal(body, &input)
+			r.Body = io.NopCloser(bytes.NewReader(body))
 			recorder := httptest.NewRecorder()
 			e.ServeHTTP(recorder, r)
-			for _, target := range batch.targets {
+			for _, target := range input.Targets {
 				imageSignatureCache.Delete(string(target.Key) + ":" + target.ImageID)
 			}
 			w.WriteHeader(recorder.Code)
