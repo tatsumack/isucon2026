@@ -33,6 +33,7 @@ func NewServer(config *Config) *echo.Echo {
 		panic("failed to open database: " + err.Error())
 	}
 	db.SetMaxOpenConns(30)
+	db.SetMaxIdleConns(30)
 	err = db.Ping()
 	if err != nil {
 		panic("failed to ping database: " + err.Error())
