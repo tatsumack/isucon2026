@@ -28,11 +28,20 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 			ImageData []byte `db:"image_data"`
 		}
 		if err := h.DB.SelectContext(ctx, &posts, `
+   WITH user_posts AS MATERIALIZED (
+     SELECT p.*
+     FROM posts p
+     WHERE p.author_id = $1 AND p.deleted_at IS NULL
+   )
    SELECT `+postColumns+`, i.data AS image_data
-   FROM posts p
+   FROM user_posts p
    JOIN posting_windows w ON w.id = p.posting_window_id
-   JOIN image_objects i ON i.id = p.image_id
-   WHERE p.author_id = $1 AND p.deleted_at IS NULL
+   JOIN LATERAL (
+     SELECT io.data
+     FROM image_objects io
+     WHERE io.id = p.image_id
+     LIMIT 1
+   ) i ON true
    ORDER BY p.posted_at, p.id
   `, userID); err != nil {
 			return err
