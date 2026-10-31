@@ -4,7 +4,9 @@ import (
 	"net"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
+	"time"
 )
 
 type Config struct {
@@ -23,6 +25,10 @@ type Config struct {
 	ImageDir string
 	// 画像署名の計算を依頼するサーバの URL。asia1 だけで設定する (image_signature_remote.go)
 	SigningURLs []string
+	// asia1 で、直接来たリクエストを転送されたリクエストより後回しにする (priority.go)
+	PriorityLimit   int
+	PriorityMaxWait time.Duration
+	PriorityScope   string
 }
 
 func ConfigFromEnv() *Config {
@@ -39,6 +45,10 @@ func ConfigFromEnv() *Config {
 		TrustedPeers: strings.FieldsFunc(os.Getenv("ISUREAL_TRUSTED_PEERS"), func(r rune) bool { return r == ',' || r == ' ' }),
 		ImageDir:     envOrDefault("ISUREAL_IMAGE_DIR", "/home/isucon/images"),
 		SigningURLs:  strings.FieldsFunc(os.Getenv("ISUREAL_SIGNING_URLS"), func(r rune) bool { return r == ',' || r == ' ' }),
+
+		PriorityLimit:   envIntOrDefault("ISUREAL_PRIORITY_LIMIT", 0),
+		PriorityMaxWait: envDurationOrDefault("ISUREAL_PRIORITY_MAX_WAIT", time.Second),
+		PriorityScope:   envOrDefault("ISUREAL_PRIORITY_SCOPE", "heavy"),
 	}
 }
 
@@ -54,6 +64,20 @@ func (c *Config) DatabaseDSN() string {
 
 func envOrDefault(key, defaultValue string) string {
 	if value := os.Getenv(key); value != "" {
+		return value
+	}
+	return defaultValue
+}
+
+func envIntOrDefault(key string, defaultValue int) int {
+	if value, err := strconv.Atoi(os.Getenv(key)); err == nil {
+		return value
+	}
+	return defaultValue
+}
+
+func envDurationOrDefault(key string, defaultValue time.Duration) time.Duration {
+	if value, err := time.ParseDuration(os.Getenv(key)); err == nil {
 		return value
 	}
 	return defaultValue
