@@ -6,7 +6,6 @@ import (
 	"errors"
 	"net/http"
 	"slices"
-	"strings"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v5"
@@ -28,9 +27,6 @@ type searchUsersResponse struct {
 func normalizeSearchText(value string) string {
 	return norm.NFC.String(cases.Fold().String(norm.NFC.String(value)))
 }
-
-// LIKEのエスケープ文字はデフォルトのバックスラッシュ。
-var likeEscaper = strings.NewReplacer(`\`, `\\`, `%`, `\%`, `_`, `\_`)
 
 // refreshUserSearchColumns は、全ユーザーの search_username / search_display_name を
 // normalizeSearchText で計算し直す。正規化はGoでしかできないため、/initialize で呼ぶ。
@@ -75,16 +71,9 @@ func searchUsersHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 		ctx := c.Request().Context()
 		viewer := GetSession(c).UserID
-		pattern := "%" + likeEscaper.Replace(normalizeSearchText(input.Q)) + "%"
-		var users []User
-		if err := h.DB.SelectContext(ctx, &users, `SELECT `+strings.Join(userColumns, ", ")+` FROM users
-  WHERE status='active' AND id<>$1 AND ($2='' OR (username,id)>($2,$3))
-    AND (search_username LIKE $4 OR search_display_name LIKE $4)
-    AND NOT EXISTS (
-      SELECT 1 FROM block_relations b
-      WHERE (b.blocker_id = $1 AND b.blocked_id = users.id) OR (b.blocked_id = $1 AND b.blocker_id = users.id)
-    )
-  ORDER BY username, id LIMIT 51`, viewer, input.BeforeUsername, input.BeforeID, pattern); err != nil {
+		// 絞り込みは asia1 のメモリで行い、ヒットした最大51件だけ DB から読む (user_search_index.go)
+		users, err := h.UserSearch.Search(ctx, viewer, input.BeforeUsername, input.BeforeID, input.Q, 51)
+		if err != nil {
 			return err
 		}
 		items := make([]relationshipUserResponse, 0)

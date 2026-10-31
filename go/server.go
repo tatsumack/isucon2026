@@ -18,6 +18,7 @@ type HandlerContext struct {
 	NotificationHub *NotificationHub
 	Images          *ImageStore
 	Signer          *ImageSigner
+	UserSearch      *UserSearchIndex
 }
 
 func NewServer(config *Config) *echo.Echo {
@@ -49,6 +50,7 @@ func NewServer(config *Config) *echo.Echo {
 		NotificationHub: NewNotificationHub(db),
 		Images:          NewImageStore(config, db),
 		Signer:          NewImageSigner(config),
+		UserSearch:      NewUserSearchIndex(config, db),
 	}
 	go handlerContext.NotificationHub.listen(context.Background(), config.DatabaseDSN())
 	e.Use(IPBanMiddleware(handlerContext))
@@ -64,6 +66,8 @@ func NewServer(config *Config) *echo.Echo {
 	// asia1 の画像を europe1 / america1 から読む内部 API (image_store.go)。/api/ の外に置き、nginx からは届かない
 	e.GET("/internal/images/:imageId", getInternalImageHandler(handlerContext), trustedPeerOnly(handlerContext))
 	e.POST("/internal/images/reset", resetInternalImagesHandler(handlerContext), trustedPeerOnly(handlerContext))
+	// /api/initialize が asia1 以外に届いたときに、asia1 のユーザー検索の索引を作り直す (user_search_index.go)
+	e.POST("/internal/user-search/reset", resetInternalUserSearchHandler(handlerContext), trustedPeerOnly(handlerContext))
 	// asia1 から画像署名の計算を受ける内部 API (image_signature_remote.go)
 	e.POST("/internal/image-signatures", postInternalImageSignaturesHandler(handlerContext), trustedPeerOnly(handlerContext))
 

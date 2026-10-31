@@ -112,6 +112,7 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := tx.Commit(); err != nil {
 			return err
 		}
+		h.UserSearch.Add(user.ID, user.Username, user.DisplayName)
 		return c.JSON(http.StatusCreated, registerResponse{SecretKey: secretKey, User: newSessionUserResponse(user)})
 	}
 }
@@ -252,6 +253,9 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 		if err := tx.Commit(); err != nil {
 			return err
+		}
+		if input.DisplayName != nil {
+			h.UserSearch.UpdateDisplayName(user.ID, user.DisplayName)
 		}
 		return c.JSON(http.StatusOK, updateMeResponse(newGetMeResponse(user)))
 	}

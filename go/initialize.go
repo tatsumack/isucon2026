@@ -26,6 +26,10 @@ func initializeHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := refreshUserSearchColumns(c.Request().Context(), h.DB); err != nil {
 			return err
 		}
+		// ユーザー検索の索引を DB から作り直す。asia1 以外では asia1 に依頼する (user_search_index.go)
+		if err := h.UserSearch.Reset(c.Request().Context()); err != nil {
+			return err
+		}
 		// ベンチ中に書かれた画像のファイルを消す。初期データの画像のファイルは残す (image_store.go)
 		if err := h.Images.Reset(c.Request().Context()); err != nil {
 			return err
