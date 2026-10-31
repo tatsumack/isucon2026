@@ -12,12 +12,13 @@ ISUCONの競技用リポジトリ。サーバ上の `/home/isucon/webapp` をそ
 - `etc/env/<host>.sh`: ホストごとの `/home/isucon/env.sh`
 - `deploy.sh`: `./deploy.sh <branch> [host...]` でデプロイする。host省略時は全台
 - `bench-capture.sh`: ベンチ中の計測スクリプト。`/bench-analyze` スキルから使う
+- `install-tools.sh`: 計測ツール (alp) をアプリサーバに入れる。各サーバで1回だけ実行する
 - `docs/manual.md`: 当日マニュアル。`docs/regulation.md`: レギュレーション。当日マニュアルの内容がレギュレーションより優先される
 
 ## 進め方
 - 1施策 = 1ブランチ。mainへは、ベンチが通ってスコアが下がらないことを確認してからマージする
 - 着手前にチームのSlackに作業を宣言する (`[着手] isu1 / ブランチ名 / 内容`)。Claudeが作業を始めるときも、宣言済みか確認する
-- ベンチはポータルから人間が実行する。Claudeは実行できない
+- ベンチはポータル (https://portal.isucon.net/contestant/benchmark_jobs) から実行する。ポータル以外から同様のリクエストを送って実行してもよい (運営に確認済み)
 - 序盤にベンチマーカーの行動分析 (どのAPIをどの順番・条件で叩いているか) を行う。手順は `docs/benchmarker-analysis.md`
 
 ## 守ること

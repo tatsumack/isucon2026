@@ -46,6 +46,7 @@ sudo cp -r etc/postgresql/. /etc/postgresql/
 sudo chown -R postgres:postgres /etc/postgresql/16/main
 sudo chmod 640 /etc/postgresql/16/main/pg_hba.conf
 sudo systemctl restart postgresql
+sudo -u postgres psql -d isureal -X -q -c 'CREATE EXTENSION IF NOT EXISTS pg_stat_statements'
 EOS
 }
 
