@@ -1,6 +1,8 @@
 package isureal
 
 import (
+	"context"
+	"sync"
 	"testing"
 	"time"
 
@@ -32,5 +34,31 @@ func TestNotificationIDMakesUUIDv7(t *testing.T) {
 			t.Fatalf("%q is not after %q", id, prev)
 		}
 		prev = id
+	}
+}
+
+func TestNotificationWakeCoalescesAndListenerStops(t *testing.T) {
+	hub := &NotificationHub{wake: make(chan struct{}, 1)}
+	var wg sync.WaitGroup
+	for range 100 {
+		wg.Go(func() { hub.wakePoll() })
+	}
+	wg.Wait()
+	if len(hub.wake) != 1 {
+		t.Fatal("wake hints were not coalesced")
+	}
+	<-hub.wake
+	hub.wakePoll()
+	if len(hub.wake) != 1 {
+		t.Fatal("next event could not wake poller")
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	done := make(chan struct{})
+	go func() { hub.listen(ctx, "invalid DSN"); close(done) }()
+	select {
+	case <-done:
+	case <-time.After(time.Second):
+		t.Fatal("listener failed to stop on cancellation")
 	}
 }

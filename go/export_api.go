@@ -24,9 +24,12 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		// 画像本体は image_objects ではなくファイルから読む (image_store.go)。JOIN は画像の行がある投稿に絞るために残す
-		var posts []Post
+		var posts []struct {
+			Post
+			InitialImage bool `db:"initial_image"`
+		}
 		if err := h.DB.SelectContext(ctx, &posts, `
-   SELECT `+postColumns+`
+   SELECT `+postColumns+`, i.created_at <= (SELECT created_at FROM initial_data_boundary) AS initial_image
    FROM posts p
    JOIN posting_windows w ON w.id = p.posting_window_id
    JOIN image_objects i ON i.id = p.image_id
@@ -54,14 +57,10 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 				return err
 			}
 			// エクスポートは過去の画像をまとめて読むため、画像取得用のメモリのキャッシュに入れない (あれば使う)
-			data, _, err := h.Images.LoadWithoutCaching(ctx, post.ImageID)
-			if err != nil {
+			if err := h.Images.writeExportImage(ctx, image, post.ImageID, post.InitialImage); err != nil {
 				return err
 			}
-			if _, err := image.Write(data); err != nil {
-				return err
-			}
-			items = append(items, exportPostResponse{createPostResponse: newPostResponse(post, author), ImagePath: imagePath})
+			items = append(items, exportPostResponse{createPostResponse: newPostResponse(post.Post, author), ImagePath: imagePath})
 		}
 		manifest, err := writer.Create("posts.json")
 		if err != nil {

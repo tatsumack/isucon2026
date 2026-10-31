@@ -14,12 +14,17 @@ var uploadBufferPool = sync.Pool{New: func() any { return new(bytes.Buffer) }}
 // 不正なリクエストで確保した大きなバッファは使い回さない
 const maxPooledUploadBuffer = 8 << 20
 
+// 一時的な事前確保の上限と、pool に保持する上限は別にする。
+// nginx の受信上限まで事前確保し、大きな本文の倍々の拡張を避ける。
+// これは本文のサイズ制限ではない。ヒントより長い本文も最後まで読む。
+const maxPreallocatedUploadBuffer = 32 << 20
+
 // readUpload は r を使い回しのバッファに読む。sizeHint (Content-Length など) が正なら先に確保して、読みながら拡張しない。
 // 使い終わったら releaseUpload でバッファを返す。
 func readUpload(r io.Reader, sizeHint int64) (*bytes.Buffer, error) {
 	buf := uploadBufferPool.Get().(*bytes.Buffer)
 	buf.Reset()
-	if sizeHint > 0 && sizeHint <= maxPooledUploadBuffer {
+	if sizeHint > 0 && sizeHint <= maxPreallocatedUploadBuffer {
 		// ReadFrom は読む前に最低 512 バイトの空きを求めるので、その分も確保する
 		buf.Grow(int(sizeHint) + bytes.MinRead)
 	}
