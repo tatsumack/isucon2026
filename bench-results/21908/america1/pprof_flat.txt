@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 94ed40882230fd585afe863efe8bc593421617b9
+Type: cpu
+Time: 2026-10-31 06:18:37 UTC
+Duration: 150s, Total samples = 8.93s ( 5.95%)
+Showing nodes accounting for 7.75s, 86.79% of 8.93s total
+Dropped 401 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 114
+      flat  flat%   sum%        cum   cum%
+     3.77s 42.22% 42.22%      3.77s 42.22%  crypto/internal/fips140/sha256.blockSHANI
+     0.88s  9.85% 52.07%      0.88s  9.85%  runtime.memmove
+     0.83s  9.29% 61.37%      5.44s 60.92%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.52s  5.82% 67.19%      6.20s 69.43%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.48s  5.38% 72.56%      0.48s  5.38%  internal/runtime/syscall/linux.Syscall6
+     0.38s  4.26% 76.82%      4.81s 53.86%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.17s  1.90% 78.72%      0.42s  4.70%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.16s  1.79% 80.52%      7.06s 79.06%  example.com/isureal-company/isureal.computeImageSignature
+     0.11s  1.23% 81.75%      3.88s 43.45%  crypto/internal/fips140/sha256.block
+     0.11s  1.23% 82.98%      0.11s  1.23%  runtime.memclrNoHeapPointers
+     0.07s  0.78% 83.76%      0.07s  0.78%  internal/byteorder.BEUint32 (inline)
+     0.06s  0.67% 84.43%      0.08s   0.9%  crypto/internal/fips140.RecordApproved
+     0.04s  0.45% 84.88%      0.12s  1.34%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.04s  0.45% 85.33%      0.06s  0.67%  runtime.tryDeferToSpanScan
+     0.02s  0.22% 85.55%      0.06s  0.67%  runtime.mallocgcSmallNoscan
+     0.02s  0.22% 85.78%      0.12s  1.34%  runtime.netpoll
+     0.01s  0.11% 85.89%      0.08s   0.9%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.01s  0.11% 86.00%      0.10s  1.12%  database/sql.withLock
+     0.01s  0.11% 86.11%      7.91s 88.58%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.01s  0.11% 86.23%      7.86s 88.02%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.01s  0.11% 86.34%      0.13s  1.46%  github.com/labstack/echo/v5.(*Response).Write
+     0.01s  0.11% 86.45%      0.05s  0.56%  net/http.(*Transport).roundTrip
+     0.01s  0.11% 86.56%      0.10s  1.12%  net/http.(*conn).readRequest
+     0.01s  0.11% 86.67%      8.16s 91.38%  net/http.(*conn).serve
+     0.01s  0.11% 86.79%      0.24s  2.69%  runtime.schedule
+         0     0% 86.79%      0.10s  1.12%  bufio.(*Reader).Read
+         0     0% 86.79%      0.21s  2.35%  bufio.(*Writer).Flush
+         0     0% 86.79%      0.12s  1.34%  bufio.(*Writer).Write
+         0     0% 86.79%      0.11s  1.23%  database/sql.(*DB).QueryContext
+         0     0% 86.79%      0.11s  1.23%  database/sql.(*DB).QueryContext.func1
+         0     0% 86.79%      0.11s  1.23%  database/sql.(*DB).query
+         0     0% 86.79%      0.07s  0.78%  database/sql.(*DB).queryDC
+         0     0% 86.79%      0.06s  0.67%  database/sql.(*DB).queryDC.func1
+         0     0% 86.79%      0.11s  1.23%  database/sql.(*DB).retry
+         0     0% 86.79%      0.06s  0.67%  database/sql.ctxDriverQuery
+         0     0% 86.79%      0.07s  0.78%  encoding/json.(*Decoder).Decode
+         0     0% 86.79%      0.27s  3.02%  example.com/isureal-company/isureal.(*ImageStore).Load
+         0     0% 86.79%      0.21s  2.35%  example.com/isureal-company/isureal.(*ImageStore).fetchFromOrigin
+         0     0% 86.79%      0.27s  3.02%  example.com/isureal-company/isureal.(*ImageStore).load
+         0     0% 86.79%      0.24s  2.69%  example.com/isureal-company/isureal.(*ImageStore).load.func1
