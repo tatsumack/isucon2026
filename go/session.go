@@ -127,40 +127,37 @@ func CreateLoginSession(db *sqlx.DB, userID string) (*Session, error) {
 	return session, nil
 }
 
+// ログインセッションの作成を、ユーザーごとに直列化する advisory lock の名前空間。
+// 2引数版の advisory lock は1引数版 (posting_window_lock.go) とキー空間が分かれている。
+const loginSessionLockClass = 1
+
+// createLoginSessionTx は、ユーザーの有効なセッションを新しい1つに置き換える。
+// ユーザーが有効でなければ sql.ErrNoRows を包んだエラーを返す。
+//
+// 「有効なセッションは1ユーザー1つ」を保つため、同じユーザーのログイン同士を advisory lock で直列化する。
+// users の行ロックは取らない。投稿やコメントなど、本人の行をロックしたまま処理するトランザクションを待たないため。
+// ロックを取った後の文は新しいスナップショットで実行されるので、先に終わったログインのセッションも無効化できる。
 func createLoginSessionTx(ctx context.Context, tx *sqlx.Tx, userID string) (*Session, error) {
 	randomToken := uuid.NewString()
 	tokenHashBytes := sha256.Sum256([]byte(randomToken))
 	tokenHash := hex.EncodeToString(tokenHashBytes[:])
-	var lockedUserID string
-	if err := tx.GetContext(ctx, &lockedUserID, `SELECT id FROM users WHERE id = $1 AND status = 'active' FOR NO KEY UPDATE`, userID); err != nil {
-		return nil, fmt.Errorf("failed to lock user: %w", err)
+	if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock($1, hashtext($2))`, loginSessionLockClass, userID); err != nil {
+		return nil, fmt.Errorf("failed to lock login session: %w", err)
 	}
-	if _, err := tx.ExecContext(ctx, `
-  UPDATE login_sessions
-  SET active = false, invalidated_at = clock_timestamp(), reason = 'replaced'
-  WHERE user_id = $1 AND active = true
- `, userID); err != nil {
-		return nil, fmt.Errorf("failed to invalidate sessions: %w", err)
-	}
-	sessionID := uuid.NewString()
-	if _, err := tx.ExecContext(ctx, `
+	var session Session
+	err := tx.GetContext(ctx, &session, `
+  WITH invalidated AS (
+    UPDATE login_sessions
+    SET active = false, invalidated_at = clock_timestamp(), reason = 'replaced'
+    WHERE user_id = $1 AND active = true
+  )
   INSERT INTO login_sessions (id, user_id, token_hash)
-  VALUES ($1, $2, $3)
- `, sessionID, userID, tokenHash); err != nil {
-		return nil, fmt.Errorf("failed to insert session: %w", err)
-	}
-	session, err := getLoginSession(ctx, tx, sessionID)
+  SELECT $2, $1, $3 WHERE EXISTS (SELECT 1 FROM users WHERE id = $1 AND status = 'active')
+  RETURNING user_id, token_hash, created_at
+ `, userID, uuid.NewString(), tokenHash)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create session: %w", err)
 	}
 	session.Token = randomToken
-	return session, nil
-}
-
-func getLoginSession(ctx context.Context, db sqlx.QueryerContext, sessionID string) (*Session, error) {
-	var session Session
-	if err := sqlx.GetContext(ctx, db, &session, `SELECT user_id, token_hash, created_at FROM login_sessions WHERE id = $1`, sessionID); err != nil {
-		return nil, fmt.Errorf("failed to get session: %w", err)
-	}
 	return &session, nil
 }
