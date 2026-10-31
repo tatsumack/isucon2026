@@ -3,7 +3,6 @@ package isureal
 import (
 	"database/sql"
 	"errors"
-	"io"
 	"mime/multipart"
 	"net/http"
 	"time"
@@ -49,7 +48,7 @@ func replaceRealMojiHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer file.Close()
-		data, err := io.ReadAll(file)
+		data, err := readAllSized(file, input.Image.Size)
 		if err != nil {
 			return err
 		}

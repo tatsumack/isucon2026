@@ -11,6 +11,9 @@ import (
 	"sync"
 	"sync/atomic"
 	"testing"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 func TestImageStoreOriginSaveLoadReset(t *testing.T) {
@@ -145,5 +148,80 @@ func TestTrustedPeerOnlyRejectsOthers(t *testing.T) {
 	r.RemoteAddr = "192.168.2.10:1"
 	if isTrustedPeer(r, &Config{}) {
 		t.Error("no peer is trusted without ISUREAL_TRUSTED_PEERS")
+	}
+}
+
+func TestImageStoreSaveWarmsCache(t *testing.T) {
+	store := &ImageStore{dir: t.TempDir()}
+	id := uuid.NewString()
+	body := []byte("saved image")
+	if err := store.Save(id, body); err != nil {
+		t.Fatal(err)
+	}
+	cached, ok := imageDataCache.get(id)
+	if !ok || cached.initial || !bytes.Equal(cached.data, body) {
+		t.Fatal("saved image not cached")
+	}
+	// A fresh store can still read the durable copy without the memory cache.
+	fresh := &ImageStore{dir: store.dir}
+	data, initial, err := fresh.load(context.Background(), id)
+	if err != nil || initial || !bytes.Equal(data, body) {
+		t.Fatalf("disk copy: %q %v %v", data, initial, err)
+	}
+}
+
+func TestImageStoreLoadCancellationAndCachePublication(t *testing.T) {
+	var requests atomic.Int32
+	started := make(chan struct{}, 10)
+	release := make(chan struct{})
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requests.Add(1)
+		started <- struct{}{}
+		<-release
+		w.Write([]byte("shared image"))
+	}))
+	defer server.Close()
+	var once sync.Once
+	unblock := func() { once.Do(func() { close(release) }) }
+	defer unblock()
+	store := &ImageStore{dir: t.TempDir(), originURL: server.URL, client: server.Client()}
+	id := uuid.NewString()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	first := make(chan error, 1)
+	go func() { _, _, err := store.Load(ctx, id); first <- err }()
+	select {
+	case <-started:
+	case <-time.After(5 * time.Second):
+		t.Fatal("fetch did not start")
+	}
+	cancel()
+	select {
+	case err := <-first:
+		if !errors.Is(err, context.Canceled) {
+			t.Fatalf("canceled load: %v", err)
+		}
+	case <-time.After(5 * time.Second):
+		t.Fatal("canceled caller remained blocked")
+	}
+	var wg sync.WaitGroup
+	for range 10 {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			data, initial, err := store.Load(context.Background(), id)
+			if err != nil || initial || string(data) != "shared image" {
+				t.Errorf("shared load: %q %v %v", data, initial, err)
+			}
+		}()
+	}
+	unblock()
+	wg.Wait()
+	data, _, err := store.Load(context.Background(), id)
+	if err != nil || string(data) != "shared image" {
+		t.Fatalf("cached load: %q %v", data, err)
+	}
+	if requests.Load() != 1 {
+		t.Fatalf("origin requests = %d, want 1", requests.Load())
 	}
 }

@@ -44,6 +44,7 @@ type ImageStore struct {
 	originURL string
 	client    *http.Client
 	fetches   singleflight.Group
+	loads     singleflight.Group
 }
 
 func NewImageStore(config *Config, db *sqlx.DB) *ImageStore {
@@ -72,13 +73,18 @@ func (s *ImageStore) path(kind, id string) string {
 	return filepath.Join(s.dir, kind, shard, filepath.Base(id))
 }
 
+// Save takes ownership of data on success; callers must not mutate it afterward.
 // Save は新しい画像を new/ に書き、fsync してから返す。DB の行は呼び出し側が data を空にして INSERT する。
 // 投稿と RealMoji の作成は asia1 へ転送されるため、asia1 以外で呼ばれることはない。
 func (s *ImageStore) Save(id string, data []byte) error {
 	if !s.isOrigin() {
 		return fmt.Errorf("image writes must run on the origin server")
 	}
-	return writeFileAtomic(s.path("new", id), data, true)
+	if err := writeFileAtomic(s.path("new", id), data, true); err != nil {
+		return err
+	}
+	imageDataCache.put(id, cachedImage{data: data})
+	return nil
 }
 
 // Load は画像本体と、初期データの画像かどうかを返す。見つからなければ errImageNotFound を返す。
@@ -86,12 +92,32 @@ func (s *ImageStore) Load(ctx context.Context, id string) ([]byte, bool, error) 
 	if cached, ok := imageDataCache.get(id); ok {
 		return cached.data, cached.initial, nil
 	}
-	data, initial, err := s.load(ctx, id)
-	if err != nil {
-		return nil, false, err
+	// Coalesce disk reads and remote fetches until cache publication.
+	// A canceled caller must not cancel a read shared with other callers.
+	result := s.loads.DoChan(id, func() (any, error) {
+		if cached, ok := imageDataCache.get(id); ok {
+			return cached, nil
+		}
+		loadCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 30*time.Second)
+		defer cancel()
+		data, initial, err := s.load(loadCtx, id)
+		if err != nil {
+			return nil, err
+		}
+		cached := cachedImage{data: data, initial: initial}
+		imageDataCache.put(id, cached)
+		return cached, nil
+	})
+	select {
+	case <-ctx.Done():
+		return nil, false, ctx.Err()
+	case result := <-result:
+		if result.Err != nil {
+			return nil, false, result.Err
+		}
+		cached := result.Val.(cachedImage)
+		return cached.data, cached.initial, nil
 	}
-	imageDataCache.put(id, cachedImage{data: data, initial: initial})
-	return data, initial, nil
 }
 
 func (s *ImageStore) load(ctx context.Context, id string) ([]byte, bool, error) {
@@ -104,7 +130,8 @@ func (s *ImageStore) load(ctx context.Context, id string) ([]byte, bool, error) 
 	if !s.isOrigin() {
 		// 同じ画像を同時に取りに行かない (投稿直後に友達が一斉に見るため)
 		// 最初に来たリクエストが切断されても、相乗りしている他のリクエストを失敗させない
-		fetchCtx := context.WithoutCancel(ctx)
+		fetchCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 30*time.Second)
+		defer cancel()
 		v, err, _ := s.fetches.Do(id, func() (any, error) {
 			// 直前に終わった取得がディスクに書いていれば、それを使う
 			if data, ok := readImageFile(s.path("initial", id)); ok {
