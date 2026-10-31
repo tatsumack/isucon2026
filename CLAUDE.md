@@ -4,8 +4,13 @@ ISUCONの競技用リポジトリ。サーバ上の `/home/isucon/webapp` をそ
 アプリの概要・エンドポイント・テーブルは競技開始後に追記する。
 
 ## 構成
-- `etc/`: サーバの `/etc` からコピーしたミドルウェアの設定 (nginx, mysql, systemd, env.sh)。deploy.shでサーバに反映される
-- `deploy.sh`: `./deploy.sh <branch> <host>` で指定ホストにデプロイする。ホストは `~/.ssh/config` の `isu1` `isu2` `isu3`
+- サーバは4台。`~/.ssh/config` のHost名で入れる
+  - `asia1` `europe1` `america1`: nginx + Goアプリ (`isureal-go.service`)。リージョンごとに固定
+  - `asia2`: 共有PostgreSQL 16
+- `go/`: Goの実装。他言語の実装はリポジトリで管理しない
+- `etc/`: サーバの `/etc` からコピーしたミドルウェアの設定 (nginx, systemd, postgresql)。deploy.shでサーバに反映される
+- `etc/env/<host>.sh`: ホストごとの `/home/isucon/env.sh`
+- `deploy.sh`: `./deploy.sh <branch> [host...]` でデプロイする。host省略時は全台
 - `bench-capture.sh`: ベンチ中の計測スクリプト。`/bench-analyze` スキルから使う
 - `docs/manual.md`: 当日マニュアル。`docs/regulation.md`: レギュレーション。当日マニュアルの内容がレギュレーションより優先される
 
