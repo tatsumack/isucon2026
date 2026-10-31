@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 653296bd91d15590bdf10bc1e07dc9a899c03374
+Type: cpu
+Time: 2026-10-31 03:54:23 UTC
+Duration: 150s, Total samples = 70.93s (47.29%)
+Showing nodes accounting for 50.39s, 71.04% of 70.93s total
+Dropped 1148 nodes (cum <= 0.35s)
+Showing top 40 nodes out of 241
+      flat  flat%   sum%        cum   cum%
+     0.03s 0.042% 0.042%     66.04s 93.11%  net/http.(*conn).serve
+         0     0% 0.042%     64.10s 90.37%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.042%     64.10s 90.37%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0% 0.042%     64.10s 90.37%  net/http.serverHandler.ServeHTTP
+     0.03s 0.042% 0.085%     64.04s 90.29%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0% 0.085%     63.51s 89.54%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.02s 0.028%  0.11%     63.50s 89.52%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.11%     63.40s 89.38%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.41s  0.58%  0.69%     45.11s 63.60%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  0.69%     45.05s 63.51%  example.com/isureal-company/isureal.signedImageURL
+     0.01s 0.014%   0.7%     44.71s 63.03%  example.com/isureal-company/isureal.issueImageSignature
+     1.20s  1.69%  2.40%     41.03s 57.85%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.87s  2.64%  5.03%     39.21s 55.28%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.86s  2.62%  7.66%     38.57s 54.38%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.52s  0.73%  8.39%     35.40s 49.91%  crypto/internal/fips140/sha256.block
+    34.72s 48.95% 57.34%     34.88s 49.18%  crypto/internal/fips140/sha256.blockAVX2
+     0.02s 0.028% 57.37%     32.25s 45.47%  example.com/isureal-company/isureal.listMemories
+         0     0% 57.37%     32.07s 45.21%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 57.37%     31.90s 44.97%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+     0.01s 0.014% 57.38%     31.90s 44.97%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+         0     0% 57.38%     23.89s 33.68%  example.com/isureal-company/isureal.newPostResponse
+         0     0% 57.38%     21.34s 30.09%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 57.38%     20.62s 29.07%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 57.38%     13.91s 19.61%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0% 57.38%     13.90s 19.60%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0% 57.38%     13.90s 19.60%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+     0.05s  0.07% 57.45%      7.41s 10.45%  database/sql.withLock
+     5.38s  7.58% 65.04%      5.38s  7.58%  internal/runtime/syscall/linux.Syscall6
+         0     0% 65.04%      5.08s  7.16%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 65.04%         5s  7.05%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 65.04%      4.99s  7.04%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+     0.03s 0.042% 65.08%      4.85s  6.84%  syscall.RawSyscall6
+     0.01s 0.014% 65.09%      4.82s  6.80%  syscall.Syscall
+         0     0% 65.09%      4.62s  6.51%  internal/poll.ignoringEINTRIO (inline)
+     0.01s 0.014% 65.11%      4.54s  6.40%  github.com/jmoiron/sqlx.GetContext
+     0.03s 0.042% 65.15%      4.42s  6.23%  database/sql.(*DB).queryDC
+     0.04s 0.056% 65.21%      4.31s  6.08%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement
+         0     0% 65.21%      4.29s  6.05%  database/sql.(*DB).retry
+     4.14s  5.84% 71.04%      4.14s  5.84%  runtime.memmove
+         0     0% 71.04%      4.07s  5.74%  database/sql.(*DB).queryDC.func1
