@@ -1,0 +1,10 @@
+Job #23313 (tatsumack/nginxで画像を返す @ 59c15cd) Score: 93650 (base=93650, deduction=0) PASS
+Started 2026-10-31 15:35:06.952 JST / Finished 15:37:21.342 JST
+asia 1 日目: 18 人 / europe 1 日目: 7 人 / america 1 日目: 6 人
+asia 2 日目: 45 人 / europe 2 日目: 17 人 / america 2 日目: 13 人
+asia 3 日目: 128 人 / europe 3 日目: 44 人 / america 3 日目: 33 人
+asia 4 日目: 360 人 / europe 4 日目: 105 人 / america 4 日目: 81 人
+asia 5 日目: 468 人 / europe 5 日目: 136 人 / america 5 日目: 144 人
+最終日（グランプリ）: asia 468 / europe 137 / america 144 人
+グランプリ: アジア 453 人, ヨーロッパ 136 人, アメリカ 139 人
+messages: []

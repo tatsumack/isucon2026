@@ -1,0 +1,49 @@
+File: isureal
+Build ID: b02c236469af92d4d100eb60e7300809f0e0fc2d
+Type: cpu
+Time: 2026-10-31 06:34:46 UTC
+Duration: 150s, Total samples = 44.01s (29.34%)
+Showing nodes accounting for 13.03s, 29.61% of 44.01s total
+Dropped 1254 nodes (cum <= 0.22s)
+Showing top 40 nodes out of 375
+      flat  flat%   sum%        cum   cum%
+     0.08s  0.18%  0.18%     37.65s 85.55%  net/http.(*conn).serve
+     0.02s 0.045%  0.23%     34.99s 79.50%  net/http.serverHandler.ServeHTTP
+     0.02s 0.045%  0.27%     34.97s 79.46%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.03s 0.068%  0.34%     34.95s 79.41%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.03s 0.068%  0.41%     34.80s 79.07%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.023%  0.43%     34.68s 78.80%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.03s 0.068%   0.5%     34.67s 78.78%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%   0.5%     34.57s 78.55%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+    12.40s 28.18% 28.68%     12.40s 28.18%  internal/runtime/syscall/linux.Syscall6
+     0.03s 0.068% 28.74%     11.67s 26.52%  syscall.RawSyscall6
+     0.03s 0.068% 28.81%     10.09s 22.93%  syscall.Syscall
+         0     0% 28.81%      9.45s 21.47%  internal/poll.ignoringEINTRIO (inline)
+     0.04s 0.091% 28.90%      7.72s 17.54%  database/sql.withLock
+         0     0% 28.90%      7.21s 16.38%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func21.1
+         0     0% 28.90%      7.19s 16.34%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func22.1
+     0.03s 0.068% 28.97%      7.19s 16.34%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func20
+         0     0% 28.97%      7.04s 16.00%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func36.1
+         0     0% 28.97%      6.88s 15.63%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func37.1
+     0.01s 0.023% 28.99%      6.88s 15.63%  example.com/isureal-company/isureal.NewServer.createPostHandler.func35
+     0.06s  0.14% 29.13%      6.38s 14.50%  bytes.(*Buffer).ReadFrom
+         0     0% 29.13%      5.75s 13.07%  database/sql.(*DB).queryDC
+     0.01s 0.023% 29.15%      5.60s 12.72%  github.com/jmoiron/sqlx.GetContext
+         0     0% 29.15%      5.44s 12.36%  example.com/isureal-company/isureal.readUpload
+         0     0% 29.15%      5.38s 12.22%  database/sql.(*DB).retry
+     0.05s  0.11% 29.27%      5.23s 11.88%  internal/poll.(*FD).Read
+     0.03s 0.068% 29.33%      5.22s 11.86%  database/sql.(*DB).queryDC.func1
+     0.01s 0.023% 29.36%      5.18s 11.77%  example.com/isureal-company/isureal.(*ImageStore).load
+     0.02s 0.045% 29.40%      5.11s 11.61%  database/sql.ctxDriverQuery
+         0     0% 29.40%      5.09s 11.57%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+         0     0% 29.40%      5.04s 11.45%  example.com/isureal-company/isureal.readImageFile
+         0     0% 29.40%      5.04s 11.45%  os.ReadFile
+         0     0% 29.40%      4.96s 11.27%  syscall.Read (inline)
+     0.04s 0.091% 29.49%      4.96s 11.27%  syscall.read
+     0.03s 0.068% 29.56%      4.93s 11.20%  github.com/jackc/pgx/v5.(*Conn).Query
+         0     0% 29.56%      4.89s 11.11%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func29.1
+         0     0% 29.56%      4.86s 11.04%  example.com/isureal-company/isureal.NewServer.putProfileImageHandler.func28
+     0.01s 0.023% 29.58%      4.84s 11.00%  database/sql.(*DB).QueryContext
+         0     0% 29.58%      4.83s 10.97%  database/sql.(*DB).QueryContext.func1
+         0     0% 29.58%      4.83s 10.97%  database/sql.(*DB).query
+     0.01s 0.023% 29.61%      4.56s 10.36%  internal/poll.(*FD).Write
