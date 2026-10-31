@@ -1,0 +1,9 @@
+score: 131598 (base=131598, deduction=0) pass
+asia 1 日目: 18 人 / europe 7 / america 6
+2 日目: asia 54 / europe 20 / america 12
+3 日目: asia 162 / europe 57 / america 29
+4 日目: asia 484 / europe 164 / america 79
+5 日目: asia 992 / europe 436 / america 199
+最終日（グランプリ）: america 198 / europe 436 / asia 992
+グランプリ: アジア 355 人, ヨーロッパ 273 人, アメリカ 198 人
+user moved: noayu_6945 asia->europe->america, miwa_6982 asia->europe->asia, kachimo6810 asia->america
