@@ -63,6 +63,10 @@ func AdminSessionMiddleware(h *HandlerContext, authRequired bool) echo.Middlewar
 			if session == nil && authRequired {
 				return NewAPIError(http.StatusUnauthorized, "invalid_administrator_session")
 			}
+			// ベンチマーカーの行動分析用。一般ユーザーと区別するため admin: を付ける
+			if session != nil {
+				c.Response().Header().Set("X-User-Id", "admin:"+session.AdministratorID)
+			}
 			c.Set("admin_session", session)
 			return next(c)
 		}

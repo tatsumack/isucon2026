@@ -72,6 +72,10 @@ func SessionMiddleware(handlerContext *HandlerContext, authRequired bool) echo.M
 			if session == nil && authRequired {
 				return NewAPIError(http.StatusUnauthorized, "invalid_session")
 			}
+			// ベンチマーカーの行動分析用。nginxがログに出し、クライアントには返さない (proxy_hide_header)
+			if session != nil {
+				c.Response().Header().Set("X-User-Id", session.UserID)
+			}
 			c.Set("session", session)
 			return next(c)
 		}

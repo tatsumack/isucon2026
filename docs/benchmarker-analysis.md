@@ -71,3 +71,21 @@ URI 中の ID は正規化（`/items/123` → `/items/:id`）してから集計�
 - ログ出力自体が負荷になる。分析が終わったら、最終ベンチの前に access log とヘッダ付与を切る。
 - `auth` には認証トークンが入る。ログや分析結果をリポジトリにコミットしない。
 - 初期化（`POST /initialize` 等）直後の挙動と、負荷走行中の挙動は分けて見る。
+
+## このアプリでの実施方法 (isureal)
+
+ブランチ `analysis/benchmarker-timeline` で、上の手順1・2・3を次のように実装している。
+
+- **ユーザーの識別**: 認証は Cookie ではなく `Authorization: Bearer`。ベンチマーカーはユーザーごとに別の `X-Client-IP` を付ける (マニュアル「クライアントのIPアドレス」) ので、ログの `host` でまとめる。ログイン前のリクエストも同じユーザーにまとまる。`auth` (トークン) はログに出さない
+- **user_id**: `SessionMiddleware` / `AdminSessionMiddleware` が `X-User-Id` を付け、nginx が `$upstream_http_x_user_id` でログに出す。`proxy_hide_header` でクライアントには返さない。管理者は `admin:<id>`
+- **追加したログのフィールド**: `msec` `country` (`X-Country-Code`) `user_id`
+- **集計**: `bench-timeline.py` を手元で実行する。並べる時刻は `msec - reqtime` (リクエストの開始時刻)。`/api/notifications` は SSE で reqtime が長いため
+
+```bash
+# ベンチ後、各アプリサーバのログを手元に持ってくる (deploy.sh / bench-capture.sh でログが退避・truncateされる前に)
+D=bench-results/timeline-$(date +%H%M); mkdir -p $D
+for h in asia1 europe1 america1; do ssh $h sudo cat /var/log/nginx/access.log > $D/$h.log; done
+./bench-timeline.py $D asia=$D/asia1.log europe=$D/europe1.log america=$D/america1.log
+```
+
+`bench-results/` は gitignore されている。最終ベンチの前に、`X-User-Id` の付与と追加したログのフィールドを外す。
