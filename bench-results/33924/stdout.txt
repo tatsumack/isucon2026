@@ -1,0 +1,38 @@
+Score: 140960 (base=140960, deduction=0) PASS
+time=2026-10-31T08:23:11.586Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T08:23:14.574Z level=INFO msg="europe 1 日目: 7 人"
+time=2026-10-31T08:23:17.577Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T08:23:20.580Z level=INFO msg="asia 2 日目: 48 人"
+time=2026-10-31T08:23:23.613Z level=INFO msg="europe 2 日目: 19 人"
+time=2026-10-31T08:23:26.580Z level=INFO msg="america 2 日目: 15 人"
+time=2026-10-31T08:23:29.584Z level=INFO msg="asia 3 日目: 138 人"
+time=2026-10-31T08:23:30.970Z level=INFO msg="user moved" user=rina.5628 from=asia to=america
+time=2026-10-31T08:23:31.289Z level=INFO msg="user moved" user=mimar5665 from=asia to=europe
+time=2026-10-31T08:23:31.705Z level=INFO msg="user moved" user=maxsu.5709 from=asia to=europe
+time=2026-10-31T08:23:32.226Z level=INFO msg="user moved" user=rina.5628 from=america to=europe
+time=2026-10-31T08:23:32.535Z level=INFO msg="user moved" user=mimar5665 from=europe to=america
+time=2026-10-31T08:23:32.594Z level=INFO msg="europe 3 日目: 58 人"
+time=2026-10-31T08:23:35.596Z level=INFO msg="america 3 日目: 44 人"
+time=2026-10-31T08:23:38.596Z level=INFO msg="asia 4 日目: 401 人"
+time=2026-10-31T08:23:40.819Z level=INFO msg="user moved" user=ruliaivy_6515 from=america to=europe
+time=2026-10-31T08:23:41.306Z level=INFO msg="user moved" user=karo.7190 from=asia to=america
+time=2026-10-31T08:23:41.626Z level=INFO msg="europe 4 日目: 148 人"
+time=2026-10-31T08:23:42.544Z level=INFO msg="user moved" user=karo.7190 from=america to=asia
+time=2026-10-31T08:23:44.602Z level=INFO msg="america 4 日目: 114 人"
+time=2026-10-31T08:23:44.717Z level=INFO msg="user moved" user=ruliaivy_6515 from=europe to=asia
+time=2026-10-31T08:23:45.222Z level=INFO msg="user moved" user=rina.5628 from=europe to=america
+time=2026-10-31T08:23:47.658Z level=INFO msg="asia 5 日目: 1066 人"
+time=2026-10-31T08:23:48.357Z level=INFO msg="user moved" user=mimar5665 from=america to=asia
+time=2026-10-31T08:23:50.617Z level=INFO msg="europe 5 日目: 361 人"
+time=2026-10-31T08:23:53.637Z level=INFO msg="america 5 日目: 270 人"
+time=2026-10-31T08:24:02.716Z level=INFO msg="europe 最終日（グランプリ）: 361 人"
+time=2026-10-31T08:24:02.769Z level=INFO msg="asia 最終日（グランプリ）: 1066 人"
+time=2026-10-31T08:24:02.839Z level=INFO msg="america 最終日（グランプリ）: 270 人"
+time=2026-10-31T08:24:11.701Z level=INFO msg="グランプリ: アジア 385 人, ヨーロッパ 352 人, アメリカ 269 人"
+{
+"pass": true,
+"score": 140960,
+"messages": [
+"munumax15785: 投稿できません: POST /api/posts: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/posts\": EOF"
+]
+}

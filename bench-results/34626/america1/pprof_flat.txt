@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 54609f59af8ffd299d98770456c885384a0e00d5
+Type: cpu
+Time: 2026-10-31 08:29:29 UTC
+Duration: 150s, Total samples = 10.56s ( 7.04%)
+Showing nodes accounting for 8.56s, 81.06% of 10.56s total
+Dropped 542 nodes (cum <= 0.05s)
+Showing top 40 nodes out of 156
+      flat  flat%   sum%        cum   cum%
+     3.41s 32.29% 32.29%      3.41s 32.29%  crypto/internal/fips140/sha256.blockSHANI
+     1.03s  9.75% 42.05%      1.03s  9.75%  internal/runtime/syscall/linux.Syscall6
+     0.89s  8.43% 50.47%      0.89s  8.43%  runtime.memmove
+     0.88s  8.33% 58.81%      4.96s 46.97%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.57s  5.40% 64.20%      5.72s 54.17%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.36s  3.41% 67.61%      0.36s  3.41%  runtime.memclrNoHeapPointers
+     0.27s  2.56% 70.17%      4.36s 41.29%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.16s  1.52% 71.69%      6.62s 62.69%  example.com/isureal-company/isureal.computeImageSignature
+     0.15s  1.42% 73.11%      0.40s  3.79%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.10s  0.95% 74.05%      3.51s 33.24%  crypto/internal/fips140/sha256.block
+     0.08s  0.76% 74.81%      0.08s  0.76%  runtime.futex
+     0.08s  0.76% 75.57%      0.08s  0.76%  runtime.nextFreeFast (inline)
+     0.05s  0.47% 76.04%      0.12s  1.14%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.05s  0.47% 76.52%      0.06s  0.57%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.47% 76.99%      0.06s  0.57%  runtime.casgstatus
+     0.05s  0.47% 77.46%      0.08s  0.76%  runtime.tryDeferToSpanScan
+     0.04s  0.38% 77.84%      0.07s  0.66%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.03s  0.28% 78.12%      0.10s  0.95%  runtime.newobject
+     0.02s  0.19% 78.31%      0.44s  4.17%  bufio.(*Writer).Write
+     0.02s  0.19% 78.50%      0.30s  2.84%  internal/poll.(*FD).Read
+     0.02s  0.19% 78.69%      0.15s  1.42%  net/http.(*chunkWriter).writeHeader
+     0.02s  0.19% 78.88%      9.13s 86.46%  net/http.(*conn).serve
+     0.02s  0.19% 79.07%      0.22s  2.08%  net/http.(*response).finishRequest
+     0.02s  0.19% 79.26%      0.35s  3.31%  runtime.mallocgc
+     0.02s  0.19% 79.45%      0.08s  0.76%  runtime.mallocgcSmallNoscan
+     0.02s  0.19% 79.64%      0.15s  1.42%  runtime.netpoll
+     0.02s  0.19% 79.83%      0.07s  0.66%  runtime.pcvalue
+     0.02s  0.19% 80.02%      0.09s  0.85%  runtime.selectgo
+     0.01s 0.095% 80.11%      0.12s  1.14%  bufio.(*Reader).fill
+     0.01s 0.095% 80.21%      0.30s  2.84%  bufio.(*Writer).Flush
+     0.01s 0.095% 80.30%      0.14s  1.33%  database/sql.withLock
+     0.01s 0.095% 80.40%      0.65s  6.16%  net.(*netFD).Write
+     0.01s 0.095% 80.49%      0.07s  0.66%  net/http.(*ResponseController).Flush
+     0.01s 0.095% 80.59%      0.12s  1.14%  net/http.(*Transport).roundTrip
+     0.01s 0.095% 80.68%      0.18s  1.70%  net/http.(*transferWriter).writeBody
+     0.01s 0.095% 80.78%      0.26s  2.46%  net/http/httputil.(*ReverseProxy).copyResponse
+     0.01s 0.095% 80.87%      0.06s  0.57%  runtime.(*unwinder).resolveInternal
+     0.01s 0.095% 80.97%      0.38s  3.60%  runtime.findRunnable
+     0.01s 0.095% 81.06%      0.08s  0.76%  runtime.stealWork
+         0     0% 81.06%      0.12s  1.14%  bufio.(*Reader).Peek
