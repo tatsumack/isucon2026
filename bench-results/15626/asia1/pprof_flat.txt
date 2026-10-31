@@ -1,0 +1,48 @@
+File: isureal
+Build ID: bf127b8285c0494b7c689b7b0960020d53f8b631
+Type: cpu
+Time: 2026-10-31 05:02:24 UTC
+Duration: 150s, Total samples = 460ms ( 0.31%)
+Showing nodes accounting for 460ms, 100% of 460ms total
+Showing top 40 nodes out of 298
+      flat  flat%   sum%        cum   cum%
+     120ms 26.09% 26.09%      120ms 26.09%  internal/runtime/syscall/linux.Syscall6
+     100ms 21.74% 47.83%      100ms 21.74%  crypto/internal/fips140/sha256.blockAVX2
+      20ms  4.35% 52.17%       20ms  4.35%  runtime.memmove
+      10ms  2.17% 54.35%       10ms  2.17%  compress/flate.(*compressor).findMatch
+      10ms  2.17% 56.52%       10ms  2.17%  crypto/internal/fips140/edwards25519/field.(*Element).Subtract
+      10ms  2.17% 58.70%       60ms 13.04%  crypto/internal/fips140/pbkdf2.Key[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+      10ms  2.17% 60.87%      120ms 26.09%  crypto/internal/fips140/sha256.(*Digest).Sum
+      10ms  2.17% 63.04%      110ms 23.91%  crypto/internal/fips140/sha256.block
+      10ms  2.17% 65.22%       10ms  2.17%  crypto/internal/fips140/sha3.keccakF1600
+      10ms  2.17% 67.39%       10ms  2.17%  encoding/json.checkValid
+      10ms  2.17% 69.57%       10ms  2.17%  golang.org/x/text/unicode/norm.(*nfcTrie).lookupString
+      10ms  2.17% 71.74%       10ms  2.17%  internal/runtime/atomic.(*Uint32).Add
+      10ms  2.17% 73.91%       30ms  6.52%  os.(*File).readdir
+      10ms  2.17% 76.09%       10ms  2.17%  p256SqrInternal
+      10ms  2.17% 78.26%       10ms  2.17%  runtime.(*mspan).writeHeapBitsSmall
+      10ms  2.17% 80.43%       20ms  4.35%  runtime.(*unwinder).resolveInternal
+      10ms  2.17% 82.61%       10ms  2.17%  runtime.futex
+      10ms  2.17% 84.78%       10ms  2.17%  runtime.memclrNoHeapPointers
+      10ms  2.17% 86.96%       20ms  4.35%  runtime.newobject
+      10ms  2.17% 89.13%       10ms  2.17%  runtime.pMask.set
+      10ms  2.17% 91.30%       10ms  2.17%  runtime.procyieldAsm
+      10ms  2.17% 93.48%       10ms  2.17%  runtime.step
+      10ms  2.17% 95.65%       20ms  4.35%  runtime.suspendG
+      10ms  2.17% 97.83%       10ms  2.17%  runtime.tryDeferToSpanScan
+      10ms  2.17%   100%       10ms  2.17%  time.Time.Add
+         0     0%   100%       30ms  6.52%  archive/zip.(*countWriter).Write (inline)
+         0     0%   100%       30ms  6.52%  archive/zip.(*fileWriter).Write
+         0     0%   100%       10ms  2.17%  archive/zip.(*pooledFlateWriter).Write
+         0     0%   100%       30ms  6.52%  bufio.(*Writer).Write
+         0     0%   100%       10ms  2.17%  bytes.(*Buffer).ReadFrom
+         0     0%   100%       20ms  4.35%  bytes.(*Buffer).Write
+         0     0%   100%       20ms  4.35%  bytes.(*Buffer).grow
+         0     0%   100%       20ms  4.35%  bytes.growSlice
+         0     0%   100%       10ms  2.17%  compress/flate.(*Writer).Write (inline)
+         0     0%   100%       10ms  2.17%  compress/flate.(*compressor).deflate
+         0     0%   100%       10ms  2.17%  compress/flate.(*compressor).write
+         0     0%   100%       10ms  2.17%  context.(*cancelCtx).Done
+         0     0%   100%       10ms  2.17%  crypto/ecdh.(*PrivateKey).ECDH
+         0     0%   100%       10ms  2.17%  crypto/ecdh.(*nistCurve).ecdh
+         0     0%   100%       10ms  2.17%  crypto/ecdh.(*x25519Curve).GenerateKey

@@ -1,0 +1,127 @@
+Linux 7.0.0-1014-aws (ip-192-168-1-10) 	10/31/26 	_x86_64_	(2 CPU)
+
+05:02:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:29        0        39    0.00    2.60    0.00    0.00    2.60     1  kcompactd0
+
+05:02:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:34     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:02:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:49     1100     24103    0.00    0.20    0.00    0.00    0.20     1  isureal
+
+05:02:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:02:54        0        26    0.00    0.20    0.00    0.00    0.20     1  ksoftirqd/1
+05:02:54      101       609    0.20    0.00    0.00    0.00    0.20     1  dbus-daemon
+05:02:54        0     13879    0.20    0.00    0.00    0.00    0.20     0  fwupd
+05:02:54     1100     24394    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:02:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:02:59      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:04        0        39    0.00    0.40    0.00    0.00    0.40     1  kcompactd0
+05:03:04     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:03:04      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:09      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:19     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:03:19      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+05:03:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:34        0         1    0.20    0.20    0.00    0.00    0.40     1  systemd
+05:03:34        0       673    0.00    0.20    0.00    0.00    0.20     0  sshd
+
+05:03:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:39     1100     24394    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:03:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:44     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:03:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:49     1100     24103    0.20    0.00    0.00    0.00    0.20     1  isureal
+
+05:03:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:54        0       128    0.20    0.20    0.00    0.00    0.40     1  systemd-journal
+05:03:54        0       847    0.20    0.00    0.00    0.00    0.20     0  ModemManager
+
+05:03:54      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:03:59     1100     24393    0.20    0.00    0.00    0.00    0.20     1  vmstat
+
+05:03:59      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:04        0     20684    0.00    0.20    0.00    0.00    0.20     1  kworker/u8:2-events_unbound
+05:04:04     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:04:04      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:09        0        39    0.00    0.20    0.00    0.00    0.20     0  kcompactd0
+
+05:04:09      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:14      101       609    0.20    0.00    0.00    0.00    0.20     1  dbus-daemon
+05:04:14        0       640    0.20    0.00    0.00    0.00    0.20     1  systemd-logind
+
+05:04:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:19        0         1    0.20    0.00    0.00    0.00    0.20     1  systemd
+05:04:19        0        16    0.00    0.20    0.00    0.00    0.20     1  rcu_sched
+05:04:19        0       640    0.00    0.20    0.00    0.20    0.20     1  systemd-logind
+05:04:19        0     23593    0.20    0.00    0.00    0.00    0.20     1  kworker/1:1-events
+05:04:19     1100     24394    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:04:19      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:24     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+
+05:04:24      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:29     1100     24617    0.00    0.20    0.00    0.00    0.20     1  bash
+
+05:04:29      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:34        0        19    0.00    0.20    0.00    0.00    0.20     0  migration/0
+
+05:04:34      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:39        0        39    0.00    0.20    0.00    0.00    0.20     0  kcompactd0
+05:04:39     1100     24617    0.00    0.20    0.00    0.00    0.20     0  bash
+
+05:04:39      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:44     1100      1365    0.20    0.00    0.00    0.00    0.20     1  journalctl
+05:04:44     1100     24103    0.40    1.20    0.00    0.00    1.60     1  isureal
+05:04:44        0     24104    0.20    0.00    0.00    0.00    0.20     0  kworker/0:0-events
+05:04:44     1100     24394    0.20    0.00    0.00    0.00    0.20     0  pidstat
+
+05:04:44      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+05:04:49        0       128    0.20    0.20    0.00    0.20    0.40     1  systemd-journal
+05:04:49      102       686    0.20    0.20    0.00    0.00    0.40     1  rsyslogd
+05:04:49     1100      1248    0.20    0.00    0.00    0.00    0.20     0  isureal-guard
+05:04:49     1100      1365    0.20    0.20    0.00    0.00    0.40     1  journalctl
+05:04:49     1100     24103    6.20    2.20    0.00    0.00    8.40     1  isureal
+05:04:49     1100     24394    0.00    0.20    0.00    0.00    0.20     0  pidstat
+05:04:49     1100     24617    0.00    0.20    0.00    0.00    0.20     0  bash
+
+05:04:49      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+
+Average:      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+Average:        0         1    0.01    0.01    0.00    0.00    0.02     -  systemd
+Average:        0        16    0.00    0.01    0.00    0.01    0.01     -  rcu_sched
+Average:        0        19    0.00    0.01    0.00    0.00    0.01     -  migration/0
+Average:        0        26    0.00    0.01    0.00    0.00    0.01     -  ksoftirqd/1
+Average:        0        39    0.00    0.11    0.00    0.00    0.11     -  kcompactd0
+Average:        0       128    0.01    0.01    0.00    0.01    0.03     -  systemd-journal
+Average:      101       609    0.01    0.00    0.00    0.01    0.01     -  dbus-daemon
+Average:        0       640    0.01    0.01    0.00    0.01    0.01     -  systemd-logind
+Average:        0       673    0.00    0.01    0.00    0.00    0.01     -  sshd
+Average:      102       686    0.01    0.01    0.00    0.00    0.01     -  rsyslogd
+Average:        0       847    0.01    0.00    0.00    0.01    0.01     -  ModemManager
+Average:     1100      1248    0.01    0.00    0.00    0.00    0.01     -  isureal-guard
+Average:     1100      1365    0.01    0.01    0.00    0.00    0.02     -  journalctl
+Average:        0     13879    0.01    0.00    0.00    0.01    0.01     -  fwupd
+Average:        0     20684    0.00    0.01    0.00    0.00    0.01     -  kworker/u8:2-events_power_efficient
+Average:        0     23593    0.01    0.00    0.00    0.03    0.01     -  kworker/1:1-events
+Average:     1100     24103    0.23    0.12    0.00    0.00    0.35     -  isureal
+Average:        0     24104    0.01    0.00    0.00    0.02    0.01     -  kworker/0:0-events
+Average:     1100     24394    0.03    0.05    0.00    0.00    0.07     -  pidstat
+Average:     1100     24617    0.00    0.02    0.00    0.00    0.02     -  bash
