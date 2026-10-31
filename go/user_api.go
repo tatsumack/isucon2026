@@ -129,13 +129,10 @@ func loginHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusUnauthorized, "invalid_credentials")
 		}
 		ctx := c.Request().Context()
-		tx, err := h.DB.BeginTxx(ctx, nil)
-		if err != nil {
-			return err
-		}
-		defer tx.Rollback()
+		// 認証はロックもトランザクションもなしで先に行う。失敗するログインが多く、それらでDBを待たせないため。
+		// secret_key_hash は変更されない。status は createLoginSessionTx の中でもう一度確認する。
 		var user User
-		err = tx.GetContext(ctx, &user, `SELECT id, username, secret_key_hash, display_name, bio, profile_image_id, region, account_type, status FROM users WHERE username = $1 FOR NO KEY UPDATE`, input.Username)
+		err := h.DB.GetContext(ctx, &user, `SELECT id, username, secret_key_hash, display_name, bio, profile_image_id, region, account_type, status FROM users WHERE username = $1`, input.Username)
 		if errors.Is(err, sql.ErrNoRows) {
 			return NewAPIError(http.StatusUnauthorized, "invalid_credentials")
 		}
@@ -146,7 +143,16 @@ func loginHandler(h *HandlerContext) echo.HandlerFunc {
 		if user.Status != "active" || user.SecretKeyHash != hex.EncodeToString(hash[:]) {
 			return NewAPIError(http.StatusUnauthorized, "invalid_credentials")
 		}
+		tx, err := h.DB.BeginTxx(ctx, nil)
+		if err != nil {
+			return err
+		}
+		defer tx.Rollback()
 		session, err := createLoginSessionTx(ctx, tx, user.ID)
+		if errors.Is(err, sql.ErrNoRows) {
+			// 認証の後に退会した
+			return NewAPIError(http.StatusUnauthorized, "invalid_credentials")
+		}
 		if err != nil {
 			return err
 		}
