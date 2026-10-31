@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 05e576b7a8e1fbdb36ffc7affae103eb92512007
+Type: cpu
+Time: 2026-10-31 03:34:15 UTC
+Duration: 150s, Total samples = 4.98s ( 3.32%)
+Showing nodes accounting for 3.22s, 64.66% of 4.98s total
+Dropped 391 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 358
+      flat  flat%   sum%        cum   cum%
+     1.16s 23.29% 23.29%      1.16s 23.29%  internal/runtime/syscall/linux.Syscall6
+     0.43s  8.63% 31.93%      0.43s  8.63%  runtime.memmove
+     0.28s  5.62% 37.55%      0.28s  5.62%  crypto/internal/fips140/sha256.blockSHANI
+     0.18s  3.61% 41.16%      0.18s  3.61%  runtime.futex
+     0.11s  2.21% 43.37%      0.11s  2.21%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.10s  2.01% 45.38%      0.10s  2.01%  runtime.memclrNoHeapPointers
+     0.06s  1.20% 46.59%      0.47s  9.44%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.06s  1.20% 47.79%      0.40s  8.03%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.05s  1.00% 48.80%      0.05s  1.00%  runtime.lock2
+     0.05s  1.00% 49.80%      0.19s  3.82%  runtime.netpoll
+     0.04s   0.8% 50.60%      0.04s   0.8%  aeshashbody
+     0.04s   0.8% 51.41%      0.06s  1.20%  image/jpeg.(*decoder).decodeHuffman
+     0.04s   0.8% 52.21%      0.04s   0.8%  indexbytebody
+     0.04s   0.8% 53.01%      0.08s  1.61%  runtime.(*unwinder).resolveInternal
+     0.04s   0.8% 53.82%      0.04s   0.8%  runtime.findfunc
+     0.04s   0.8% 54.62%      0.07s  1.41%  runtime.pcvalue
+     0.03s   0.6% 55.22%      0.34s  6.83%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.03s   0.6% 55.82%      0.52s 10.44%  crypto/tls.(*Conn).readRecordOrCCS
+     0.03s   0.6% 56.43%      0.03s   0.6%  image/jpeg.(*decoder).receiveExtend
+     0.03s   0.6% 57.03%      0.03s   0.6%  runtime.(*mspan).writeHeapBitsSmall
+     0.03s   0.6% 57.63%      0.03s   0.6%  runtime.(*waitq).dequeue (inline)
+     0.03s   0.6% 58.23%      0.09s  1.81%  runtime.adjustframe
+     0.03s   0.6% 58.84%      0.42s  8.43%  runtime.findRunnable
+     0.02s   0.4% 59.24%      0.19s  3.82%  crypto/tls.(*halfConn).decrypt
+     0.02s   0.4% 59.64%      0.04s   0.8%  database/sql.(*DB).putConn
+     0.02s   0.4% 60.04%      0.05s  1.00%  image/jpeg.(*decoder).reconstructBlock
+     0.02s   0.4% 60.44%      0.39s  7.83%  internal/poll.(*FD).Read
+     0.02s   0.4% 60.84%      0.42s  8.43%  net.(*conn).Read
+     0.02s   0.4% 61.24%      0.07s  1.41%  net/http/httputil.removeHopByHopHeaders
+     0.02s   0.4% 61.65%      0.08s  1.61%  net/textproto.readMIMEHeader
+     0.02s   0.4% 62.05%      0.07s  1.41%  runtime.(*mcentral).cacheSpan
+     0.02s   0.4% 62.45%      0.04s   0.8%  runtime.(*stkframe).getStackMap
+     0.02s   0.4% 62.85%      0.12s  2.41%  runtime.mallocgcSmallScanNoHeader
+     0.02s   0.4% 63.25%      0.05s  1.00%  runtime.mapassign
+     0.02s   0.4% 63.65%      0.09s  1.81%  runtime.reentersyscall
+     0.01s   0.2% 63.86%      0.12s  2.41%  context.(*cancelCtx).Done
+     0.01s   0.2% 64.06%      0.08s  1.61%  database/sql.(*DB).conn
+     0.01s   0.2% 64.26%      0.34s  6.83%  database/sql.(*Rows).nextLocked
+     0.01s   0.2% 64.46%      1.03s 20.68%  database/sql.withLock
+     0.01s   0.2% 64.66%      0.45s  9.04%  example.com/isureal-company/isureal.DelegateMiddleware.func4.1

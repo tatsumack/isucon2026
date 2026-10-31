@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 05e576b7a8e1fbdb36ffc7affae103eb92512007
+Type: cpu
+Time: 2026-10-31 03:34:14 UTC
+Duration: 150s, Total samples = 59.86s (39.91%)
+Showing nodes accounting for 38.52s, 64.35% of 59.86s total
+Dropped 995 nodes (cum <= 0.30s)
+Showing top 40 nodes out of 262
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     55.05s 91.96%  net/http.(*conn).serve
+     0.02s 0.033% 0.033%     53.83s 89.93%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.033%     53.83s 89.93%  net/http.serverHandler.ServeHTTP
+     0.01s 0.017%  0.05%     53.81s 89.89%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0%  0.05%     53.77s 89.83%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0%  0.05%     53.36s 89.14%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%  0.05%     53.36s 89.14%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0%  0.05%     53.32s 89.07%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0%  0.05%     37.62s 62.85%  example.com/isureal-company/isureal.signedImageURL
+     0.44s  0.74%  0.79%     37.51s 62.66%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  0.79%     37.32s 62.35%  example.com/isureal-company/isureal.issueImageSignature
+     1.24s  2.07%  2.86%     34.12s 57.00%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.58s  2.64%  5.50%     32.34s 54.03%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.64s  2.74%  8.24%     31.84s 53.19%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.40s  0.67%  8.90%     29.07s 48.56%  crypto/internal/fips140/sha256.block
+    28.61s 47.79% 56.70%     28.67s 47.90%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 56.70%     26.25s 43.85%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 56.70%     26.23s 43.82%  example.com/isureal-company/isureal.listMemories
+         0     0% 56.70%     26.15s 43.69%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 56.70%     26.14s 43.67%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+     0.02s 0.033% 56.73%     20.52s 34.28%  example.com/isureal-company/isureal.newPostResponse
+     0.02s 0.033% 56.77%     17.15s 28.65%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 56.77%     16.71s 27.92%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 56.77%     12.06s 20.15%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0% 56.77%     12.05s 20.13%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+     0.01s 0.017% 56.78%     12.05s 20.13%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+     0.03s  0.05% 56.83%      6.18s 10.32%  database/sql.withLock
+     4.41s  7.37% 64.20%      4.41s  7.37%  internal/runtime/syscall/linux.Syscall6
+         0     0% 64.20%      4.06s  6.78%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 64.20%      3.99s  6.67%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 64.20%      3.99s  6.67%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+     0.01s 0.017% 64.22%      3.65s  6.10%  github.com/jmoiron/sqlx.GetContext
+     0.04s 0.067% 64.28%      3.64s  6.08%  database/sql.(*DB).queryDC
+         0     0% 64.28%      3.62s  6.05%  syscall.Syscall
+     0.01s 0.017% 64.30%      3.59s  6.00%  syscall.RawSyscall6
+         0     0% 64.30%      3.52s  5.88%  internal/poll.ignoringEINTRIO (inline)
+         0     0% 64.30%      3.51s  5.86%  runtime.systemstack
+         0     0% 64.30%      3.41s  5.70%  database/sql.(*DB).retry
+     0.02s 0.033% 64.33%      3.33s  5.56%  database/sql.(*DB).queryDC.func1
+     0.01s 0.017% 64.35%      3.31s  5.53%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecStatement

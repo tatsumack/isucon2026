@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 05e576b7a8e1fbdb36ffc7affae103eb92512007
+Type: cpu
+Time: 2026-10-31 03:34:15 UTC
+Duration: 150s, Total samples = 4.44s ( 2.96%)
+Showing nodes accounting for 3.09s, 69.59% of 4.44s total
+Dropped 360 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 335
+      flat  flat%   sum%        cum   cum%
+     1.24s 27.93% 27.93%      1.24s 27.93%  internal/runtime/syscall/linux.Syscall6
+     0.35s  7.88% 35.81%      0.35s  7.88%  crypto/internal/fips140/sha256.blockSHANI
+     0.32s  7.21% 43.02%      0.32s  7.21%  runtime.memmove
+     0.15s  3.38% 46.40%      0.15s  3.38%  runtime.futex
+     0.12s  2.70% 49.10%      0.12s  2.70%  runtime.memclrNoHeapPointers
+     0.06s  1.35% 50.45%      0.06s  1.35%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.05s  1.13% 51.58%      0.55s 12.39%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.05s  1.13% 52.70%      0.48s 10.81%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.05s  1.13% 53.83%      0.47s 10.59%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.05s  1.13% 54.95%      0.05s  1.13%  runtime.nextFreeFast (inline)
+     0.05s  1.13% 56.08%      0.05s  1.13%  runtime.usleep
+     0.04s   0.9% 56.98%      0.04s   0.9%  image/jpeg.(*decoder).receiveExtend
+     0.04s   0.9% 57.88%      0.04s   0.9%  runtime.step
+     0.03s  0.68% 58.56%      0.03s  0.68%  aeshashbody
+     0.03s  0.68% 59.23%      0.03s  0.68%  image/jpeg.(*decoder).reconstructBlock
+     0.03s  0.68% 59.91%      0.03s  0.68%  internal/runtime/atomic.(*Uint32).CompareAndSwap (inline)
+     0.03s  0.68% 60.59%      0.09s  2.03%  runtime.(*unwinder).resolveInternal
+     0.03s  0.68% 61.26%      0.07s  1.58%  runtime.pcvalue
+     0.02s  0.45% 61.71%      0.06s  1.35%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.02s  0.45% 62.16%      0.24s  5.41%  database/sql.(*Rows).Next
+     0.02s  0.45% 62.61%      0.11s  2.48%  database/sql.convertAssignRows
+     0.02s  0.45% 63.06%      0.46s 10.36%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.02s  0.45% 63.51%      0.09s  2.03%  image/jpeg.(*decoder).processSOS
+     0.02s  0.45% 63.96%      0.14s  3.15%  net/http.(*persistConn).readLoop
+     0.02s  0.45% 64.41%      0.04s   0.9%  net/http.(*persistConn).roundTrip
+     0.02s  0.45% 64.86%      0.06s  1.35%  net/http.Header.writeSubset
+     0.02s  0.45% 65.32%      0.03s  0.68%  runtime.(*stkframe).getStackMap
+     0.02s  0.45% 65.77%      0.04s   0.9%  runtime.chansend
+     0.02s  0.45% 66.22%      0.34s  7.66%  runtime.findRunnable
+     0.02s  0.45% 66.67%      0.15s  3.38%  runtime.mallocgcSmallScanNoHeader
+     0.02s  0.45% 67.12%      0.03s  0.68%  runtime.mapaccess1_faststr
+     0.02s  0.45% 67.57%      0.16s  3.60%  runtime.netpoll
+     0.02s  0.45% 68.02%      0.03s  0.68%  runtime.selectgo
+     0.01s  0.23% 68.24%      0.03s  0.68%  compress/flate.(*compressor).deflate
+     0.01s  0.23% 68.47%      0.07s  1.58%  context.(*cancelCtx).Done
+     0.01s  0.23% 68.69%      0.10s  2.25%  crypto/tls.(*Conn).Write
+     0.01s  0.23% 68.92%      0.05s  1.13%  crypto/tls.(*Conn).write
+     0.01s  0.23% 69.14%      0.08s  1.80%  crypto/tls.(*Conn).writeRecordLocked
+     0.01s  0.23% 69.37%      0.10s  2.25%  crypto/tls.(*xorNonceAEAD).Open
+     0.01s  0.23% 69.59%      0.08s  1.80%  database/sql.(*DB).conn
