@@ -58,6 +58,9 @@ func (c *Config) DatabaseDSN() string {
 		User:   url.UserPassword(c.DBUser, c.DBPassword),
 		Host:   net.JoinHostPort(c.DBHost, c.DBPort),
 		Path:   "/" + c.DBName,
+		// DB とは私設ネットワーク内で通信するので TLS を使わない。
+		// 指定しないと pgx は prefer で TLS を張り、暗号化と小さな書き込みで CPU を使う
+		RawQuery: "sslmode=disable",
 	}
 	return u.String()
 }
