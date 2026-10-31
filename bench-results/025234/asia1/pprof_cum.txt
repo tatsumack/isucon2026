@@ -1,0 +1,49 @@
+File: isureal
+Build ID: b4a442f60549d8350a4b5d4b16fcc273583d474d
+Type: cpu
+Time: 2026-10-31 02:52:34 UTC
+Duration: 70s, Total samples = 88.90s (127.00%)
+Showing nodes accounting for 59.29s, 66.69% of 88.90s total
+Dropped 983 nodes (cum <= 0.44s)
+Showing top 40 nodes out of 168
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     85.73s 96.43%  net/http.(*conn).serve
+         0     0%     0%     84.92s 95.52%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0%     0%     84.92s 95.52%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0%     0%     84.92s 95.52%  net/http.serverHandler.ServeHTTP
+     0.02s 0.022% 0.022%     84.87s 95.47%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s 0.011% 0.034%     84.57s 95.13%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0% 0.034%     84.56s 95.12%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+     0.01s 0.011% 0.045%     84.54s 95.10%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+         0     0% 0.045%     42.50s 47.81%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 0.045%     42.48s 47.78%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 0.045%     42.47s 47.77%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+         0     0% 0.045%     40.35s 45.39%  image/jpeg.Decode
+         0     0% 0.045%     40.34s 45.38%  image/jpeg.(*decoder).decode
+     5.96s  6.70%  6.75%     40.33s 45.37%  image/jpeg.(*decoder).processSOS
+     0.25s  0.28%  7.03%     32.97s 37.09%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  7.03%     32.72s 36.81%  example.com/isureal-company/isureal.signedImageURL
+         0     0%  7.03%     32.56s 36.63%  example.com/isureal-company/isureal.issueImageSignature
+     0.95s  1.07%  8.10%     31.38s 35.30%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.84s  0.94%  9.04%     28.86s 32.46%  crypto/internal/fips140/sha256.(*Digest).Sum
+         0     0%  9.04%     26.21s 29.48%  example.com/isureal-company/isureal.listMemories
+         0     0%  9.04%     26.05s 29.30%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0%  9.04%     25.97s 29.21%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0%  9.04%     25.97s 29.21%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+     1.28s  1.44% 10.48%     25.51s 28.70%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.63s  1.83% 12.32%     25.39s 28.56%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.32s  0.36% 12.68%     22.90s 25.76%  crypto/internal/fips140/sha256.block
+    22.52s 25.33% 38.01%     22.58s 25.40%  crypto/internal/fips140/sha256.blockAVX2
+    12.42s 13.97% 51.98%     20.34s 22.88%  image/jpeg.(*decoder).reconstructBlock
+         0     0% 51.98%     17.34s 19.51%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 51.98%        17s 19.12%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 51.98%     15.49s 17.42%  example.com/isureal-company/isureal.newPostResponse
+     5.36s  6.03% 58.01%      8.96s 10.08%  image/jpeg.(*decoder).decodeHuffman
+     0.08s  0.09% 58.10%      7.86s  8.84%  image/jpeg.idct
+         0     0% 58.10%      7.07s  7.95%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0% 58.10%      7.07s  7.95%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0% 58.10%      7.07s  7.95%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+     4.28s  4.81% 62.91%      4.43s  4.98%  image/jpeg.(*decoder).receiveExtend
+     3.01s  3.39% 66.30%      3.97s  4.47%  image/jpeg.idctRows
+     0.01s 0.011% 66.31%      3.90s  4.39%  database/sql.withLock
+     0.34s  0.38% 66.69%      3.88s  4.36%  runtime.mallocgc
