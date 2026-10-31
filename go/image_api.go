@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/labstack/echo/v5"
@@ -40,37 +41,16 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
 		}
 
+		// 署名鍵と削除状態を1クエリで取る。削除状態は毎回確認する。即時反映も5秒以内の許容範囲に含まれる。
+		// 画像本体は署名を検証してから取る。
 		ctx := c.Request().Context()
-		var secretKeyHash string
-		err = h.DB.GetContext(ctx, &secretKeyHash, `
-   SELECT u.secret_key_hash
-   FROM image_objects i JOIN users u ON u.id = i.owner_user_id
-   WHERE i.id = $1 AND u.status = 'active'
-  `, input.ImageID)
-		if errors.Is(err, sql.ErrNoRows) {
-			return NewAPIError(http.StatusForbidden, "image_forbidden")
-		}
-		if err != nil {
-			return err
-		}
-		key, err := imageSigningKey(secretKeyHash)
-		if err != nil {
-			return err
-		}
-		if !hmac.Equal(sig, imageSignature(key, input.ImageID, exp)) {
-			c.Set("abuse", "invalid_signature")
-			return NewAPIError(http.StatusForbidden, "image_forbidden")
-		}
-
-		// 削除状態を毎回確認する。即時反映も5秒以内の許容範囲に含まれる。
 		var object struct {
-			Data      []byte `db:"data"`
-			MediaType string `db:"media_type"`
+			SecretKeyHash string `db:"secret_key_hash"`
+			MediaType     string `db:"media_type"`
+			Servable      bool   `db:"servable"`
 		}
 		err = h.DB.GetContext(ctx, &object, `
-   SELECT i.data, i.media_type
-   FROM image_objects i JOIN users u ON u.id = i.owner_user_id AND u.status = 'active'
-   WHERE i.id = $1 AND (
+   SELECT u.secret_key_hash, i.media_type, (
      u.profile_image_id = i.id
      OR EXISTS (
        SELECT 1 FROM posts p
@@ -82,7 +62,9 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
        JOIN users author ON author.id = p.author_id AND author.status = 'active'
        WHERE r.image_id = i.id AND r.reactor_id = u.id AND r.replaced_at IS NULL AND r.deleted_at IS NULL
      )
-   )
+   ) IS TRUE AS servable
+   FROM image_objects i JOIN users u ON u.id = i.owner_user_id
+   WHERE i.id = $1 AND u.status = 'active'
   `, input.ImageID)
 		if errors.Is(err, sql.ErrNoRows) {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
@@ -90,9 +72,72 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
+		key, err := imageSigningKey(object.SecretKeyHash)
+		if err != nil {
+			return err
+		}
+		if !hmac.Equal(sig, imageSignature(key, input.ImageID, exp)) {
+			c.Set("abuse", "invalid_signature")
+			return NewAPIError(http.StatusForbidden, "image_forbidden")
+		}
+		if !object.Servable {
+			return NewAPIError(http.StatusForbidden, "image_forbidden")
+		}
+
+		data, ok := imageDataCache.get(input.ImageID)
+		if !ok {
+			err = h.DB.GetContext(ctx, &data, `SELECT data FROM image_objects WHERE id = $1`, input.ImageID)
+			if errors.Is(err, sql.ErrNoRows) {
+				return NewAPIError(http.StatusForbidden, "image_forbidden")
+			}
+			if err != nil {
+				return err
+			}
+			imageDataCache.put(input.ImageID, data)
+		}
 		if exp <= time.Now().Unix() {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
 		}
-		return c.Blob(http.StatusOK, object.MediaType, object.Data)
+		return c.Blob(http.StatusOK, object.MediaType, data)
 	}
+}
+
+// 画像本体のバイト列を画像IDごとに保持する。画像IDはサーバが採番するUUIDで、
+// 同じIDの中身が書き換わることはないため、無効化しない。配信してよいかは毎回DBで確認する。
+// /initialize で消えた画像のエントリが残っても、DBの確認で403になるため配信されない。
+var imageDataCache = &byteCache{entries: map[string][]byte{}, limit: 256 << 20}
+
+type byteCache struct {
+	mu      sync.RWMutex
+	entries map[string][]byte
+	size    int
+	limit   int
+}
+
+func (c *byteCache) get(key string) ([]byte, bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	data, ok := c.entries[key]
+	return data, ok
+}
+
+// put は上限を超えるとき、任意のエントリを追い出して空きを作る。
+func (c *byteCache) put(key string, data []byte) {
+	if len(data) > c.limit {
+		return
+	}
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if _, ok := c.entries[key]; ok {
+		return
+	}
+	for evictKey, evictData := range c.entries {
+		if c.size+len(data) <= c.limit {
+			break
+		}
+		delete(c.entries, evictKey)
+		c.size -= len(evictData)
+	}
+	c.entries[key] = data
+	c.size += len(data)
 }
