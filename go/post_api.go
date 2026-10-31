@@ -3,7 +3,6 @@ package isureal
 import (
 	"database/sql"
 	"errors"
-	"io"
 	"mime/multipart"
 	"net/http"
 	"time"
@@ -70,7 +69,7 @@ func createPostHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer imageFile.Close()
-		imageData, err := io.ReadAll(imageFile)
+		imageData, err := readAllSized(imageFile, input.Image.Size)
 		if err != nil {
 			return err
 		}
