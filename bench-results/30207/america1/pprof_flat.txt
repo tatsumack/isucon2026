@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 477ac9055a6f5b90184fad7436938a1d813c64af
+Type: cpu
+Time: 2026-10-31 07:46:21 UTC
+Duration: 150s, Total samples = 9.61s ( 6.41%)
+Showing nodes accounting for 7.33s, 76.27% of 9.61s total
+Dropped 499 nodes (cum <= 0.05s)
+Showing top 40 nodes out of 218
+      flat  flat%   sum%        cum   cum%
+     2.62s 27.26% 27.26%      2.62s 27.26%  crypto/internal/fips140/sha256.blockSHANI
+     1.22s 12.70% 39.96%      1.22s 12.70%  internal/runtime/syscall/linux.Syscall6
+     0.84s  8.74% 48.70%      0.84s  8.74%  runtime.memmove
+     0.48s  4.99% 53.69%      3.70s 38.50%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.43s  4.47% 58.17%      4.33s 45.06%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.41s  4.27% 62.43%      0.41s  4.27%  runtime.memclrNoHeapPointers
+     0.23s  2.39% 64.83%      3.36s 34.96%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.11s  1.14% 65.97%      4.89s 50.88%  example.com/isureal-company/isureal.computeImageSignature
+     0.11s  1.14% 67.12%      0.11s  1.14%  runtime.futex
+     0.09s  0.94% 68.05%      2.71s 28.20%  crypto/internal/fips140/sha256.block
+     0.06s  0.62% 68.68%      0.27s  2.81%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.05s  0.52% 69.20%      0.09s  0.94%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.05s  0.52% 69.72%      0.05s  0.52%  runtime.(*spanSet).push
+     0.05s  0.52% 70.24%      0.05s  0.52%  runtime.nextFreeFast (inline)
+     0.04s  0.42% 70.66%      0.05s  0.52%  runtime.(*mspan).writeHeapBitsSmall
+     0.04s  0.42% 71.07%      0.06s  0.62%  runtime.makechan
+     0.03s  0.31% 71.38%      0.05s  0.52%  context.(*cancelCtx).Done
+     0.03s  0.31% 71.70%      0.11s  1.14%  crypto/internal/fips140.RecordApproved
+     0.03s  0.31% 72.01%      0.18s  1.87%  net/textproto.readMIMEHeader
+     0.03s  0.31% 72.32%      0.05s  0.52%  runtime.(*stkframe).getStackMap
+     0.03s  0.31% 72.63%      0.05s  0.52%  runtime.(*unwinder).resolveInternal
+     0.03s  0.31% 72.94%      0.11s  1.14%  runtime.newobject
+     0.03s  0.31% 73.26%      0.09s  0.94%  runtime.selectgo
+     0.02s  0.21% 73.47%      0.24s  2.50%  bufio.(*Reader).Read
+     0.02s  0.21% 73.67%      0.25s  2.60%  io.copyBuffer
+     0.02s  0.21% 73.88%      0.23s  2.39%  net/http.(*Transport).roundTrip
+     0.02s  0.21% 74.09%      0.10s  1.04%  net/http.(*chunkWriter).writeHeader
+     0.02s  0.21% 74.30%      0.08s  0.83%  net/http.(*persistConn).roundTrip
+     0.02s  0.21% 74.51%      0.78s  8.12%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.02s  0.21% 74.71%      0.05s  0.52%  net/textproto.canonicalMIMEHeaderKey
+     0.02s  0.21% 74.92%      0.46s  4.79%  runtime.mallocgc
+     0.02s  0.21% 75.13%      0.16s  1.66%  runtime.netpoll
+     0.02s  0.21% 75.34%      0.07s  0.73%  runtime.scanObject
+     0.02s  0.21% 75.55%      0.34s  3.54%  runtime.schedule
+     0.02s  0.21% 75.75%      0.06s  0.62%  runtime.tryDeferToSpanScan
+     0.01s   0.1% 75.86%      0.18s  1.87%  bufio.(*Reader).fill
+     0.01s   0.1% 75.96%      0.06s  0.62%  crypto/tls.(*xorNonceAEAD).Open
+     0.01s   0.1% 76.07%      0.08s  0.83%  database/sql.(*DB).conn
+     0.01s   0.1% 76.17%      0.22s  2.29%  database/sql.(*DB).queryDC.func1
+     0.01s   0.1% 76.27%      0.12s  1.25%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
