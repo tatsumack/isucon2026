@@ -32,9 +32,12 @@ ssh asia2 /home/isucon/webapp/bench-capture.sh 150 db
 
 - ベンチ時間が違う場合はユーザーの指示に合わせる
 - 完了通知が来るまで待つ。sleepやポーリングはしない
-- 最終行に出力される結果ディレクトリ (例: `/home/isucon/bench/153012`) を控える
+- 最終行に出力される結果ディレクトリ (例: `/home/isucon/bench/153012`) を控える (ディレクトリ名はUTCの時刻で、ベンチIDではない)
 
 ### 2. 結果を取得する
+`<ベンチID>` はポータルのジョブ番号 (`#6150` なら `6150`) にする。bench-capture.sh の結果ディレクトリ名 (`153012` のような時刻) は使わない。
+ジョブ番号はユーザーに聞くか、ポータルのジョブ一覧 (https://portal.isucon.net/contestant/benchmark_jobs) で計測開始時刻に最も近い開始時刻のジョブを探す。結果ディレクトリ名はUTC、ポータルの時刻はJSTなので9時間ずらして比べる。特定できなければユーザーに確認する。
+
 ```
 mkdir -p bench-results/<ベンチID>
 scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
