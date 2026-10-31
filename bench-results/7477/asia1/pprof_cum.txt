@@ -1,0 +1,49 @@
+File: isureal
+Build ID: ef7c17585ac0a32dfe3df4d397a9319d642409da
+Type: cpu
+Time: 2026-10-31 03:17:45 UTC
+Duration: 150s, Total samples = 71.67s (47.78%)
+Showing nodes accounting for 51.90s, 72.42% of 71.67s total
+Dropped 1122 nodes (cum <= 0.36s)
+Showing top 40 nodes out of 237
+      flat  flat%   sum%        cum   cum%
+     0.02s 0.028% 0.028%     67.13s 93.67%  net/http.(*conn).serve
+         0     0% 0.028%     65.46s 91.34%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.028%     65.46s 91.34%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+         0     0% 0.028%     65.46s 91.34%  net/http.serverHandler.ServeHTTP
+         0     0% 0.028%     65.38s 91.22%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0% 0.028%     65.04s 90.75%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0% 0.028%     65.03s 90.74%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0% 0.028%     64.92s 90.58%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.51s  0.71%  0.74%     47.71s 66.57%  example.com/isureal-company/isureal.computeImageSignature
+     0.02s 0.028%  0.77%     47.60s 66.42%  example.com/isureal-company/isureal.signedImageURL
+     0.01s 0.014%  0.78%     47.26s 65.94%  example.com/isureal-company/isureal.issueImageSignature
+     1.29s  1.80%  2.58%        43s 60.00%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.97s  2.75%  5.33%     41.10s 57.35%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.99s  2.78%  8.11%     40.43s 56.41%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.48s  0.67%  8.78%     36.83s 51.39%  crypto/internal/fips140/sha256.block
+    36.27s 50.61% 59.38%     36.35s 50.72%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 59.38%     33.84s 47.22%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 59.38%     33.82s 47.19%  example.com/isureal-company/isureal.listMemories
+         0     0% 59.38%     33.66s 46.97%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 59.38%     33.65s 46.95%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+     0.02s 0.028% 59.41%     25.67s 35.82%  example.com/isureal-company/isureal.newPostResponse
+     0.02s 0.028% 59.44%     22.03s 30.74%  example.com/isureal-company/isureal.loadMemoryInteractions
+         0     0% 59.44%     21.50s 30.00%  example.com/isureal-company/isureal.newRealMojiResponse
+         0     0% 59.44%     14.81s 20.66%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0% 59.44%     14.80s 20.65%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0% 59.44%     14.80s 20.65%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+         0     0% 59.44%      6.74s  9.40%  database/sql.withLock
+     4.72s  6.59% 66.02%      4.72s  6.59%  runtime.memmove
+     4.49s  6.26% 72.29%      4.49s  6.26%  internal/runtime/syscall/linux.Syscall6
+     0.01s 0.014% 72.30%      4.14s  5.78%  database/sql.(*DB).queryDC
+         0     0% 72.30%      4.09s  5.71%  database/sql.(*DB).retry
+     0.01s 0.014% 72.32%      4.08s  5.69%  github.com/jmoiron/sqlx.GetContext
+     0.02s 0.028% 72.35%      3.91s  5.46%  syscall.RawSyscall6
+     0.01s 0.014% 72.36%      3.89s  5.43%  database/sql.(*DB).queryDC.func1
+     0.01s 0.014% 72.37%      3.83s  5.34%  database/sql.(*DB).QueryContext
+         0     0% 72.37%      3.82s  5.33%  database/sql.(*DB).QueryContext.func1
+     0.01s 0.014% 72.39%      3.82s  5.33%  database/sql.(*DB).query
+     0.01s 0.014% 72.40%      3.76s  5.25%  database/sql.ctxDriverQuery
+     0.01s 0.014% 72.42%      3.75s  5.23%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+         0     0% 72.42%      3.67s  5.12%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func48.1
