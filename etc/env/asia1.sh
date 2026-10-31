@@ -16,3 +16,4 @@ ISUREAL_PRIORITY_HEAVY=8
 ISUREAL_PRIORITY_OTHER=8
 # PUT /api/me/profile-image を入れる枠 (heavy / critical / other / exempt)。新規ユーザーの入口で軽いので、heavy (Memories・export と同じ枠) から出す
 ISUREAL_PRIORITY_PROFILE_IMAGE=critical
+ISUREAL_SESSION_CACHE=1

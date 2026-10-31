@@ -141,6 +141,8 @@ func loginHandler(h *HandlerContext) echo.HandlerFunc {
 		if user.Status != "active" || user.SecretKeyHash != hex.EncodeToString(hash[:]) {
 			return NewAPIError(http.StatusUnauthorized, "invalid_credentials")
 		}
+		finishMutation := h.Sessions.beginMutation(user.ID)
+		defer finishMutation()
 		tx, err := h.DB.BeginTxx(ctx, nil)
 		if err != nil {
 			return err
@@ -167,6 +169,8 @@ func logoutHandler(h *HandlerContext) echo.HandlerFunc {
 		if session == nil {
 			return NewAPIError(http.StatusUnauthorized, "invalid_session")
 		}
+		finishMutation := h.Sessions.beginMutation(session.UserID)
+		defer finishMutation()
 		if err := InvalidateLoginSession(h.DB, session.UserID, session.TokenHash); err != nil {
 			return err
 		}
@@ -206,6 +210,10 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 			(input.Bio != nil && !validUserText(*input.Bio, 0, 500)) ||
 			(input.Region != nil && !validRegion(*input.Region)) {
 			return NewAPIError(http.StatusBadRequest, "invalid_profile")
+		}
+		if input.Region != nil {
+			finishMutation := h.Sessions.beginMutation(session.UserID)
+			defer finishMutation()
 		}
 		ctx := c.Request().Context()
 		tx, err := h.DB.BeginTxx(ctx, nil)

@@ -17,6 +17,8 @@ type initializeResponse struct {
 
 func initializeHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
+		finishReset := h.Sessions.beginReset()
+		defer finishReset()
 		cmd := exec.Command("../sql/init.sh")
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
