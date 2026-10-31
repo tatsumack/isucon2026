@@ -36,8 +36,8 @@ ssh asia2 /home/isucon/webapp/bench-capture.sh 70 db
 
 ### 2. 結果を取得する
 ```
-mkdir -p bench-results/<HHMMSS>
-scp -r <host>:<結果ディレクトリ> bench-results/<HHMMSS>/<host>
+mkdir -p bench-results/<ベンチID>
+scp -r <host>:<結果ディレクトリ> bench-results/<ベンチID>/<host>
 ```
 
 ### 3. 分析する
@@ -54,7 +54,7 @@ scp -r <host>:<結果ディレクトリ> bench-results/<HHMMSS>/<host>
 `bench-results/` に前回の結果がある場合は比較し、改善・悪化したものを示す。
 
 ### 4. 報告する
-次の形式で `bench-results/<HHMMSS>/report.md` に保存し、同じ内容をユーザーに出力する。
+次の形式で `bench-results/<ベンチID>/report.md` に保存し、同じ内容をユーザーに出力する。
 
 ```
 ## 概況
@@ -69,6 +69,14 @@ scp -r <host>:<結果ディレクトリ> bench-results/<HHMMSS>/<host>
 - 期待効果: 大/中/小 とその理由
 - リスク: 仕様を壊す可能性、整合性の注意点 (キャッシュの無効化タイミングなど)
 ```
+
+### 5. Slackに共有する
+`report.md` をSlackの `#isucon2026` (チャンネルID `C0CDHTMH8MU`) にファイルとして添付して送る。本文に全文は貼らない。
+
+1. `wc -c < report.md` でバイト数を測り、`slack_get_file_upload_url` を呼ぶ (filename: `bench-<ベンチID>-report.md`、snippet_type: `markdown`)
+2. 返ってきたURLをそのまま変数に入れ、`curl -X POST -H 'Content-Type: text/markdown' --data-binary @report.md "$URL"` でアップロードする
+3. `slack_complete_file_upload` で `#isucon2026` に共有する (title: `ベンチ #<ベンチID> 分析 (score <スコア>)`、initial_comment: `ベンチ #<ベンチID> の分析結果 (mdファイル)`)
+4. 返ってきたファイルのリンクをユーザーに伝える
 
 ## 守ること
 - **分析だけ行い、コードの変更・デプロイはしない。** 対策をどれから入れるかは人間が決める
