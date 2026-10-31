@@ -43,7 +43,8 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
-		if _, err := tx.ExecContext(ctx, `LOCK TABLE users IN SHARE ROW EXCLUSIVE MODE`); err != nil {
+		// 同じリージョンの投稿期間開始だけを直列化する。通知対象のユーザーはINSERT ... SELECTのスナップショットで決まるため、usersのテーブルロックは取らない。
+		if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtext('posting_window:' || $1::text))`, region); err != nil {
 			return err
 		}
 		var conflict bool
