@@ -23,13 +23,17 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
 		if err != nil {
 			return err
 		}
-		// 画像本体は image_objects ではなくファイルから読む (image_store.go)。JOIN は画像の行がある投稿に絞るために残す
+		// 画像本体は image_objects ではなくファイルから読む (image_store.go)。
+		// image_objects との JOIN はしない。image_objects は created_at で約36個に分かれていて、id だけの JOIN は投稿1件ごとに全パーティションを引く
+		// (ベンチ #26166 で1回 109ms、DB 時間の13.3%)。JOIN で落ちる投稿は無い:
+		//   - 投稿の作成 (post_api.go) は、同じトランザクションで image_objects に行を入れる
+		//   - image_objects の行を消すのはプロフィール画像の変更・削除だけで、投稿の画像とは id が別 (初期データで重なりは0件)
+		//   - 初期データで、画像の行が無い投稿は0件 (2026-10-31 に asia2 で確認)
 		var posts []Post
 		if err := h.DB.SelectContext(ctx, &posts, `
    SELECT `+postColumns+`
    FROM posts p
    JOIN posting_windows w ON w.id = p.posting_window_id
-   JOIN image_objects i ON i.id = p.image_id
    WHERE p.author_id = $1 AND p.deleted_at IS NULL
    ORDER BY p.posted_at, p.id
   `, userID); err != nil {
