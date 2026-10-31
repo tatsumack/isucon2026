@@ -21,6 +21,8 @@ BEGIN
   END LOOP;
 END $$;
 DELETE FROM image_objects WHERE created_at > (SELECT created_at FROM initial_data_boundary);
+-- session_replication_role = replica ではトリガーが動かず、パーティションの TRUNCATE も行を消さないため、image_owners (005-image-owners.sql) はここで消す
+DELETE FROM image_owners WHERE created_at > (SELECT created_at FROM initial_data_boundary);
 DELETE FROM users WHERE created_at > (SELECT created_at FROM initial_data_boundary);
 
 UPDATE users u

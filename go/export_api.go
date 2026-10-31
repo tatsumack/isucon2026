@@ -32,7 +32,7 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
    SELECT `+postColumns+`, i.created_at <= (SELECT created_at FROM initial_data_boundary) AS initial_image
    FROM posts p
    JOIN posting_windows w ON w.id = p.posting_window_id
-   JOIN image_objects i ON i.id = p.image_id
+   JOIN image_owners i ON i.id = p.image_id
    WHERE p.author_id = $1 AND p.deleted_at IS NULL
    ORDER BY p.posted_at, p.id
   `, userID); err != nil {
