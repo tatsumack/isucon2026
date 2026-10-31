@@ -83,7 +83,7 @@ func (s *ImageStore) Save(id string, data []byte) error {
 	if err := writeFileAtomic(s.path("new", id), data, true); err != nil {
 		return err
 	}
-	// 呼び出し側の io.ReadAll の余分な容量を持ち続けないよう、大きさぴったりに写す
+	// data は呼び出し側のバッファ (投稿は使い回し、upload_buffer.go) を指すので、写してから持つ
 	imageDataCache.put(id, cachedImage{data: bytes.Clone(data)})
 	return nil
 }
