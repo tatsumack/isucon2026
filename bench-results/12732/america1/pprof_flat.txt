@@ -1,0 +1,48 @@
+File: isureal
+Build ID: 266ad89502d951678cb24e307f066c03bda7d54b
+Type: cpu
+Time: 2026-10-31 04:28:11 UTC
+Duration: 150s, Total samples = 1.57s ( 1.05%)
+Showing nodes accounting for 1.25s, 79.62% of 1.57s total
+Showing top 40 nodes out of 432
+      flat  flat%   sum%        cum   cum%
+     0.54s 34.39% 34.39%      0.54s 34.39%  internal/runtime/syscall/linux.Syscall6
+     0.09s  5.73% 40.13%      0.09s  5.73%  runtime.futex
+     0.09s  5.73% 45.86%      0.09s  5.73%  runtime.memclrNoHeapPointers
+     0.04s  2.55% 48.41%      0.04s  2.55%  runtime.lock2
+     0.03s  1.91% 50.32%      0.03s  1.91%  crypto/internal/fips140/sha256.blockSHANI
+     0.03s  1.91% 52.23%      0.03s  1.91%  runtime.memmove
+     0.03s  1.91% 54.14%      0.03s  1.91%  runtime.usleep
+     0.02s  1.27% 55.41%      0.02s  1.27%  crypto/internal/fips140.RecordApproved
+     0.02s  1.27% 56.69%      0.11s  7.01%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.02s  1.27% 57.96%      0.02s  1.27%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.02s  1.27% 59.24%      0.06s  3.82%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.02s  1.27% 60.51%      0.07s  4.46%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.02s  1.27% 61.78%      0.02s  1.27%  runtime.selectgo
+     0.02s  1.27% 63.06%      0.02s  1.27%  runtime.unlock2
+     0.01s  0.64% 63.69%      0.01s  0.64%  context.value
+     0.01s  0.64% 64.33%      0.03s  1.91%  crypto/internal/fips140/pbkdf2.Key[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+     0.01s  0.64% 64.97%      0.06s  3.82%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.64% 65.61%      0.76s 48.41%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.01s  0.64% 66.24%      0.01s  0.64%  fmt.newPrinter
+     0.01s  0.64% 66.88%      0.01s  0.64%  github.com/jackc/pgx/v5/pgconn.(*scramClient).recvServerFirstMessage
+     0.01s  0.64% 67.52%      0.06s  3.82%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Flush
+     0.01s  0.64% 68.15%      0.01s  0.64%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).SendBind
+     0.01s  0.64% 68.79%      0.01s  0.64%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).SendExecute
+     0.01s  0.64% 69.43%      0.02s  1.27%  github.com/jackc/pgx/v5/stdlib.(*Rows).initValueFuncs
+     0.01s  0.64% 70.06%      0.01s  0.64%  image/jpeg.(*decoder).processSOS
+     0.01s  0.64% 70.70%      0.01s  0.64%  indexbytebody
+     0.01s  0.64% 71.34%      0.01s  0.64%  internal/poll.(*fdMutex).rwlock
+     0.01s  0.64% 71.97%      0.02s  1.27%  internal/poll.runtime_pollSetDeadline
+     0.01s  0.64% 72.61%      0.01s  0.64%  internal/runtime/atomic.(*Uint32).CompareAndSwap (inline)
+     0.01s  0.64% 73.25%      0.01s  0.64%  internal/runtime/maps.(*Iter).Next
+     0.01s  0.64% 73.89%      0.01s  0.64%  internal/runtime/maps.(*Map).Delete
+     0.01s  0.64% 74.52%      0.01s  0.64%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+     0.01s  0.64% 75.16%      0.01s  0.64%  net.(*TCPConn).Write
+     0.01s  0.64% 75.80%      0.03s  1.91%  net/http.(*conn).readRequest
+     0.01s  0.64% 76.43%      0.02s  1.27%  net/http.(*connReader).backgroundRead
+     0.01s  0.64% 77.07%      0.10s  6.37%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.01s  0.64% 77.71%      0.01s  0.64%  net/http/httputil.(*ReverseProxy).flushInterval
+     0.01s  0.64% 78.34%      0.11s  7.01%  net/http/internal.(*chunkedReader).Read
+     0.01s  0.64% 78.98%      0.01s  0.64%  net/netip.AddrFrom4
+     0.01s  0.64% 79.62%      0.01s  0.64%  os.(*File).Close (inline)
