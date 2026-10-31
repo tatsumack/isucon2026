@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 2c66ec638b3126e3d661e79a3f126f6ab05c92ac
+Type: cpu
+Time: 2026-10-31 03:07:52 UTC
+Duration: 70s, Total samples = 54.67s (78.10%)
+Showing nodes accounting for 44.99s, 82.29% of 54.67s total
+Dropped 936 nodes (cum <= 0.27s)
+Showing top 40 nodes out of 210
+      flat  flat%   sum%        cum   cum%
+    26.55s 48.56% 48.56%     26.55s 48.56%  crypto/internal/fips140/sha256.blockAVX2
+     3.21s  5.87% 54.44%      3.21s  5.87%  runtime.memmove
+     3.07s  5.62% 60.05%      3.07s  5.62%  internal/runtime/syscall/linux.Syscall6
+     1.85s  3.38% 63.44%     29.67s 54.27%  crypto/internal/fips140/sha256.(*Digest).Write
+     1.72s  3.15% 66.58%      1.72s  3.15%  runtime.memclrNoHeapPointers
+     1.30s  2.38% 68.96%     29.59s 54.12%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     1.28s  2.34% 71.30%     33.70s 61.64%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.80s  1.46% 72.76%     36.20s 66.22%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     0.50s  0.91% 73.68%      1.51s  2.76%  runtime.mallocgcSmallNoscan
+     0.45s  0.82% 74.50%      1.56s  2.85%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.40s  0.73% 75.23%      0.40s  0.73%  runtime.nextFreeFast (inline)
+     0.38s   0.7% 75.93%      2.69s  4.92%  runtime.growslice
+     0.36s  0.66% 76.59%      0.73s  1.34%  runtime.tryDeferToSpanScan
+     0.33s   0.6% 77.19%      1.25s  2.29%  crypto/internal/fips140/hmac.(*HMAC).Reset
+     0.32s  0.59% 77.78%      0.32s  0.59%  runtime.spanClass.sizeclass (inline)
+     0.31s  0.57% 78.34%     26.87s 49.15%  crypto/internal/fips140/sha256.block
+     0.30s  0.55% 78.89%      0.93s  1.70%  runtime.scanObjectsSmall
+     0.25s  0.46% 79.35%     38.35s 70.15%  example.com/isureal-company/isureal.computeImageSignature
+     0.24s  0.44% 79.79%      3.11s  5.69%  runtime.mallocgc
+     0.23s  0.42% 80.21%      0.31s  0.57%  crypto/internal/fips140.RecordApproved
+     0.14s  0.26% 80.46%      0.31s  0.57%  runtime.scanObject
+     0.12s  0.22% 80.68%      0.66s  1.21%  crypto/internal/fips140/hmac.(*HMAC).Write
+     0.08s  0.15% 80.83%      0.37s  0.68%  encoding/json.structEncoder.encode
+     0.08s  0.15% 80.98%      0.50s  0.91%  runtime.mallocgcSmallScanNoHeader
+     0.08s  0.15% 81.12%      0.50s  0.91%  runtime.newobject
+     0.07s  0.13% 81.25%      0.36s  0.66%  crypto/tls.(*halfConn).decrypt
+     0.07s  0.13% 81.38%      1.07s  1.96%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+     0.06s  0.11% 81.49%      0.38s   0.7%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.05s 0.091% 81.58%      0.32s  0.59%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.05s 0.091% 81.67%      1.14s  2.09%  runtime.scanSpan
+     0.04s 0.073% 81.75%     21.55s 39.42%  example.com/isureal-company/isureal.newPostResponse
+     0.04s 0.073% 81.82%      2.14s  3.91%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.04s 0.073% 81.89%      1.14s  2.09%  internal/poll.(*FD).Read
+     0.04s 0.073% 81.96%      2.67s  4.88%  runtime.systemstack
+     0.03s 0.055% 82.02%      0.35s  0.64%  bufio.(*Reader).Peek
+     0.03s 0.055% 82.07%      0.35s  0.64%  crypto/tls.(*halfConn).encrypt
+     0.03s 0.055% 82.13%      0.29s  0.53%  crypto/tls.(*xorNonceAEAD).Open
+     0.03s 0.055% 82.18%      4.52s  8.27%  database/sql.withLock
+     0.03s 0.055% 82.24%      1.34s  2.45%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+     0.03s 0.055% 82.29%      0.91s  1.66%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
