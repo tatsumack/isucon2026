@@ -1,0 +1,149 @@
+package isureal
+
+import (
+	"bytes"
+	"context"
+	"errors"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"runtime"
+	"sync"
+	"sync/atomic"
+	"testing"
+)
+
+func TestImageStoreOriginSaveLoadReset(t *testing.T) {
+	origin := &ImageStore{dir: t.TempDir()}
+	id := "0123abcd-new"
+	if err := origin.Save(id, []byte("new image")); err != nil {
+		t.Fatal(err)
+	}
+	if err := writeFileAtomic(origin.path("initial", "4567abcd-initial"), []byte("initial image"), false); err != nil {
+		t.Fatal(err)
+	}
+
+	data, initial, err := origin.load(context.Background(), id)
+	if err != nil || string(data) != "new image" || initial {
+		t.Fatalf("load new = %q, %v, %v", data, initial, err)
+	}
+	data, initial, err = origin.load(context.Background(), "4567abcd-initial")
+	if err != nil || string(data) != "initial image" || !initial {
+		t.Fatalf("load initial = %q, %v, %v", data, initial, err)
+	}
+
+	// /initialize ではベンチ中の画像だけを消し、初期データの画像は残す
+	if err := origin.Reset(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := readImageFile(origin.path("new", id)); ok {
+		t.Fatal("new image remains after reset")
+	}
+	if _, ok := readImageFile(origin.path("initial", "4567abcd-initial")); !ok {
+		t.Fatal("initial image removed by reset")
+	}
+	if err := origin.Save(id, []byte("again")); err != nil {
+		t.Fatalf("save after reset: %v", err)
+	}
+}
+
+func TestReadImageFileTreatsEmptyAsMissing(t *testing.T) {
+	path := t.TempDir() + "/empty"
+	if err := os.WriteFile(path, nil, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := readImageFile(path); ok {
+		t.Fatal("empty file must be treated as missing")
+	}
+}
+
+func TestImageStoreSaveRejectedOutsideOrigin(t *testing.T) {
+	store := &ImageStore{dir: t.TempDir(), originURL: "http://origin.invalid"}
+	if err := store.Save("abcd", []byte("x")); err == nil {
+		t.Fatal("save must fail outside the origin")
+	}
+}
+
+func TestImageStoreFetchFromOrigin(t *testing.T) {
+	var requests atomic.Int32
+	release := make(chan struct{})
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requests.Add(1)
+		<-release
+		switch r.URL.Path {
+		case "/internal/images/aa-initial":
+			w.Header().Set(imageInitialHeader, "1")
+			w.Write([]byte("initial image"))
+		case "/internal/images/bb-new":
+			w.Write([]byte("new image"))
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer server.Close()
+	store := &ImageStore{dir: t.TempDir(), originURL: server.URL, client: server.Client()}
+
+	// 同じ画像を同時に読んでも、asia1 へは1回だけ取りに行く
+	var wg sync.WaitGroup
+	for range 10 {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			data, initial, err := store.load(context.Background(), "aa-initial")
+			if err != nil || string(data) != "initial image" || !initial {
+				t.Errorf("load = %q, %v, %v", data, initial, err)
+			}
+		}()
+	}
+	// 1件目が asia1 で止まっている間に、残りが相乗りする。遅れて来たものは、ディスクに書かれた画像を読む
+	for requests.Load() == 0 {
+		runtime.Gosched()
+	}
+	close(release)
+	wg.Wait()
+	if n := requests.Load(); n != 1 {
+		t.Fatalf("origin requests = %d, want 1", n)
+	}
+
+	// 初期データの画像だけをディスクに残す。ベンチ中の画像は /initialize で消えるため残さない
+	if data, ok := readImageFile(store.path("initial", "aa-initial")); !ok || !bytes.Equal(data, []byte("initial image")) {
+		t.Fatalf("initial image is not cached on disk: %q", data)
+	}
+	data, initial, err := store.load(context.Background(), "bb-new")
+	if err != nil || string(data) != "new image" || initial {
+		t.Fatalf("load new = %q, %v, %v", data, initial, err)
+	}
+	if _, ok := readImageFile(store.path("initial", "bb-new")); ok {
+		t.Fatal("new image must not be cached on disk")
+	}
+	if _, ok := readImageFile(store.path("new", "bb-new")); ok {
+		t.Fatal("new image must not be cached on disk")
+	}
+
+	if _, _, err := store.load(context.Background(), "cc-missing"); !errors.Is(err, errImageNotFound) {
+		t.Fatalf("missing image err = %v, want errImageNotFound", err)
+	}
+}
+
+func TestTrustedPeerOnlyRejectsOthers(t *testing.T) {
+	config := &Config{TrustedPeers: []string{"192.168.2.10"}}
+	for _, tc := range []struct {
+		remote string
+		want   bool
+	}{
+		{"192.168.2.10:51234", true},
+		{"127.0.0.1:51234", false},
+		{"192.168.9.9:51234", false},
+	} {
+		r := httptest.NewRequest(http.MethodGet, "/internal/images/x", nil)
+		r.RemoteAddr = tc.remote
+		if got := isTrustedPeer(r, config); got != tc.want {
+			t.Errorf("isTrustedPeer(%s) = %v, want %v", tc.remote, got, tc.want)
+		}
+	}
+	r := httptest.NewRequest(http.MethodGet, "/internal/images/x", nil)
+	r.RemoteAddr = "192.168.2.10:1"
+	if isTrustedPeer(r, &Config{}) {
+		t.Error("no peer is trusted without ISUREAL_TRUSTED_PEERS")
+	}
+}
