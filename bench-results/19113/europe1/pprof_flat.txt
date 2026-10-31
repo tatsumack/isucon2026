@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 1976bb3e6334e44182728139e17f841a115f6292
+Type: cpu
+Time: 2026-10-31 05:45:51 UTC
+Duration: 150s, Total samples = 8.87s ( 5.91%)
+Showing nodes accounting for 7.81s, 88.05% of 8.87s total
+Dropped 338 nodes (cum <= 0.04s)
+Showing top 40 nodes out of 167
+      flat  flat%   sum%        cum   cum%
+     3.15s 35.51% 35.51%      3.15s 35.51%  crypto/internal/fips140/sha256.blockSHANI
+        1s 11.27% 46.79%      4.88s 55.02%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.82s  9.24% 56.03%      0.82s  9.24%  runtime.memmove
+     0.69s  7.78% 63.81%      0.69s  7.78%  internal/runtime/syscall/linux.Syscall6
+     0.55s  6.20% 70.01%      5.63s 63.47%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.38s  4.28% 74.30%      4.18s 47.13%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.19s  2.14% 76.44%      0.19s  2.14%  runtime.futex
+     0.17s  1.92% 78.35%      0.39s  4.40%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.16s  1.80% 80.16%      0.16s  1.80%  runtime.memclrNoHeapPointers
+     0.08s   0.9% 81.06%      3.23s 36.41%  crypto/internal/fips140/sha256.block
+     0.06s  0.68% 81.74%      0.06s  0.68%  internal/byteorder.BEUint32 (inline)
+     0.05s  0.56% 82.30%      0.06s  0.68%  crypto/internal/fips140.RecordApproved
+     0.05s  0.56% 82.86%      0.07s  0.79%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.56% 83.43%      0.05s  0.56%  runtime.tryDeferToSpanScan
+     0.04s  0.45% 83.88%      0.12s  1.35%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.04s  0.45% 84.33%      6.42s 72.38%  example.com/isureal-company/isureal.computeImageSignature
+     0.04s  0.45% 84.78%      0.05s  0.56%  runtime.scanObjectsSmall
+     0.02s  0.23% 85.01%      0.08s   0.9%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.02s  0.23% 85.23%      0.05s  0.56%  encoding/json.(*decodeState).object
+     0.02s  0.23% 85.46%      0.07s  0.79%  github.com/jackc/pgx/v5/pgconn.(*PgConn).receiveMessage
+     0.02s  0.23% 85.68%      0.06s  0.68%  internal/poll.runtime_pollSetDeadline
+     0.02s  0.23% 85.91%      0.17s  1.92%  runtime.mallocgc
+     0.02s  0.23% 86.13%      0.12s  1.35%  runtime.scanSpan
+     0.01s  0.11% 86.25%      0.10s  1.13%  bufio.(*Reader).fill
+     0.01s  0.11% 86.36%      0.05s  0.56%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.01s  0.11% 86.47%      0.24s  2.71%  internal/poll.(*FD).Read
+     0.01s  0.11% 86.58%      0.42s  4.74%  internal/poll.(*FD).Write
+     0.01s  0.11% 86.70%      0.25s  2.82%  net.(*conn).Read
+     0.01s  0.11% 86.81%      0.37s  4.17%  net.(*netFD).Write
+     0.01s  0.11% 86.92%      7.52s 84.78%  net/http.serverHandler.ServeHTTP
+     0.01s  0.11% 87.03%      0.13s  1.47%  net/http/httputil.(*ReverseProxy).copyResponse
+     0.01s  0.11% 87.15%      0.05s  0.56%  runtime.chansend
+     0.01s  0.11% 87.26%      0.34s  3.83%  runtime.findRunnable
+     0.01s  0.11% 87.37%      0.12s  1.35%  runtime.futexsleep
+     0.01s  0.11% 87.49%      0.06s  0.68%  runtime.makeslice
+     0.01s  0.11% 87.60%      0.08s   0.9%  runtime.mallocgcSmallScanNoHeader
+     0.01s  0.11% 87.71%      0.37s  4.17%  runtime.mcall
+     0.01s  0.11% 87.82%      0.13s  1.47%  runtime.netpoll
+     0.01s  0.11% 87.94%      0.13s  1.47%  runtime.notesleep
+     0.01s  0.11% 88.05%      0.15s  1.69%  runtime.stopm

@@ -3,6 +3,7 @@
 # 使い方: bench-capture.sh [計測秒数] [app|db]
 #   app: アプリサーバ (asia1/europe1/america1)。vmstat, pidstat, pprof, alp
 #   db : DBサーバ (asia2)。vmstat, pidstat, pg_stat_statements
+#   全台で、プロセス別のディスクの読み書き (pidstat -d、1秒ごと) も pidstat_disk.txt に取る
 #   実行直後にベンチを開始する。終了後に結果ディレクトリのパスを出力する
 set -eu
 
@@ -25,9 +26,11 @@ else
     $PSQL -c "SELECT pg_stat_statements_reset()" > /dev/null
 fi
 
-# 計測 (CPU全体 / プロセス別CPU / Goのプロファイル)
+# 計測 (CPU全体 / プロセス別CPU / プロセス別ディスク / Goのプロファイル)
 vmstat 1 ${DURATION} > ${OUT}/vmstat.txt &
 pidstat -u 5 $((DURATION / 5)) > ${OUT}/pidstat.txt &
+# 他ユーザーのプロセス (nginx, postgres, journald) の /proc/<pid>/io を読むため sudo で動かす
+sudo pidstat -d 1 ${DURATION} > ${OUT}/pidstat_disk.txt &
 if [ "$ROLE" = "app" ]; then
     curl -s -o ${OUT}/cpu.pb.gz "${PPROF_URL}?seconds=${DURATION}" || echo "pprof failed" > ${OUT}/pprof_error.txt &
 fi
