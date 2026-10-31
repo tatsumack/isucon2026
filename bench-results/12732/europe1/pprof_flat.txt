@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 266ad89502d951678cb24e307f066c03bda7d54b
+Type: cpu
+Time: 2026-10-31 04:28:09 UTC
+Duration: 150s, Total samples = 2.42s ( 1.61%)
+Showing nodes accounting for 1.65s, 68.18% of 2.42s total
+Dropped 263 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 335
+      flat  flat%   sum%        cum   cum%
+     0.73s 30.17% 30.17%      0.73s 30.17%  internal/runtime/syscall/linux.Syscall6
+     0.19s  7.85% 38.02%      0.19s  7.85%  runtime.memclrNoHeapPointers
+     0.09s  3.72% 41.74%      0.09s  3.72%  runtime.futex
+     0.08s  3.31% 45.04%      0.08s  3.31%  runtime.memmove
+     0.05s  2.07% 47.11%      0.12s  4.96%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.04s  1.65% 48.76%      0.04s  1.65%  crypto/internal/fips140/sha256.blockSHANI
+     0.03s  1.24% 50.00%      0.04s  1.65%  runtime.adjustframe
+     0.03s  1.24% 51.24%      0.03s  1.24%  runtime.step
+     0.02s  0.83% 52.07%      0.14s  5.79%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.02s  0.83% 52.89%      0.02s  0.83%  internal/sync.(*Mutex).Lock
+     0.02s  0.83% 53.72%      0.03s  1.24%  net/textproto.MIMEHeader.Get
+     0.02s  0.83% 54.55%      0.02s  0.83%  runtime.(*mspan).writeHeapBitsSmall
+     0.02s  0.83% 55.37%      0.03s  1.24%  runtime.(*unwinder).initAt
+     0.02s  0.83% 56.20%      0.02s  0.83%  runtime.mapassign
+     0.02s  0.83% 57.02%      0.02s  0.83%  runtime.nextFreeFast (inline)
+     0.02s  0.83% 57.85%      0.06s  2.48%  runtime.reentersyscall
+     0.02s  0.83% 58.68%      0.04s  1.65%  runtime.stealWork
+     0.01s  0.41% 59.09%      0.17s  7.02%  bufio.(*Reader).Read
+     0.01s  0.41% 59.50%      0.03s  1.24%  context.(*cancelCtx).propagateCancel
+     0.01s  0.41% 59.92%      0.07s  2.89%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.01s  0.41% 60.33%      0.24s  9.92%  database/sql.(*DB).queryDC
+     0.01s  0.41% 60.74%      0.28s 11.57%  database/sql.withLock
+     0.01s  0.41% 61.16%      0.32s 13.22%  example.com/isureal-company/isureal.(*ImageStore).fetchFromOrigin
+     0.01s  0.41% 61.57%      0.16s  6.61%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+     0.01s  0.41% 61.98%      0.13s  5.37%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.01s  0.41% 62.40%      0.15s  6.20%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.01s  0.41% 62.81%      0.23s  9.50%  internal/poll.(*FD).Read
+     0.01s  0.41% 63.22%      0.02s  0.83%  internal/poll.(*FD).SetsockoptInt
+     0.01s  0.41% 63.64%      0.02s  0.83%  internal/runtime/maps.(*Map).getWithoutKeySmallFastStr
+     0.01s  0.41% 64.05%      0.02s  0.83%  internal/sync.(*Mutex).Unlock (inline)
+     0.01s  0.41% 64.46%      0.29s 11.98%  io.ReadAll
+     0.01s  0.41% 64.88%      0.14s  5.79%  io.ReadAtLeast
+     0.01s  0.41% 65.29%      0.24s  9.92%  net.(*conn).Read
+     0.01s  0.41% 65.70%      0.04s  1.65%  net/http.(*Transport).roundTrip
+     0.01s  0.41% 66.12%      0.02s  0.83%  net/http.(*connReader).backgroundRead
+     0.01s  0.41% 66.53%      0.02s  0.83%  net/http.newTextprotoReader
+     0.01s  0.41% 66.94%      0.06s  2.48%  net/http.readRequest
+     0.01s  0.41% 67.36%      0.02s  0.83%  net/http.send
+     0.01s  0.41% 67.77%      0.02s  0.83%  net/textproto.CanonicalMIMEHeaderKey
+     0.01s  0.41% 68.18%      0.02s  0.83%  net/textproto.readMIMEHeader

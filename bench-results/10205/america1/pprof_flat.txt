@@ -1,0 +1,48 @@
+File: isureal
+Build ID: 653296bd91d15590bdf10bc1e07dc9a899c03374
+Type: cpu
+Time: 2026-10-31 03:54:24 UTC
+Duration: 150s, Total samples = 1.99s ( 1.33%)
+Showing nodes accounting for 1.40s, 70.35% of 1.99s total
+Showing top 40 nodes out of 525
+      flat  flat%   sum%        cum   cum%
+     0.42s 21.11% 21.11%      0.42s 21.11%  internal/runtime/syscall/linux.Syscall6
+     0.22s 11.06% 32.16%      0.22s 11.06%  crypto/internal/fips140/sha256.blockSHANI
+     0.12s  6.03% 38.19%      0.12s  6.03%  runtime.memmove
+     0.10s  5.03% 43.22%      0.10s  5.03%  runtime.futex
+     0.04s  2.01% 45.23%      0.29s 14.57%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.03s  1.51% 46.73%      0.03s  1.51%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.03s  1.51% 48.24%      0.04s  2.01%  runtime.newobject
+     0.02s  1.01% 49.25%      0.02s  1.01%  context.(*cancelCtx).Done
+     0.02s  1.01% 50.25%      0.02s  1.01%  crypto/internal/fips140/aes.encryptBlockAsm
+     0.02s  1.01% 51.26%      0.02s  1.01%  crypto/internal/fips140/pbkdf2.Key[go.shape.interface { BlockSize int; Reset; Size int; Sum []uint8; Write  }]
+     0.02s  1.01% 52.26%      0.17s  8.54%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.02s  1.01% 53.27%      0.02s  1.01%  internal/runtime/atomic.(*Uint32).Load
+     0.02s  1.01% 54.27%      0.02s  1.01%  runtime.memclrNoHeapPointers
+     0.02s  1.01% 55.28%      0.12s  6.03%  runtime.netpoll
+     0.02s  1.01% 56.28%      0.02s  1.01%  runtime.nextFreeFast (inline)
+     0.02s  1.01% 57.29%      0.03s  1.51%  runtime.pcvalue
+     0.02s  1.01% 58.29%      0.02s  1.01%  runtime.scanObject
+     0.02s  1.01% 59.30%      0.03s  1.51%  runtime.scanObjectsSmall
+     0.01s   0.5% 59.80%      0.01s   0.5%  aeshashbody
+     0.01s   0.5% 60.30%      0.01s   0.5%  bufio.(*Reader).Reset
+     0.01s   0.5% 60.80%      0.01s   0.5%  bufio.(*Writer).Reset
+     0.01s   0.5% 61.31%      0.01s   0.5%  bytes.(*Buffer).WriteByte
+     0.01s   0.5% 61.81%      0.02s  1.01%  compress/flate.(*compressor).deflate
+     0.01s   0.5% 62.31%      0.01s   0.5%  compress/flate.matchLen (inline)
+     0.01s   0.5% 62.81%      0.01s   0.5%  crypto/internal/fips140/aes/gcm.gcmAesEnc
+     0.01s   0.5% 63.32%      0.01s   0.5%  crypto/internal/fips140/nistec.boothW5 (inline)
+     0.01s   0.5% 63.82%      0.30s 15.08%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.01s   0.5% 64.32%      0.26s 13.07%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.01s   0.5% 64.82%      0.01s   0.5%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.01s   0.5% 65.33%      0.08s  4.02%  crypto/tls.(*halfConn).decrypt
+     0.01s   0.5% 65.83%      0.01s   0.5%  crypto/tls.(*halfConn).explicitNonceLen
+     0.01s   0.5% 66.33%      0.06s  3.02%  crypto/tls.(*xorNonceAEAD).Open
+     0.01s   0.5% 66.83%      0.01s   0.5%  database/sql.(*DB).putConn
+     0.01s   0.5% 67.34%      1.06s 53.27%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+     0.01s   0.5% 67.84%      0.34s 17.09%  example.com/isureal-company/isureal.computeImageSignature
+     0.01s   0.5% 68.34%      0.04s  2.01%  github.com/jackc/pgx/v5.(*Conn).Exec
+     0.01s   0.5% 68.84%      0.18s  9.05%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.01s   0.5% 69.35%      0.02s  1.01%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+     0.01s   0.5% 69.85%      0.02s  1.01%  github.com/jackc/pgx/v5/stdlib.(*Rows).initValueFuncs
+     0.01s   0.5% 70.35%      0.01s   0.5%  github.com/labstack/echo/v5.bindData
