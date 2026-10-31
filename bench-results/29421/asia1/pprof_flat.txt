@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 8e4359802b87bba66fb484a1591176d955e11c47
+Type: cpu
+Time: 2026-10-31 07:38:21 UTC
+Duration: 150s, Total samples = 46.67s (31.11%)
+Showing nodes accounting for 28.14s, 60.30% of 46.67s total
+Dropped 1241 nodes (cum <= 0.23s)
+Showing top 40 nodes out of 398
+      flat  flat%   sum%        cum   cum%
+    11.96s 25.63% 25.63%     11.96s 25.63%  internal/runtime/syscall/linux.Syscall6
+     3.84s  8.23% 33.85%      3.84s  8.23%  crypto/internal/fips140/sha256.blockAVX2
+     2.06s  4.41% 38.27%      2.06s  4.41%  runtime.memclrNoHeapPointers
+     1.50s  3.21% 41.48%      1.50s  3.21%  runtime.memmove
+     0.83s  1.78% 43.26%      0.83s  1.78%  runtime.futex
+     0.63s  1.35% 44.61%      0.63s  1.35%  indexbytebody
+     0.51s  1.09% 45.70%      0.51s  1.09%  runtime.nextFreeFast (inline)
+     0.44s  0.94% 46.65%      0.71s  1.52%  image/jpeg.(*decoder).reconstructBlock
+     0.44s  0.94% 47.59%      0.48s  1.03%  runtime.(*mspan).writeHeapBitsSmall
+     0.43s  0.92% 48.51%      1.89s  4.05%  image/jpeg.(*decoder).processSOS
+     0.38s  0.81% 49.33%      1.94s  4.16%  runtime.mallocgcSmallScanNoHeader
+     0.35s  0.75% 50.07%      3.76s  8.06%  runtime.mallocgc
+     0.33s  0.71% 50.78%      0.51s  1.09%  image/jpeg.(*decoder).decodeHuffman
+     0.31s  0.66% 51.45%      0.31s  0.66%  runtime.spanClass.sizeclass (inline)
+     0.28s   0.6% 52.05%      0.28s   0.6%  aeshashbody
+     0.25s  0.54% 52.58%      4.29s  9.19%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.24s  0.51% 53.10%      0.32s  0.69%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+     0.22s  0.47% 53.57%      0.47s  1.01%  compress/flate.(*compressor).deflate
+     0.21s  0.45% 54.02%      0.68s  1.46%  runtime.scanObjectsSmall
+     0.20s  0.43% 54.45%      4.40s  9.43%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.20s  0.43% 54.87%      1.79s  3.84%  runtime.newobject
+     0.20s  0.43% 55.30%      0.29s  0.62%  runtime.scanObjectSmall
+     0.20s  0.43% 55.73%      0.26s  0.56%  runtime.step
+     0.17s  0.36% 56.10%      0.53s  1.14%  runtime.pcvalue
+     0.16s  0.34% 56.44%      0.84s  1.80%  encoding/json.structEncoder.encode
+     0.16s  0.34% 56.78%      0.43s  0.92%  runtime.(*unwinder).resolveInternal
+     0.16s  0.34% 57.12%      0.59s  1.26%  runtime.tryDeferToSpanScan
+     0.15s  0.32% 57.45%      2.72s  5.83%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.15s  0.32% 57.77%      0.36s  0.77%  runtime.selectgo
+     0.14s   0.3% 58.07%      2.48s  5.31%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.13s  0.28% 58.35%      0.25s  0.54%  database/sql.convertAssignRows
+     0.12s  0.26% 58.60%      1.15s  2.46%  runtime.scanSpan
+     0.11s  0.24% 58.84%      4.60s  9.86%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.11s  0.24% 59.07%      1.61s  3.45%  crypto/tls.(*atLeastReader).Read
+     0.11s  0.24% 59.31%      0.42s   0.9%  runtime.mapaccess2_faststr
+     0.10s  0.21% 59.52%      0.44s  0.94%  crypto/internal/fips140/aes/gcm.gcmAesEnc
+     0.10s  0.21% 59.74%      0.24s  0.51%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.09s  0.19% 59.93%      0.57s  1.22%  runtime.mapassign_faststr
+     0.09s  0.19% 60.12%      2.52s  5.40%  runtime.schedule
+     0.08s  0.17% 60.30%      0.62s  1.33%  database/sql.(*Rows).close
