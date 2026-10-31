@@ -1,4 +1,3 @@
-bench-results/
 ._*
 /go/isureal
 # Go以外のリファレンス実装は管理しない (サーバ上のものはgit cleanで消えないようにignoreする)
