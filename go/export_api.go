@@ -35,6 +35,13 @@ func exportPostsHandler(h *HandlerContext) echo.HandlerFunc {
   `, userID); err != nil {
 			return err
 		}
+		// 応答で返す署名を、組み立てる前にまとめて依頼する (image_signature_remote.go)
+		var batch imageSignatureBatch
+		batch.addProfileImage(author)
+		for _, post := range posts {
+			batch.add(author, post.ImageID)
+		}
+		h.Signer.Prime(ctx, &batch)
 
 		var body bytes.Buffer
 		writer := zip.NewWriter(&body)
