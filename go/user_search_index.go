@@ -138,9 +138,10 @@ func (index *UserSearchIndex) UpdateDisplayName(id, displayName string) {
 }
 
 // markDeleted は退会済みのユーザーを索引から外す。
-func (index *UserSearchIndex) markDeleted(ids []string) {
+func (index *UserSearchIndex) markDeleted(ids []string) int {
 	index.mu.Lock()
 	defer index.mu.Unlock()
+	removed := 0
 	for _, id := range ids {
 		entry, ok := index.byID[id]
 		if !ok {
@@ -150,8 +151,10 @@ func (index *UserSearchIndex) markDeleted(ids []string) {
 		pos, found := slices.BinarySearchFunc(index.entries, entry, compareUserSearchEntry)
 		if found {
 			index.entries = slices.Delete(index.entries, pos, pos+1)
+			removed++
 		}
 	}
+	return removed
 }
 
 // candidates は、条件に合うユーザーの ID を (username, id) の順に最大 limit 件返す。
@@ -225,7 +228,10 @@ func (index *UserSearchIndex) Search(ctx context.Context, viewer, beforeUsername
 				missing = append(missing, id)
 			}
 		}
-		index.markDeleted(missing)
+		if removed := index.markDeleted(missing); removed == 0 {
+			// 索引が壊れていると同じ候補を返し続けるため、無限ループにせずエラーにする
+			return nil, fmt.Errorf("user search index: missing users not in index: %v", missing)
+		}
 	}
 }
 
