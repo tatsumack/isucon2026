@@ -84,6 +84,19 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
 		}
 
+		// メモリのキャッシュに無く、ファイルがこのサーバにあれば、nginx に返させる。Content-Type と Cache-Control はこの応答のものが使われる
+		// キャッシュにある画像 (asia1 で保存した直後の投稿画像など) は、ディスクを読まないようアプリから返す (#23313)
+		if _, cached := imageDataCache.get(input.ImageID); !cached {
+			if path, ok := h.Images.AccelPath(input.ImageID); ok {
+				if exp <= time.Now().Unix() {
+					return NewAPIError(http.StatusForbidden, "image_forbidden")
+				}
+				c.Response().Header().Set(echo.HeaderContentType, object.MediaType)
+				c.Response().Header().Set("X-Accel-Redirect", path)
+				return c.NoContent(http.StatusOK)
+			}
+		}
+
 		data, _, err := h.Images.Load(ctx, input.ImageID)
 		if errors.Is(err, errImageNotFound) {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")

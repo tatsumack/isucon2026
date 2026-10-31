@@ -61,6 +61,8 @@ sudo cp -r etc/nginx/. /etc/nginx/
 sudo nginx -t
 sudo cp etc/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
+# 以前のアプリが 0600 で書いた画像を nginx (www-data) が X-Accel-Redirect で読めるようにする
+if [ -d /home/isucon/images ]; then find /home/isucon/images -type f ! -perm -044 -exec chmod go+r {} +; fi
 cd $APP_DIR
 PATH=/home/isucon/local/go/bin:/usr/local/go/bin:/home/isucon/go/bin:/usr/bin go build -o $APP_BINARY ./cmd/isureal
 sudo mkdir -p $LOG_BACKUP_DIR

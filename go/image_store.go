@@ -88,6 +88,25 @@ func (s *ImageStore) Save(id string, data []byte) error {
 	return nil
 }
 
+// imageAccelPrefix は nginx の internal location (etc/nginx/sites-available/isureal.conf)。ImageDir を指す
+const imageAccelPrefix = "/_images/"
+
+// AccelPath は画像のファイルがこのサーバにあれば、nginx に渡すパス (X-Accel-Redirect の値) を返す。
+// 探す順と、大きさ0のファイルを無いものと扱うのは load と同じ。
+func (s *ImageStore) AccelPath(id string) (string, bool) {
+	for _, kind := range []string{"new", "initial"} {
+		path := s.path(kind, id)
+		if info, err := os.Stat(path); err == nil && info.Mode().IsRegular() && info.Size() > 0 {
+			rel, err := filepath.Rel(s.dir, path)
+			if err != nil {
+				return "", false
+			}
+			return imageAccelPrefix + filepath.ToSlash(rel), true
+		}
+	}
+	return "", false
+}
+
 // Load は画像本体と、初期データの画像かどうかを返す。見つからなければ errImageNotFound を返す。
 func (s *ImageStore) Load(ctx context.Context, id string) ([]byte, bool, error) {
 	if cached, ok := imageDataCache.get(id); ok {
@@ -238,6 +257,11 @@ func writeFileAtomic(path string, data []byte, durable bool) error {
 	}
 	tmp := f.Name()
 	defer os.Remove(tmp)
+	// CreateTemp は 0600 で作る。nginx (www-data) が X-Accel-Redirect で読めるようにする
+	if err := f.Chmod(0o644); err != nil {
+		f.Close()
+		return err
+	}
 	if _, err := f.Write(data); err != nil {
 		f.Close()
 		return err
