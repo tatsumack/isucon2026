@@ -1,8 +1,9 @@
 package isureal
 
 import (
-	"crypto/hmac"
+	"bytes"
 	"crypto/sha256"
+	"encoding"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -61,15 +62,46 @@ func cachedImageSignature(key []byte, imageID string, exp int64) ([]byte, bool) 
 	return entry.sig, entry.exp == exp
 }
 
+// HMAC-SHA256 を imageSignatureIterations 回繰り返す。結果は crypto/hmac で繰り返した場合と同じ。
+// crypto/hmac は1回ごとに出力の確保と状態の作り直しをするため、鍵を混ぜた直後 (ipad / opad) の状態を
+// 1度だけ作って毎回戻し、出力は同じバッファに書き込む。
 func computeImageSignature(key []byte, imageID string, exp int64) []byte {
-	value := []byte(strconv.FormatInt(exp, 10) + ":" + imageID)
-	mac := hmac.New(sha256.New, key)
-	for range imageSignatureIterations {
-		mac.Reset()
-		mac.Write(value)
-		value = mac.Sum(nil)
+	if len(key) > sha256.BlockSize {
+		sum := sha256.Sum256(key)
+		key = sum[:]
 	}
-	return value
+	var ipad, opad [sha256.BlockSize]byte
+	copy(ipad[:], key)
+	copy(opad[:], key)
+	for i := range ipad {
+		ipad[i] ^= 0x36
+		opad[i] ^= 0x5c
+	}
+	inner, outer := sha256.New(), sha256.New()
+	inner.Write(ipad[:])
+	outer.Write(opad[:])
+	innerState, err := inner.(encoding.BinaryMarshaler).MarshalBinary()
+	if err != nil {
+		panic(err)
+	}
+	outerState, err := outer.(encoding.BinaryMarshaler).MarshalBinary()
+	if err != nil {
+		panic(err)
+	}
+	innerRestore := inner.(encoding.BinaryUnmarshaler)
+	outerRestore := outer.(encoding.BinaryUnmarshaler)
+
+	value := []byte(strconv.FormatInt(exp, 10) + ":" + imageID)
+	var buf [sha256.Size]byte
+	for range imageSignatureIterations {
+		innerRestore.UnmarshalBinary(innerState)
+		inner.Write(value)
+		sum := inner.Sum(buf[:0])
+		outerRestore.UnmarshalBinary(outerState)
+		outer.Write(sum)
+		value = outer.Sum(buf[:0])
+	}
+	return bytes.Clone(value)
 }
 
 func signedImageURL(user User, imageID string) string {

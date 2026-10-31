@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 2c66ec638b3126e3d661e79a3f126f6ab05c92ac
+Type: cpu
+Time: 2026-10-31 03:07:52 UTC
+Duration: 70s, Total samples = 2.10s ( 3.00%)
+Showing nodes accounting for 1.51s, 71.90% of 2.10s total
+Dropped 210 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 272
+      flat  flat%   sum%        cum   cum%
+     0.40s 19.05% 19.05%      0.40s 19.05%  internal/runtime/syscall/linux.Syscall6
+     0.23s 10.95% 30.00%      0.23s 10.95%  crypto/internal/fips140/sha256.blockSHANI
+     0.22s 10.48% 40.48%      0.22s 10.48%  runtime.memmove
+     0.07s  3.33% 43.81%      0.39s 18.57%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.05s  2.38% 46.19%      0.05s  2.38%  runtime.futex
+     0.04s  1.90% 48.10%      0.04s  1.90%  runtime.memclrNoHeapPointers
+     0.04s  1.90% 50.00%      0.04s  1.90%  runtime.usleep
+     0.03s  1.43% 51.43%      0.03s  1.43%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.03s  1.43% 52.86%      0.33s 15.71%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.02s  0.95% 53.81%      0.02s  0.95%  aeshashbody
+     0.02s  0.95% 54.76%      0.02s  0.95%  crypto/internal/fips140.getIndicator
+     0.02s  0.95% 55.71%      0.02s  0.95%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.02s  0.95% 56.67%      0.49s 23.33%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.02s  0.95% 57.62%      0.02s  0.95%  image/jpeg.idctRows
+     0.02s  0.95% 58.57%      0.02s  0.95%  runtime.getMCache (inline)
+     0.02s  0.95% 59.52%      0.02s  0.95%  runtime.nextFreeFast
+     0.02s  0.95% 60.48%      0.02s  0.95%  runtime.tryDeferToSpanScan
+     0.02s  0.95% 61.43%      0.02s  0.95%  time.Time.Add
+     0.01s  0.48% 61.90%      0.03s  1.43%  crypto/internal/fips140.RecordApproved
+     0.01s  0.48% 62.38%      0.03s  1.43%  crypto/internal/fips140/hmac.(*HMAC).Reset
+     0.01s  0.48% 62.86%      0.19s  9.05%  crypto/tls.(*Conn).readFromUntil
+     0.01s  0.48% 63.33%      0.05s  2.38%  crypto/tls.(*xorNonceAEAD).Open
+     0.01s  0.48% 63.81%      0.03s  1.43%  database/sql.(*Rows).close
+     0.01s  0.48% 64.29%      0.49s 23.33%  database/sql.withLock
+     0.01s  0.48% 64.76%      0.03s  1.43%  encoding/json.(*encodeState).reflectValue
+     0.01s  0.48% 65.24%      0.27s 12.86%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+     0.01s  0.48% 65.71%      0.27s 12.86%  github.com/jackc/pgx/v5/pgconn.(*PgConn).receiveMessage
+     0.01s  0.48% 66.19%      0.25s 11.90%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).receiveMessage
+     0.01s  0.48% 66.67%      0.14s  6.67%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+     0.01s  0.48% 67.14%      0.04s  1.90%  image/jpeg.(*decoder).processSOS
+     0.01s  0.48% 67.62%      0.03s  1.43%  image/jpeg.(*decoder).reconstructBlock
+     0.01s  0.48% 68.10%      0.02s  0.95%  internal/runtime/atomic.(*Bool).Load (inline)
+     0.01s  0.48% 68.57%      0.02s  0.95%  internal/runtime/maps.(*Iter).Next
+     0.01s  0.48% 69.05%      0.08s  3.81%  net/http.(*conn).readRequest
+     0.01s  0.48% 69.52%      0.06s  2.86%  net/http.(*persistConn).readLoop
+     0.01s  0.48% 70.00%      0.03s  1.43%  net/http.(*response).WriteHeader
+     0.01s  0.48% 70.48%      0.05s  2.38%  net/http.(*response).finishRequest
+     0.01s  0.48% 70.95%      0.10s  4.76%  net/http/httputil.(*ReverseProxy).ServeHTTP
+     0.01s  0.48% 71.43%      0.05s  2.38%  net/http/httputil.(*ReverseProxy).copyResponse
+     0.01s  0.48% 71.90%      0.07s  3.33%  runtime.growslice

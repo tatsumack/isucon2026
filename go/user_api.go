@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"net/http"
+	"strings"
 
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v5"
@@ -90,25 +91,21 @@ func registerHandler(h *HandlerContext) echo.HandlerFunc {
 		}
 		defer tx.Rollback()
 		// 投稿期間開始時の通知対象と、登録の前後関係をリージョン単位で確定する。
-		if err := lockPostingWindowRegions(ctx, tx, input.Region); err != nil {
+		if err := lockPostingWindowRegionsShared(ctx, tx, input.Region); err != nil {
 			return err
 		}
 		userID := uuid.NewString()
-		var insertedUserID string
-		err = tx.GetContext(ctx, &insertedUserID, `
+		var user User
+		err = tx.GetContext(ctx, &user, `
 			INSERT INTO users (id, username, secret_key_hash, display_name, region, search_username, search_display_name)
 			VALUES ($1, $2, $3, $4, $5, $6, $7)
 			ON CONFLICT (username) DO NOTHING
-			RETURNING id
+			RETURNING `+strings.Join(userColumns, ", ")+`
 		`, userID, input.Username, hex.EncodeToString(hash[:]), input.DisplayName, input.Region,
 			normalizeSearchText(input.Username), normalizeSearchText(input.DisplayName))
 		if errors.Is(err, sql.ErrNoRows) {
 			return NewAPIError(http.StatusConflict, "username_taken")
 		}
-		if err != nil {
-			return err
-		}
-		user, err := getUser(ctx, tx, userID)
 		if err != nil {
 			return err
 		}
@@ -224,30 +221,33 @@ func updateMeHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		if input.Region != nil && *input.Region != currentRegion {
-			if err := lockPostingWindowRegions(ctx, tx, currentRegion, *input.Region); err != nil {
+			if err := lockPostingWindowRegionsShared(ctx, tx, currentRegion, *input.Region); err != nil {
 				return err
 			}
 		}
+		var normalizedDisplayName *string
 		if input.DisplayName != nil {
-			if _, err := tx.ExecContext(ctx, `UPDATE users SET display_name = $2, search_display_name = $3, updated_at = clock_timestamp() WHERE id = $1`, session.UserID, *input.DisplayName, normalizeSearchText(*input.DisplayName)); err != nil {
-				return err
-			}
+			normalized := normalizeSearchText(*input.DisplayName)
+			normalizedDisplayName = &normalized
 		}
-		if input.Bio != nil {
-			if _, err := tx.ExecContext(ctx, `UPDATE users SET bio = $2, updated_at = clock_timestamp() WHERE id = $1`, session.UserID, *input.Bio); err != nil {
-				return err
-			}
-		}
-		if input.Region != nil {
-			if _, err := tx.ExecContext(ctx, `UPDATE users SET region = $2, updated_at = clock_timestamp() WHERE id = $1`, session.UserID, *input.Region); err != nil {
-				return err
-			}
-		}
-		user, err := getUser(ctx, tx, session.UserID)
+		var user User
+		err = tx.GetContext(ctx, &user, `
+			UPDATE users SET
+				display_name = COALESCE($2::text, display_name),
+				search_display_name = COALESCE($3::text, search_display_name),
+				bio = COALESCE($4::text, bio),
+				region = COALESCE($5::text, region),
+				updated_at = clock_timestamp()
+			WHERE id = $1 AND status = 'active'
+			RETURNING `+strings.Join(userColumns, ", ")+`
+		`, session.UserID, input.DisplayName, normalizedDisplayName, input.Bio, input.Region)
 		if errors.Is(err, sql.ErrNoRows) {
 			return NewAPIError(http.StatusNotFound, "account_not_found")
 		}
 		if err != nil {
+			return err
+		}
+		if err := user.setImageKey(); err != nil {
 			return err
 		}
 		if err := tx.Commit(); err != nil {
