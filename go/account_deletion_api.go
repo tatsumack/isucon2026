@@ -12,6 +12,8 @@ func deleteAccountHandler(h *HandlerContext) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		ctx := c.Request().Context()
 		userID := GetSession(c).UserID
+		finishMutation := h.Sessions.beginMutation(userID)
+		defer finishMutation()
 		tx, err := h.DB.BeginTxx(ctx, nil)
 		if err != nil {
 			return err

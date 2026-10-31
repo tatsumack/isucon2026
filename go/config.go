@@ -10,13 +10,15 @@ import (
 )
 
 type Config struct {
-	Region     string
-	DBHost     string
-	DBPort     string
-	DBUser     string
-	DBPassword string
-	DBName     string
-	LogLevel   string
+	// セッションの正本を更新する asia1 でのみ認証結果をキャッシュする。
+	SessionCacheEnabled bool
+	Region              string
+	DBHost              string
+	DBPort              string
+	DBUser              string
+	DBPassword          string
+	DBName              string
+	LogLevel            string
 	// 転送先 (asia1) の URL。europe1 / america1 だけで設定する (delegate.go)
 	DelegateURL string
 	// 転送元として信用するサーバのIPアドレス。asia1 だけで設定する (delegate.go)
@@ -33,13 +35,14 @@ type Config struct {
 
 func ConfigFromEnv() *Config {
 	return &Config{
-		Region:     envOrDefault("ISUREAL_REGION", "asia"),
-		DBHost:     envOrDefault("ISUREAL_DB_HOST", "127.0.0.1"),
-		DBPort:     envOrDefault("ISUREAL_DB_PORT", "5432"),
-		DBUser:     envOrDefault("ISUREAL_DB_USER", "isureal"),
-		DBPassword: envOrDefault("ISUREAL_DB_PASSWORD", "isureal"),
-		DBName:     envOrDefault("ISUREAL_DB_NAME", "isureal"),
-		LogLevel:   envOrDefault("ISUREAL_LOG_LEVEL", "debug"),
+		SessionCacheEnabled: envOrDefault("ISUREAL_SESSION_CACHE", "0") == "1",
+		Region:              envOrDefault("ISUREAL_REGION", "asia"),
+		DBHost:              envOrDefault("ISUREAL_DB_HOST", "127.0.0.1"),
+		DBPort:              envOrDefault("ISUREAL_DB_PORT", "5432"),
+		DBUser:              envOrDefault("ISUREAL_DB_USER", "isureal"),
+		DBPassword:          envOrDefault("ISUREAL_DB_PASSWORD", "isureal"),
+		DBName:              envOrDefault("ISUREAL_DB_NAME", "isureal"),
+		LogLevel:            envOrDefault("ISUREAL_LOG_LEVEL", "debug"),
 
 		DelegateURL:  os.Getenv("ISUREAL_DELEGATE_URL"),
 		TrustedPeers: strings.FieldsFunc(os.Getenv("ISUREAL_TRUSTED_PEERS"), func(r rune) bool { return r == ',' || r == ' ' }),

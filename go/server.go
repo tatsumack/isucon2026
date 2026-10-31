@@ -12,6 +12,7 @@ import (
 )
 
 type HandlerContext struct {
+	Sessions        *SessionCache
 	DB              *sqlx.DB
 	Config          *Config
 	IPBans          *IPBanList
@@ -44,6 +45,7 @@ func NewServer(config *Config) *echo.Echo {
 
 	handlerContext := &HandlerContext{
 		DB:              db,
+		Sessions:        newSessionCache(config),
 		Config:          config,
 		IPBans:          &IPBanList{},
 		NotificationHub: NewNotificationHub(db),
@@ -54,9 +56,10 @@ func NewServer(config *Config) *echo.Echo {
 	e.Use(IPBanMiddleware(handlerContext))
 	e.Use(PriorityMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
-	// 転送しないもの: 初期化、退会、画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
+	// 転送しないもの: 画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
 	// 登録・ログイン・ログアウト・自分の情報の更新・プロフィール画像も転送する (DB と約5往復するため)。
-	// これらはアプリの状態をプロセス内に持たず、リージョンは入力と DB の値だけを使うので、asia1 で処理しても結果は同じ。
+	// 認証状態の変更は asia1 に集約し、セッションキャッシュもそこで無効化する。
+	// 退会・初期化も委譲する。海外のSSE認証はキャッシュせずDBの現在値を読む。
 	// ログイン・登録の行動ログは、転送元では username が null になり、username つきの行は asia1 に出る
 	// エクスポートは、画像本体が asia1 のディスクにあるため転送する (image_store.go)
 	delegate := DelegateMiddleware(handlerContext)
@@ -67,7 +70,7 @@ func NewServer(config *Config) *echo.Echo {
 	// asia1 から画像署名の計算を受ける内部 API (image_signature_remote.go)
 	e.POST("/internal/image-signatures", postInternalImageSignaturesHandler(handlerContext), trustedPeerOnly(handlerContext))
 
-	e.POST("/api/initialize", initializeHandler(handlerContext))
+	e.POST("/api/initialize", initializeHandler(handlerContext), delegate)
 	e.POST("/api/auth/register", registerHandler(handlerContext), delegate)
 	e.POST("/api/auth/login", loginHandler(handlerContext), delegate)
 	e.POST("/api/auth/logout", logoutHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
@@ -78,7 +81,7 @@ func NewServer(config *Config) *echo.Echo {
 	e.PATCH("/api/me", updateMeHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
 	e.PUT("/api/me/profile-image", putProfileImageHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
 	e.DELETE("/api/me/profile-image", deleteProfileImageHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
-	e.POST("/api/me/account-deletion", deleteAccountHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
+	e.POST("/api/me/account-deletion", deleteAccountHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.POST("/api/posts", createPostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/posting-window/current", getCurrentPostingWindowHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/posts/me/current", getMyCurrentPostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
