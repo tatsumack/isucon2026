@@ -43,8 +43,8 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
-		// 同じリージョンの投稿期間開始だけを直列化する。通知対象のユーザーはINSERT ... SELECTのスナップショットで決まるため、usersのテーブルロックは取らない。
-		if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtext('posting_window:' || $1::text))`, region); err != nil {
+		// 登録・リージョン変更・退会と直列化し、通知対象のactiveユーザーを確定する。
+		if err := lockPostingWindowRegions(ctx, tx, region); err != nil {
 			return err
 		}
 		var conflict bool
