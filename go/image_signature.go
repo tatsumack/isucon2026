@@ -50,8 +50,12 @@ func issueImageSignature(key []byte, imageID string, exp int64) []byte {
 		return sig
 	}
 	sig := computeImageSignature(key, imageID, exp)
-	imageSignatureCache.Store(string(key)+":"+imageID, imageSignatureCacheEntry{exp: exp, sig: sig})
+	storeImageSignature(key, imageID, exp, sig)
 	return sig
+}
+
+func storeImageSignature(key []byte, imageID string, exp int64, sig []byte) {
+	imageSignatureCache.Store(string(key)+":"+imageID, imageSignatureCacheEntry{exp: exp, sig: sig})
 }
 
 func cachedImageSignature(key []byte, imageID string, exp int64) ([]byte, bool) {
@@ -105,8 +109,12 @@ func computeImageSignature(key []byte, imageID string, exp int64) []byte {
 	return bytes.Clone(value)
 }
 
+func imageURLExpiration(now time.Time) int64 {
+	return now.Add(imageURLLifetime).Truncate(imageURLExpirationStep).Unix()
+}
+
 func signedImageURL(user User, imageID string) string {
-	exp := time.Now().Add(imageURLLifetime).Truncate(imageURLExpirationStep).Unix()
+	exp := imageURLExpiration(time.Now())
 	query := url.Values{
 		"exp": {strconv.FormatInt(exp, 10)},
 		"sig": {base64.RawURLEncoding.EncodeToString(issueImageSignature(user.ImageKey, imageID, exp))},

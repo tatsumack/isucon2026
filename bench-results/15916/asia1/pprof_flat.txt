@@ -1,0 +1,49 @@
+File: isureal
+Build ID: bf127b8285c0494b7c689b7b0960020d53f8b631
+Type: cpu
+Time: 2026-10-31 05:07:58 UTC
+Duration: 150s, Total samples = 45.43s (30.29%)
+Showing nodes accounting for 28.39s, 62.49% of 45.43s total
+Dropped 1145 nodes (cum <= 0.23s)
+Showing top 40 nodes out of 375
+      flat  flat%   sum%        cum   cum%
+    11.65s 25.64% 25.64%     11.65s 25.64%  internal/runtime/syscall/linux.Syscall6
+     3.38s  7.44% 33.08%      3.38s  7.44%  runtime.memclrNoHeapPointers
+     2.74s  6.03% 39.12%      2.76s  6.08%  crypto/internal/fips140/sha256.blockAVX2
+     1.93s  4.25% 43.36%      1.93s  4.25%  runtime.memmove
+     1.02s  2.25% 45.61%      1.02s  2.25%  runtime.spanClass.sizeclass (inline)
+     0.69s  1.52% 47.13%      1.39s  3.06%  runtime.scanObjectSmall
+     0.56s  1.23% 48.36%      0.56s  1.23%  runtime.nextFreeFast (inline)
+     0.55s  1.21% 49.57%      1.92s  4.23%  runtime.tryDeferToSpanScan
+     0.54s  1.19% 50.76%      0.54s  1.19%  runtime.futex
+     0.49s  1.08% 51.84%      3.77s  8.30%  runtime.scanSpan
+     0.40s  0.88% 52.72%      1.70s  3.74%  runtime.scanObjectsSmall
+     0.31s  0.68% 53.40%      0.34s  0.75%  runtime.(*mspan).writeHeapBitsSmall
+     0.30s  0.66% 54.06%      0.30s  0.66%  runtime.madvise
+     0.27s  0.59% 54.66%      1.70s  3.74%  runtime.mallocgcSmallScanNoHeader
+     0.25s  0.55% 55.21%      0.28s  0.62%  encoding/json.appendString[go.shape.string]
+     0.24s  0.53% 55.73%      4.41s  9.71%  runtime.mallocgc
+     0.21s  0.46% 56.20%      0.41s   0.9%  compress/flate.(*compressor).deflate
+     0.21s  0.46% 56.66%      3.12s  6.87%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.21s  0.46% 57.12%      1.93s  4.25%  runtime.newobject
+     0.20s  0.44% 57.56%      0.27s  0.59%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Load
+     0.19s  0.42% 57.98%      0.27s  0.59%  runtime.(*spanInlineMarkBits).tryAcquire
+     0.17s  0.37% 58.35%      3.18s  7.00%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.16s  0.35% 58.71%      0.70s  1.54%  image/jpeg.(*decoder).processSOS
+     0.15s  0.33% 59.04%      0.83s  1.83%  encoding/json.structEncoder.encode
+     0.15s  0.33% 59.37%      0.24s  0.53%  image/jpeg.(*decoder).decodeHuffman
+     0.13s  0.29% 59.65%      0.34s  0.75%  runtime.(*unwinder).resolveInternal
+     0.12s  0.26% 59.92%      0.25s  0.55%  context.(*cancelCtx).Done
+     0.12s  0.26% 60.18%      4.87s 10.72%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.11s  0.24% 60.42%      0.24s  0.53%  database/sql.convertAssignRows
+     0.11s  0.24% 60.66%      0.79s  1.74%  runtime.mallocgcSmallNoscan
+     0.11s  0.24% 60.91%      0.38s  0.84%  runtime.pcvalue
+     0.10s  0.22% 61.13%      0.26s  0.57%  runtime.mapaccess1_faststr
+     0.09s   0.2% 61.33%      3.35s  7.37%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.09s   0.2% 61.52%      1.96s  4.31%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.08s  0.18% 61.70%      0.23s  0.51%  runtime.adjustframe
+     0.08s  0.18% 61.88%      0.29s  0.64%  runtime.scanObject
+     0.07s  0.15% 62.03%      1.94s  4.27%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+     0.07s  0.15% 62.18%      0.30s  0.66%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+     0.07s  0.15% 62.34%      1.43s  3.15%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+     0.07s  0.15% 62.49%      4.62s 10.17%  internal/poll.(*FD).Read

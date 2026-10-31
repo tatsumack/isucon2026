@@ -1,0 +1,24 @@
+ calls | total_ms | mean_ms | rows  | pct  |                                                                                                                                                    query                                                                                                                                                     
+-------+----------+---------+-------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     1 |     1498 | 1498.37 | 30385 | 25.5 | DELETE FROM notifications WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+     1 |      718 |  717.97 |   248 | 12.2 | DELETE FROM comments WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+     1 |      610 |  609.58 |     1 | 10.4 | SELECT $1, count(*) FROM posts WHERE posted_at < $2
+     1 |      582 |  581.89 |     1 |  9.9 | SELECT $1, count(*) FROM image_objects
+     1 |      532 |  531.66 |   231 |  9.0 | DELETE FROM realmojis WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+     1 |      359 |  358.66 |  4846 |  6.1 | INSERT INTO notifications (id, user_id, posting_window_id, created_at) SELECT $4 || substr(gen_random_uuid()::text, $5), id, $2, $3 FROM users WHERE region = $1 AND status = $6
+     1 |      264 |  263.66 |  1341 |  4.5 | DELETE FROM posts WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+    46 |      215 |    4.67 |    92 |  3.7 | SELECT id FROM users WHERE id IN ($1, $2) AND status=$3 ORDER BY id FOR NO KEY UPDATE
+     1 |      197 |  196.83 | 24985 |  3.3 | INSERT INTO friendships (id, user_low_id, user_high_id, source_request_id, created_at, updated_at) SELECT id, user_low_id, user_high_id, source_request_id, created_at, updated_at FROM initial_friendships
+    99 |      149 |    1.51 |    99 |  2.5 | SELECT u.secret_key_hash, i.media_type, ( u.profile_image_id = i.id OR EXISTS ( SELECT $2 FROM posts p WHERE p.image_id = i.id AND p.author_id = u.id AND p.deleted_at IS NULL ) OR EXISTS ( SELECT $3 FROM realmojis r JOIN posts p ON p.id = r.post_id AND p.deleted_at IS NULL JOIN users author ON autho
+     1 |       97 |   97.18 | 28970 |  1.7 | INSERT INTO friend_requests (id, requester_id, recipient_id, status, created_at, updated_at) SELECT id, requester_id, recipient_id, status, created_at, updated_at FROM initial_friend_requests
+     1 |       74 |   74.47 |     0 |  1.3 | DO $$ DECLARE partition_name text; BEGIN FOR partition_name IN SELECT c.relname FROM pg_inherits i JOIN pg_class c ON c.oid = i.inhrelid WHERE i.inhparent = 'image_objects'::regclass AND c.relname > 'image_objects_' || to_char((SELECT created_at FROM initial_data_boundary) AT TIME ZONE 'UTC', 'YYYYM
+     1 |       73 |   73.38 |     0 |  1.2 | TRUNCATE ip_bans, login_sessions, administrator_sessions, friendships, friend_requests, follows, block_relations
+     1 |       73 |   73.13 | 10020 |  1.2 | INSERT INTO follows (id, follower_id, followee_id, created_at, updated_at) SELECT id, follower_id, followee_id, created_at, updated_at FROM initial_follows
+     5 |       70 |   13.94 |   661 |  1.2 | SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at FROM posts p JOIN posting_windows w ON w.id = p.posting_window_id JOIN image_objects i ON i.id = p.
+     1 |       48 |   48.08 |     1 |  0.8 | SELECT $1, count(*) FROM posts
+    23 |       33 |    1.43 |   198 |  0.6 | SELECT p.id, p.author_id, p.posting_window_id, p.image_id, p.caption, p.visibility, p.location_kind, p.latitude, p.longitude, p.locality, p.posted_at, w.on_time_deadline, w.ended_at AS window_ended_at, u.id AS "author.id", u.username AS "author.username", u.secret_key_hash AS "author.secret_key_hash
+     1 |       21 |   21.23 |     0 |  0.4 | DELETE FROM image_objects WHERE created_at > (SELECT created_at FROM initial_data_boundary)
+  4992 |       19 |    0.00 |  4992 |  0.3 | SELECT $2 FROM ONLY "public"."users" x WHERE "id"::pg_catalog.text OPERATOR(pg_catalog.=) $1::pg_catalog.text FOR KEY SHARE OF x
+    53 |       17 |    0.32 |    53 |  0.3 | WITH invalidated AS ( UPDATE login_sessions SET active = $4, invalidated_at = clock_timestamp(), reason = $5 WHERE user_id = $1 AND active = $6 ) INSERT INTO login_sessions (id, user_id, token_hash) SELECT $2, $1, $3 WHERE EXISTS (SELECT $7 FROM users WHERE id = $1 AND status = $8) RETURNING user_id
+(20 rows)
+
