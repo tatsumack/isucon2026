@@ -18,7 +18,6 @@ DROP TABLE IF EXISTS
   users,
   image_objects;
 
--- 2026-09-01: 画像をDBにおかないと、別のサーバーからデータを返却したときに404になってしまう。ファイル配置に変更して障害になってしまったので注意。ここは決して変更しないこと。
 CREATE TABLE image_objects (
   id varchar(36) NOT NULL,
   owner_user_id varchar(36) NOT NULL,
@@ -84,8 +83,6 @@ CREATE TABLE users (
 );
 ALTER TABLE image_objects ADD CONSTRAINT image_objects_owner_fk FOREIGN KEY (owner_user_id) REFERENCES users(id) ON DELETE RESTRICT;
 
--- 2026-09-10 管理者を消す時のオペレーションはどうすればよいですか？
--- 2026-09-13 消すことは想定されていません
 CREATE TABLE administrators (
   id varchar(36) PRIMARY KEY,
   username varchar(64) NOT NULL,

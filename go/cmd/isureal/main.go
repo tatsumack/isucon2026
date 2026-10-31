@@ -7,8 +7,6 @@ import (
 	"example.com/isureal-company/isureal"
 )
 
-// 2026-09-23
-
 func main() {
 	// 計測用 (bench-capture.shから取得する)
 	go func() {
