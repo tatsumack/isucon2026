@@ -69,6 +69,12 @@ func replaceRealMojiHandler(h *HandlerContext) echo.HandlerFunc {
 		if actor == post.AuthorID {
 			return NewAPIError(http.StatusForbidden, "interaction_forbidden")
 		}
+		// 画像本体はファイルに置き、行の data は空にする (image_store.go)。RealMoji を作れない場合は行がロールバックで消え、
+		// 行が無いファイルは配信されない。ロックを持つ時間を延ばさないよう、トランザクションの前に書く。
+		imageID := uuid.NewString()
+		if err := h.Images.Save(imageID, data); err != nil {
+			return err
+		}
 		tx, err := beginRelationshipTx(ctx, h.DB, actor, post.AuthorID)
 		if err != nil {
 			return err
@@ -88,11 +94,11 @@ func replaceRealMojiHandler(h *HandlerContext) echo.HandlerFunc {
 		var reaction RealMoji
 		if err := tx.GetContext(ctx, &reaction, `
    WITH image AS (
-     INSERT INTO image_objects(id,owner_user_id,data,media_type) VALUES($4,$3,$6,'image/jpeg')
+     INSERT INTO image_objects(id,owner_user_id,data,media_type) VALUES($4,$3,''::bytea,'image/jpeg')
    )
    INSERT INTO realmojis(id,post_id,reactor_id,image_id,reaction_type,created_at) VALUES($1,$2,$3,$4,$5,clock_timestamp())
    RETURNING id, post_id, reactor_id, image_id, reaction_type, created_at, replaced_at, deleted_at
-  `, uuid.NewString(), post.ID, actor, uuid.NewString(), input.ReactionType, data); err != nil {
+  `, uuid.NewString(), post.ID, actor, imageID, input.ReactionType); err != nil {
 			return err
 		}
 		if err := tx.Commit(); err != nil {
