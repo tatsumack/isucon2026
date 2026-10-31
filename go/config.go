@@ -31,6 +31,12 @@ type Config struct {
 	PriorityLimit   int
 	PriorityMaxWait time.Duration
 	PriorityScope   string
+	// split の枠を個別に指定する。0 (既定) なら PriorityLimit から決める (投稿の経路は 1/2、heavy は 1/8、その他は残り)
+	PriorityCriticalLimit int
+	PriorityHeavyLimit    int
+	PriorityOtherLimit    int
+	// split で PUT /api/me/profile-image を入れる枠: heavy (既定) / critical / other / exempt (枠に並ばない)
+	PriorityProfileImageGroup string
 }
 
 func ConfigFromEnv() *Config {
@@ -52,6 +58,12 @@ func ConfigFromEnv() *Config {
 		PriorityLimit:   envIntOrDefault("ISUREAL_PRIORITY_LIMIT", 0),
 		PriorityMaxWait: envDurationOrDefault("ISUREAL_PRIORITY_MAX_WAIT", time.Second),
 		PriorityScope:   envOrDefault("ISUREAL_PRIORITY_SCOPE", "heavy"),
+
+		PriorityCriticalLimit: envIntOrDefault("ISUREAL_PRIORITY_CRITICAL", 0),
+		PriorityHeavyLimit:    envIntOrDefault("ISUREAL_PRIORITY_HEAVY", 0),
+		PriorityOtherLimit:    envIntOrDefault("ISUREAL_PRIORITY_OTHER", 0),
+
+		PriorityProfileImageGroup: envOrDefault("ISUREAL_PRIORITY_PROFILE_IMAGE", "heavy"),
 	}
 }
 

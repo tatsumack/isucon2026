@@ -100,3 +100,38 @@ func TestSplitPriorityReleasesSlotAfterHandler(t *testing.T) {
 		}
 	}
 }
+
+func TestSplitPriorityLimits(t *testing.T) {
+	for _, tc := range []struct {
+		name   string
+		config Config
+		want   []int
+	}{
+		{"LIMITだけなら従来どおり (32 -> 16 / 4 / 12)", Config{PriorityLimit: 32}, []int{16, 4, 12}},
+		{"LIMIT 3 でも各枠は最低1", Config{PriorityLimit: 3}, []int{1, 1, 1}},
+		{"3つとも指定", Config{PriorityLimit: 32, PriorityCriticalLimit: 16, PriorityHeavyLimit: 8, PriorityOtherLimit: 8}, []int{16, 8, 8}},
+		{"heavy だけ指定すると、その他は残り", Config{PriorityLimit: 32, PriorityHeavyLimit: 8}, []int{16, 8, 8}},
+		{"その他だけ指定すると、heavy は LIMIT/8", Config{PriorityLimit: 32, PriorityOtherLimit: 12}, []int{16, 4, 12}},
+		{"枠の合計は LIMIT を超えてよい", Config{PriorityLimit: 32, PriorityHeavyLimit: 8, PriorityOtherLimit: 12}, []int{16, 8, 12}},
+	} {
+		got := splitPriorityLimits(&tc.config)
+		if len(got) != 3 || got[0] != tc.want[0] || got[1] != tc.want[1] || got[2] != tc.want[2] {
+			t.Errorf("%s: got %v, want %v", tc.name, got, tc.want)
+		}
+	}
+}
+
+func TestProfileImagePriorityGroup(t *testing.T) {
+	for name, want := range map[string]struct {
+		group  int
+		exempt bool
+	}{
+		"heavy": {1, false}, "": {1, false}, "unknown": {1, false},
+		"critical": {0, false}, "other": {2, false}, "exempt": {0, true},
+	} {
+		group, exempt := profileImagePriorityGroup(name)
+		if group != want.group || exempt != want.exempt {
+			t.Errorf("%q: got (%d, %v), want (%d, %v)", name, group, exempt, want.group, want.exempt)
+		}
+	}
+}
