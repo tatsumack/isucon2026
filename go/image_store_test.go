@@ -57,6 +57,36 @@ func TestReadImageFileTreatsEmptyAsMissing(t *testing.T) {
 	}
 }
 
+// nginx (www-data) が読めるパーミッションで書き、X-Accel-Redirect のパスは new/ を先に探す
+func TestImageStoreAccelPath(t *testing.T) {
+	store := &ImageStore{dir: t.TempDir()}
+	if err := store.Save("0123abcd-new", []byte("new image")); err != nil {
+		t.Fatal(err)
+	}
+	info, err := os.Stat(store.path("new", "0123abcd-new"))
+	if err != nil || info.Mode().Perm() != 0o644 {
+		t.Fatalf("mode = %v, %v", info, err)
+	}
+	if path, ok := store.AccelPath("0123abcd-new"); !ok || path != "/_images/new/01/0123abcd-new" {
+		t.Fatalf("AccelPath new = %q, %v", path, ok)
+	}
+	if err := writeFileAtomic(store.path("initial", "4567abcd-initial"), []byte("initial image"), false); err != nil {
+		t.Fatal(err)
+	}
+	if path, ok := store.AccelPath("4567abcd-initial"); !ok || path != "/_images/initial/45/4567abcd-initial" {
+		t.Fatalf("AccelPath initial = %q, %v", path, ok)
+	}
+	if err := writeFileAtomic(store.path("initial", "89abcdef-empty"), nil, false); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := store.AccelPath("89abcdef-empty"); ok {
+		t.Fatal("empty file must be treated as missing")
+	}
+	if _, ok := store.AccelPath("missing"); ok {
+		t.Fatal("missing file must not be redirected")
+	}
+}
+
 func TestImageStoreSaveRejectedOutsideOrigin(t *testing.T) {
 	store := &ImageStore{dir: t.TempDir(), originURL: "http://origin.invalid"}
 	if err := store.Save("abcd", []byte("x")); err == nil {

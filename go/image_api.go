@@ -84,6 +84,16 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
 		}
 
+		// ファイルがこのサーバにあれば、nginx に sendfile で返させる。Content-Type と Cache-Control はこの応答のものが使われる
+		if path, ok := h.Images.AccelPath(input.ImageID); ok {
+			if exp <= time.Now().Unix() {
+				return NewAPIError(http.StatusForbidden, "image_forbidden")
+			}
+			c.Response().Header().Set(echo.HeaderContentType, object.MediaType)
+			c.Response().Header().Set("X-Accel-Redirect", path)
+			return c.NoContent(http.StatusOK)
+		}
+
 		data, _, err := h.Images.Load(ctx, input.ImageID)
 		if errors.Is(err, errImageNotFound) {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
