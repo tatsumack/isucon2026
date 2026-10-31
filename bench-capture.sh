@@ -4,6 +4,7 @@
 #   app: アプリサーバ (asia1/europe1/america1)。vmstat, pidstat, pprof, alp
 #   db : DBサーバ (asia2)。vmstat, pidstat, pg_stat_statements
 #   全台で、プロセス別のディスクの読み書き (pidstat -d、1秒ごと) も pidstat_disk.txt に取る
+#   app は、優先制御の枠ごとの待ち (priority: group=... の行) を priority.log に取る (asia1 だけに出る)
 #   実行直後にベンチを開始する。終了後に結果ディレクトリのパスを出力する
 set -eu
 
@@ -18,6 +19,7 @@ DURATION=${1:-150}
 ROLE=${2:-app}
 OUT=/home/isucon/bench/$(date "+%H%M%S")
 mkdir -p ${OUT}
+START=$(date "+%Y-%m-%d %H:%M:%S")
 
 # 前回までのログ・統計が混ざらないようにリセットする
 if [ "$ROLE" = "app" ]; then
@@ -38,6 +40,9 @@ wait
 
 # 集計
 if [ "$ROLE" = "app" ]; then
+    # 枠ごとの待ち (priority: group=... limited / waited / gave_up / avg_wait)。10秒ごとに、待ちがあった枠だけ出る。
+    # 起動時の枠は journalctl -u isureal-go.service -g 'priority: split limits' で確認する
+    { sudo journalctl -u isureal-go.service -o cat --since "${START}" --no-pager | grep 'priority:' || true; } > ${OUT}/priority.log
     sudo /usr/local/bin/alp ltsv --file /var/log/nginx/access.log --sort sum -r -m "$ALP_MATCHING_GROUPS" > ${OUT}/alp.txt
     if [ -s ${OUT}/cpu.pb.gz ]; then
         go tool pprof -top -cum -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_cum.txt 2>&1

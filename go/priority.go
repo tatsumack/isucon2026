@@ -114,14 +114,32 @@ func (s *priorityStats) reportGroup(group string) {
 	}
 }
 
+// splitPriorityLimits は split の枠 (投稿の経路 / heavy / その他) を返す。
+// ISUREAL_PRIORITY_CRITICAL / _HEAVY / _OTHER で個別に指定でき、0 (未指定) のものは
+// ISUREAL_PRIORITY_LIMIT から決める (投稿の経路は 1/2、heavy は 1/8、その他は残り。どれも最低1)。
+func splitPriorityLimits(config *Config) []int {
+	critical := config.PriorityCriticalLimit
+	if critical <= 0 {
+		critical = max(1, config.PriorityLimit/2)
+	}
+	heavy := config.PriorityHeavyLimit
+	if heavy <= 0 {
+		heavy = max(1, config.PriorityLimit/8)
+	}
+	other := config.PriorityOtherLimit
+	if other <= 0 {
+		other = max(1, config.PriorityLimit-critical-heavy)
+	}
+	return []int{critical, heavy, other}
+}
+
 // split は遅い画像転送や export が投稿経路の枠を埋めないようにする。
 // 32枠なら投稿16 / heavy4 / その他12。海外からの委譲と管理者/SSEは従来どおり対象外。
 // MaxWait 後も無制限には実行せず、全グループ共通の追加枠 (32枠なら4) に入れる。
 // 追加枠も満杯なら通常枠か追加枠が空くまで待つ。切断された待機リクエストは実行しない。
 func splitPriorityMiddleware(config *Config) echo.MiddlewareFunc {
-	critical := max(1, config.PriorityLimit/2)
-	heavy := max(1, config.PriorityLimit/8)
-	limits := []int{critical, heavy, config.PriorityLimit - critical - heavy}
+	limits := splitPriorityLimits(config)
+	log.Printf("priority: split limits critical=%d heavy=%d other=%d overflow=%d", limits[0], limits[1], limits[2], max(1, config.PriorityLimit/8))
 	slots := make([]chan struct{}, len(limits))
 	stats := make([]*priorityStats, len(limits))
 	for i, limit := range limits {
