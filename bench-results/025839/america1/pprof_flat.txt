@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6455c50103a79e2c843f888161b1a866be5179a2
+Type: cpu
+Time: 2026-10-31 02:58:41 UTC
+Duration: 150s, Total samples = 2.61s ( 1.74%)
+Showing nodes accounting for 1.98s, 75.86% of 2.61s total
+Dropped 223 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 362
+      flat  flat%   sum%        cum   cum%
+     0.68s 26.05% 26.05%      0.68s 26.05%  internal/runtime/syscall/linux.Syscall6
+     0.24s  9.20% 35.25%      0.24s  9.20%  crypto/internal/fips140/sha256.blockSHANI
+     0.18s  6.90% 42.15%      0.18s  6.90%  runtime.memmove
+     0.09s  3.45% 45.59%      0.09s  3.45%  runtime.memclrNoHeapPointers
+     0.07s  2.68% 48.28%      0.07s  2.68%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.06s  2.30% 50.57%      0.06s  2.30%  runtime.futex
+     0.05s  1.92% 52.49%      0.05s  1.92%  runtime.findfunc
+     0.04s  1.53% 54.02%      0.33s 12.64%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.03s  1.15% 55.17%      0.42s 16.09%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.03s  1.15% 56.32%      0.03s  1.15%  crypto/internal/fips140deps/byteorder.BEUint32
+     0.03s  1.15% 57.47%      0.03s  1.15%  runtime.unlock2
+     0.02s  0.77% 58.24%      0.02s  0.77%  aeshashbody
+     0.02s  0.77% 59.00%      0.32s 12.26%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.02s  0.77% 59.77%      0.11s  4.21%  crypto/tls.(*halfConn).decrypt
+     0.02s  0.77% 60.54%      0.04s  1.53%  image/jpeg.(*decoder).reconstructBlock
+     0.02s  0.77% 61.30%      0.02s  0.77%  internal/runtime/maps.ctrlGroup.matchH2
+     0.02s  0.77% 62.07%      0.02s  0.77%  internal/strconv.formatBase10
+     0.02s  0.77% 62.84%      0.02s  0.77%  internal/sync.(*Mutex).Unlock (inline)
+     0.02s  0.77% 63.60%      0.02s  0.77%  runtime.(*m).clearAllpSnapshot
+     0.02s  0.77% 64.37%      0.02s  0.77%  runtime.(*moduledata).textAddr
+     0.02s  0.77% 65.13%      0.34s 13.03%  runtime.findRunnable
+     0.02s  0.77% 65.90%      0.02s  0.77%  runtime.lock2
+     0.02s  0.77% 66.67%      0.08s  3.07%  runtime.mallocgcSmallScanNoHeader
+     0.02s  0.77% 67.43%      0.02s  0.77%  runtime.nanotime1
+     0.02s  0.77% 68.20%      0.20s  7.66%  runtime.netpoll
+     0.02s  0.77% 68.97%      0.02s  0.77%  runtime.scanblock
+     0.02s  0.77% 69.73%      0.02s  0.77%  runtime.step
+     0.02s  0.77% 70.50%      0.02s  0.77%  runtime.usleep
+     0.02s  0.77% 71.26%      0.02s  0.77%  sync/atomic.(*Value).Store
+     0.02s  0.77% 72.03%      0.02s  0.77%  vendor/golang.org/x/net/http/httpguts.ValidHeaderFieldValue
+     0.01s  0.38% 72.41%      0.20s  7.66%  bytes.(*Buffer).ReadFrom
+     0.01s  0.38% 72.80%      0.02s  0.77%  bytes.(*Reader).Read (inline)
+     0.01s  0.38% 73.18%      0.02s  0.77%  context.(*cancelCtx).propagateCancel
+     0.01s  0.38% 73.56%      0.02s  0.77%  crypto/internal/fips140.RecordApproved
+     0.01s  0.38% 73.95%      0.09s  3.45%  crypto/internal/fips140/aes/gcm.(*GCM).Open
+     0.01s  0.38% 74.33%      0.25s  9.58%  crypto/internal/fips140/sha256.block
+     0.01s  0.38% 74.71%      0.34s 13.03%  crypto/tls.(*Conn).Read
+     0.01s  0.38% 75.10%      0.18s  6.90%  crypto/tls.(*atLeastReader).Read
+     0.01s  0.38% 75.48%      0.03s  1.15%  database/sql.(*Rows).close.func1
+     0.01s  0.38% 75.86%      0.35s 13.41%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next

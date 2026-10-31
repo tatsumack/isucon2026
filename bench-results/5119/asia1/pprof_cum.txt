@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 6b28ef707f68f5574b6810ab6bae1e6040a2e0c1
+Type: cpu
+Time: 2026-10-31 02:43:37 UTC
+Duration: 150s, Total samples = 87.73s (58.49%)
+Showing nodes accounting for 55.83s, 63.64% of 87.73s total
+Dropped 1119 nodes (cum <= 0.44s)
+Showing top 40 nodes out of 194
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     84.01s 95.76%  net/http.(*conn).serve
+     0.01s 0.011% 0.011%     82.84s 94.43%  net/http.serverHandler.ServeHTTP
+     0.02s 0.023% 0.034%     82.83s 94.41%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0% 0.034%     82.83s 94.41%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+         0     0% 0.034%     82.83s 94.41%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s 0.011% 0.046%     82.45s 93.98%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0% 0.046%     82.44s 93.97%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0% 0.046%     82.43s 93.96%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.26s   0.3%  0.34%     42.10s 47.99%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  0.34%     41.67s 47.50%  example.com/isureal-company/isureal.signedImageURL
+         0     0%  0.34%     41.42s 47.21%  example.com/isureal-company/isureal.issueImageSignature
+     1.14s  1.30%  1.64%     39.75s 45.31%  crypto/internal/fips140/hmac.(*HMAC).Sum
+     1.10s  1.25%  2.90%     36.69s 41.82%  crypto/internal/fips140/sha256.(*Digest).Sum
+     1.57s  1.79%  4.68%     32.46s 37.00%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     2.18s  2.48%  7.17%     32.42s 36.95%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.42s  0.48%  7.65%     29.07s 33.14%  crypto/internal/fips140/sha256.block
+    28.48s 32.46% 40.11%     28.65s 32.66%  crypto/internal/fips140/sha256.blockAVX2
+         0     0% 40.11%     28.59s 32.59%  example.com/isureal-company/isureal.listMemories
+         0     0% 40.11%     28.54s 32.53%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func30.1
+         0     0% 40.11%     28.52s 32.51%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func31.1
+         0     0% 40.11%     28.52s 32.51%  example.com/isureal-company/isureal.NewServer.createPostHandler.func29
+         0     0% 40.11%     28.37s 32.34%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func51.1
+         0     0% 40.11%     28.28s 32.24%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func52.1
+         0     0% 40.11%     28.28s 32.24%  example.com/isureal-company/isureal.NewServer.getMemoriesHandler.func50
+         0     0% 40.11%     27.42s 31.25%  image/jpeg.Decode
+         0     0% 40.11%     27.41s 31.24%  image/jpeg.(*decoder).decode
+     3.94s  4.49% 44.60%     27.41s 31.24%  image/jpeg.(*decoder).processSOS
+     0.01s 0.011% 44.61%     22.67s 25.84%  example.com/isureal-company/isureal.newPostResponse
+         0     0% 44.61%     18.99s 21.65%  example.com/isureal-company/isureal.loadMemoryInteractions
+     0.01s 0.011% 44.63%     18.61s 21.21%  example.com/isureal-company/isureal.newRealMojiResponse
+     8.90s 10.14% 54.77%     14.65s 16.70%  image/jpeg.(*decoder).reconstructBlock
+         0     0% 54.77%     13.99s 15.95%  example.com/isureal-company/isureal.NewServer.SessionMiddleware.func15.1
+         0     0% 54.77%     13.98s 15.94%  example.com/isureal-company/isureal.NewServer.RegionMiddleware.func16.1
+         0     0% 54.77%     13.98s 15.94%  example.com/isureal-company/isureal.NewServer.exportPostsHandler.func14
+     3.79s  4.32% 59.09%      5.82s  6.63%  image/jpeg.(*decoder).decodeHuffman
+     0.11s  0.13% 59.22%      5.69s  6.49%  image/jpeg.idct
+     0.01s 0.011% 59.23%      4.78s  5.45%  database/sql.withLock
+     0.44s   0.5% 59.73%      3.90s  4.45%  runtime.mallocgc
+     3.41s  3.89% 63.62%      3.41s  3.89%  runtime.memmove
+     0.02s 0.023% 63.64%      3.27s  3.73%  runtime.systemstack

@@ -476,3 +476,44 @@ t=   80.28  asia  POST /api/admin/posting-window  201
 t=   80.28  asia  POST /api/admin/posting-window  201
 t=   80.28  asia  POST /api/admin/posting-window  201
 t=   89.28  asia  POST /api/admin/auth/logout  204
+
+## 投稿期間ごとの投稿〜友達フィード完了 (M2)
+期間の割り当て: 巡回の順番ごとの、期間開始から3秒以内に閉じた SSE の数 (多いものを採用)
+    181  asia → europe → america  ← 採用
+    143  asia → america → europe
+    135  america → europe → asia
+    129  europe → america → asia
+     55  europe → asia → america
+     23  america → asia → europe
+admin = POST /api/admin/posting-window の reqtime、lag = 期間開始からそのリージョンで最初に SSE が閉じるまで
+  start     end  region   admin   lag  posts  done
+  31.63   39.86  asia      2.35  0.17     15    15
+  32.71   44.53  europe    0.42  0.18      7     5
+  35.41   45.92  america   0.13  0.08      5     3
+  39.86   48.12  asia      1.58  0.21     15    15
+  44.53   53.65  europe    3.25  0.16      7     4
+  45.92   54.77  america   1.64  0.37      4     2
+  48.12   57.18  asia      0.84  0.05     17    17
+  53.65   59.63  europe    3.37  0.16      3     0
+  54.77   65.32  america   1.49  0.11      4     3
+  57.18   68.00  asia      0.90  0.02     23    23
+  59.63   70.56  europe    0.35  0.30      6     5
+  65.32   71.39  america   3.03  0.06      1     0
+  68.00   82.68  asia      2.72  0.00     33    33
+  70.56   82.91  europe    2.28  0.07      7     5
+  71.39   82.19  america   0.11  0.29      4     4
+  82.68    last  asia      2.40  0.00     36    36
+  82.91    last  europe    2.63  0.15      5     2
+  82.19    last  america   1.91  0.62      3     3
+lag が無い・6秒超の期間 (割り当てが疑わしい): 0 / 18
+
+### リージョン別 (秒は p50/p90。通知 = 期間開始→本人の SSE が閉じる、反応 = SSE→投稿開始、開始→投稿 = 期間開始→投稿開始、投稿→フィード = 投稿開始→友達フィード完了)
+region         posts  done rate           通知           反応        開始→投稿      投稿→フィード
+asia             103   103 100%   0.34/ 0.41   1.10/ 2.38   1.53/ 4.84   1.03/ 1.58
+europe            30    19  63%   0.76/ 1.47   2.41/ 4.99   3.24/ 6.28   5.15/ 7.65
+america           18    12  67%   0.55/ 1.38   3.11/ 5.59   3.99/ 5.94   4.69/ 5.08
+(all)            151   134  89%   0.36/ 1.20   1.50/ 4.40   2.21/ 5.51   1.19/ 4.79
+最後の期間 (終了時刻不明。ログの最後 t=147.46 までに完了したもの)
+asia last         36    36 100%   0.09/ 0.15   1.37/ 3.06   1.09/ 2.61   3.14/ 3.61
+europe last        5     2  40%   0.26/ 0.97   3.12/ 4.18   3.27/ 5.15   5.32/ 5.32
+america last       3     3 100%   0.70/ 1.95   1.55/ 1.62   2.32/ 3.51   4.36/ 4.72

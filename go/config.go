@@ -4,6 +4,7 @@ import (
 	"net"
 	"net/url"
 	"os"
+	"strings"
 )
 
 type Config struct {
@@ -14,6 +15,10 @@ type Config struct {
 	DBPassword string
 	DBName     string
 	LogLevel   string
+	// 転送先 (asia1) の URL。europe1 / america1 だけで設定する (delegate.go)
+	DelegateURL string
+	// 転送元として信用するサーバのIPアドレス。asia1 だけで設定する (delegate.go)
+	TrustedPeers []string
 }
 
 func ConfigFromEnv() *Config {
@@ -25,6 +30,9 @@ func ConfigFromEnv() *Config {
 		DBPassword: envOrDefault("ISUREAL_DB_PASSWORD", "isureal"),
 		DBName:     envOrDefault("ISUREAL_DB_NAME", "isureal"),
 		LogLevel:   envOrDefault("ISUREAL_LOG_LEVEL", "debug"),
+
+		DelegateURL:  os.Getenv("ISUREAL_DELEGATE_URL"),
+		TrustedPeers: strings.FieldsFunc(os.Getenv("ISUREAL_TRUSTED_PEERS"), func(r rune) bool { return r == ',' || r == ' ' }),
 	}
 }
 

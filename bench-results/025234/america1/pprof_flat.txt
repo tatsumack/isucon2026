@@ -1,0 +1,49 @@
+File: isureal
+Build ID: b4a442f60549d8350a4b5d4b16fcc273583d474d
+Type: cpu
+Time: 2026-10-31 02:52:34 UTC
+Duration: 70s, Total samples = 2.38s ( 3.40%)
+Showing nodes accounting for 1.69s, 71.01% of 2.38s total
+Dropped 244 nodes (cum <= 0.01s)
+Showing top 40 nodes out of 348
+      flat  flat%   sum%        cum   cum%
+     0.61s 25.63% 25.63%      0.61s 25.63%  internal/runtime/syscall/linux.Syscall6
+     0.25s 10.50% 36.13%      0.25s 10.50%  crypto/internal/fips140/sha256.blockSHANI
+     0.13s  5.46% 41.60%      0.13s  5.46%  runtime.memmove
+     0.10s  4.20% 45.80%      0.10s  4.20%  runtime.futex
+     0.08s  3.36% 49.16%      0.08s  3.36%  runtime.memclrNoHeapPointers
+     0.04s  1.68% 50.84%      0.04s  1.68%  runtime.step
+     0.03s  1.26% 52.10%      0.29s 12.18%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.03s  1.26% 53.36%      0.03s  1.26%  image/jpeg.(*decoder).decodeHuffman
+     0.02s  0.84% 54.20%      0.02s  0.84%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.02s  0.84% 55.04%      0.02s  0.84%  image/jpeg.(*decoder).reconstructBlock
+     0.02s  0.84% 55.88%      0.02s  0.84%  net/textproto.validHeaderFieldByte
+     0.02s  0.84% 56.72%      0.02s  0.84%  runtime.(*mspan).writeHeapBitsSmall
+     0.02s  0.84% 57.56%      0.02s  0.84%  runtime.findfunc
+     0.02s  0.84% 58.40%      0.02s  0.84%  runtime.gopark
+     0.02s  0.84% 59.24%      0.02s  0.84%  runtime.interhash
+     0.02s  0.84% 60.08%      0.06s  2.52%  runtime.mallocgcSmallNoscan
+     0.02s  0.84% 60.92%      0.15s  6.30%  runtime.netpoll
+     0.02s  0.84% 61.76%      0.06s  2.52%  runtime.pcvalue
+     0.01s  0.42% 62.18%      0.04s  1.68%  bufio.(*Reader).Read
+     0.01s  0.42% 62.61%      0.11s  4.62%  bufio.(*Writer).Flush
+     0.01s  0.42% 63.03%      0.02s  0.84%  crypto/internal/fips140/hmac.(*HMAC).Reset
+     0.01s  0.42% 63.45%      0.03s  1.26%  crypto/internal/fips140/hmac.(*HMAC).Write
+     0.01s  0.42% 63.87%      0.34s 14.29%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.01s  0.42% 64.29%      0.02s  0.84%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.01s  0.42% 64.71%      0.26s 10.92%  crypto/internal/fips140/sha256.block
+     0.01s  0.42% 65.13%      0.20s  8.40%  crypto/tls.(*Conn).readRecordOrCCS
+     0.01s  0.42% 65.55%      0.08s  3.36%  crypto/tls.(*Conn).writeRecordLocked
+     0.01s  0.42% 65.97%      0.02s  0.84%  github.com/jackc/pgx/v5/pgproto3.(*Describe).Encode
+     0.01s  0.42% 66.39%      0.02s  0.84%  internal/poll.runtime_pollOpen
+     0.01s  0.42% 66.81%      0.04s  1.68%  internal/runtime/maps.(*Map).Delete
+     0.01s  0.42% 67.23%      0.04s  1.68%  io.(*LimitedReader).Read
+     0.01s  0.42% 67.65%      0.24s 10.08%  net.(*conn).Write
+     0.01s  0.42% 68.07%      0.04s  1.68%  net/http.(*Transport).roundTrip
+     0.01s  0.42% 68.49%      0.08s  3.36%  net/http.(*response).finishRequest
+     0.01s  0.42% 68.91%      0.07s  2.94%  runtime.(*mheap).allocSpan
+     0.01s  0.42% 69.33%      0.05s  2.10%  runtime.(*mheap).initSpan
+     0.01s  0.42% 69.75%      0.03s  1.26%  runtime.(*stkframe).getStackMap
+     0.01s  0.42% 70.17%      0.02s  0.84%  runtime.(*timers).check
+     0.01s  0.42% 70.59%      0.02s  0.84%  runtime.getitab
+     0.01s  0.42% 71.01%      0.03s  1.26%  runtime.interfaceSwitch

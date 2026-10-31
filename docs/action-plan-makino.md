@@ -61,13 +61,16 @@
 
 | リージョン | 投稿数 | 期間内にフィード取得まで完了 |
 |---|---|---|
-| asia | 143 | 139 (97%) |
-| europe | 29 | **11 (38%)** |
-| america | 18 | **10 (56%)** |
+| asia | 103 | 103 (100%) |
+| europe | 30 | **19 (63%)** |
+| america | 18 | **12 (67%)** |
+| 最後の期間 (3リージョン計) | 44 | 41 (93%) |
 
-- 同じリージョンの投稿期間は約9秒ごとに切り替わる。利用者は期間開始の約2.3秒後に投稿を始めるので、残り約6.5秒で「投稿 → 友達フィード」を終える必要がある
+- `bench-timeline.py` の「投稿期間ごとの投稿〜友達フィード完了 (M2)」の値 (#2540 の基準値)。最後の期間は終了時刻がログに無いため別に数えている
+- 期間の境界は admin の `POST /api/admin/posting-window` の完了時刻。このリクエストが最大3.4秒かかるため、開始時刻を境界にすると europe 43%・america 44% になる。実際の値はこの間にある (詳細は bench-results/2540/report.md)
+- 同じリージョンの投稿期間は約9秒ごとに切り替わる。期間開始から投稿開始まで p50 で asia 1.5秒 / europe 3.2秒 / america 4.0秒、投稿開始からフィード完了まで asia 1.0秒 / europe 5.2秒 / america 4.7秒
 - europe / america は倍率1.5倍なので、取りこぼしの影響が一番大きい
-- 上の集計は、admin の `POST /api/admin/posting-window` を asia → europe → america の順と仮定して期間を割り当てた概算
+- 期間のリージョンはログに無い (admin のリクエストは全部 asia1 に来て、region は body にしか無い)。SSE (`GET /api/notifications`) が閉じた時刻から巡回の順番を推定している (asia → europe → america)。正確に取るには、ベンチ後に asia2 の `posting_windows` (region, starts_at, ended_at) を読む方法がある (未実装)
 
 **手順**
 
