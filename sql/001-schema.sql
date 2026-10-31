@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS
+  notification_recipient_snapshots,
   ip_bans,
   notifications,
   comments,
@@ -213,3 +214,5 @@ CREATE TABLE ip_bans (
 );
 
 \ir 002-performance-indexes.sql
+
+\ir 005-compact-notifications.sql

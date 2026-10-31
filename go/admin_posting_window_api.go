@@ -43,6 +43,10 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
+		// Fence reset before touching windows (reset truncates snapshots first).
+		if _, err := tx.ExecContext(ctx, `LOCK TABLE notification_recipient_snapshots IN ACCESS SHARE MODE`); err != nil {
+			return err
+		}
 		// 登録・リージョン変更・退会と直列化し、通知対象のactiveユーザーを確定する。
 		if err := lockPostingWindowRegionExclusive(ctx, tx, region); err != nil {
 			return err
@@ -68,10 +72,7 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
   `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second)); err != nil {
 			return err
 		}
-		if _, err := tx.ExecContext(ctx, `
-   INSERT INTO notifications (id, user_id, posting_window_id, created_at)
-   SELECT gen_random_uuid()::text, id, $2, $3 FROM users WHERE region = $1 AND status = 'active'
-  `, region, windowID, startsAt); err != nil {
+		if err := createWindowNotifications(ctx, tx, h.Config.CompactNotifications, region, windowID, startsAt); err != nil {
 			return err
 		}
 		window, err := getPostingWindow(ctx, tx, windowID)

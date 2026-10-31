@@ -126,6 +126,9 @@ func (h *NotificationHub) snapshot() map[int64]*notificationSubscription {
 }
 
 func (h *NotificationHub) fetch(ctx context.Context, subscriptions map[int64]*notificationSubscription) ([]notificationPollRow, error) {
+	if len(subscriptions) == 0 {
+		return nil, nil
+	}
 	values := make([]string, 0, len(subscriptions))
 	args := make([]any, 0, len(subscriptions)*4)
 	for _, subscription := range subscriptions {
@@ -154,7 +157,20 @@ LEFT JOIN LATERAL (
   WHERE notifications.user_id = s.user_id
     AND notifications.created_at > s.connected_at
     AND posting_windows.ended_at IS NULL
-  ORDER BY notifications.created_at, notifications.id
+  UNION ALL
+  SELECT compact_notification_id(s.user_id, w.id) AS id,
+         w.id AS posting_window_id,
+         w.region,
+         w.starts_at AS created_at
+  FROM posting_windows w
+  JOIN notification_recipient_snapshots r ON r.posting_window_id = w.id
+  WHERE w.ended_at IS NULL
+    AND w.starts_at > s.connected_at
+    AND r.recipients ? s.user_id
+    -- Legacy IDs are authoritative, even if a snapshot also covers this pair.
+    AND NOT EXISTS (SELECT 1 FROM notifications existing
+                    WHERE existing.user_id = s.user_id AND existing.posting_window_id = w.id)
+  ORDER BY created_at, id
   LIMIT 1
 ) n ON true
 `

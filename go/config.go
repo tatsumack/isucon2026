@@ -15,6 +15,9 @@ type Config struct {
 	DBPassword string
 	DBName     string
 	LogLevel   string
+
+	// Writer flag only: readers always understand both durable representations.
+	CompactNotifications bool
 	// 転送先 (asia1) の URL。europe1 / america1 だけで設定する (delegate.go)
 	DelegateURL string
 	// 転送元として信用するサーバのIPアドレス。asia1 だけで設定する (delegate.go)
@@ -30,6 +33,8 @@ func ConfigFromEnv() *Config {
 		DBPassword: envOrDefault("ISUREAL_DB_PASSWORD", "isureal"),
 		DBName:     envOrDefault("ISUREAL_DB_NAME", "isureal"),
 		LogLevel:   envOrDefault("ISUREAL_LOG_LEVEL", "debug"),
+
+		CompactNotifications: envOrDefault("ISUREAL_COMPACT_NOTIFICATIONS", "false") == "true",
 
 		DelegateURL:  os.Getenv("ISUREAL_DELEGATE_URL"),
 		TrustedPeers: strings.FieldsFunc(os.Getenv("ISUREAL_TRUSTED_PEERS"), func(r rune) bool { return r == ',' || r == ' ' }),
