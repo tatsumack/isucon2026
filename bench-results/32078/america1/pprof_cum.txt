@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 28c8f5d2eb382d309a93c26ea24ecf5200cdc55f
+Type: cpu
+Time: 2026-10-31 08:04:58 UTC
+Duration: 150s, Total samples = 10.05s ( 6.70%)
+Showing nodes accounting for 6.74s, 67.06% of 10.05s total
+Dropped 483 nodes (cum <= 0.05s)
+Showing top 40 nodes out of 181
+      flat  flat%   sum%        cum   cum%
+     0.01s   0.1%   0.1%      8.37s 83.28%  net/http.(*conn).serve
+     0.01s   0.1%   0.2%      7.81s 77.71%  net/http.serverHandler.ServeHTTP
+     0.01s   0.1%   0.3%      7.80s 77.61%  github.com/labstack/echo/v5.(*Echo).ServeHTTP
+     0.02s   0.2%   0.5%      7.79s 77.51%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s   0.1%   0.6%      7.72s 76.82%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+         0     0%   0.6%      7.70s 76.62%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+         0     0%   0.6%      7.69s 76.52%  example.com/isureal-company/isureal.NewServer.IPBanMiddleware.func2.1
+         0     0%   0.6%      7.64s 76.02%  github.com/labstack/echo/v5.(*Echo).buildRouterChains.func1
+     0.07s   0.7%  1.29%      5.35s 53.23%  example.com/isureal-company/isureal.computeImageSignature
+         0     0%  1.29%      4.97s 49.45%  example.com/isureal-company/isureal.NewServer.postInternalImageSignaturesHandler.func7
+         0     0%  1.29%      4.97s 49.45%  example.com/isureal-company/isureal.NewServer.trustedPeerOnly.func8.1
+         0     0%  1.29%      4.89s 48.66%  example.com/isureal-company/isureal.issueImageSignature
+     0.37s  3.68%  4.98%      4.59s 45.67%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.72s  7.16% 12.14%      4.06s 40.40%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.28s  2.79% 14.93%      3.63s 36.12%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.12s  1.19% 16.12%      2.88s 28.66%  crypto/internal/fips140/sha256.block
+     2.76s 27.46% 43.58%      2.76s 27.46%  crypto/internal/fips140/sha256.blockSHANI
+         0     0% 43.58%      1.44s 14.33%  example.com/isureal-company/isureal.DelegateMiddleware.func4.1
+     1.39s 13.83% 57.41%      1.39s 13.83%  internal/runtime/syscall/linux.Syscall6
+         0     0% 57.41%      1.23s 12.24%  syscall.Syscall
+         0     0% 57.41%      1.20s 11.94%  syscall.RawSyscall6
+         0     0% 57.41%      1.19s 11.84%  internal/poll.ignoringEINTRIO (inline)
+         0     0% 57.41%      1.18s 11.74%  example.com/isureal-company/isureal.NewServer.getImageHandler.func80
+     0.87s  8.66% 66.07%      0.87s  8.66%  runtime.memmove
+     0.02s   0.2% 66.27%      0.86s  8.56%  net/http/httputil.(*ReverseProxy).ServeHTTP
+         0     0% 66.27%      0.80s  7.96%  net.(*conn).Write
+     0.03s   0.3% 66.57%      0.80s  7.96%  net.(*netFD).Write
+         0     0% 66.57%      0.78s  7.76%  internal/poll.(*FD).Write
+         0     0% 66.57%      0.77s  7.66%  syscall.Write (inline)
+         0     0% 66.57%      0.77s  7.66%  syscall.write
+         0     0% 66.57%      0.59s  5.87%  net/http.checkConnErrorWriter.Write
+         0     0% 66.57%      0.58s  5.77%  runtime.mcall
+         0     0% 66.57%      0.57s  5.67%  example.com/isureal-company/isureal.withCapturedUpload
+         0     0% 66.57%      0.56s  5.57%  runtime.schedule
+         0     0% 66.57%      0.55s  5.47%  runtime.park_m
+     0.04s   0.4% 66.97%      0.54s  5.37%  runtime.findRunnable
+     0.01s   0.1% 67.06%      0.51s  5.07%  io.ReadAll
+         0     0% 67.06%      0.51s  5.07%  net/http.(*chunkWriter).Write
+         0     0% 67.06%      0.50s  4.98%  example.com/isureal-company/isureal.imageSignature
+         0     0% 67.06%      0.48s  4.78%  bufio.(*Writer).Write

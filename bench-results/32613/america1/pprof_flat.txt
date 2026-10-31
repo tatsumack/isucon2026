@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 33df5c8e9d6ea7d2ec3eab9974f72be73e0046b7
+Type: cpu
+Time: 2026-10-31 08:10:20 UTC
+Duration: 150s, Total samples = 11.02s ( 7.35%)
+Showing nodes accounting for 8.57s, 77.77% of 11.02s total
+Dropped 541 nodes (cum <= 0.06s)
+Showing top 40 nodes out of 190
+      flat  flat%   sum%        cum   cum%
+     3.05s 27.68% 27.68%      3.05s 27.68%  crypto/internal/fips140/sha256.blockSHANI
+     1.22s 11.07% 38.75%      1.22s 11.07%  internal/runtime/syscall/linux.Syscall6
+     0.94s  8.53% 47.28%      4.70s 42.65%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.83s  7.53% 54.81%      0.83s  7.53%  runtime.memmove
+     0.57s  5.17% 59.98%      5.51s 50.00%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.38s  3.45% 63.43%      0.38s  3.45%  runtime.memclrNoHeapPointers
+     0.32s  2.90% 66.33%      3.90s 35.39%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.19s  1.72% 68.06%      0.19s  1.72%  runtime.futex
+     0.12s  1.09% 69.15%      0.38s  3.45%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.12s  1.09% 70.24%      0.18s  1.63%  runtime.tryDeferToSpanScan
+     0.09s  0.82% 71.05%      3.14s 28.49%  crypto/internal/fips140/sha256.block
+     0.06s  0.54% 71.60%      0.09s  0.82%  net/textproto.CanonicalMIMEHeaderKey
+     0.06s  0.54% 72.14%      0.06s  0.54%  runtime.(*mspan).writeHeapBitsSmall
+     0.06s  0.54% 72.69%      0.06s  0.54%  runtime.spanClass.sizeclass (inline)
+     0.05s  0.45% 73.14%      0.07s  0.64%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.05s  0.45% 73.59%      6.17s 55.99%  example.com/isureal-company/isureal.computeImageSignature
+     0.05s  0.45% 74.05%      0.09s  0.82%  runtime.selectgo
+     0.04s  0.36% 74.41%      0.07s  0.64%  crypto/internal/fips140.RecordApproved
+     0.04s  0.36% 74.77%      0.09s  0.82%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.03s  0.27% 75.05%      0.12s  1.09%  crypto/internal/fips140/sha256.consumeUint32 (inline)
+     0.03s  0.27% 75.32%      0.07s  0.64%  net/http.Header.sortedKeyValues
+     0.03s  0.27% 75.59%      0.49s  4.45%  runtime.mallocgc
+     0.03s  0.27% 75.86%      0.11s     1%  runtime.scanObjectsSmall
+     0.02s  0.18% 76.04%      0.10s  0.91%  example.com/isureal-company/isureal.(*NotificationHub).fetch
+     0.02s  0.18% 76.23%      0.17s  1.54%  runtime.mallocgcSmallScanNoHeader
+     0.02s  0.18% 76.41%      0.21s  1.91%  runtime.netpoll
+     0.02s  0.18% 76.59%      0.14s  1.27%  runtime.newobject
+     0.01s 0.091% 76.68%      0.32s  2.90%  bufio.(*Reader).Peek
+     0.01s 0.091% 76.77%      0.21s  1.91%  bufio.(*Reader).Read
+     0.01s 0.091% 76.86%      0.41s  3.72%  bufio.(*Writer).Flush
+     0.01s 0.091% 76.95%      0.15s  1.36%  database/sql.(*DB).query
+     0.01s 0.091% 77.04%      0.08s  0.73%  encoding/json.(*decodeState).object
+     0.01s 0.091% 77.13%      0.36s  3.27%  github.com/labstack/echo/v5.(*Response).Write
+     0.01s 0.091% 77.22%      8.28s 75.14%  github.com/labstack/echo/v5/middleware.RecoverWithConfig.toMiddlewareOrPanic.RecoverConfig.ToMiddleware.func1.1
+     0.01s 0.091% 77.31%      0.54s  4.90%  internal/poll.(*FD).Read
+     0.01s 0.091% 77.40%      0.09s  0.82%  internal/poll.setDeadlineImpl
+     0.01s 0.091% 77.50%      0.18s  1.63%  internal/runtime/syscall/linux.EpollWait
+     0.01s 0.091% 77.59%      0.17s  1.54%  io.(*LimitedReader).Read
+     0.01s 0.091% 77.68%      0.27s  2.45%  io.copyBuffer
+     0.01s 0.091% 77.77%      0.10s  0.91%  net.(*conn).SetReadDeadline

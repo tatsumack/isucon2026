@@ -1,0 +1,44 @@
+ベンチ #32613 score 145168 (pass: true, messages: [])
+ブランチ: codex/increase-priority-heavy (c247377)
+
+time=2026-10-31T08:10:35.560Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T08:10:36.225Z level=INFO msg="user moved" user=hayo_5027 from=asia to=europe
+time=2026-10-31T08:10:38.558Z level=INFO msg="europe 1 日目: 8 人"
+time=2026-10-31T08:10:41.554Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T08:10:44.554Z level=INFO msg="asia 2 日目: 51 人"
+time=2026-10-31T08:10:47.558Z level=INFO msg="europe 2 日目: 17 人"
+time=2026-10-31T08:10:50.554Z level=INFO msg="america 2 日目: 16 人"
+time=2026-10-31T08:10:50.773Z level=INFO msg="user moved" user=hayo_5027 from=europe to=asia
+time=2026-10-31T08:10:53.546Z level=INFO msg="asia 3 日目: 152 人"
+time=2026-10-31T08:10:55.274Z level=INFO msg="user moved" user=hayo_5027 from=asia to=europe
+time=2026-10-31T08:10:56.394Z level=INFO msg="user moved" user=madan-5686 from=asia to=europe
+time=2026-10-31T08:10:56.565Z level=INFO msg="europe 3 日目: 45 人"
+time=2026-10-31T08:10:57.069Z level=INFO msg="user moved" user=komochi.5795 from=asia to=america
+time=2026-10-31T08:10:58.282Z level=INFO msg="user moved" user=hiteki-6100 from=asia to=europe
+time=2026-10-31T08:10:58.472Z level=INFO msg="user moved" user=komochi.5795 from=america to=asia
+time=2026-10-31T08:10:58.549Z level=INFO msg="user moved" user=torkeso.5708 from=asia to=america
+time=2026-10-31T08:10:59.562Z level=INFO msg="america 3 日目: 47 人"
+time=2026-10-31T08:11:02.557Z level=INFO msg="asia 4 日目: 448 人"
+time=2026-10-31T08:11:03.965Z level=INFO msg="user moved" user=komochi.5795 from=asia to=america
+time=2026-10-31T08:11:04.527Z level=INFO msg="user moved" user=hiri_6696 from=asia to=america
+time=2026-10-31T08:11:05.570Z level=INFO msg="europe 4 日目: 110 人"
+time=2026-10-31T08:11:05.819Z level=INFO msg="user moved" user=benhita-6352 from=europe to=asia
+time=2026-10-31T08:11:07.324Z level=INFO msg="user moved" user=hayo_5027 from=europe to=asia
+time=2026-10-31T08:11:07.363Z level=INFO msg="user moved" user=hiteki-6100 from=europe to=america
+time=2026-10-31T08:11:08.558Z level=INFO msg="america 4 日目: 128 人"
+time=2026-10-31T08:11:08.735Z level=INFO msg="user moved" user=rueva-8630 from=europe to=asia
+time=2026-10-31T08:11:09.013Z level=INFO msg="user moved" user=madan-5686 from=europe to=america
+time=2026-10-31T08:11:11.264Z level=INFO msg="user moved" user=sato6441 from=europe to=asia
+time=2026-10-31T08:11:11.574Z level=INFO msg="asia 5 日目: 1027 人"
+time=2026-10-31T08:11:14.588Z level=INFO msg="europe 5 日目: 272 人"
+time=2026-10-31T08:11:14.939Z level=INFO msg="user moved" user=samu_8835 from=europe to=america
+time=2026-10-31T08:11:17.614Z level=INFO msg="america 5 日目: 307 人"
+time=2026-10-31T08:11:26.654Z level=INFO msg="europe 最終日（グランプリ）: 270 人"
+time=2026-10-31T08:11:26.704Z level=INFO msg="america 最終日（グランプリ）: 306 人"
+time=2026-10-31T08:11:26.726Z level=INFO msg="asia 最終日（グランプリ）: 1027 人"
+time=2026-10-31T08:11:35.673Z level=INFO msg="グランプリ: アジア 451 人, ヨーロッパ 270 人, アメリカ 303 人"
+{
+  "pass": true,
+  "score": 145168,
+  "messages": []
+}
