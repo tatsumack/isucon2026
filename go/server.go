@@ -53,6 +53,8 @@ func NewServer(config *Config) *echo.Echo {
 	e.Use(PriorityMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
 	// 転送しないもの: 初期化、退会、画像の取得 (各サーバの画像キャッシュを使う)、通知 (SSE)、管理者 API
+	// SQL が1本だけの読み取り (投稿期間の確認、ユーザー検索、自分の情報) も転送しない。転送しても DB に直接行っても往復は1回で、
+	// 転送すると asia1 での処理待ちが足されるため (asia1 が混むと1本 0.3秒以上)。署名付き画像 URL は鍵・画像ID・期限だけで決まるので、どのサーバで作っても同じ
 	// 登録・ログイン・ログアウト・自分の情報の更新・プロフィール画像も転送する (DB と約5往復するため)。
 	// これらはアプリの状態をプロセス内に持たず、リージョンは入力と DB の値だけを使うので、asia1 で処理しても結果は同じ。
 	// ログイン・登録の行動ログは、転送元では username が null になり、username つきの行は asia1 に出る
@@ -69,16 +71,16 @@ func NewServer(config *Config) *echo.Echo {
 	e.POST("/api/auth/register", registerHandler(handlerContext), delegate)
 	e.POST("/api/auth/login", loginHandler(handlerContext), delegate)
 	e.POST("/api/auth/logout", logoutHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
-	e.GET("/api/users", searchUsersHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
+	e.GET("/api/users", searchUsersHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/users/:userId", getUserHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/me/export", exportPostsHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
-	e.GET("/api/me", getMeHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
+	e.GET("/api/me", getMeHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.PATCH("/api/me", updateMeHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
 	e.PUT("/api/me/profile-image", putProfileImageHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
 	e.DELETE("/api/me/profile-image", deleteProfileImageHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true))
 	e.POST("/api/me/account-deletion", deleteAccountHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.POST("/api/posts", createPostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
-	e.GET("/api/posting-window/current", getCurrentPostingWindowHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
+	e.GET("/api/posting-window/current", getCurrentPostingWindowHandler(handlerContext), SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/posts/me/current", getMyCurrentPostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.GET("/api/posts/:postId", getPostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
 	e.PATCH("/api/posts/:postId", updatePostHandler(handlerContext), delegate, SessionMiddleware(handlerContext, true), RegionMiddleware(handlerContext))
