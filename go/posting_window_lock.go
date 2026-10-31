@@ -21,8 +21,9 @@ func lockPostingWindowRegionsShared(ctx context.Context, tx *sqlx.Tx, regions ..
 	return nil
 }
 
-// lockPostingWindowRegionExclusive waits for in-flight user changes and blocks
-// new ones until the window and its notification recipients are committed.
+// lockPostingWindowRegionExclusive serializes opening posting windows in the
+// same region. Notifications are no longer stored as rows; SSE builds them from
+// the open window, so the shared locks no longer protect a recipient set.
 func lockPostingWindowRegionExclusive(ctx context.Context, tx *sqlx.Tx, region string) error {
 	_, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtext('posting_window:' || $1::text))`, region)
 	return err
