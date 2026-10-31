@@ -7,13 +7,17 @@ import (
 	"github.com/google/uuid"
 )
 
-// SQL の `$4 || substr(gen_random_uuid()::text, 16)` と同じ組み立てで、UUID v7 になることを確かめる。
-func TestNotificationIDPrefixMakesUUIDv7(t *testing.T) {
+// notificationID が、投稿期間の開始時刻を持つ UUID v7 になり、同じ組では同じIDになることを確かめる。
+func TestNotificationIDMakesUUIDv7(t *testing.T) {
 	startsAt := time.Date(2026, 10, 31, 3, 47, 20, 730_719_000, time.UTC)
 	prev := ""
 	for i := range 1000 {
 		at := startsAt.Add(time.Duration(i) * 7 * time.Millisecond)
-		id := notificationIDPrefix(at) + uuid.NewString()[15:]
+		windowID, userID := uuid.NewString(), uuid.NewString()
+		id := notificationID(windowID, userID, at)
+		if again := notificationID(windowID, userID, at); again != id {
+			t.Fatalf("notificationID is not stable: %q, %q", id, again)
+		}
 		parsed, err := uuid.Parse(id)
 		if err != nil {
 			t.Fatalf("uuid.Parse(%q): %v", id, err)

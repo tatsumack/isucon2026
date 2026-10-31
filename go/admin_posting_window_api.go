@@ -1,7 +1,6 @@
 package isureal
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -44,7 +43,7 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			return err
 		}
 		defer tx.Rollback()
-		// 登録・リージョン変更・退会と直列化し、通知対象のactiveユーザーを確定する。
+		// 同じリージョンの投稿期間の作成を直列化する。通知の行は作らず、SSEがこの行から通知を組み立てる。
 		if err := lockPostingWindowRegionExclusive(ctx, tx, region); err != nil {
 			return err
 		}
@@ -59,29 +58,15 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 		if err := tx.GetContext(ctx, &startsAt, `SELECT clock_timestamp()`); err != nil {
 			return err
 		}
-		// 古い期間の行ロック (UPDATE ended_at) は、通知のINSERTが終わるまで持つと、
-		// 投稿の FOR SHARE を全部待たせる。そのため新しい期間を終了済み (ended_at = startsAt) で先に作り、
-		// 通知を入れてから、最後に古い期間を終わらせて新しい期間を有効にする。コミットまでは他から見えない。
-		windowID := uuid.NewString()
-		if _, err := tx.ExecContext(ctx, `
-   INSERT INTO posting_windows (id, region, local_date, starts_at, on_time_deadline, ended_at)
-   VALUES ($1, $2, $3, $4, $5, $4)
-  `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second)); err != nil {
-			return err
-		}
-		// 通知IDはUUID v7の形にする。ランダムなUUIDだと1行ごとに主キーの別のページへ書き込み、
-		// asiaの約4,900行でディスクの読み込みが多発するため、先頭を時刻にして書き込み先を寄せる。
-		// 後半はgen_random_uuid()の16文字目以降 (ランダムな部分とvariant) をそのまま使う。
-		if _, err := tx.ExecContext(ctx, `
-   INSERT INTO notifications (id, user_id, posting_window_id, created_at)
-   SELECT $4 || substr(gen_random_uuid()::text, 16), id, $2, $3 FROM users WHERE region = $1 AND status = 'active'
-  `, region, windowID, startsAt, notificationIDPrefix(startsAt)); err != nil {
-			return err
-		}
+		// 通知の行を作らないので、古い期間の行ロックを持つのは、この UPDATE からコミットまでの短い間だけになる。
 		if _, err := tx.ExecContext(ctx, `UPDATE posting_windows SET ended_at = $2 WHERE region = $1 AND ended_at IS NULL`, region, startsAt); err != nil {
 			return err
 		}
-		if _, err := tx.ExecContext(ctx, `UPDATE posting_windows SET ended_at = NULL WHERE id = $1`, windowID); err != nil {
+		windowID := uuid.NewString()
+		if _, err := tx.ExecContext(ctx, `
+   INSERT INTO posting_windows (id, region, local_date, starts_at, on_time_deadline)
+   VALUES ($1, $2, $3, $4, $5)
+  `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second)); err != nil {
 			return err
 		}
 		window, err := getPostingWindow(ctx, tx, windowID)
@@ -96,10 +81,4 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			StartsAt: window.StartsAt, OnTimeDeadline: window.OnTimeDeadline,
 		})
 	}
-}
-
-// notificationIDPrefix は、UUID v7 の先頭15文字 (48ビットのミリ秒時刻とバージョンの7) を返す。
-func notificationIDPrefix(t time.Time) string {
-	ms := uint64(t.UnixMilli())
-	return fmt.Sprintf("%08x-%04x-7", ms>>16, ms&0xffff)
 }
