@@ -56,19 +56,21 @@ func DelegateMiddleware(h *HandlerContext) echo.MiddlewareFunc {
 // requestRegion は、リージョンの確認に使う入口のリージョンを返す。
 // 転送元のサーバからの転送であれば転送元 (europe / america) のリージョン、それ以外はこのサーバのリージョン。
 func requestRegion(c *echo.Context, config *Config) string {
-	if len(config.TrustedPeers) == 0 {
-		return config.Region
-	}
-	host, _, err := net.SplitHostPort(c.Request().RemoteAddr)
-	if err != nil {
-		return config.Region
-	}
-	ip := net.ParseIP(host)
-	if ip == nil || !slices.ContainsFunc(config.TrustedPeers, func(peer string) bool { return net.ParseIP(peer).Equal(ip) }) {
+	if !isTrustedPeer(c.Request(), config) {
 		return config.Region
 	}
 	if region := c.Request().Header.Get(ingressRegionHeader); validRegion(region) {
 		return region
 	}
 	return config.Region
+}
+
+// isTrustedPeer は、TCP の接続元が転送元のサーバ (ISUREAL_TRUSTED_PEERS) かどうかを返す。
+func isTrustedPeer(r *http.Request, config *Config) bool {
+	host, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		return false
+	}
+	ip := net.ParseIP(host)
+	return ip != nil && slices.ContainsFunc(config.TrustedPeers, func(peer string) bool { return net.ParseIP(peer).Equal(ip) })
 }

@@ -84,16 +84,12 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
 		}
 
-		data, ok := imageDataCache.get(input.ImageID)
-		if !ok {
-			err = h.DB.GetContext(ctx, &data, `SELECT data FROM image_objects WHERE id = $1`, input.ImageID)
-			if errors.Is(err, sql.ErrNoRows) {
-				return NewAPIError(http.StatusForbidden, "image_forbidden")
-			}
-			if err != nil {
-				return err
-			}
-			imageDataCache.put(input.ImageID, data)
+		data, _, err := h.Images.Load(ctx, input.ImageID)
+		if errors.Is(err, errImageNotFound) {
+			return NewAPIError(http.StatusForbidden, "image_forbidden")
+		}
+		if err != nil {
+			return err
 		}
 		if exp <= time.Now().Unix() {
 			return NewAPIError(http.StatusForbidden, "image_forbidden")
@@ -102,28 +98,34 @@ func getImageHandler(h *HandlerContext) echo.HandlerFunc {
 	}
 }
 
-// 画像本体のバイト列を画像IDごとに保持する。画像IDはサーバが採番するUUIDで、
+// 画像本体のバイト列を画像IDごとに保持する (image_store.go の ImageStore.Load から使う)。画像IDはサーバが採番するUUIDで、
 // 同じIDの中身が書き換わることはないため、無効化しない。配信してよいかは毎回DBで確認する。
 // /initialize で消えた画像のエントリが残っても、DBの確認で403になるため配信されない。
-var imageDataCache = &byteCache{entries: map[string][]byte{}, limit: 256 << 20}
+var imageDataCache = &byteCache{entries: map[string]cachedImage{}, limit: 256 << 20}
+
+type cachedImage struct {
+	data []byte
+	// 初期データの画像か。asia1 の内部 API が europe1 / america1 に伝える (image_store.go)
+	initial bool
+}
 
 type byteCache struct {
 	mu      sync.RWMutex
-	entries map[string][]byte
+	entries map[string]cachedImage
 	size    int
 	limit   int
 }
 
-func (c *byteCache) get(key string) ([]byte, bool) {
+func (c *byteCache) get(key string) (cachedImage, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	data, ok := c.entries[key]
-	return data, ok
+	image, ok := c.entries[key]
+	return image, ok
 }
 
 // put は上限を超えるとき、任意のエントリを追い出して空きを作る。
-func (c *byteCache) put(key string, data []byte) {
-	if len(data) > c.limit {
+func (c *byteCache) put(key string, image cachedImage) {
+	if len(image.data) > c.limit {
 		return
 	}
 	c.mu.Lock()
@@ -131,13 +133,13 @@ func (c *byteCache) put(key string, data []byte) {
 	if _, ok := c.entries[key]; ok {
 		return
 	}
-	for evictKey, evictData := range c.entries {
-		if c.size+len(data) <= c.limit {
+	for evictKey, evicted := range c.entries {
+		if c.size+len(image.data) <= c.limit {
 			break
 		}
 		delete(c.entries, evictKey)
-		c.size -= len(evictData)
+		c.size -= len(evicted.data)
 	}
-	c.entries[key] = data
-	c.size += len(data)
+	c.entries[key] = image
+	c.size += len(image.data)
 }
