@@ -214,3 +214,5 @@ CREATE TABLE ip_bans (
   banned_until timestamptz NOT NULL,
   created_at timestamptz NOT NULL DEFAULT clock_timestamp()
 );
+
+\ir 002-performance-indexes.sql
