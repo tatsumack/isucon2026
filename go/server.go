@@ -16,6 +16,7 @@ type HandlerContext struct {
 	IPBans          *IPBanList
 	NotificationHub *NotificationHub
 	Images          *ImageStore
+	Signer          *ImageSigner
 }
 
 func NewServer(config *Config) *echo.Echo {
@@ -46,6 +47,7 @@ func NewServer(config *Config) *echo.Echo {
 		IPBans:          &IPBanList{},
 		NotificationHub: NewNotificationHub(db),
 		Images:          NewImageStore(config, db),
+		Signer:          NewImageSigner(config),
 	}
 	e.Use(IPBanMiddleware(handlerContext))
 	// europe1 / america1 では、DB への往復が多い API を asia1 へ転送する (delegate.go)。
@@ -59,6 +61,8 @@ func NewServer(config *Config) *echo.Echo {
 	// asia1 の画像を europe1 / america1 から読む内部 API (image_store.go)。/api/ の外に置き、nginx からは届かない
 	e.GET("/internal/images/:imageId", getInternalImageHandler(handlerContext), trustedPeerOnly(handlerContext))
 	e.POST("/internal/images/reset", resetInternalImagesHandler(handlerContext), trustedPeerOnly(handlerContext))
+	// asia1 から画像署名の計算を受ける内部 API (image_signature_remote.go)
+	e.POST("/internal/image-signatures", postInternalImageSignaturesHandler(handlerContext), trustedPeerOnly(handlerContext))
 
 	e.POST("/api/initialize", initializeHandler(handlerContext))
 	e.POST("/api/auth/register", registerHandler(handlerContext), delegate)
