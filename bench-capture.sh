@@ -1,40 +1,57 @@
 #!/bin/bash
-# ベンチ実行中の計測をまとめて行う (アプリサーバ上で実行する)
-# 使い方: bench-capture.sh [計測秒数]
+# ベンチ実行中の計測をまとめて行う (各サーバ上で実行する)
+# 使い方: bench-capture.sh [計測秒数] [app|db]
+#   app: アプリサーバ (asia1/europe1/america1)。vmstat, pidstat, pprof, alp
+#   db : DBサーバ (asia2)。vmstat, pidstat, pg_stat_statements
 #   実行直後にベンチを開始する。終了後に結果ディレクトリのパスを出力する
 set -eu
 
-# TODO: 当日の環境に合わせて書き換える
-APP_BINARY=/home/isucon/webapp/go/isucondition
+APP_BINARY=/home/isucon/webapp/go/isureal
 PPROF_URL=http://localhost:6060/debug/pprof/profile
-# TODO: パスパラメータを含むURIは -m でまとめる (analyze.shと揃える)
-ALP_MATCHING_GROUPS=""
+# パスパラメータを含むURIをまとめる (server.goのルーティングと揃える)
+ALP_MATCHING_GROUPS='^/api/users/[^/]+$,^/api/posts/[^/]+$,^/api/posts/[^/]+/comments$,^/api/posts/[^/]+/realmojis$,^/api/feeds/[^/]+$,^/api/memories/[^/]+$,^/api/comments/[^/]+$,^/api/realmojis/[^/]+$,^/api/images/[^/]+$,^/api/friend-requests/[^/]+/[^/]+$,^/api/relationships/[^/]+$,^/api/friendships/[^/]+$,^/api/follows/[^/]+$,^/api/blocks/[^/]+$,^/api/admin/users/[^/]+/certification$,^/assets/.+$'
 export PATH=/home/isucon/local/go/bin:/usr/local/go/bin:/home/isucon/go/bin:${PATH}
+PSQL="sudo -u postgres psql -d isureal -X -q"
 
 DURATION=${1:-70}
+ROLE=${2:-app}
 OUT=/home/isucon/bench/$(date "+%H%M%S")
 mkdir -p ${OUT}
 
-# 前回までのログが混ざらないようにリセットする
-sudo truncate -s 0 /var/log/nginx/access.log
-if [ -f /var/log/mysql/mysql-slow.log ]; then
-    sudo truncate -s 0 /var/log/mysql/mysql-slow.log
+# 前回までのログ・統計が混ざらないようにリセットする
+if [ "$ROLE" = "app" ]; then
+    sudo truncate -s 0 /var/log/nginx/access.log
+else
+    $PSQL -c "SELECT pg_stat_statements_reset()" > /dev/null
 fi
 
 # 計測 (CPU全体 / プロセス別CPU / Goのプロファイル)
 vmstat 1 ${DURATION} > ${OUT}/vmstat.txt &
 pidstat -u 5 $((DURATION / 5)) > ${OUT}/pidstat.txt &
-curl -s -o ${OUT}/cpu.pb.gz "${PPROF_URL}?seconds=${DURATION}" || echo "pprof failed" > ${OUT}/pprof_error.txt &
+if [ "$ROLE" = "app" ]; then
+    curl -s -o ${OUT}/cpu.pb.gz "${PPROF_URL}?seconds=${DURATION}" || echo "pprof failed" > ${OUT}/pprof_error.txt &
+fi
 wait
 
 # 集計
-sudo /usr/local/bin/alp ltsv --file /var/log/nginx/access.log --sort sum -r ${ALP_MATCHING_GROUPS:+-m "$ALP_MATCHING_GROUPS"} > ${OUT}/alp.txt
-if [ -f /var/log/mysql/mysql-slow.log ]; then
-    sudo pt-query-digest --limit 15 /var/log/mysql/mysql-slow.log > ${OUT}/slow.txt
-fi
-if [ -s ${OUT}/cpu.pb.gz ]; then
-    go tool pprof -top -cum -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_cum.txt 2>&1
-    go tool pprof -top -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_flat.txt 2>&1
+if [ "$ROLE" = "app" ]; then
+    sudo /usr/local/bin/alp ltsv --file /var/log/nginx/access.log --sort sum -r -m "$ALP_MATCHING_GROUPS" > ${OUT}/alp.txt
+    if [ -s ${OUT}/cpu.pb.gz ]; then
+        go tool pprof -top -cum -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_cum.txt 2>&1
+        go tool pprof -top -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_flat.txt 2>&1
+    fi
+else
+    $PSQL > ${OUT}/slow.txt <<'EOS'
+SELECT calls,
+       round(total_exec_time::numeric, 0) AS total_ms,
+       round(mean_exec_time::numeric, 2) AS mean_ms,
+       rows,
+       round((100 * total_exec_time / sum(total_exec_time) OVER ())::numeric, 1) AS pct,
+       left(regexp_replace(query, '\s+', ' ', 'g'), 300) AS query
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 20;
+EOS
 fi
 
 echo ${OUT}
