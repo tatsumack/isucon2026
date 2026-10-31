@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 764b66a5f5b75e6d6cf8647508839882ecb654d5
+Type: cpu
+Time: 2026-10-31 08:39:46 UTC
+Duration: 150s, Total samples = 12.86s ( 8.57%)
+Showing nodes accounting for 10.12s, 78.69% of 12.86s total
+Dropped 549 nodes (cum <= 0.06s)
+Showing top 40 nodes out of 190
+      flat  flat%   sum%        cum   cum%
+     3.84s 29.86% 29.86%      3.84s 29.86%  crypto/internal/fips140/sha256.blockSHANI
+     1.31s 10.19% 40.05%      1.31s 10.19%  internal/runtime/syscall/linux.Syscall6
+        1s  7.78% 47.82%         1s  7.78%  runtime.memmove
+     0.94s  7.31% 55.13%      5.74s 44.63%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.55s  4.28% 59.41%      6.51s 50.62%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.48s  3.73% 63.14%      5.01s 38.96%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.39s  3.03% 66.17%      0.39s  3.03%  runtime.memclrNoHeapPointers
+     0.28s  2.18% 68.35%      0.28s  2.18%  runtime.futex
+     0.17s  1.32% 69.67%      0.44s  3.42%  crypto/internal/fips140/sha256.(*Digest).UnmarshalBinary
+     0.17s  1.32% 71.00%      7.45s 57.93%  example.com/isureal-company/isureal.computeImageSignature
+     0.12s  0.93% 71.93%      3.96s 30.79%  crypto/internal/fips140/sha256.block
+     0.11s  0.86% 72.78%      0.11s  0.86%  crypto/internal/fips140deps/byteorder.BEPutUint32 (inline)
+     0.07s  0.54% 73.33%      0.07s  0.54%  crypto/internal/fips140.getIndicator
+     0.07s  0.54% 73.87%      0.14s  1.09%  crypto/internal/fips140deps/byteorder.BEUint32 (inline)
+     0.07s  0.54% 74.42%      0.07s  0.54%  internal/byteorder.BEUint32 (inline)
+     0.06s  0.47% 74.88%      0.18s  1.40%  runtime.newobject
+     0.05s  0.39% 75.27%      0.14s  1.09%  runtime.tryDeferToSpanScan
+     0.04s  0.31% 75.58%     10.60s 82.43%  net/http.(*conn).serve
+     0.03s  0.23% 75.82%      0.10s  0.78%  crypto/internal/fips140.RecordApproved
+     0.03s  0.23% 76.05%      0.21s  1.63%  example.com/isureal-company/isureal.(*NotificationHub).fetch
+     0.03s  0.23% 76.28%      0.59s  4.59%  runtime.findRunnable
+     0.03s  0.23% 76.52%      0.11s  0.86%  runtime.scanObjectsSmall
+     0.02s  0.16% 76.67%      9.81s 76.28%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.02s  0.16% 76.83%      0.35s  2.72%  internal/poll.(*FD).Read
+     0.02s  0.16% 76.98%      0.93s  7.23%  net.(*netFD).Write
+     0.02s  0.16% 77.14%      0.07s  0.54%  net/http.(*connReader).abortPendingRead
+     0.02s  0.16% 77.29%      0.42s  3.27%  net/http.(*persistConn).readLoop
+     0.02s  0.16% 77.45%      0.07s  0.54%  net/textproto.canonicalMIMEHeaderKey
+     0.02s  0.16% 77.60%      0.55s  4.28%  runtime.mallocgc
+     0.02s  0.16% 77.76%      0.23s  1.79%  runtime.netpoll
+     0.02s  0.16% 77.92%      0.22s  1.71%  runtime.scanSpan
+     0.02s  0.16% 78.07%      0.14s  1.09%  runtime.selectgo
+     0.01s 0.078% 78.15%      0.22s  1.71%  bufio.(*Reader).fill
+     0.01s 0.078% 78.23%      0.46s  3.58%  bufio.(*Writer).Flush
+     0.01s 0.078% 78.30%      0.07s  0.54%  encoding/json.(*decodeState).object
+     0.01s 0.078% 78.38%      0.19s  1.48%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+     0.01s 0.078% 78.46%      9.84s 76.52%  github.com/labstack/echo/v5.(*Echo).serveHTTP
+     0.01s 0.078% 78.54%      0.15s  1.17%  mime/multipart.partReader.Read
+     0.01s 0.078% 78.62%      0.25s  1.94%  net.(*TCPConn).ReadFrom
+     0.01s 0.078% 78.69%      0.34s  2.64%  net.(*conn).Read

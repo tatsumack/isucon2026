@@ -1,0 +1,21 @@
+ベンチ #35726 score 165035 (pass: true)
+ブランチ: perf/priority-class-limits (b2aee54)
+
+asia 1 日目: 18 人 / europe 1 日目: 7 人 / america 1 日目: 6 人
+asia 2 日目: 52 人 / europe 2 日目: 20 人 / america 2 日目: 15 人
+asia 3 日目: 154 人 / europe 3 日目: 58 人 / america 3 日目: 42 人
+asia 4 日目: 450 人 / europe 4 日目: 152 人 / america 4 日目: 112 人
+asia 5 日目: 1302 人 / europe 5 日目: 385 人 / america 5 日目: 277 人
+europe 最終日（グランプリ）: 384 人 / asia 最終日（グランプリ）: 1304 人 / america 最終日（グランプリ）: 276 人
+グランプリ: アジア 639 人, ヨーロッパ 317 人, アメリカ 274 人
+(user moved のログは省略)
+{
+  "pass": true,
+  "score": 165035,
+  "messages": [
+    "GET /api/notifications: ステータスコード 503 が返りました（期待値 200、unknown）  x10",
+    "POST /api/friend-requests: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/friend-requests\": EOF  x2",
+    "POST /api/friend-requests/:id/accept: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/friend-requests/<id>/accept\": EOF  x1",
+    "POST /api/posts: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/posts\": EOF  x1"
+  ]
+}
