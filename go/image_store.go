@@ -192,6 +192,7 @@ func (s *ImageStore) fetchFromOrigin(ctx context.Context, id string) ([]byte, bo
 // Reset は /initialize から呼ぶ。asia1 では new/ を空にし、それ以外のサーバでは asia1 に依頼する。
 // 古いディレクトリは名前を変えてから裏で消すので、初期化の時間はほとんど増えない。
 func (s *ImageStore) Reset(ctx context.Context) error {
+	exportImageCache.reset()
 	if !s.isOrigin() {
 		req, err := http.NewRequestWithContext(ctx, http.MethodPost, s.originURL+"/internal/images/reset", nil)
 		if err != nil {

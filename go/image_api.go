@@ -131,6 +131,14 @@ func (c *byteCache) get(key string) (cachedImage, bool) {
 	return image, ok
 }
 
+func (c *byteCache) reset() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.entries = map[string]cachedImage{}
+	c.order = nil
+	c.size = 0
+}
+
 // put は上限を超えるとき、古いエントリから追い出して空きを作る。
 // 投稿の画像は書いた直後ほどよく読まれるため、新しいものを残す。
 func (c *byteCache) put(key string, image cachedImage) {

@@ -95,3 +95,35 @@ func TestExportImageFallbackCacheAndCancellation(t *testing.T) {
 		t.Fatalf("canceled export wrote data: %v", err)
 	}
 }
+
+func TestExportImageCacheHitAndReset(t *testing.T) {
+	store := &ImageStore{dir: t.TempDir()}
+	id := uuid.NewString()
+	data := []byte("export cached image")
+	path := store.path("initial", id)
+	if err := writeFileAtomic(path, data, false); err != nil {
+		t.Fatal(err)
+	}
+	var dst bytes.Buffer
+	if err := store.writeExportImage(context.Background(), &dst, id, true); err != nil || !bytes.Equal(dst.Bytes(), data) {
+		t.Fatalf("first export: %v", err)
+	}
+	// 2回目はファイルを読まずにキャッシュから返す
+	if err := os.Remove(path); err != nil {
+		t.Fatal(err)
+	}
+	dst.Reset()
+	if err := store.writeExportImage(context.Background(), &dst, id, true); err != nil || !bytes.Equal(dst.Bytes(), data) {
+		t.Fatalf("cached export: %v", err)
+	}
+	if _, ok := imageDataCache.get(id); ok {
+		t.Fatal("export polluted image cache")
+	}
+	// /initialize で空になる
+	if err := store.Reset(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if _, ok := exportImageCache.get(id); ok {
+		t.Fatal("export image cache survived reset")
+	}
+}
