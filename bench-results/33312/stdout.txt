@@ -1,0 +1,31 @@
+ベンチ #33312 score 148887 (pass: true)
+ブランチ: perf/session-auth-cache (73ba62b)
+
+time=2026-10-31T08:17:18.786Z level=INFO msg="asia 1 日目: 18 人"
+time=2026-10-31T08:17:21.780Z level=INFO msg="europe 1 日目: 7 人"
+time=2026-10-31T08:17:24.780Z level=INFO msg="america 1 日目: 6 人"
+time=2026-10-31T08:17:27.781Z level=INFO msg="asia 2 日目: 54 人"
+time=2026-10-31T08:17:30.789Z level=INFO msg="europe 2 日目: 17 人"
+time=2026-10-31T08:17:33.775Z level=INFO msg="america 2 日目: 15 人"
+time=2026-10-31T08:17:36.782Z level=INFO msg="asia 3 日目: 162 人"
+time=2026-10-31T08:17:39.806Z level=INFO msg="europe 3 日目: 44 人"
+time=2026-10-31T08:17:42.853Z level=INFO msg="america 3 日目: 45 人"
+time=2026-10-31T08:17:45.781Z level=INFO msg="asia 4 日目: 480 人"
+time=2026-10-31T08:17:48.823Z level=INFO msg="europe 4 日目: 118 人"
+time=2026-10-31T08:17:51.802Z level=INFO msg="america 4 日目: 117 人"
+time=2026-10-31T08:17:55.063Z level=INFO msg="asia 5 日目: 1281 人"
+time=2026-10-31T08:17:57.797Z level=INFO msg="europe 5 日目: 297 人"
+time=2026-10-31T08:18:00.827Z level=INFO msg="america 5 日目: 288 人"
+time=2026-10-31T08:18:09.877Z level=INFO msg="europe 最終日（グランプリ）: 296 人"
+time=2026-10-31T08:18:09.877Z level=INFO msg="asia 最終日（グランプリ）: 1283 人"
+time=2026-10-31T08:18:09.985Z level=INFO msg="america 最終日（グランプリ）: 287 人"
+time=2026-10-31T08:18:18.935Z level=INFO msg="グランプリ: アジア 463 人, ヨーロッパ 295 人, アメリカ 285 人"
+(user moved の行は省略)
+{
+  "pass": true,
+  "score": 148887,
+  "messages": [
+    "elya-12702: 現在の投稿期間を取得できません: GET /api/posting-window/current: ステータスコード 500 が返りました（期待値 200、failed to connect to `user=isureal database=isureal`: 192.168.4.10:5432 (192.168.4.10): server error: FATAL: sorry, too many clients already (SQLSTATE 53300)）",
+    "benne6496: 投稿できません: POST /api/posts: 通信に失敗しました: Post \"http://52.198.5.68:8080/api/posts\": EOF"
+  ]
+}
