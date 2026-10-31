@@ -42,7 +42,7 @@ wait
 if [ "$ROLE" = "app" ]; then
     # 枠ごとの待ち (priority: group=... limited / waited / gave_up / avg_wait)。10秒ごとに、待ちがあった枠だけ出る。
     # 起動時の枠は journalctl -u isureal-go.service -g 'priority: split limits' で確認する
-    { sudo journalctl -u isureal-go.service -o cat --since "${START}" --no-pager | grep 'priority:' || true; } > ${OUT}/priority.log
+    { sudo journalctl -u isureal-go.service -o cat --since "${START}" --no-pager | grep -E 'priority(_adaptive)?:' || true; } > ${OUT}/priority.log
     sudo /usr/local/bin/alp ltsv --file /var/log/nginx/access.log --sort sum -r -m "$ALP_MATCHING_GROUPS" > ${OUT}/alp.txt
     if [ -s ${OUT}/cpu.pb.gz ]; then
         go tool pprof -top -cum -nodecount=40 ${APP_BINARY} ${OUT}/cpu.pb.gz > ${OUT}/pprof_cum.txt 2>&1
