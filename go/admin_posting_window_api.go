@@ -1,6 +1,7 @@
 package isureal
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -68,10 +69,13 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
   `, windowID, region, localDate, startsAt, startsAt.Add(time.Duration(seconds)*time.Second)); err != nil {
 			return err
 		}
+		// 通知IDはUUID v7の形にする。ランダムなUUIDだと1行ごとに主キーの別のページへ書き込み、
+		// asiaの約4,900行でディスクの読み込みが多発するため、先頭を時刻にして書き込み先を寄せる。
+		// 後半はgen_random_uuid()の16文字目以降 (ランダムな部分とvariant) をそのまま使う。
 		if _, err := tx.ExecContext(ctx, `
    INSERT INTO notifications (id, user_id, posting_window_id, created_at)
-   SELECT gen_random_uuid()::text, id, $2, $3 FROM users WHERE region = $1 AND status = 'active'
-  `, region, windowID, startsAt); err != nil {
+   SELECT $4 || substr(gen_random_uuid()::text, 16), id, $2, $3 FROM users WHERE region = $1 AND status = 'active'
+  `, region, windowID, startsAt, notificationIDPrefix(startsAt)); err != nil {
 			return err
 		}
 		window, err := getPostingWindow(ctx, tx, windowID)
@@ -86,4 +90,10 @@ func openPostingWindowHandler(h *HandlerContext) echo.HandlerFunc {
 			StartsAt: window.StartsAt, OnTimeDeadline: window.OnTimeDeadline,
 		})
 	}
+}
+
+// notificationIDPrefix は、UUID v7 の先頭15文字 (48ビットのミリ秒時刻とバージョンの7) を返す。
+func notificationIDPrefix(t time.Time) string {
+	ms := uint64(t.UnixMilli())
+	return fmt.Sprintf("%08x-%04x-7", ms>>16, ms&0xffff)
 }

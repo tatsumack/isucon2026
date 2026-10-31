@@ -1,0 +1,49 @@
+File: isureal
+Build ID: 653296bd91d15590bdf10bc1e07dc9a899c03374
+Type: cpu
+Time: 2026-10-31 03:54:24 UTC
+Duration: 150s, Total samples = 3.58s ( 2.39%)
+Showing nodes accounting for 2.45s, 68.44% of 3.58s total
+Dropped 277 nodes (cum <= 0.02s)
+Showing top 40 nodes out of 402
+      flat  flat%   sum%        cum   cum%
+     0.84s 23.46% 23.46%      0.84s 23.46%  internal/runtime/syscall/linux.Syscall6
+     0.31s  8.66% 32.12%      0.31s  8.66%  runtime.memmove
+     0.17s  4.75% 36.87%      0.17s  4.75%  crypto/internal/fips140/sha256.blockSHANI
+     0.11s  3.07% 39.94%      0.11s  3.07%  runtime.memclrNoHeapPointers
+     0.10s  2.79% 42.74%      0.10s  2.79%  runtime.futex
+     0.07s  1.96% 44.69%      0.07s  1.96%  crypto/internal/fips140/aes/gcm.gcmAesDec
+     0.04s  1.12% 45.81%      0.31s  8.66%  crypto/internal/fips140/sha256.(*Digest).Sum
+     0.04s  1.12% 46.93%      0.04s  1.12%  image/jpeg.(*decoder).ensureNBits
+     0.04s  1.12% 48.04%      0.04s  1.12%  runtime.lock2
+     0.03s  0.84% 48.88%      0.23s  6.42%  crypto/internal/fips140/sha256.(*Digest).Write
+     0.03s  0.84% 49.72%      0.03s  0.84%  indexbytebody
+     0.03s  0.84% 50.56%      0.03s  0.84%  internal/runtime/maps.ctrlGroup.matchH2 (inline)
+     0.03s  0.84% 51.40%      0.03s  0.84%  runtime.(*moduledata).textAddr
+     0.03s  0.84% 52.23%      0.03s  0.84%  runtime.(*mspan).writeHeapBitsSmall
+     0.03s  0.84% 53.07%      0.05s  1.40%  runtime.SetFinalizer
+     0.03s  0.84% 53.91%      0.03s  0.84%  runtime.adjustpointers
+     0.03s  0.84% 54.75%      0.16s  4.47%  runtime.netpoll
+     0.03s  0.84% 55.59%      0.08s  2.23%  runtime.selectgo
+     0.03s  0.84% 56.42%      0.03s  0.84%  runtime.step
+     0.03s  0.84% 57.26%      0.03s  0.84%  vendor/golang.org/x/net/http/httpguts.ValidHeaderFieldValue
+     0.02s  0.56% 57.82%      0.02s  0.56%  aeshashbody
+     0.02s  0.56% 58.38%      0.25s  6.98%  crypto/internal/fips140/sha256.(*Digest).checkSum
+     0.02s  0.56% 58.94%      1.90s 53.07%  example.com/isureal-company/isureal.NewServer.ActionLogMiddleware.func1.1
+     0.02s  0.56% 59.50%      0.04s  1.12%  fmt.(*pp).doPrintf
+     0.02s  0.56% 60.06%      0.05s  1.40%  image/jpeg.(*decoder).decodeHuffman
+     0.02s  0.56% 60.61%      0.12s  3.35%  image/jpeg.(*decoder).processSOS
+     0.02s  0.56% 61.17%      0.03s  0.84%  image/jpeg.(*decoder).receiveExtend
+     0.02s  0.56% 61.73%      0.02s  0.56%  image/jpeg.(*decoder).reconstructBlock
+     0.02s  0.56% 62.29%      0.02s  0.56%  internal/chacha8rand.block
+     0.02s  0.56% 62.85%      0.02s  0.56%  internal/runtime/atomic.(*Uint32).CompareAndSwap (inline)
+     0.02s  0.56% 63.41%      0.02s  0.56%  runtime.(*mspan).refillAllocCache
+     0.02s  0.56% 63.97%      0.02s  0.56%  runtime.(*timers).siftDown
+     0.02s  0.56% 64.53%      0.10s  2.79%  runtime.adjustframe
+     0.02s  0.56% 65.08%      0.02s  0.56%  runtime.exitsyscall
+     0.02s  0.56% 65.64%      0.35s  9.78%  runtime.findRunnable
+     0.02s  0.56% 66.20%      0.02s  0.56%  runtime.findfunc
+     0.02s  0.56% 66.76%      0.05s  1.40%  runtime.mapaccess2_faststr
+     0.02s  0.56% 67.32%      0.02s  0.56%  runtime.nanotime (inline)
+     0.02s  0.56% 67.88%      0.07s  1.96%  runtime.pcvalue
+     0.02s  0.56% 68.44%      0.02s  0.56%  runtime.usleep
