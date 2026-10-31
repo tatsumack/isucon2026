@@ -1,0 +1,10 @@
+score: 127659 (pass)
+asia 1 日目: 18 人 / europe 7 / america 6
+asia 2 日目: 54 人 / europe 20 / america 17
+asia 3 日目: 159 人 / europe 55 / america 41
+asia 4 日目: 459 人 / europe 142 / america 97
+asia 5 日目: 458 人 / europe 329 / america 222
+最終日（グランプリ）: asia 460 / europe 328 / america 221
+グランプリ: アジア 448 人, ヨーロッパ 272 人, アメリカ 219 人
+user moved: asia→europe 5件、asia→america 2件、europe→asia 2件
+messages: futsu.9154: 投稿できません: POST /api/posts: 通信に失敗しました: Post "http://52.198.5.68:8080/api/posts": EOF
