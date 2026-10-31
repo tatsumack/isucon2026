@@ -35,8 +35,8 @@ asia2 の累積統計の、デプロイ直後 (03:31:53) からベンチ後 (03:
 
 - 流れは前回と同じ。通知 (SSE) → `GET /api/posting-window/current` → `POST /api/posts` → `GET /api/feeds/friends`
 - 投稿期間は asia → europe → america の順に開く。18期間
-- 管理者の `POST /api/admin/posting-window` の reqtime: 最大 **4.77s** (最後の america の期間)。asia の期間は毎回 1.6〜2.7s かかっている
-  - 最後の america の期間は t=72.51 に開き、投稿は38件で、期間内の完了は31件 (82%)。最後の期間は1件20点なので、ここの取りこぼしが大きい
+- 管理者の `POST /api/admin/posting-window` の reqtime: 最大 **4.77s** (最後の america の期間。**asia の誤り**。3番の追記を参照)。asia の期間は毎回 1.6〜2.7s かかっている
+  - (誤り: 下の2行は america ではなく asia。3番の追記を参照) 最後の america の期間は t=72.51 に開き、投稿は38件で、期間内の完了は31件 (82%)。最後の期間は1件20点なので、ここの取りこぼしが大きい
   - 通知の作成 `INSERT INTO notifications ... SELECT FROM users` が1回 812ms〜1290ms (18回)。管理者のリクエストが遅いのはこれが原因と考えられる
 - 加点されない 4xx は前回と同じ傾向
   - 失敗ログイン 401: 549件
@@ -55,7 +55,7 @@ asia2 の累積統計の、デプロイ直後 (03:31:53) からベンチ後 (03:
 
 - 期間の割り当て: asia → europe → america (531)。2位の europe → asia → america は 458
 - リージョン別の数値は推定扱い。#8155 と今回で asia の投稿数が大きく違う (233 / 65)。Stdout の asia の人数 (1日あたり18〜20人) とは今回の数値のほうが合う
-- 最後の america の期間が遅れて開いたため、最後の期間の完了率が 97% から 95% に下がった
+- (誤り: america ではなく asia。3番の追記を参照) 最後の america の期間が遅れて開いたため、最後の期間の完了率が 97% から 95% に下がった
 
 ## ボトルネック上位
 
@@ -74,11 +74,31 @@ asia2 の累積統計の、デプロイ直後 (03:31:53) からベンチ後 (03:
 - リスク: export の画像は初期データの期待値と一致しないと即 FAIL。ファイルが無いときは DB から読み直すようにする
 
 ### 3. 投稿期間の作成が遅い (通知の INSERT)
-- 根拠: `INSERT INTO notifications ... SELECT FROM users` が18回、平均 812ms (最大の4回は平均 1290ms)。管理者の `POST /api/admin/posting-window` は最大 4.77s で、最後の america の期間が t=72.51 まで開かなかった
-- 原因箇所: 投稿期間の作成の中の通知作成 (`go/admin_posting_window_api.go:72`)。対象リージョンの全ユーザー分 (2万〜3万行) を1回で INSERT している
+- 根拠: `INSERT INTO notifications ... SELECT FROM users` が18回、平均 812ms (最大の4回は平均 1290ms)。管理者の `POST /api/admin/posting-window` は最大 4.77s で、最後の america の期間が t=72.51 まで開かなかった (america は誤りで asia。下の追記を参照)
+- 原因箇所: 投稿期間の作成の中の通知作成 (`go/admin_posting_window_api.go:72`)。対象リージョンの active な全ユーザー分を1回で INSERT している (「2万〜3万行」と書いていたのは誤り。下の追記を参照)
 - 対策案: 通知の行をまとめて作らない構成 (期間から計算するなど) を検討する。SSE の通知との関係を確認する必要がある
 - 期待効果: 中。最後の期間 (1件20点) の取りこぼしが減る
 - リスク: 通知一覧のレスポンスの形と順序を変えないこと
+
+#### 追記: 通知の INSERT の分析 (#8155 の5番と合わせて見直した)
+- **最後の期間で遅かったのは america ではなく asia**。最後の期間は3リージョンを同時に開く。bench-timeline.py は巡回の順番を前提に割り当てるため、最後の遅い admin (4.77s) を america にしていた
+  - 根拠: ホスト別の SSE が閉じた時刻 (#8691 / #8155 / #7477 とも asia1 だけが遅い)。03:46 のベンチの DB では、最後の期間の最初の投稿が asia は +6.6s、ほかは +1.3s
+  - 上の「ベンチマーカーの行動」の「最後の america の期間」と、M2 の「最後の america の期間が遅れて開いた」は、asia の誤り
+- 行数: active なユーザーは asia 4,869、europe 231、america 207。1回の INSERT は asia で約4,900行、ほかは200行台 (「2万〜3万行」は誤りで、ベンチ全体の合計が約3万行)
+- 遅い理由: notifications は 186万行で、主キー (ランダムな UUID、160MB) と、UNIQUE `(user_id, posting_window_id)` (283MB)、自前で足した `notifications_user_created_id` (274MB) がある。asia2 の `shared_buffers` (512MB) に収まらない
+- asia2 で EXPLAIN ANALYZE (ROLLBACK) した結果 (asia、約4,870行)
+  | 条件 | 時間 | ディスク読み込み |
+  |---|---|---|
+  | キャッシュが冷えている | 2477ms | 14,634 |
+  | キャッシュが温まっている | 296〜694ms | 2,711 (うち主キーが 2,620) |
+  | ID を時刻順にする | 155ms | 主キーは1 |
+  | `notifications_user_created_id` を消す | 406ms | ぶれの範囲 |
+  - 外部キーのトリガーは2つで合計 59ms
+- 対策案
+  - A: 通知の ID を時刻順 (UUID v7 の形) にして、主キーへの書き込みを末尾に寄せる。レスポンスの形は変わらない
+  - B: 自前で足した `notifications_user_created_id` を消す。SSE の問い合わせ (`go/notification_hub.go:136-160`) が使っているので、代わりの計画を確認する必要がある
+- 期待効果: **小** (中から下げる)。最後の期間の asia の利用者は十数人で、点数への影響は小さい。ただしベンチマーカーの中身が見えないので A を試す
+- 結果: A を #10205 で試した (`perf/notification-time-ordered-id`)。通知の INSERT は合計 16.5s → 9.5s (-43%)、asia の途中の期間の admin は 0.46〜0.58s になった。スコアは 52766 で下がったが、ベンチマーカーのリージョンの比率が大きく違い、切り分けられていない。詳しくは `bench-results/10205/report.md`
 
 ### 4. europe1 / america1 での画像の取得
 - 根拠: europe1 は 1689件、平均 1.02s、p99 5.4s。america1 は 1556件、平均 0.83s。asia1 は平均 0.017s
@@ -104,4 +124,4 @@ asia2 の累積統計の、デプロイ直後 (03:31:53) からベンチ後 (03:
 - 確認していない
   - 画像の INSERT が遅い原因 (wait_event は取っていない)
   - PostgreSQL の設定だけの効果 (設定を戻した同じアプリでのベンチがない)
-  - 通知の INSERT のコード上の詳細
+  - 通知の INSERT のコード上の詳細 (3番の追記で確認した)
