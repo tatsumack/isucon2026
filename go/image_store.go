@@ -72,13 +72,17 @@ func (s *ImageStore) path(kind, id string) string {
 	return filepath.Join(s.dir, kind, shard, filepath.Base(id))
 }
 
-// Save は新しい画像を new/ に書き、fsync してから返す。DB の行は呼び出し側が data を空にして INSERT する。
+// Save は新しい画像を new/ に書く。DB の行は呼び出し側が data を空にして INSERT する。
 // 投稿と RealMoji の作成は asia1 へ転送されるため、asia1 以外で呼ばれることはない。
+//
+// fsync はしない。投稿のたびにディスクへの書き出しを待つと、ディスクが混む時間帯に投稿の応答が遅くなるため (#16464)。
+// 通常の再起動では OS がページキャッシュを書き出してから止まるので、再起動後も画像は残る。
+// 電源断などの異常停止では、直前に書いた画像が失われたり大きさ0のファイルになったりしうる (大きさ0は readImageFile が無いものとして扱う)。
 func (s *ImageStore) Save(id string, data []byte) error {
 	if !s.isOrigin() {
 		return fmt.Errorf("image writes must run on the origin server")
 	}
-	return writeFileAtomic(s.path("new", id), data, true)
+	return writeFileAtomic(s.path("new", id), data, false)
 }
 
 // Load は画像本体と、初期データの画像かどうかを返す。見つからなければ errImageNotFound を返す。
